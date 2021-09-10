@@ -1,8 +1,11 @@
 ﻿using Controladores.PessoaModule;
 using Dominio.PessoaModule;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Configuration;
+using System.IO;
 using System.Windows.Forms;
+using ConfigurationManager;
 
 namespace WindowsApp
 {
@@ -41,8 +44,9 @@ namespace WindowsApp
 
         private bool EhSuperAdm(string usuario, string senha)
         {
-            var userAdmin = ConfigurationManager.AppSettings["userAdmin"];
-            var senhaAdmin = ConfigurationManager.AppSettings["senhaAdmin"];
+            var config = JsonManager.InitConfiguration();
+            var userAdmin = config["userAdmin"];
+            var senhaAdmin = config["senhaAdmin"];
 
             if (userAdmin != usuario)
                 return false;

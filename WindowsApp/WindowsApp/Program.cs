@@ -18,6 +18,9 @@ namespace WindowsApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+
+
+
             new Login().Show();
 
             Task.Run(async () =>
