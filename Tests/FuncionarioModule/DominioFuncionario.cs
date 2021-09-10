@@ -9,7 +9,7 @@ namespace Tests.Tests.FuncionarioModule
     public class DominioFuncionario
     {
         Funcionario funcionario;
-        Image imagem = Image.FromFile(@"..\..\Resources\user.png");
+        Image imagem = Image.FromFile(@"..\..\..\Resources\user.png");
 
         [TestMethod]
         public void Deve_retornar_funcionario_valido()

@@ -21,8 +21,8 @@ namespace Tests.Tests.AlguelModule
         MotoristaEmpresa motoristaEmpresa;
         ClientePF clientepf;
         ClientePJ clientepj;
-        Image imagemVeiculo = Image.FromFile(@"..\..\Resources\ford_ka_gay.jpg");
-        Image imagemFuncionario = Image.FromFile(@"..\..\Resources\rech.png");
+        Image imagemVeiculo = Image.FromFile(@"..\..\..\Resources\ford_ka_gay.jpg");
+        Image imagemFuncionario = Image.FromFile(@"..\..\..\Resources\rech.png");
         Categoria categoria;
         List<Servico> servicos;
         Funcionario funcionario;

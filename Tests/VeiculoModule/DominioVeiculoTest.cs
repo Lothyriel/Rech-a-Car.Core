@@ -10,7 +10,7 @@ namespace Tests.VeiculoModule
     [TestClass]
     public class DominioVeiculoTest
     {
-        Image imagem = Image.FromFile(@"..\..\Resources\ford_ka_gay.jpg");
+        Image imagem = Image.FromFile(@"..\..\..\Resources\ford_ka_gay.jpg");
         Categoria categoria = new Categoria("Economico", 100, 10, 400, 800, TipoCNH.B);
 
         [TestMethod]
