@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[TBEmail] (
+    [ID]           INT             IDENTITY (1, 1) NOT NULL,
+    [ID_ALUGUEL]   INT             NOT NULL,
+    [PDF]          VARBINARY (MAX) NOT NULL,
+    [DATA_ENVIADO] DATETIME        NULL,
+    CONSTRAINT [PK_TBEmail] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_TBEmail_TBAluguel] FOREIGN KEY ([ID_ALUGUEL]) REFERENCES [dbo].[TBAluguel] ([ID]) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
