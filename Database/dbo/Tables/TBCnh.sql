@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[TBCnh] (
+    [ID]     INT          IDENTITY (1, 1) NOT NULL,
+    [NUMERO] VARCHAR (50) NOT NULL,
+    [TIPO]   INT          NOT NULL,
+    CONSTRAINT [PK_TBCnh] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+
