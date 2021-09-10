@@ -1,5 +1,7 @@
-﻿using Dominio.PessoaModule;
+﻿using ConfigurationManager;
+using Dominio.PessoaModule;
 using EmailAluguelPDF;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;

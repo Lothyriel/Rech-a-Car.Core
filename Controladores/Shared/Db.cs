@@ -1,8 +1,10 @@
-﻿using System;
+﻿using ConfigurationManager;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
+using System.Data.SqlClient;
 
 namespace Controladores.Shared
 {
@@ -16,9 +18,12 @@ namespace Controladores.Shared
 
         static Db()
         {
-            bancoSelecionado = ConfigurationManager.AppSettings["bancoDeDados"];
-            connectionString = ConfigurationManager.ConnectionStrings[bancoSelecionado].ConnectionString;
-            string nomeProvedor = ConfigurationManager.ConnectionStrings[bancoSelecionado].ProviderName;
+            var ConfigurationManager = JsonManager.InitConfiguration();
+            bancoSelecionado = ConfigurationManager.GetSection("bancoDeDados").Value;
+            connectionString = ConfigurationManager.GetSection("ConnectionStrings").GetSection("SQLServer").Value;
+
+            string nomeProvedor = ConfigurationManager.GetSection("SQLProvider").Value;
+            DbProviderFactories.RegisterFactory(nomeProvedor, SqlClientFactory.Instance);
             factory = DbProviderFactories.GetFactory(nomeProvedor);
         }
         public static int Insert(string sql, Dictionary<string, object> parameters)

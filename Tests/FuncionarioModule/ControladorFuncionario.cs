@@ -12,7 +12,7 @@ namespace Tests.FuncionarioModule
     public class ControladorFuncionariotTest
     {
         ControladorFuncionario controlador = new ControladorFuncionario();
-        Image imagem = Image.FromFile(@"..\..\Resources\user.png");
+        Image imagem = Image.FromFile(@"..\..\..\Resources\user.png");
         Funcionario funcionario;
 
         [TestInitialize]
