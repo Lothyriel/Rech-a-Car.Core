@@ -54,10 +54,16 @@ namespace Tests.ParceiroModule
         }
 
         [TestMethod]
-        public void Deve_retornar_todos_as_categorias()
+        public void Deve_Visualizar_todos_as_categorias()
         {
             controladorParceiro.Registros.Count.Should().Be(1);
         }
 
+        [TestMethod]
+        public void Deve_excluir_Parceiro()
+        {
+            controladorParceiro.Excluir(parceiro.Id);
+            controladorParceiro.Registros.Count.Should().Be(0);
+        }
     }
 }
