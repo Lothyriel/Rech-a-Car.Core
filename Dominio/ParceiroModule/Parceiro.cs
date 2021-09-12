@@ -20,8 +20,6 @@ namespace Dominio.ParceiroModule
             string resultadoValidacao = "";
             if (string.IsNullOrEmpty(nome))
                 resultadoValidacao = "O Nome do Parceiro é obrigatório.";
-            if (resultadoValidacao == "")
-                resultadoValidacao = "ESTA_VALIDO";
 
             return resultadoValidacao;
         }
