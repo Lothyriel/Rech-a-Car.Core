@@ -75,6 +75,7 @@ namespace Controladores.ParceiroModule
 
         public override string sqlExists => sqlExisteParceiros;
 
+
         public override Parceiro ConverterEmEntidade(IDataReader reader)
         {
             int id = Convert.ToInt32(reader["ID"]);

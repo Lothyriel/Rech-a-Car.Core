@@ -89,6 +89,7 @@ namespace Controladores.PessoaModule
         public override string sqlEditar => sqlEditarFuncionario;
         public override string sqlExcluir => sqlExcluirFuncionario;
         public override string sqlExists => sqlExisteFuncionario;
+
         public override void Inserir(Funcionario entidade)
         {
             base.Inserir(entidade);

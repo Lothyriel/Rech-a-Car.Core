@@ -14,7 +14,7 @@ namespace Dominio.ParceiroModule
             this.nome = parceiro;
         }
 
-        public string nome { get; }
+        public string nome { get; set; }
         public override string Validar()
         {
             string resultadoValidacao = "";
