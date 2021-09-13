@@ -46,7 +46,7 @@ namespace WindowsApp.FuncionarioModule
             this.tbUsuario = new System.Windows.Forms.TextBox();
             this.ofdImagem = new System.Windows.Forms.OpenFileDialog();
             this.label6 = new System.Windows.Forms.Label();
-            this.bt_foto = new WindowsApp.Shared.BotaoComImagem();
+            this.bt_foto = new Shared.BotaoComImagem();
             this.tbSenha = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cb_cargo = new System.Windows.Forms.ComboBox();

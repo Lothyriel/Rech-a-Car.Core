@@ -8,6 +8,7 @@ using WindowsApp.FuncionarioModule;
 using WindowsApp.ServicoModule;
 using WindowsApp.VeiculoModule;
 using WindowsApp.VeiculoModule.CategoriaModule;
+using WindowsApp.WindowsApp.CupomModule;
 
 namespace WindowsApp
 {
@@ -122,6 +123,11 @@ namespace WindowsApp
             EsconderSubMenu();
             FormAtivo = new Configuracoes();
         }
+        private void btCupom_Click(object sender, EventArgs e)
+        {
+            EsconderSubMenu();
+            FormAtivo = new GerenciamentoCupom();
+        }
         private void TelaPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!(sender as Form).ActiveControl.Text.Contains("Sair"))
@@ -131,5 +137,7 @@ namespace WindowsApp
         }
 
         #endregion
+
+        
     }
 }
