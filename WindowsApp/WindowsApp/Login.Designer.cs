@@ -47,9 +47,10 @@ namespace WindowsApp
             // 
             this.labelTitulo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelTitulo.AutoSize = true;
-            this.labelTitulo.Font = new System.Drawing.Font("LEMON MILK Bold", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitulo.Font = new System.Drawing.Font("LEMON MILK Bold", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelTitulo.ForeColor = System.Drawing.Color.White;
-            this.labelTitulo.Location = new System.Drawing.Point(73, 242);
+            this.labelTitulo.Location = new System.Drawing.Point(109, 279);
+            this.labelTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTitulo.Name = "labelTitulo";
             this.labelTitulo.Size = new System.Drawing.Size(281, 53);
             this.labelTitulo.TabIndex = 2;
@@ -58,9 +59,10 @@ namespace WindowsApp
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(22, 323);
+            this.label1.Location = new System.Drawing.Point(26, 373);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 21);
             this.label1.TabIndex = 3;
@@ -68,22 +70,24 @@ namespace WindowsApp
             // 
             // tbUsuario
             // 
-            this.tbUsuario.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbUsuario.Location = new System.Drawing.Point(26, 347);
+            this.tbUsuario.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tbUsuario.Location = new System.Drawing.Point(30, 400);
+            this.tbUsuario.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbUsuario.MaxLength = 30;
             this.tbUsuario.Name = "tbUsuario";
-            this.tbUsuario.Size = new System.Drawing.Size(367, 43);
+            this.tbUsuario.Size = new System.Drawing.Size(428, 43);
             this.tbUsuario.TabIndex = 4;
             this.tbUsuario.TextChanged += new System.EventHandler(this.tbUsuario_TextChanged);
             this.tbUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EnterPressionado);
             // 
             // tbSenha
             // 
-            this.tbSenha.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSenha.Location = new System.Drawing.Point(26, 441);
+            this.tbSenha.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tbSenha.Location = new System.Drawing.Point(30, 509);
+            this.tbSenha.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbSenha.MaxLength = 30;
             this.tbSenha.Name = "tbSenha";
-            this.tbSenha.Size = new System.Drawing.Size(367, 43);
+            this.tbSenha.Size = new System.Drawing.Size(428, 43);
             this.tbSenha.TabIndex = 6;
             this.tbSenha.UseSystemPasswordChar = true;
             this.tbSenha.TextChanged += new System.EventHandler(this.tbSenha_TextChanged);
@@ -92,9 +96,10 @@ namespace WindowsApp
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(22, 417);
+            this.label2.Location = new System.Drawing.Point(26, 481);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 21);
             this.label2.TabIndex = 5;
@@ -106,11 +111,12 @@ namespace WindowsApp
             this.bt_entrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(7)))), ((int)(((byte)(49)))));
             this.bt_entrar.FlatAppearance.BorderSize = 0;
             this.bt_entrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bt_entrar.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_entrar.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.bt_entrar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.bt_entrar.Location = new System.Drawing.Point(147, 512);
+            this.bt_entrar.Location = new System.Drawing.Point(172, 591);
+            this.bt_entrar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.bt_entrar.Name = "bt_entrar";
-            this.bt_entrar.Size = new System.Drawing.Size(114, 60);
+            this.bt_entrar.Size = new System.Drawing.Size(133, 69);
             this.bt_entrar.TabIndex = 13;
             this.bt_entrar.Text = "Entrar";
             this.bt_entrar.UseVisualStyleBackColor = false;
@@ -119,18 +125,19 @@ namespace WindowsApp
             // pictureBox1
             // 
             this.pictureBox1.Image = global::WindowsApp.Properties.Resources.ford_ka_login;
-            this.pictureBox1.Location = new System.Drawing.Point(26, 36);
+            this.pictureBox1.Location = new System.Drawing.Point(67, 42);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(367, 203);
+            this.pictureBox1.Size = new System.Drawing.Size(365, 234);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(33)))), ((int)(((byte)(34)))));
-            this.ClientSize = new System.Drawing.Size(421, 594);
+            this.ClientSize = new System.Drawing.Size(491, 685);
             this.Controls.Add(this.bt_entrar);
             this.Controls.Add(this.tbSenha);
             this.Controls.Add(this.label2);
@@ -139,6 +146,7 @@ namespace WindowsApp
             this.Controls.Add(this.labelTitulo);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
