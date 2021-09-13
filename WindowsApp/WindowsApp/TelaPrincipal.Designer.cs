@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipal));
             this.PanelMenuLateral = new System.Windows.Forms.Panel();
             this.btConfiguracoes = new System.Windows.Forms.Button();
+            this.panelSubMenuCupons = new System.Windows.Forms.Panel();
+            this.btParceiros = new System.Windows.Forms.Button();
+            this.btCupons = new System.Windows.Forms.Button();
             this.btCupom = new System.Windows.Forms.Button();
             this.bt_servicos = new System.Windows.Forms.Button();
             this.bt_funcionarios = new System.Windows.Forms.Button();
@@ -54,6 +57,7 @@
             this.labelTitulo = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PanelMenuLateral.SuspendLayout();
+            this.panelSubMenuCupons.SuspendLayout();
             this.panelSubMenuVeiculos.SuspendLayout();
             this.panelSubMenuClientes.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -67,6 +71,7 @@
             // 
             this.PanelMenuLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(33)))), ((int)(((byte)(34)))));
             this.PanelMenuLateral.Controls.Add(this.btConfiguracoes);
+            this.PanelMenuLateral.Controls.Add(this.panelSubMenuCupons);
             this.PanelMenuLateral.Controls.Add(this.btCupom);
             this.PanelMenuLateral.Controls.Add(this.bt_servicos);
             this.PanelMenuLateral.Controls.Add(this.bt_funcionarios);
@@ -93,16 +98,65 @@
             this.btConfiguracoes.ForeColor = System.Drawing.Color.White;
             this.btConfiguracoes.Image = global::WindowsApp.Properties.Resources.settings;
             this.btConfiguracoes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btConfiguracoes.Location = new System.Drawing.Point(0, 693);
+            this.btConfiguracoes.Location = new System.Drawing.Point(0, 808);
             this.btConfiguracoes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btConfiguracoes.Name = "btConfiguracoes";
             this.btConfiguracoes.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btConfiguracoes.Size = new System.Drawing.Size(292, 58);
-            this.btConfiguracoes.TabIndex = 21;
+            this.btConfiguracoes.TabIndex = 23;
             this.btConfiguracoes.Text = " Configurações";
             this.btConfiguracoes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btConfiguracoes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btConfiguracoes.UseVisualStyleBackColor = true;
+            // 
+            // panelSubMenuCupons
+            // 
+            this.panelSubMenuCupons.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(40)))), ((int)(((byte)(41)))));
+            this.panelSubMenuCupons.Controls.Add(this.btParceiros);
+            this.panelSubMenuCupons.Controls.Add(this.btCupons);
+            this.panelSubMenuCupons.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSubMenuCupons.Location = new System.Drawing.Point(0, 693);
+            this.panelSubMenuCupons.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.panelSubMenuCupons.Name = "panelSubMenuCupons";
+            this.panelSubMenuCupons.Size = new System.Drawing.Size(292, 115);
+            this.panelSubMenuCupons.TabIndex = 21;
+            // 
+            // btParceiros
+            // 
+            this.btParceiros.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btParceiros.FlatAppearance.BorderSize = 0;
+            this.btParceiros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btParceiros.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btParceiros.ForeColor = System.Drawing.Color.White;
+            this.btParceiros.Location = new System.Drawing.Point(0, 58);
+            this.btParceiros.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btParceiros.Name = "btParceiros";
+            this.btParceiros.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
+            this.btParceiros.Size = new System.Drawing.Size(292, 58);
+            this.btParceiros.TabIndex = 3;
+            this.btParceiros.Text = "Parceiros";
+            this.btParceiros.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btParceiros.UseVisualStyleBackColor = true;
+            this.btParceiros.Click += new System.EventHandler(this.btParceiros_Click);
+            // 
+            // btCupons
+            // 
+            this.btCupons.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btCupons.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btCupons.FlatAppearance.BorderSize = 0;
+            this.btCupons.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btCupons.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btCupons.ForeColor = System.Drawing.Color.White;
+            this.btCupons.Location = new System.Drawing.Point(0, 0);
+            this.btCupons.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btCupons.Name = "btCupons";
+            this.btCupons.Padding = new System.Windows.Forms.Padding(41, 0, 0, 0);
+            this.btCupons.Size = new System.Drawing.Size(292, 58);
+            this.btCupons.TabIndex = 2;
+            this.btCupons.Text = "Cupons";
+            this.btCupons.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btCupons.UseVisualStyleBackColor = true;
+            this.btCupons.Click += new System.EventHandler(this.btCupons_Click);
             // 
             // btCupom
             // 
@@ -476,6 +530,7 @@
             this.Text = "Rech-a-Car";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TelaPrincipal_FormClosing);
             this.PanelMenuLateral.ResumeLayout(false);
+            this.panelSubMenuCupons.ResumeLayout(false);
             this.panelSubMenuVeiculos.ResumeLayout(false);
             this.panelSubMenuClientes.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -513,8 +568,11 @@
         private System.Windows.Forms.Button btGrupos;
         private System.Windows.Forms.Button btVeiculosSubMenu;
         private System.Windows.Forms.Label lbCargo;
-        private System.Windows.Forms.Button btConfiguracoes;
         private System.Windows.Forms.Button btCupom;
+        private System.Windows.Forms.Button btConfiguracoes;
+        private System.Windows.Forms.Panel panelSubMenuCupons;
+        private System.Windows.Forms.Button btParceiros;
+        private System.Windows.Forms.Button btCupons;
     }
 }
 

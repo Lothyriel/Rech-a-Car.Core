@@ -9,6 +9,7 @@ using WindowsApp.ServicoModule;
 using WindowsApp.VeiculoModule;
 using WindowsApp.VeiculoModule.CategoriaModule;
 using WindowsApp.WindowsApp.CupomModule;
+using WindowsApp.WindowsApp.CupomModule.ParceiroModule;
 
 namespace WindowsApp
 {
@@ -38,6 +39,7 @@ namespace WindowsApp
         {
             panelSubMenuClientes.Visible = false;
             panelSubMenuVeiculos.Visible = false;
+            panelSubMenuCupons.Visible = false;
         }
         private void MostrarSubMenu(Panel subMenu)
         {
@@ -73,6 +75,7 @@ namespace WindowsApp
         private void bt_Veiculos_Click(object sender, EventArgs e)
         {
             panelSubMenuClientes.Visible = false;
+            panelSubMenuCupons.Visible = false;
             MostrarSubMenu(panelSubMenuVeiculos);
         }
         private void bt_Servicos_Click(object sender, EventArgs e)
@@ -88,6 +91,7 @@ namespace WindowsApp
         private void bt_clientes_Click(object sender, EventArgs e)
         {
             panelSubMenuVeiculos.Visible = false;
+            panelSubMenuCupons.Visible = false;
             MostrarSubMenu(panelSubMenuClientes);
             FormAtivo = new GerenciamentoCliente();
         }
@@ -125,9 +129,21 @@ namespace WindowsApp
         }
         private void btCupom_Click(object sender, EventArgs e)
         {
+            panelSubMenuClientes.Visible = false;
+            panelSubMenuVeiculos.Visible = false;
+            MostrarSubMenu(panelSubMenuCupons);
+        }
+        private void btCupons_Click(object sender, EventArgs e)
+        {
             EsconderSubMenu();
             FormAtivo = new GerenciamentoCupom();
         }
+        private void btParceiros_Click(object sender, EventArgs e)
+        {
+            EsconderSubMenu();
+            FormAtivo = new GerenciamentoParceiro();
+        }
+
         private void TelaPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!(sender as Form).ActiveControl.Text.Contains("Sair"))
@@ -138,6 +154,5 @@ namespace WindowsApp
 
         #endregion
 
-        
     }
 }

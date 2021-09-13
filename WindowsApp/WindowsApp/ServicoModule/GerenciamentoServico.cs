@@ -34,7 +34,7 @@ namespace WindowsApp.ServicoModule
 
         protected override IVisualizavel Visualizar(Servico entidade)
         {
-            return new VisualizarServico();
+            return new VisualizarCupom();
         }
     }
 }
