@@ -137,6 +137,5 @@ namespace WindowsApp
             }
         }
         public enum ResultadoLogin { Sucesso, SenhaErrada, UsuarioNaoCadastrado }
-
     }
 }
