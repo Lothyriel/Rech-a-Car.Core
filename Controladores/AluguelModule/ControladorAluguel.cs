@@ -1,8 +1,10 @@
-﻿using Controladores.PessoaModule;
+﻿using Controladores.CupomModule;
+using Controladores.PessoaModule;
 using Controladores.ServicoModule;
 using Controladores.Shared;
 using Controladores.VeiculoModule;
 using Dominio.AluguelModule;
+using Dominio.CupomModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using System;
@@ -85,9 +87,9 @@ namespace Controladores.AluguelModule
             base.Inserir(entidade);
             new ControladorServico().AlugarServicos(entidade.Id, entidade.Servicos);
         }
-        public override void Editar(int id,Aluguel entidade)
+        public override void Editar(int id, Aluguel entidade)
         {
-            base.Editar(id,entidade);
+            base.Editar(id, entidade);
             var controladorServico = new ControladorServico();
             controladorServico.DesalugarServicosAlugados(id);
             controladorServico.AlugarServicos(entidade.Id, entidade.Servicos);
@@ -114,8 +116,14 @@ namespace Controladores.AluguelModule
             var condutor = ehClientePF ? null : ((ClientePJ)cliente).Motoristas.Find(x => x.Id == id_condutor);
 
             var servicos = new ControladorServico().GetServicosAlugados(id);
+            
+            var id_cupom = reader["ID_CUPOM"];
 
-            return new Aluguel(veiculo, servicos, (Plano)tipoPlano, dataAluguel, cliente, funcionario, dataDevolucao, condutor)
+            Cupom cupom = null;
+            if (id_cupom is int _id_cupom)
+                cupom = new ControladorCupom().GetById(_id_cupom);
+
+            return new Aluguel(veiculo, servicos, (Plano)tipoPlano, dataAluguel, cliente, funcionario, dataDevolucao, condutor, cupom)
             {
                 Id = id
             };
@@ -129,6 +137,7 @@ namespace Controladores.AluguelModule
                 { "ID_CONDUTOR", aluguel.Condutor.Id },
                 { "ID_FUNCIONARIO", aluguel.Funcionario.Id },
                 { "ID_VEICULO", aluguel.Veiculo.Id },
+                { "ID_CUPOM", aluguel.Cupom.Id},
                 { "TIPO_PLANO", aluguel.TipoPlano },
                 { "DATA_ALUGUEL", aluguel.DataAluguel },
                 { "DATA_DEVOLUCAO", aluguel.DataDevolucao }
