@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using Dominio.VeiculoModule;
 using System.Threading.Tasks;
 using EmailAluguelPDF;
+using Controladores.CupomModule;
 
 namespace WindowsApp.AluguelModule
 {
@@ -57,6 +58,9 @@ namespace WindowsApp.AluguelModule
             Aluguel.DataAluguel = dataAluguel;
             Aluguel.DataDevolucao = dataDevolucao;
 
+            if (tb_cupom.Text != string.Empty)
+                Aluguel.Cupom = new ControladorCupom().GetByName(tb_cupom.Text);
+
             return Aluguel;
         }
         protected override IEditavel Editar()
@@ -70,7 +74,7 @@ namespace WindowsApp.AluguelModule
             tbPlaca.Text = entidade.Veiculo.Placa;
             tbTipoCnh.Text = entidade.Veiculo.Categoria.TipoDeCnh.ToString();
             cbPlano.SelectedItem = entidade.TipoPlano.ToString();
-
+            tb_cupom.Text = entidade.Cupom.Nome;
             SetCondutor();
 
             tbDt_Emprestimo.Text = entidade.DataAluguel.ToString("d");
