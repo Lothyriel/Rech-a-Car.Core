@@ -32,7 +32,7 @@ namespace WindowsApp.WindowsApp.CupomModule
             tbValorPercentual.Text = entidade.ValorPercentual.ToString();
             tbValorFixo.Text = entidade.ValorFixo.ToString();
             tbData.Text = entidade.DataValidade.ToString();
-            cbParceiro.SelectedItem = entidade.Parceiro.ToString();
+            cbParceiro.SelectedItem = entidade.Parceiro;
             tbValorMinimo.Text = entidade.ValorMinimo.ToString();
 
             return this;
@@ -41,10 +41,10 @@ namespace WindowsApp.WindowsApp.CupomModule
         public override Cupom GetNovaEntidade()
         {
             var nome = tbNome.Text;
+            var parceiro = (Parceiro)cbParceiro.SelectedItem;
             Int32.TryParse(tbValorPercentual.Text, out int valorPercentual);
             Double.TryParse(tbValorFixo.Text, out double valorFixo);
             DateTime.TryParse(tbData.Text, out DateTime data);
-            var parceiro = (Parceiro)cbParceiro.SelectedItem;
             Double.TryParse(tbValorMinimo.Text, out double valorMinimo);
 
             return new Cupom(nome, valorPercentual, valorFixo, data, parceiro, valorMinimo);
