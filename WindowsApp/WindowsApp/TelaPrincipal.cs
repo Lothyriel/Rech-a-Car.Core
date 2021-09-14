@@ -34,7 +34,6 @@ namespace WindowsApp
 
         public Form FormAtivo { set { AbrirFormPanel(value); } }
 
-
         private void EsconderSubMenu()
         {
             panelSubMenuClientes.Visible = false;
@@ -125,7 +124,7 @@ namespace WindowsApp
         private void btConfiguracoes_Click(object sender, EventArgs e)
         {
             EsconderSubMenu();
-            FormAtivo = new Configuracoes();
+            FormAtivo = new AlterarConfiguracoes();
         }
         private void btCupom_Click(object sender, EventArgs e)
         {
@@ -149,10 +148,9 @@ namespace WindowsApp
             if (!(sender as Form).ActiveControl.Text.Contains("Sair"))
                 Application.Exit();
             else
-                new Login().Show();
+                Instancia = null;
         }
 
         #endregion
-
     }
 }
