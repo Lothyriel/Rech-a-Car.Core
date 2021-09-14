@@ -1,6 +1,7 @@
 ﻿using Dominio.ServicoModule;
 using System;
 using System.Collections.Generic;
+using ConfigurationManager.Combustivel;
 
 namespace Dominio.AluguelModule
 {
@@ -32,10 +33,24 @@ namespace Dominio.AluguelModule
 
             PrecoFinal += diasAtraso * 50;
 
+            PrecoFinal += CalcularCombustivel();
+
             ServicosNecessarios.ForEach(x => PrecoFinal += x.Taxa);
 
             return PrecoFinal;
-
+        }
+        private double CalcularCombustivel()
+        {
+            switch (Veiculo.TipoDeCombustivel)
+            {
+                case VeiculoModule.TipoCombustivel.Diesel:
+                    return TanqueUtilizado * Configuracoes.Configs.ValorDiesel;
+                case VeiculoModule.TipoCombustivel.Etanol:
+                    return TanqueUtilizado * Configuracoes.Configs.ValorEtanol;
+                case VeiculoModule.TipoCombustivel.Gasolina:
+                    return TanqueUtilizado * Configuracoes.Configs.ValorGasolina;
+                default: return 0;
+            }
         }
         public override string Validar()
         {

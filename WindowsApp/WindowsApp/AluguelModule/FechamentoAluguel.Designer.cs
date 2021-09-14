@@ -36,8 +36,8 @@ namespace WindowsApp.AluguelModule
             this.label4 = new System.Windows.Forms.Label();
             this.lbValor = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.panelColorido3 = new WindowsApp.Shared.PanelColorido();
-            this.panelColorido2 = new WindowsApp.Shared.PanelColorido();
+            this.panelColorido3 = new PanelColorido();
+            this.panelColorido2 = new PanelColorido();
             this.label6 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tb_TanqueInicial = new System.Windows.Forms.MaskedTextBox();

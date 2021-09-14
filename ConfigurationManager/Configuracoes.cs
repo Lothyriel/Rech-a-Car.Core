@@ -25,7 +25,7 @@ namespace ConfigurationManager.Combustivel
         {
             get
             {
-                var path = Directory.GetCurrentDirectory() + "appsettings.json";
+                var path = Directory.GetCurrentDirectory() + "\\appsettings.json";
                 JObject o1 = JObject.Parse(File.ReadAllText(path));
 
                 var gasolina = o1["Gasolina"].ToObject<double>();
