@@ -35,7 +35,7 @@ namespace WindowsApp.AluguelModule
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new WindowsApp.Shared.PanelColorido();
+            this.panel1 = new Shared.PanelColorido();
             this.label12 = new System.Windows.Forms.Label();
             this.panelEsconderCliente = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
@@ -50,7 +50,7 @@ namespace WindowsApp.AluguelModule
             this.tbEndereço = new System.Windows.Forms.TextBox();
             this.tbCliente = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel2 = new WindowsApp.Shared.PanelColorido();
+            this.panel2 = new Shared.PanelColorido();
             this.label13 = new System.Windows.Forms.Label();
             this.panelEsconderVeiculo = new System.Windows.Forms.Panel();
             this.label19 = new System.Windows.Forms.Label();
@@ -61,7 +61,7 @@ namespace WindowsApp.AluguelModule
             this.label10 = new System.Windows.Forms.Label();
             this.tbMarca = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.panel3 = new WindowsApp.Shared.PanelColorido();
+            this.panel3 = new Shared.PanelColorido();
             this.cbPlano = new System.Windows.Forms.ComboBox();
             this.tbDt_Devolucao = new System.Windows.Forms.MaskedTextBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -71,13 +71,13 @@ namespace WindowsApp.AluguelModule
             this.label3 = new System.Windows.Forms.Label();
             this.lbValor = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.panelColorido1 = new WindowsApp.Shared.PanelColorido();
+            this.panelColorido1 = new Shared.PanelColorido();
             this.bt_alterna_listas = new System.Windows.Forms.Button();
             this.bt_RemoveServico = new System.Windows.Forms.Button();
             this.bt_AddServico = new System.Windows.Forms.Button();
             this.listServicos = new System.Windows.Forms.ListBox();
             this.lb_lista_opcionais = new System.Windows.Forms.Label();
-            this.panelColorido2 = new WindowsApp.Shared.PanelColorido();
+            this.panelColorido2 = new Shared.PanelColorido();
             this.tipAluguel = new System.Windows.Forms.ToolTip(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btFecharAluguel = new System.Windows.Forms.Button();

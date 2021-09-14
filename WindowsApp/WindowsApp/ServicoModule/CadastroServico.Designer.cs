@@ -42,9 +42,10 @@ namespace WindowsApp.ServicoModule
             // lbTitulo
             // 
             this.lbTitulo.AutoSize = true;
-            this.lbTitulo.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTitulo.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbTitulo.ForeColor = System.Drawing.Color.White;
-            this.lbTitulo.Location = new System.Drawing.Point(231, 9);
+            this.lbTitulo.Location = new System.Drawing.Point(280, 9);
+            this.lbTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTitulo.Name = "lbTitulo";
             this.lbTitulo.Size = new System.Drawing.Size(190, 25);
             this.lbTitulo.TabIndex = 0;
@@ -53,9 +54,10 @@ namespace WindowsApp.ServicoModule
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(209, 193);
+            this.label1.Location = new System.Drawing.Point(244, 223);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 21);
             this.label1.TabIndex = 1;
@@ -64,9 +66,10 @@ namespace WindowsApp.ServicoModule
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(222, 235);
+            this.label2.Location = new System.Drawing.Point(259, 271);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 21);
             this.label2.TabIndex = 2;
@@ -74,18 +77,20 @@ namespace WindowsApp.ServicoModule
             // 
             // tbNome
             // 
-            this.tbNome.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNome.Location = new System.Drawing.Point(268, 190);
+            this.tbNome.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbNome.Location = new System.Drawing.Point(313, 219);
+            this.tbNome.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbNome.Name = "tbNome";
-            this.tbNome.Size = new System.Drawing.Size(163, 29);
+            this.tbNome.Size = new System.Drawing.Size(190, 29);
             this.tbNome.TabIndex = 1;
             // 
             // tbTaxa
             // 
-            this.tbTaxa.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbTaxa.Location = new System.Drawing.Point(268, 232);
+            this.tbTaxa.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbTaxa.Location = new System.Drawing.Point(313, 268);
+            this.tbTaxa.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbTaxa.Name = "tbTaxa";
-            this.tbTaxa.Size = new System.Drawing.Size(163, 29);
+            this.tbTaxa.Size = new System.Drawing.Size(190, 29);
             this.tbTaxa.TabIndex = 2;
             // 
             // btAdicionar
@@ -93,9 +98,10 @@ namespace WindowsApp.ServicoModule
             this.btAdicionar.FlatAppearance.BorderSize = 0;
             this.btAdicionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btAdicionar.Image = global::WindowsApp.Properties.Resources.check;
-            this.btAdicionar.Location = new System.Drawing.Point(575, 431);
+            this.btAdicionar.Location = new System.Drawing.Point(671, 497);
+            this.btAdicionar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btAdicionar.Name = "btAdicionar";
-            this.btAdicionar.Size = new System.Drawing.Size(81, 79);
+            this.btAdicionar.Size = new System.Drawing.Size(94, 91);
             this.btAdicionar.TabIndex = 4;
             this.btAdicionar.UseVisualStyleBackColor = true;
             this.btAdicionar.Click += new System.EventHandler(this.btAdicionar_Click);
@@ -103,9 +109,10 @@ namespace WindowsApp.ServicoModule
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(170, 278);
+            this.label3.Location = new System.Drawing.Point(198, 321);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 21);
             this.label3.TabIndex = 2;
@@ -113,18 +120,19 @@ namespace WindowsApp.ServicoModule
             // 
             // tbQuantidade
             // 
-            this.tbQuantidade.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbQuantidade.Location = new System.Drawing.Point(268, 275);
+            this.tbQuantidade.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbQuantidade.Location = new System.Drawing.Point(313, 317);
+            this.tbQuantidade.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbQuantidade.Name = "tbQuantidade";
-            this.tbQuantidade.Size = new System.Drawing.Size(163, 29);
+            this.tbQuantidade.Size = new System.Drawing.Size(190, 29);
             this.tbQuantidade.TabIndex = 3;
             // 
             // CadastroServico
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(33)))), ((int)(((byte)(34)))));
-            this.ClientSize = new System.Drawing.Size(668, 522);
+            this.ClientSize = new System.Drawing.Size(779, 602);
             this.Controls.Add(this.btAdicionar);
             this.Controls.Add(this.tbQuantidade);
             this.Controls.Add(this.tbTaxa);
@@ -133,6 +141,7 @@ namespace WindowsApp.ServicoModule
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbTitulo);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "CadastroServico";
             this.Text = "CadastrarServico";
             this.ResumeLayout(false);
