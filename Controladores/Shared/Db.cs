@@ -18,7 +18,7 @@ namespace Controladores.Shared
 
         static Db()
         {
-            var ConfigurationManager = JsonManager.InitConfiguration();
+            var ConfigurationManager = Config.AppConfig;
             bancoSelecionado = ConfigurationManager.GetSection("bancoDeDados").Value;
             connectionString = ConfigurationManager.GetSection("ConnectionStrings").GetSection("SQLServer").Value;
 

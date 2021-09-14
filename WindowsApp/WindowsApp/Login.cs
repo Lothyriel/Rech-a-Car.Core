@@ -11,13 +11,11 @@ namespace WindowsApp
 {
     public partial class Login : Form
     {
-        public static Login Instancia;
         private ControladorFuncionario ControladorFuncionario = new ControladorFuncionario();
         private Funcionario funcionario;
 
         public Login()
         {
-            Instancia = this;
             InitializeComponent();
             bt_entrar.Enabled = false;
         }
@@ -44,7 +42,7 @@ namespace WindowsApp
 
         private bool EhSuperAdm(string usuario, string senha)
         {
-            var config = JsonManager.InitConfiguration();
+            var config = Config.AppConfig;
             var userAdmin = config["userAdmin"];
             var senhaAdmin = config["senhaAdmin"];
 
