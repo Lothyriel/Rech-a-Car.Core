@@ -13,8 +13,8 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Collections.Generic;
 using Dominio.VeiculoModule;
-using EmailAluguelPDF;
 using System.Threading.Tasks;
+using EmailAluguelPDF;
 
 namespace WindowsApp.AluguelModule
 {
@@ -193,7 +193,7 @@ namespace WindowsApp.AluguelModule
             if (!Salva())
                 return;
 
-            //Task.Run(() => new CriaPDFAluguel(Aluguel));
+            Task.Run(() => new CriaPDFAluguel(Aluguel));
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoAluguel();
         }
         private void panelEsconderCliente_DoubleClick(object sender, EventArgs e)

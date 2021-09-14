@@ -8,6 +8,7 @@ namespace ConfigurationManager.Combustivel
 {
     public class Configuracoes
     {
+        private static string path = @"..\..\..\appsettings.json";
         public Configuracoes(double valorEtanol, double valorDiesel, double valorGasolina, double valorCaucao)
         {
             ValorEtanol = valorEtanol;
@@ -25,7 +26,6 @@ namespace ConfigurationManager.Combustivel
         {
             get
             {
-                var path = Directory.GetCurrentDirectory() + "appsettings.json";
                 JObject o1 = JObject.Parse(File.ReadAllText(path));
 
                 var gasolina = o1["Gasolina"].ToObject<double>();
@@ -52,12 +52,10 @@ namespace ConfigurationManager.Combustivel
         }
         private static void SalvaConfiguracoes(Configuracoes config)
         {
-            var path = Directory.GetCurrentDirectory() + "appsettings.json";
             JObject o1 = JObject.Parse(File.ReadAllText(path));
             o1["Gasolina"] = new JValue(config.ValorGasolina);
             o1["Diesel"] = new JValue(config.ValorDiesel);
             o1["Etanol"] = new JValue(config.ValorEtanol);
-
             o1["Caucao"] = new JValue(config.ValorCaucao);
 
             File.WriteAllText(path, JsonConvert.SerializeObject(o1));
