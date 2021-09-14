@@ -23,13 +23,12 @@ namespace WindowsApp.AluguelModule
             this.aluguel = aluguel;
             InitializeComponent();
             tb_OdometroInicial.Text = aluguel.Veiculo.Quilometragem.ToString();
+            tb_TanqueInicial.Text = aluguel.Veiculo.CapacidadeTanque.ToString();
         }
-
         public IVisualizavel Visualizar()
         {
             return this;
         }
-
         private void CalcularPrecoTotal()
         {
             lbValor.Text = GetNovaEntidade().CalcularTotal().ToString();
@@ -43,9 +42,11 @@ namespace WindowsApp.AluguelModule
         }
         private double TanqueUtilizado()
         {
-            return 0.5;
-        }
+            if (int.TryParse(tb_TanqueAtual.Text, out int tanqueFinal) && int.TryParse(tb_TanqueInicial.Text, out int tanqueInicial))
+                return tanqueFinal - tanqueInicial;
 
+            return -1;
+        }
         public override AluguelFechado GetNovaEntidade()
         {
             var servicos = new List<Servico>();
@@ -55,14 +56,12 @@ namespace WindowsApp.AluguelModule
 
             return aluguel.Fechar(KmRodados(), TanqueUtilizado(), servicos);
         }
-
         protected override IEditavel Editar()
         {
             throw new NotImplementedException();
         }
 
         #region eventos
-
         private void bt_AddDespesa_Click(object sender, EventArgs e)
         {
             if (tb_NomeDespesa.Text != "" && mtb_PrecoDespesa.Text != "" && double.TryParse(mtb_PrecoDespesa.Text, out double precoDespesa))
@@ -99,11 +98,6 @@ namespace WindowsApp.AluguelModule
             {
                 e.Handled = true;
             }
-        }
-
-        private void maskedTextBox2_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
         }
     }
 }

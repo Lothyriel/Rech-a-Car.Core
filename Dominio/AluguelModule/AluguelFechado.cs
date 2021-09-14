@@ -32,8 +32,6 @@ namespace Dominio.AluguelModule
 
             PrecoFinal += diasAtraso * 50;
 
-            //CALCULAR GASOLINA DEPOIS.
-
             ServicosNecessarios.ForEach(x => PrecoFinal += x.Taxa);
 
             return PrecoFinal;

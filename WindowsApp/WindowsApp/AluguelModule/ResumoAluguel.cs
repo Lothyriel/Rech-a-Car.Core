@@ -161,6 +161,10 @@ namespace WindowsApp.AluguelModule
 
             Aluguel.DataAluguel = dtEmprestimo;
             Aluguel.DataDevolucao = dtDevolucao;
+
+            if (cbPlano.SelectedItem != null)
+                Aluguel.TipoPlano = (Plano)Enum.Parse(typeof(Plano), cbPlano.SelectedItem.ToString());
+
             lbValor.Text = Aluguel.CalcularTotal().ToString();
         }
         private void AtualizaOpcoesListServicos()

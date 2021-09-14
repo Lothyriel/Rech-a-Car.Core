@@ -62,9 +62,9 @@ namespace Dominio.AluguelModule
             var Categoria = Veiculo.Categoria;
             switch (TipoPlano)
             {
-                case Plano.diario: CalculaPlanoDiario(); break;
-                case Plano.controlado: CalculaPlanoControlado(); break;
-                case Plano.livre: CalculaPlanoLivre(); break;
+                case Plano.Diário: CalculaPlanoDiario(); break;
+                case Plano.Controlado: CalculaPlanoControlado(); break;
+                case Plano.Livre: CalculaPlanoLivre(); break;
                 default: break;
             }
 
@@ -81,7 +81,7 @@ namespace Dominio.AluguelModule
             }
             void CalculaPlanoLivre()
             {
-                PrecoParcial += Categoria.PrecoDiaria * GetQtdDiasAluguel() * 1.3;
+                PrecoParcial += Categoria.PrecoLivre * GetQtdDiasAluguel();
             }
             int GetQtdDiasAluguel()
             {
@@ -128,8 +128,8 @@ namespace Dominio.AluguelModule
     }
     public enum Plano
     {
-        diario,
-        controlado,
-        livre
+        Diário,
+        Controlado,
+        Livre
     }
 }
