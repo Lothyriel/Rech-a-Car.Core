@@ -1,7 +1,8 @@
-﻿using Aspose.Pdf;
-using Controladores.AluguelModule;
+﻿using Controladores.AluguelModule;
 using Controladores.Shared;
 using Dominio.AluguelModule;
+using iText.Kernel.Pdf;
+using iText.Layout;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -56,8 +57,8 @@ namespace EmailAluguelPDF
         {
             var id = Convert.ToInt32(reader["ID"]);
             var aluguel = new ControladorAluguel().GetById(Convert.ToInt32(reader["ID_ALUGUEL"]));
-
-            return new EnvioEmail(aluguel, new Document(new MemoryStream((byte[])reader["PDF"]))) { Id = id };
+            var doc = new Document(new PdfDocument(new PdfWriter(new MemoryStream((byte[])reader["PDF"]))));
+            return new EnvioEmail(aluguel, doc) { Id = id };
         }
     }
 }
