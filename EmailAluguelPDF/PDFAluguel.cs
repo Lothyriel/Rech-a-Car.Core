@@ -43,10 +43,11 @@ namespace EmailAluguelPDF
 
             Paragraph body_aluguel = new Paragraph().SetTextAlignment(TextAlignment.LEFT).AddStyle(helvetica14r);
             body_aluguel.Add(new Text($"\nOlá, {aluguel.Cliente}. aqui está o resumo do seu mais novo aluguel na Rech-a-car!\n"));
-            body_aluguel.Add(new Text($"     Veículo: {aluguel.Veiculo}\n"));
-            body_aluguel.Add(new Text($"     Data de Aluguel: {aluguel.DataAluguel:d}\n"));
-            body_aluguel.Add(new Text($"     Data de Devolução: {aluguel.DataDevolucao:d}\n"));
-            body_aluguel.Add(new Text($"     Total Parcial R$: {aluguel.CalcularTotal()}\n\n"));
+            body_aluguel.Add(new Text($"Veículo: {aluguel.Veiculo}\n"));
+            body_aluguel.Add(new Text($"Data de Aluguel: {aluguel.DataAluguel:d}\n"));
+            body_aluguel.Add(new Text($"Data de Devolução: {aluguel.DataDevolucao:d}\n"));
+            body_aluguel.Add(new Text($"Cupom aplicado: {aluguel.Cupom.Nome}\n"));
+            body_aluguel.Add(new Text($"Total Parcial R$: {aluguel.CalcularTotal()}\n\n"));
             pdf.Add(body_aluguel);
 
             pdf.Add(separador);
@@ -54,7 +55,7 @@ namespace EmailAluguelPDF
             if (aluguel.Servicos.Count > 0)
             {
                 Paragraph body_servicos = new Paragraph().SetTextAlignment(TextAlignment.LEFT).AddStyle(helvetica14r);
-                body_servicos.Add(new Text($"\nServiços alugados:"));
+                body_servicos.Add(new Text($"\nServiços alugados:\n"));
                 aluguel.Servicos.ForEach(s => body_servicos.Add(new Text($"     {s}\n")));
                 body_servicos.Add(new Text($"\n"));
                 pdf.Add(body_servicos);
@@ -62,6 +63,7 @@ namespace EmailAluguelPDF
             }
 
             Paragraph body_imagem = new Paragraph().SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica14r);
+            body_imagem.Add(new Text($"\n"));
             body_imagem.Add(ImagemItextImage(aluguel.Veiculo.Foto));
             pdf.Add(body_imagem);
 
