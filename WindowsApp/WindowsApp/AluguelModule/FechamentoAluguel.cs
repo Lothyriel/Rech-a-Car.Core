@@ -29,7 +29,15 @@ namespace WindowsApp.AluguelModule
         }
         private void CalcularPrecoTotal()
         {
-            lbValor.Text = GetNovaEntidade().CalcularTotal().ToString();
+            AluguelFechado aluguelFechado = GetNovaEntidade();
+
+            if (aluguelFechado.Cupom != null)
+            {
+                lbValorFinal.Text = aluguelFechado.Cupom.CalcularDesconto(aluguelFechado.CalcularTotal()).ToString();
+                lbDesconto.Text = (aluguelFechado.Cupom.CalcularDesconto(aluguelFechado.CalcularTotal()) - aluguelFechado.CalcularTotal()).ToString();
+            }
+
+            lbValor.Text = aluguelFechado.CalcularTotal().ToString();
         }
         private int KmRodados()
         {
@@ -41,7 +49,7 @@ namespace WindowsApp.AluguelModule
         private double TanqueUtilizado()
         {
             if (int.TryParse(tb_TanqueAtual.Text, out int tanqueFinal) && int.TryParse(tb_TanqueInicial.Text, out int tanqueInicial))
-                return tanqueInicial -tanqueFinal;
+                return tanqueInicial - tanqueFinal;
 
             return 0;
         }
@@ -86,6 +94,8 @@ namespace WindowsApp.AluguelModule
                 return;
 
             ControladorVeiculo.AdicionarQuilometragem(aluguel.Veiculo, KmRodados());
+            TelaPrincipal.Instancia.FormAtivo = new GerenciamentoAluguel();
+
         }
         private void tb_TanqueAtual_TextChanged(object sender, EventArgs e)
         {
@@ -119,7 +129,5 @@ namespace WindowsApp.AluguelModule
                 e.Handled = true;
             }
         }
-
-
     }
 }

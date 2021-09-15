@@ -15,6 +15,7 @@ namespace Dominio.AluguelModule
             Condutor = aluguel.Condutor;
             TipoPlano = aluguel.TipoPlano;
             DataAluguel = aluguel.DataAluguel;
+            Cupom = aluguel.Cupom;
             KmRodados = kmRodados;
             TanqueUtilizado = tanqueUtilizado;
             ServicosNecessarios = servicosNecessarios;
@@ -39,7 +40,6 @@ namespace Dominio.AluguelModule
 
             return PrecoFinal;
         }
-
         private double CalcularKmRodados()
         {
             double PrecoKmRodado = 0;
@@ -62,7 +62,6 @@ namespace Dominio.AluguelModule
 
             return PrecoKmRodado;
         }
-
         private double CalcularCombustivel()
         {
             switch (Veiculo.TipoDeCombustivel)

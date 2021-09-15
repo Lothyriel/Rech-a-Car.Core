@@ -1,7 +1,9 @@
 ﻿using Controladores.AluguelModule;
 using Controladores.ServicoModule;
 using Controladores.Shared;
+using Controladores.CupomModule;
 using Dominio.AluguelModule;
+using Dominio.CupomModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
@@ -56,6 +58,7 @@ namespace WindowsApp.AluguelModule
             Aluguel.Funcionario = TelaPrincipal.Instancia.FuncionarioLogado;
             Aluguel.DataAluguel = dataAluguel;
             Aluguel.DataDevolucao = dataDevolucao;
+            Aluguel.Cupom = new ControladorCupom().GetByName(tb_Cupom.Text);
 
             return Aluguel;
         }
@@ -154,7 +157,7 @@ namespace WindowsApp.AluguelModule
         {
             panel.Visible = false;
         }
-        private void CalcularPrecoParcial()
+        private double CalcularPrecoParcial()
         {
             DateTime.TryParse(tbDt_Emprestimo.Text, out DateTime dtEmprestimo);
             DateTime.TryParse(tbDt_Devolucao.Text, out DateTime dtDevolucao);
@@ -166,6 +169,7 @@ namespace WindowsApp.AluguelModule
                 Aluguel.TipoPlano = (Plano)Enum.Parse(typeof(Plano), cbPlano.SelectedItem.ToString());
 
             lbValor.Text = Aluguel.CalcularTotal().ToString();
+            return Aluguel.CalcularTotal();
         }
         private void AtualizaOpcoesListServicos()
         {
@@ -249,6 +253,23 @@ namespace WindowsApp.AluguelModule
             else
                 bt_RemoveServico.Enabled = NaotemZero;
         }
+        private void bt_Aplicar_Click(object sender, EventArgs e)
+        {
+            ControladorCupom controladorCupom = new();
+            double valorParcial = CalcularPrecoParcial();
+
+            Cupom cupom = controladorCupom.GetByName(tb_Cupom.Text);
+
+            if (cupom != null && valorParcial >= cupom.ValorMinimo)
+            {
+                MessageBox.Show($"Cupom {cupom.Nome} aplicado com sucesso!", "Sucesso", MessageBoxButtons.OK);
+            }
+            else
+                MessageBox.Show($"Cupom {cupom.Nome} não existe ou o aluguel não atingiu o valor mínimo!", "Erro", MessageBoxButtons.OK);
+
+        }
         #endregion
+
+
     }
 }

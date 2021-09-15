@@ -24,7 +24,8 @@ namespace Controladores.AluguelModule
                     [ID_FUNCIONARIO],
                     [TIPO_PLANO],
                     [DATA_ALUGUEL],
-                    [DATA_DEVOLUCAO]
+                    [DATA_DEVOLUCAO],
+                    [ID_CUPOM]
                 )
             VALUES
                 (
@@ -34,7 +35,8 @@ namespace Controladores.AluguelModule
                     @ID_FUNCIONARIO,
                     @TIPO_PLANO,
                     @DATA_ALUGUEL,
-                    @DATA_DEVOLUCAO
+                    @DATA_DEVOLUCAO,
+                    @ID_CUPOM
                 )";
 
         private const string sqlEditarAluguel =
@@ -46,7 +48,8 @@ namespace Controladores.AluguelModule
                     [ID_FUNCIONARIO] = @ID_FUNCIONARIO,       
                     [TIPO_PLANO] = @TIPO_PLANO,
                     [DATA_ALUGUEL] = @DATA_ALUGUEL,
-                    [DATA_DEVOLUCAO] = @DATA_DEVOLUCAO
+                    [DATA_DEVOLUCAO] = @DATA_DEVOLUCAO,
+                    [ID_CUPOM] = @ID_CUPOM
                 WHERE [ID] = @ID";
 
         private const string sqlExcluirAluguel =
