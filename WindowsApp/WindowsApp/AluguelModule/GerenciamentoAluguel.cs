@@ -1,6 +1,5 @@
 ﻿using Dominio.AluguelModule;
 using Dominio.PessoaModule.ClienteModule;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using WindowsApp.Shared;
 

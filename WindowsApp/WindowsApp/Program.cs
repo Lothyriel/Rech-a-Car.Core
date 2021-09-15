@@ -1,11 +1,7 @@
-﻿using ConfigurationManager;
-using Dominio.PessoaModule;
-using EmailAluguelPDF;
-using Microsoft.Extensions.Configuration;
+﻿using EmailAluguelPDF;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsApp.AluguelModule;
 
 namespace WindowsApp
 {
@@ -32,7 +28,7 @@ namespace WindowsApp
                     }
                     catch (FilaEmailVazia)
                     {
-                        await Task.Delay(new TimeSpan(0,5,0));
+                        await Task.Delay(new TimeSpan(0, 5, 0));
                     }
                 }
             });

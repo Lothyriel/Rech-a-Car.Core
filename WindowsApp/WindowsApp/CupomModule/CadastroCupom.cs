@@ -4,14 +4,6 @@ using Controladores.Shared;
 using Dominio.CupomModule;
 using Dominio.ParceiroModule;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using WindowsApp.Shared;
 
 namespace WindowsApp.WindowsApp.CupomModule
@@ -51,7 +43,7 @@ namespace WindowsApp.WindowsApp.CupomModule
         }
 
         private void btAdicionar_Click(object sender, EventArgs e)
-        { 
+        {
             if (!Salva(mostraSucesso: false))
                 return;
 

@@ -2,10 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
 
 namespace Controladores.Shared
 {
@@ -43,6 +39,6 @@ namespace Controladores.Shared
             return Db.GetAll(sqlSelecionarTodos, ConverterEmEntidade);
         }
         public abstract T ConverterEmEntidade(IDataReader reader);
-        public abstract Dictionary<string, object> ObterParametrosRegistro(T entidade);       
+        public abstract Dictionary<string, object> ObterParametrosRegistro(T entidade);
     }
 }

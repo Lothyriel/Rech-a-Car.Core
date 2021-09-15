@@ -3,10 +3,6 @@ using Dominio.ParceiroModule;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tests.CupomModule
 {
@@ -17,7 +13,7 @@ namespace Tests.CupomModule
         public void Deve_retornar_clientePJ_valido()
         {
             Parceiro parceiro = new Parceiro("Deko");
-            Cupom cupomValido = new Cupom("DEKO-1563", 0, 120, (new DateTime(2021, 09, 30)),parceiro, 200);
+            Cupom cupomValido = new Cupom("DEKO-1563", 0, 120, (new DateTime(2021, 09, 30)), parceiro, 200);
             cupomValido.Validar().Should().Be(string.Empty);
         }
 
@@ -64,7 +60,7 @@ namespace Tests.CupomModule
         public void Deve_Retornar_Data_Invalido()
         {
             Parceiro parceiro = new Parceiro("Deko");
-            Cupom cupons = new Cupom("deko03", 90, 0, DateTime.MinValue, parceiro, 250) ;
+            Cupom cupons = new Cupom("deko03", 90, 0, DateTime.MinValue, parceiro, 250);
             Assert.AreEqual("A data Invalida, Insira uma data valida", cupons.Validar());
         }
 

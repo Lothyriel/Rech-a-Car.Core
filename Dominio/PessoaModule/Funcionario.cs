@@ -32,5 +32,5 @@ namespace Dominio.PessoaModule
             return validacao;
         }
     }
-    public enum Cargo { SysAdmin, Vendedor}
+    public enum Cargo { SysAdmin, Vendedor }
 }

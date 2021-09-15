@@ -1,13 +1,9 @@
 ﻿using Controladores.ParceiroModule;
 using Controladores.Shared;
 using Dominio.CupomModule;
-using Dominio.ParceiroModule;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Controladores.CupomModule
 {

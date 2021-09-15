@@ -1,11 +1,8 @@
-﻿using Controladores.PessoaModule;
+﻿using ConfigurationManager;
+using Controladores.PessoaModule;
 using Dominio.PessoaModule;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.Configuration;
-using System.IO;
 using System.Windows.Forms;
-using ConfigurationManager;
 
 namespace WindowsApp
 {

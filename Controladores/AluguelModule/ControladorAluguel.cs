@@ -5,7 +5,6 @@ using Controladores.Shared;
 using Controladores.VeiculoModule;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
-using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using System;
 using System.Collections.Generic;
@@ -116,7 +115,7 @@ namespace Controladores.AluguelModule
             var condutor = ehClientePF ? null : ((ClientePJ)cliente).Motoristas.Find(x => x.Id == id_condutor);
 
             var servicos = new ControladorServico().GetServicosAlugados(id);
-            
+
             var id_cupom = reader["ID_CUPOM"];
 
             Cupom cupom = null;
@@ -137,7 +136,7 @@ namespace Controladores.AluguelModule
                 { "ID_CONDUTOR", aluguel.Condutor.Id },
                 { "ID_FUNCIONARIO", aluguel.Funcionario.Id },
                 { "ID_VEICULO", aluguel.Veiculo.Id },
-                { "ID_CUPOM", aluguel.Cupom.Id},
+                { "ID_CUPOM", aluguel.Cupom?.Id},
                 { "TIPO_PLANO", aluguel.TipoPlano },
                 { "DATA_ALUGUEL", aluguel.DataAluguel },
                 { "DATA_DEVOLUCAO", aluguel.DataDevolucao }

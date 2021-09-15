@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dominio.AluguelModule;
-using System.IO;
-using System.Drawing.Imaging;
+﻿using Dominio.AluguelModule;
+using ExtensionsModule;
+using iText.IO.Font.Constants;
+using iText.IO.Image;
+using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
-using iText.Kernel.Font;
-using iText.IO.Font.Constants;
-using iText.IO.Image;
-using ExtensionsModule;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace EmailAluguelPDF
 {

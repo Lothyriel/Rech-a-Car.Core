@@ -1,12 +1,12 @@
-﻿using Dominio.AluguelModule;
+﻿using Controladores.AluguelModule;
+using Controladores.Shared;
+using Controladores.VeiculoModule;
+using Dominio.AluguelModule;
+using Dominio.ServicoModule;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using WindowsApp.Shared;
-using Dominio.ServicoModule;
-using Controladores.AluguelModule;
-using Controladores.VeiculoModule;
-using Controladores.Shared;
 
 namespace WindowsApp.AluguelModule
 {
