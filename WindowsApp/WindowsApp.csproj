@@ -24,7 +24,6 @@
     <ProjectReference Include="..\EmailAluguelPDF\Infra.ES.EnvioEmail.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Aspose.PDF" Version="21.8.0" />
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.242703">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

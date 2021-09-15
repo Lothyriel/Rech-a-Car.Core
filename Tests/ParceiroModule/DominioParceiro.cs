@@ -1,11 +1,6 @@
 ﻿using Dominio.ParceiroModule;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tests.ParceiroModule
 {
@@ -15,7 +10,7 @@ namespace Tests.ParceiroModule
         Parceiro parceiro;
 
         [TestMethod]
-        public void Deve_retornar_Parceiro_valido() 
+        public void Deve_retornar_Parceiro_valido()
         {
             parceiro = new Parceiro("Desconto do Deko");
             parceiro.Validar().Should().Be(string.Empty);

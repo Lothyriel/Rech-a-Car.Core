@@ -2,7 +2,6 @@
 using Controladores.Shared;
 using Dominio.ServicoModule;
 using System;
-using System.Windows.Forms;
 using WindowsApp.Shared;
 
 namespace WindowsApp.ServicoModule

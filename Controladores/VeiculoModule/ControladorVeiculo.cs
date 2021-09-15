@@ -1,5 +1,6 @@
 ﻿using Controladores.Shared;
 using Dominio.VeiculoModule;
+using ExtensionsModule;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -114,7 +115,7 @@ namespace Controladores.VeiculoModule
         public override string sqlExcluir => sqlExcluirVeiculo;
         public override string sqlExists => sqlExisteVeiculo;
 
-        public void AdicionarQuilometragem(Veiculo veiculo, int kmRodados)
+        public static void AdicionarQuilometragem(Veiculo veiculo, int kmRodados)
         {
             Db.Update(sqlAdicionarQuilometragem, Db.AdicionarParametro("NOVA_QUILOMETRAGEM", kmRodados + veiculo.Quilometragem, Db.AdicionarParametro("ID", veiculo.Id)));
         }
@@ -135,7 +136,7 @@ namespace Controladores.VeiculoModule
             var quilometragem = Convert.ToInt32(reader["QUILOMETRAGEM"]);
             var capacidadeTanque = Convert.ToInt32(reader["CAPACIDADE_TANQUE"]);
 
-            var foto = RecuperarImagem((byte[])reader["FOTO"]);
+            var foto = ((byte[])reader["FOTO"]).ToImage();
 
             var categoria = new ControladorCategoria().GetById(id_categoria);
 
@@ -161,7 +162,7 @@ namespace Controladores.VeiculoModule
                 { "PORTAS", veiculo.Portas },
                 { "CHASSI", veiculo.Chassi },
                 { "PORTA_MALAS", veiculo.Porta_malas },
-                { "FOTO", SalvarImagem(veiculo.Foto)  },
+                { "FOTO", veiculo.Foto.ToByteArray()  },
                 { "AUTOMATICO", veiculo.Automatico },
                 { "ID_CATEGORIA", veiculo.Categoria.Id },
                 { "QUILOMETRAGEM", veiculo.Quilometragem },

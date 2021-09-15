@@ -36,7 +36,7 @@ namespace WindowsApp.ClienteModule
         }
         public override object[] ObterCamposLinha(ICliente cliente)
         {
-            List<object> linha = new List<object>()
+            List<object> linha = new()
             {
                 cliente is ClientePJ ? "CNPJ" : "CPF",
                 cliente.Nome,

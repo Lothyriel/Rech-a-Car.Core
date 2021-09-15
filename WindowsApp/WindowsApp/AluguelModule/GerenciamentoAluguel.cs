@@ -1,6 +1,5 @@
 ﻿using Dominio.AluguelModule;
 using Dominio.PessoaModule.ClienteModule;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using WindowsApp.Shared;
 
@@ -40,7 +39,7 @@ namespace WindowsApp.AluguelModule
         }
         protected override IVisualizavel Visualizar(Aluguel entidade)
         {
-            return new FechamentoAluguel(GetEntidadeSelecionado());
+            return entidade is AluguelFechado ? new FechamentoAluguel(GetEntidadeSelecionado()) : this;
         }
     }
 }

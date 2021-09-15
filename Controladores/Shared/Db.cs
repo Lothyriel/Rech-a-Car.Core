@@ -1,7 +1,6 @@
 ﻿using ConfigurationManager;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -28,44 +27,36 @@ namespace Controladores.Shared
         }
         public static int Insert(string sql, Dictionary<string, object> parameters)
         {
-            using (DbConnection connection = factory.CreateConnection())
-            {
-                connection.ConnectionString = connectionString;
+            using DbConnection connection = factory.CreateConnection();
+            connection.ConnectionString = connectionString;
 
-                using (DbCommand command = connection.CreateCommand())
-                {
-                    command.CommandText = sql.GetUltimoIdInserido();
-                    command.Connection = connection;
+            using DbCommand command = connection.CreateCommand();
+            command.CommandText = sql.GetUltimoIdInserido();
+            command.Connection = connection;
 
-                    command.SetParameters(parameters);
-                    connection.Open();
+            command.SetParameters(parameters);
+            connection.Open();
 
-                    int id = Convert.ToInt32(command.ExecuteScalar());
+            int id = Convert.ToInt32(command.ExecuteScalar());
 
-                    connection.Close();
+            connection.Close();
 
-                    return id;
-                }
-            }
+            return id;
         }
         public static void Update(string sql, Dictionary<string, object> parameters)
         {
-            using (DbConnection connection = factory.CreateConnection())
-            {
-                connection.ConnectionString = connectionString;
+            using DbConnection connection = factory.CreateConnection();
+            connection.ConnectionString = connectionString;
 
-                using (DbCommand command = connection.CreateCommand())
-                {
-                    command.CommandText = sql;
-                    command.Connection = connection;
+            using DbCommand command = connection.CreateCommand();
+            command.CommandText = sql;
+            command.Connection = connection;
 
-                    command.SetParameters(parameters);
+            command.SetParameters(parameters);
 
-                    connection.Open();
+            connection.Open();
 
-                    command.ExecuteNonQuery();
-                }
-            }
+            command.ExecuteNonQuery();
         }
         public static void Delete(string sql, Dictionary<string, object> parameters = null)
         {
@@ -73,80 +64,64 @@ namespace Controladores.Shared
         }
         public static List<T> GetAll<T>(string sql, ConverterDelegate<T> convert, Dictionary<string, object> parameters = null)
         {
-            using (DbConnection connection = factory.CreateConnection())
+            using DbConnection connection = factory.CreateConnection();
+            connection.ConnectionString = connectionString;
+
+            using DbCommand command = connection.CreateCommand();
+            command.CommandText = sql;
+            command.Connection = connection;
+            command.SetParameters(parameters);
+
+            connection.Open();
+
+            using var reader = command.ExecuteReader();
+            var list = new List<T>();
+
+            while (reader.Read())
             {
-                connection.ConnectionString = connectionString;
-
-                using (DbCommand command = connection.CreateCommand())
-                {
-                    command.CommandText = sql;
-                    command.Connection = connection;
-                    command.SetParameters(parameters);
-
-                    connection.Open();
-
-                    using (var reader = command.ExecuteReader())
-                    {
-                        var list = new List<T>();
-
-                        while (reader.Read())
-                        {
-                            var obj = convert(reader);
-                            list.Add(obj);
-                        }
-                        return list;
-                    }
-                }
+                var obj = convert(reader);
+                list.Add(obj);
             }
+            return list;
         }
-        public static T Get<T>(string sql, ConverterDelegate<T> convert, Dictionary<string, object> parameters=null)
+        public static T Get<T>(string sql, ConverterDelegate<T> convert, Dictionary<string, object> parameters = null)
         {
-            using (DbConnection connection = factory.CreateConnection())
-            {
-                connection.ConnectionString = connectionString;
+            using DbConnection connection = factory.CreateConnection();
+            connection.ConnectionString = connectionString;
 
-                using (DbCommand command = connection.CreateCommand())
-                {
-                    command.CommandText = sql;
-                    command.Connection = connection;
+            using DbCommand command = connection.CreateCommand();
+            command.CommandText = sql;
+            command.Connection = connection;
 
-                    command.SetParameters(parameters);
+            command.SetParameters(parameters);
 
-                    connection.Open();
+            connection.Open();
 
-                    using (var reader = command.ExecuteReader())
-                    {
-                        T t = default;
+            using var reader = command.ExecuteReader();
+            T t = default;
 
-                        if (reader.Read())
-                            t = convert(reader);
+            if (reader.Read())
+                t = convert(reader);
 
-                        return t;
-                    }
-                }
-            }
+            return t;
         }
-        public static bool Exists(string sql, Dictionary<string, object> parameters)
+        public static bool Exists(string sql, Dictionary<string, object> parameters = null)
         {
-            using (DbConnection connection = factory.CreateConnection())
-            {
-                connection.ConnectionString = connectionString;
+            using DbConnection connection = factory.CreateConnection();
+            connection.ConnectionString = connectionString;
 
-                using (DbCommand command = connection.CreateCommand())
-                {
-                    command.CommandText = sql;
+            using DbCommand command = connection.CreateCommand();
+            command.CommandText = sql;
 
-                    command.Connection = connection;
+            command.Connection = connection;
 
-                    command.SetParameters(parameters);
+            command.SetParameters(parameters);
 
-                    connection.Open();
+            connection.Open();
 
-                    int numberRows = Convert.ToInt32(command.ExecuteScalar());
+            int numberRows = Convert.ToInt32(command.ExecuteScalar());
 
-                    return numberRows > 0;
-                }
-            }
+            return numberRows > 0;
         }
         private static void SetParameters(this DbCommand command, Dictionary<string, object> parameters)
         {
