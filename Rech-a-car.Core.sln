@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio", "Dominio\Dominio.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmailAluguelPDF", "EmailAluguelPDF\EmailAluguelPDF.csproj", "{DE9FDA08-3E14-49E7-BF18-F9424A9FFCCE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{7ACBD780-F866-489C-BC9E-723EA9AD92BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "Tests\UnitTests.csproj", "{7ACBD780-F866-489C-BC9E-723EA9AD92BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{536E2352-5380-46A3-B83A-C4C3EEE85680}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurationManager", "ConfigurationManager\ConfigurationManager.csproj", "{4FD7278E-07B0-464E-9811-68AEC3504353}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "extensions", "extensions", "{9EEE2F75-AD20-4C68-99B7-5584F29A2922}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{6B53BD26-3478-4174-BF45-5AF95861B96A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{4FD7278E-07B0-464E-9811-68AEC3504353}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FD7278E-07B0-464E-9811-68AEC3504353}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FD7278E-07B0-464E-9811-68AEC3504353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B53BD26-3478-4174-BF45-5AF95861B96A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B53BD26-3478-4174-BF45-5AF95861B96A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B53BD26-3478-4174-BF45-5AF95861B96A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B53BD26-3478-4174-BF45-5AF95861B96A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{09145CF3-3B58-4334-AD7D-7A95A6F618AA} = {536E2352-5380-46A3-B83A-C4C3EEE85680}
 		{4FD7278E-07B0-464E-9811-68AEC3504353} = {9EEE2F75-AD20-4C68-99B7-5584F29A2922}
 		{9EEE2F75-AD20-4C68-99B7-5584F29A2922} = {536E2352-5380-46A3-B83A-C4C3EEE85680}
+		{6B53BD26-3478-4174-BF45-5AF95861B96A} = {22166A9E-A51D-43C2-AE8F-AD19CA06E7CE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {588C9984-282F-4230-84B2-CF78AFC64778}
