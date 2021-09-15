@@ -2,7 +2,6 @@
 using System.IO;
 using System.Net;
 using System.Net.Mail;
-using System.Runtime.Serialization;
 
 namespace EmailAluguelPDF
 {
@@ -10,8 +9,7 @@ namespace EmailAluguelPDF
     {
         private const string email = "rech.a.car.alugueldeveiculos@gmail.com";
 
-        private static ControladorEmail controladorEmail = new ControladorEmail();
-        private static SmtpClient client = new SmtpClient("smtp.gmail.com", 587) 
+        private static SmtpClient client = new("smtp.gmail.com", 587)
         {
             UseDefaultCredentials = false,
             Credentials = new NetworkCredential(email, "rech#admin"),
@@ -20,7 +18,7 @@ namespace EmailAluguelPDF
 
         public EnviaPDFEmail()
         {
-            var proxEnvio = controladorEmail.GetProxEnvio();
+            var proxEnvio = new ControladorEmail().GetProxEnvio();
 
             if (proxEnvio == null)
                 throw new FilaEmailVazia();
@@ -29,25 +27,23 @@ namespace EmailAluguelPDF
             var message = new MailMessage(email, emailUsuario, "Resumo Aluguel Rech-a-car", "Confira o resumo do seu mais novo aluguel: ");
 
             var stream = new MemoryStream();
-            proxEnvio.Pdf.Save(stream);
 
-            var data = new Attachment(stream, "Pdf Resumo Aluguel.pdf");
-            message.Attachments.Add(data);
+            message.Attachments.Add(new Attachment(stream, "Pdf Resumo Aluguel.pdf"));
 
             client.Send(message);
-            controladorEmail.AlterarEnviado(proxEnvio.Id);
+            ControladorEmail.AlterarEnviado(proxEnvio.Id);
         }
 
     }
-        [Serializable]
-        public class FilaEmailVazia : Exception
+    [Serializable]
+    public class FilaEmailVazia : Exception
+    {
+        public FilaEmailVazia()
         {
-            public FilaEmailVazia()
-            {
-            }
-
-            public FilaEmailVazia(string message) : base(message)
-            {
-            }
         }
+
+        public FilaEmailVazia(string message) : base(message)
+        {
+        }
+    }
 }

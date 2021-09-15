@@ -38,7 +38,7 @@ namespace WindowsApp
             panelSubMenuClientes.Visible = false;
             panelSubMenuVeiculos.Visible = false;
         }
-        private void MostrarSubMenu(Panel subMenu)
+        private static void MostrarSubMenu(Panel subMenu)
         {
             subMenu.Visible = !subMenu.Visible;
         }

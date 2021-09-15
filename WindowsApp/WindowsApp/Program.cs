@@ -20,9 +20,6 @@ namespace WindowsApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-
-
-
             new Login().Show();
 
             Task.Run(async () =>
@@ -37,7 +34,6 @@ namespace WindowsApp
                     {
                         await Task.Delay(new TimeSpan(0,5,0));
                     }
-        
                 }
             });
 

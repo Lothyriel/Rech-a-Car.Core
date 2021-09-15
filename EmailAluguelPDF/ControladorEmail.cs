@@ -39,13 +39,13 @@ namespace EmailAluguelPDF
 
         #endregion
 
-        public void InserirParaEnvio(EnvioEmail envio)
+        public static void InserirParaEnvio(EnvioEmail envio)
         {
-            var ms = new MemoryStream();
-            envio.Pdf.Save(ms);
-            Db.Insert(sqlInserirEmail, Db.AdicionarParametro("ID_ALUGUEL", envio.Aluguel.Id, Db.AdicionarParametro("PDF", ms)));
+            var stream = envio.Pdf.GetPdfDocument().GetWriter().GetOutputStream();
+            stream.Position = 0;
+            Db.Insert(sqlInserirEmail, Db.AdicionarParametro("ID_ALUGUEL", envio.Aluguel.Id, Db.AdicionarParametro("PDF", stream)));
         }
-        public void AlterarEnviado(int id)
+        public static void AlterarEnviado(int id)
         {
             Db.Update(sqlAlterarEmailEnviado, Db.AdicionarParametro("ID", id, Db.AdicionarParametro("DATA_ENVIADO", DateTime.Now)));
         }
@@ -57,7 +57,10 @@ namespace EmailAluguelPDF
         {
             var id = Convert.ToInt32(reader["ID"]);
             var aluguel = new ControladorAluguel().GetById(Convert.ToInt32(reader["ID_ALUGUEL"]));
-            var doc = new Document(new PdfDocument(new PdfWriter(new MemoryStream((byte[])reader["PDF"]))));
+            var ms = new MemoryStream((byte[])reader["PDF"]);
+            var pdfWriter = new PdfWriter(ms);
+            var pdfDocument = new PdfDocument(pdfWriter);
+            var doc = new Document(pdfDocument);
             return new EnvioEmail(aluguel, doc) { Id = id };
         }
     }

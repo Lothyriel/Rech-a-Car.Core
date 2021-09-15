@@ -9,5 +9,7 @@ namespace Dominio.PessoaModule.ClienteModule
         string Endereco { get; set; }
         string Documento { get; set; }
         string Email { get; set; }
+
+        static string sexo() { return ""; }
     }
 }

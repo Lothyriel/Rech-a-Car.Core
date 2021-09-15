@@ -13,6 +13,8 @@ using iText.Layout.Properties;
 using iText.Kernel.Font;
 using iText.IO.Font.Constants;
 using iText.IO.Image;
+using iText.IO.Source;
+using ExtensionsModule;
 
 namespace EmailAluguelPDF
 {
@@ -21,18 +23,20 @@ namespace EmailAluguelPDF
         public CriaPDFAluguel(Aluguel aluguel)
         {
             #region Estilos
-            Style helvetica20b = new Style();
+            Style helvetica20b = new();
             PdfFont fontHeader = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
             helvetica20b.SetFont(fontHeader).SetFontSize(20);
 
-            Style helvetica14r = new Style();
+            Style helvetica14r = new();
             PdfFont fontCorpo = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
             helvetica14r.SetFont(fontCorpo).SetFontSize(14);
             #endregion
 
-            PdfWriter writer = new PdfWriter("aluguel.pdf");
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf);
+            ByteArrayOutputStream byteArray = new();
+            PdfWriter writer = new(byteArray);
+
+            PdfDocument pdf = new(writer);
+            Document document = new(pdf);
 
             Paragraph header = new Paragraph("RECH-A-CAR").SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica20b);
             document.Add(header);
@@ -50,23 +54,18 @@ namespace EmailAluguelPDF
                 aluguel.Servicos.ForEach(s => corpo.Add(new Text($"{s}")));
             }
 
-            corpo.Add(ImagemParaStream(aluguel.Veiculo.Foto));
+            corpo.Add(ImagemItextImage(aluguel.Veiculo.Foto));
 
-            new ControladorEmail().InserirParaEnvio(new EnvioEmail(aluguel, document));
+            ControladorEmail.InserirParaEnvio(new EnvioEmail(aluguel, document));
             document.Close();
         }
 
-        private static Image ImagemParaStream(System.Drawing.Image imagem)
+        private static Image ImagemItextImage(System.Drawing.Image imagem)
         {
-            byte[] byteImage;
-            using (var ms = new MemoryStream())
-            {
-                imagem.Save(ms, imagem.RawFormat);
-                byteImage = ms.ToArray();
-            }
-            ImageData imageData = ImageDataFactory.Create(byteImage);
-            Image imagemPDF = new(imageData);
-            return imagemPDF;
+            var byteArray = imagem.ToByteArray(ImageFormat.Bmp);
+
+            ImageData imageData = ImageDataFactory.Create(byteArray);
+            return new Image(imageData);
         }
     }
 }

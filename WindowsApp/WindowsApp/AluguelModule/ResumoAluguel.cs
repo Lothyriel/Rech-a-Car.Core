@@ -20,7 +20,7 @@ namespace WindowsApp.AluguelModule
 {
     public partial class ResumoAluguel : CadastroEntidade<Aluguel>// Form // 
     {
-        private Aluguel Aluguel;
+        private readonly Aluguel Aluguel;
         public ResumoAluguel(Aluguel aluguel = null)
         {
             Aluguel = aluguel ?? new Aluguel();
@@ -150,7 +150,7 @@ namespace WindowsApp.AluguelModule
             listServicos.Items.Remove(listServicos.SelectedItem);
             CalcularPrecoParcial();
         }
-        private void EsconderPanel(Panel panel)
+        private static void EsconderPanel(Panel panel)
         {
             panel.Visible = false;
         }
@@ -193,7 +193,7 @@ namespace WindowsApp.AluguelModule
             if (!Salva())
                 return;
 
-            //Task.Run(() => new CriaPDFAluguel(Aluguel));
+            Task.Run(() => new CriaPDFAluguel(Aluguel));
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoAluguel();
         }
         private void panelEsconderCliente_DoubleClick(object sender, EventArgs e)

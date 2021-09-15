@@ -60,7 +60,7 @@ namespace WindowsApp
         private void SetSuperAdm(string userAdmin, string senhaAdmin)
         {
             var Controlador = new ControladorFuncionario();
-            if (!Controlador.ExisteUsuario("admin"))
+            if (!ControladorFuncionario.ExisteUsuario("admin"))
                 Controlador.Inserir(new Funcionario("Alexandre Rech", "99999999999", "Rua do Flamengo", "999999", Cargo.SysAdmin, Properties.Resources.rech, userAdmin, senhaAdmin));
             funcionario = Controlador.GetByUserName(userAdmin);
         }
