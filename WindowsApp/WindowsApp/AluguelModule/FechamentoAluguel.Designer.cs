@@ -47,7 +47,7 @@ namespace WindowsApp.AluguelModule
             this.label9 = new System.Windows.Forms.Label();
             this.tb_OdometroInicial = new System.Windows.Forms.MaskedTextBox();
             this.tb_OdometroFinal = new System.Windows.Forms.MaskedTextBox();
-            this.panelColorido1 = new Shared.PanelColorido();
+            this.panelColorido1 = new PanelColorido();
             this.mtb_PrecoDespesa = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tb_NomeDespesa = new System.Windows.Forms.TextBox();
@@ -192,6 +192,7 @@ namespace WindowsApp.AluguelModule
             this.tb_TanqueAtual.Name = "tb_TanqueAtual";
             this.tb_TanqueAtual.Size = new System.Drawing.Size(166, 29);
             this.tb_TanqueAtual.TabIndex = 4;
+            this.tb_TanqueAtual.TextChanged += new System.EventHandler(this.tb_TanqueAtual_TextChanged);
             // 
             // label8
             // 
@@ -239,7 +240,6 @@ namespace WindowsApp.AluguelModule
             this.tb_OdometroInicial.Size = new System.Drawing.Size(166, 29);
             this.tb_OdometroInicial.TabIndex = 1;
             this.tb_OdometroInicial.ValidatingType = typeof(int);
-            this.tb_OdometroInicial.TextChanged += new System.EventHandler(this.tb_KmFinal_TextChanged);
             this.tb_OdometroInicial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.validaCampoNumerico);
             // 
             // tb_OdometroFinal
@@ -250,7 +250,7 @@ namespace WindowsApp.AluguelModule
             this.tb_OdometroFinal.Name = "tb_OdometroFinal";
             this.tb_OdometroFinal.Size = new System.Drawing.Size(166, 29);
             this.tb_OdometroFinal.TabIndex = 2;
-            this.tb_OdometroFinal.TextChanged += new System.EventHandler(this.tb_KmFinal_TextChanged);
+            this.tb_OdometroFinal.TextChanged += new System.EventHandler(this.tb_OdometroFinal_TextChanged);
             this.tb_OdometroFinal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.validaCampoNumerico);
             // 
             // panelColorido1
@@ -379,6 +379,7 @@ namespace WindowsApp.AluguelModule
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "FechamentoAluguel";
             this.Text = "FechamentoAluguel";
+            this.Load += new System.EventHandler(this.FechamentoAluguel_Load);
             this.panelColorido2.ResumeLayout(false);
             this.panelColorido2.PerformLayout();
             this.panelColorido1.ResumeLayout(false);

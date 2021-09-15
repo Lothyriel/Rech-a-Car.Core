@@ -10,7 +10,7 @@ using WindowsApp.Shared;
 
 namespace WindowsApp.AluguelModule
 {
-    public partial class FechamentoAluguel : CadastroEntidade<AluguelFechado>, IVisualizavel //Form//
+    public partial class FechamentoAluguel : CadastroEntidade<AluguelFechado>, IVisualizavel //Form, IVisualizavel//
     {
         public readonly Aluguel aluguel;
 
@@ -36,14 +36,14 @@ namespace WindowsApp.AluguelModule
             if (int.TryParse(tb_OdometroFinal.Text, out int odometroFinal) && odometroFinal >= aluguel.Veiculo.Quilometragem)
                 return odometroFinal - aluguel.Veiculo.Quilometragem;
 
-            return -1;
+            return 0;
         }
         private double TanqueUtilizado()
         {
             if (int.TryParse(tb_TanqueAtual.Text, out int tanqueFinal) && int.TryParse(tb_TanqueInicial.Text, out int tanqueInicial))
-                return tanqueFinal - tanqueInicial;
+                return tanqueInicial -tanqueFinal;
 
-            return -1;
+            return 0;
         }
         public override AluguelFechado GetNovaEntidade()
         {
@@ -87,6 +87,21 @@ namespace WindowsApp.AluguelModule
 
             ControladorVeiculo.AdicionarQuilometragem(aluguel.Veiculo, KmRodados());
         }
+        private void tb_TanqueAtual_TextChanged(object sender, EventArgs e)
+        {
+            entidade = GetNovaEntidade();
+            CalcularPrecoTotal();
+        }
+        private void tb_OdometroFinal_TextChanged(object sender, EventArgs e)
+        {
+            entidade = GetNovaEntidade();
+            CalcularPrecoTotal();
+        }
+        private void FechamentoAluguel_Load(object sender, EventArgs e)
+        {
+            entidade = GetNovaEntidade();
+            CalcularPrecoTotal();
+        }
         #endregion
 
         private void validaCampoNumerico(object sender, KeyPressEventArgs e)
@@ -97,5 +112,7 @@ namespace WindowsApp.AluguelModule
                 e.Handled = true;
             }
         }
+
+
     }
 }

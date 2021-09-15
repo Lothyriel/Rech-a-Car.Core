@@ -75,7 +75,7 @@ namespace Dominio.AluguelModule
             void CalculaPlanoControlado()
             {
                 PrecoParcial += (Categoria.PrecoDiaria * GetQtdDiasAluguel()) +
-                    Categoria.QuilometragemFranquia * Categoria.PrecoKm;
+                    (Categoria.QuilometragemFranquia * Categoria.PrecoKm);
             }
             void CalculaPlanoDiario()
             {
