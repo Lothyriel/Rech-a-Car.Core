@@ -1,5 +1,5 @@
-﻿using Aspose.Pdf;
-using Dominio.AluguelModule;
+﻿using Dominio.AluguelModule;
+using iText.Layout;
 
 namespace EmailAluguelPDF
 {

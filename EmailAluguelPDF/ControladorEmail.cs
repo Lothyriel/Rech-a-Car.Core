@@ -1,9 +1,9 @@
-﻿using Aspose.Pdf;
-using Controladores.AluguelModule;
+﻿using Controladores.AluguelModule;
 using Controladores.Shared;
 using Dominio.AluguelModule;
+using iText.Kernel.Pdf;
+using iText.Layout;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IO;
 
@@ -36,28 +36,57 @@ namespace EmailAluguelPDF
 			  WHERE [DATA_ENVIADO] IS NULL
                 ORDER BY [DATA_ENVIADO] DESC";
 
+        private const string sqlExisteEmailPendente =
+            @"SELECT 
+                COUNT(*) 
+            FROM 
+                [TBEMAIL]
+            WHERE 
+                [DATA_ENVIADO] IS NULL";
+
         #endregion
 
-        public void InserirParaEnvio(EnvioEmail envio)
+        public static void InserirParaEnvio(Aluguel aluguel, MemoryStream msPDF)
         {
-            var ms = new MemoryStream();
-            envio.Pdf.Save(ms);
-            Db.Insert(sqlInserirEmail, Db.AdicionarParametro("ID_ALUGUEL", envio.Aluguel.Id, Db.AdicionarParametro("PDF", ms)));
+            var bytesPdf = msPDF.ToArray();
+            Db.Insert(sqlInserirEmail, Db.AdicionarParametro("ID_ALUGUEL", aluguel.Id, Db.AdicionarParametro("PDF", bytesPdf)));
         }
-        public void AlterarEnviado(int id)
+
+        public static void AlterarEnviado(int id)
         {
             Db.Update(sqlAlterarEmailEnviado, Db.AdicionarParametro("ID", id, Db.AdicionarParametro("DATA_ENVIADO", DateTime.Now)));
         }
         public EnvioEmail GetProxEnvio()
         {
-            return Db.Get(sqlGetProxEnvio, ConverterEmEntidade);
+            if (Db.Exists(sqlExisteEmailPendente))
+                return Db.Get(sqlGetProxEnvio, ConverterEmEntidade);
+            else
+                return null;
         }
         private EnvioEmail ConverterEmEntidade(IDataReader reader)
         {
             var id = Convert.ToInt32(reader["ID"]);
             var aluguel = new ControladorAluguel().GetById(Convert.ToInt32(reader["ID_ALUGUEL"]));
+            MemoryStream ms = BytesToStream((byte[])reader["PDF"]);
+            Document pdf = StreamToPdf(ms);
 
-            return new EnvioEmail(aluguel, new Document(new MemoryStream((byte[])reader["PDF"]))) { Id = id };
+            return new EnvioEmail(aluguel, pdf) { Id = id };
+        }
+
+        private static Document StreamToPdf(MemoryStream ms)
+        {
+            var pdfReader = new PdfReader(ms);
+            var pdfWriter = new PdfWriter(ms);
+            var pdfDocument = new PdfDocument(pdfReader, pdfWriter);
+            return new Document(pdfDocument);
+        }
+
+        private static MemoryStream BytesToStream(byte[] bytes)
+        {
+            var ms = new MemoryStream();
+            ms.Write(bytes);
+            ms.Position = 0;
+            return ms;
         }
     }
 }

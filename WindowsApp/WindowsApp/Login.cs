@@ -1,11 +1,8 @@
-﻿using Controladores.PessoaModule;
+﻿using ConfigurationManager;
+using Controladores.PessoaModule;
 using Dominio.PessoaModule;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.Configuration;
-using System.IO;
 using System.Windows.Forms;
-using ConfigurationManager;
 
 namespace WindowsApp
 {
@@ -58,7 +55,7 @@ namespace WindowsApp
         private void SetSuperAdm(string userAdmin, string senhaAdmin)
         {
             var Controlador = new ControladorFuncionario();
-            if (!Controlador.ExisteUsuario("admin"))
+            if (!ControladorFuncionario.ExisteUsuario("admin"))
                 Controlador.Inserir(new Funcionario("Alexandre Rech", "99999999999", "Rua do Flamengo", "999999", Cargo.SysAdmin, Properties.Resources.rech, userAdmin, senhaAdmin));
             funcionario = Controlador.GetByUserName(userAdmin);
         }

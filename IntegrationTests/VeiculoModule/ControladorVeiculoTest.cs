@@ -20,7 +20,7 @@ namespace Tests.VeiculoModule
         {
             Image imagem = Image.FromFile(@"..\..\..\Resources\ford_ka_gay.jpg");
             Categoria categoria = new Categoria("Economico", 100, 10, 400, 800, TipoCNH.B);
-            veiculo1 = new Veiculo("Ka", "Ford", 2001, "ABC1024", 50000, 4, 4, "ASDFGHJKLQWERTYUI", 0, 50,imagem, false, categoria, TipoCombustivel.Gasolina);
+            veiculo1 = new Veiculo("Ka", "Ford", 2001, "ABC1024", 50000, 4, 4, "ASDFGHJKLQWERTYUI", 0, 50, imagem, false, categoria, TipoCombustivel.Gasolina);
             new ControladorCategoria().Inserir(categoria);
             controladorVeiculo.Inserir(veiculo1);
         }

@@ -3,11 +3,6 @@ using Controladores.Shared;
 using Dominio.ParceiroModule;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tests.Shared;
 
 namespace Tests.ParceiroModule
