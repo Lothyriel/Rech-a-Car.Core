@@ -46,7 +46,10 @@ namespace EmailAluguelPDF
             body_aluguel.Add(new Text($"Veículo: {aluguel.Veiculo}\n"));
             body_aluguel.Add(new Text($"Data de Aluguel: {aluguel.DataAluguel:d}\n"));
             body_aluguel.Add(new Text($"Data de Devolução: {aluguel.DataDevolucao:d}\n"));
-            body_aluguel.Add(new Text($"Cupom aplicado: {aluguel.Cupom.Nome}\n"));
+            if (aluguel.Cupom != null)
+            {
+                body_aluguel.Add(new Text($"Cupom aplicado: {aluguel.Cupom.Nome}\n"));
+            }
             body_aluguel.Add(new Text($"Total Parcial R$: {aluguel.CalcularTotal()}\n\n"));
             pdf.Add(body_aluguel);
 
