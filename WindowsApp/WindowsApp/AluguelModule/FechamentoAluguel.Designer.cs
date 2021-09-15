@@ -323,9 +323,11 @@ namespace WindowsApp.AluguelModule
             this.listDespesas.Name = "listDespesas";
             this.listDespesas.Size = new System.Drawing.Size(289, 104);
             this.listDespesas.TabIndex = 18;
+            this.listDespesas.SelectedIndexChanged += new System.EventHandler(this.listDespesas_SelectedIndexChanged);
             // 
             // bt_RemoveDespesa
             // 
+            this.bt_RemoveDespesa.Enabled = false;
             this.bt_RemoveDespesa.FlatAppearance.BorderSize = 0;
             this.bt_RemoveDespesa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bt_RemoveDespesa.Image = global::WindowsApp.Properties.Resources.removemini;

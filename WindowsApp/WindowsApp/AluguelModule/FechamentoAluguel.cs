@@ -70,7 +70,7 @@ namespace WindowsApp.AluguelModule
         private void bt_RemoveDespesa_Click(object sender, EventArgs e)
         {
             listDespesas.Items.Remove(listDespesas.SelectedItem);
-            lbValor.Text = entidade.CalcularTotal().ToString();
+            CalcularPrecoTotal();
         }
         private void tb_KmFinal_TextChanged(object sender, EventArgs e)
         {
@@ -101,6 +101,13 @@ namespace WindowsApp.AluguelModule
         {
             entidade = GetNovaEntidade();
             CalcularPrecoTotal();
+        }
+        private void listDespesas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listDespesas.SelectedIndex != -1)
+                bt_RemoveDespesa.Enabled = true;
+            else
+                bt_RemoveDespesa.Enabled = false;
         }
         #endregion
 
