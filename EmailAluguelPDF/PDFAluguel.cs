@@ -42,24 +42,24 @@ namespace EmailAluguelPDF
             pdf.Add(separador);
 
             Paragraph body_aluguel = new Paragraph().SetTextAlignment(TextAlignment.LEFT).AddStyle(helvetica14r);
-            body_aluguel.Add(new Text($"Olá, {aluguel.Cliente}. aqui está o resumo do seu mais novo aluguel na Rech-a-car!\n"));
-            body_aluguel.Add(new Text($"\tVeículo: {aluguel.Veiculo}\n"));
-            body_aluguel.Add(new Text($"\tData de Aluguel: {aluguel.DataAluguel:d}\n"));
-            body_aluguel.Add(new Text($"\tData de Devolução: {aluguel.DataDevolucao:d}\n"));
-            body_aluguel.Add(new Text($"\tTotal Parcial R$: {aluguel.CalcularTotal()}\n\n"));
+            body_aluguel.Add(new Text($"\nOlá, {aluguel.Cliente}. aqui está o resumo do seu mais novo aluguel na Rech-a-car!\n"));
+            body_aluguel.Add(new Text($"     Veículo: {aluguel.Veiculo}\n"));
+            body_aluguel.Add(new Text($"     Data de Aluguel: {aluguel.DataAluguel:d}\n"));
+            body_aluguel.Add(new Text($"     Data de Devolução: {aluguel.DataDevolucao:d}\n"));
+            body_aluguel.Add(new Text($"     Total Parcial R$: {aluguel.CalcularTotal()}\n\n"));
             pdf.Add(body_aluguel);
 
             pdf.Add(separador);
 
-            Paragraph body_servicos = new Paragraph().SetTextAlignment(TextAlignment.LEFT).AddStyle(helvetica14r);
             if (aluguel.Servicos.Count > 0)
             {
-                body_servicos.Add(new Text($"Serviços alugados:"));
-                aluguel.Servicos.ForEach(s => body_servicos.Add(new Text($"\t{s}")));
+                Paragraph body_servicos = new Paragraph().SetTextAlignment(TextAlignment.LEFT).AddStyle(helvetica14r);
+                body_servicos.Add(new Text($"\nServiços alugados:"));
+                aluguel.Servicos.ForEach(s => body_servicos.Add(new Text($"     {s}\n")));
+                body_servicos.Add(new Text($"\n"));
+                pdf.Add(body_servicos);
+                pdf.Add(separador);
             }
-            pdf.Add(body_servicos);
-
-            pdf.Add(separador);
 
             Paragraph body_imagem = new Paragraph().SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica14r);
             body_imagem.Add(ImagemItextImage(aluguel.Veiculo.Foto));
