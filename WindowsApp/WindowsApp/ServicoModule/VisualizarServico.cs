@@ -5,7 +5,7 @@ using WindowsApp.Shared;
 
 namespace WindowsApp.ServicoModule
 {
-    public class VisualizarServico : IVisualizavel
+    public class VisualizarCupom : IVisualizavel
     {
     }
 }

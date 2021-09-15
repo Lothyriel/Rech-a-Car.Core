@@ -93,5 +93,5 @@ namespace Dominio.VeiculoModule
             return $"{Marca} {Modelo} {Ano} {Categoria}";
         }
     }
-    public enum TipoCombustivel { Alcool, Diesel, Etanol, Flex, Gasolina }
+    public enum TipoCombustivel { Diesel, Etanol, Flex, Gasolina }
 }

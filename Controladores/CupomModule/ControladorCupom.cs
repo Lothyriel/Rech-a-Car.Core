@@ -74,6 +74,7 @@ namespace Controladores.CupomModule
 
                         FROM TBCUPONS";
 
+
         private const string sqlSelecionarCupomPorId =
          @"SELECT
                         [ID],
@@ -89,19 +90,21 @@ namespace Controladores.CupomModule
                     WHERE 
                         ID = @ID";
 
+        private const string sqlSelecionarCupomPorNome =
+                @"SELECT *
+	                FROM
+                        [TBCUPONS]
+                    WHERE 
+                        [NOME] = @NOME";
+
 
         #endregion
 
         public override string sqlSelecionarPorId => sqlSelecionarCupomPorId;
-
         public override string sqlSelecionarTodos => sqlSelecionarTodosCupons;
-
         public override string sqlInserir => sqlInserirCupom;
-
         public override string sqlEditar => sqlEditarCupom;
-
         public override string sqlExcluir => sqlExcluirCupom;
-
         public override string sqlExists => sqlExisteCupom;
 
         public override Cupom ConverterEmEntidade(IDataReader reader)
@@ -121,7 +124,6 @@ namespace Controladores.CupomModule
                 Id = id
             };
         }
-
         public override Dictionary<string, object> ObterParametrosRegistro(Cupom entidade)
         {
             var parametros = new Dictionary<string, object>
@@ -135,6 +137,10 @@ namespace Controladores.CupomModule
                 { "VALOR_MINIMO", entidade.ValorMinimo }
             };
             return parametros;
+        }
+        public Cupom GetByName(string nome)
+        {
+            return Db.Get(sqlSelecionarCupomPorNome, ConverterEmEntidade, Db.AdicionarParametro("NOME", nome));
         }
     }
 }

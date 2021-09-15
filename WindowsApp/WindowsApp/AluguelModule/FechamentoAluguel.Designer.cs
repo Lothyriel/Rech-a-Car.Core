@@ -36,14 +36,14 @@ namespace WindowsApp.AluguelModule
             this.label4 = new System.Windows.Forms.Label();
             this.lbValor = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.panelColorido3 = new WindowsApp.Shared.PanelColorido();
-            this.panelColorido2 = new WindowsApp.Shared.PanelColorido();
+            this.panelColorido3 = new Shared.PanelColorido();
+            this.panelColorido2 = new Shared.PanelColorido();
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tb_OdometroInicial = new System.Windows.Forms.MaskedTextBox();
             this.tb_OdometroFinal = new System.Windows.Forms.MaskedTextBox();
-            this.panelColorido1 = new WindowsApp.Shared.PanelColorido();
+            this.panelColorido1 = new Shared.PanelColorido();
             this.mtb_PrecoDespesa = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tb_NomeDespesa = new System.Windows.Forms.TextBox();
