@@ -9,7 +9,7 @@ namespace WindowsApp.Shared
     public abstract partial class GerenciamentoEntidade<T> : Form, IVisualizavel where T : IControlavel
     {
         protected abstract CadastroEntidade<T> Cadastro { get; }
-        public GerenciamentoEntidade(String titulo, TipoTela tipo = TipoTela.CadastroBasico)
+        public GerenciamentoEntidade(string titulo, TipoTela tipo = TipoTela.CadastroBasico)
         {
             InitializeComponent();
             AtualizarRegistros(Cadastro.Controlador.Registros);
@@ -139,9 +139,6 @@ namespace WindowsApp.Shared
         private void tbFiltro_TextChanged(object sender, EventArgs e)
         {
             AtualizarRegistros(Cadastro.Controlador.FiltroTunado(tbFiltro.Text));
-        }
-        private void dgvEntidade_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
         }
         private void dgvEntidade_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

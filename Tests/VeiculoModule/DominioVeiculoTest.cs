@@ -45,7 +45,7 @@ namespace Tests.VeiculoModule
         [TestMethod]
         public void Deve_retornar_carro_invalido()
         {
-            Veiculo veiculo1 = new Veiculo(string.Empty, string.Empty, DateTime.Now.Year + 2, "PLACA", -1, 0, 0, "CHASSI", -1, 0, null, true, null, TipoCombustivel.Alcool);
+            Veiculo veiculo1 = new Veiculo(string.Empty, string.Empty, DateTime.Now.Year + 2, "PLACA", -1, 0, 0, "CHASSI", -1, 0, null, true, null, TipoCombustivel.Etanol);
             veiculo1.Validar().Should().NotBe(string.Empty);
         }
     }

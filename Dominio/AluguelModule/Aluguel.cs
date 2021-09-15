@@ -1,4 +1,5 @@
-﻿using Dominio.PessoaModule;
+﻿using Dominio.CupomModule;
+using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
 using Dominio.Shared;
@@ -10,7 +11,7 @@ namespace Dominio.AluguelModule
 {
     public class Aluguel : Entidade
     {
-        public Aluguel(Veiculo veiculo, List<Servico> servicos, Plano tipoPlano, DateTime dataAluguel, ICliente cliente, Funcionario funcionario, DateTime dataDevolucao, Condutor condutor = null)
+        public Aluguel(Veiculo veiculo, List<Servico> servicos, Plano tipoPlano, DateTime dataAluguel, ICliente cliente, Funcionario funcionario, DateTime dataDevolucao, Condutor condutor = null, Cupom cupom = null)
         {
             Funcionario = funcionario;
             Veiculo = veiculo;
@@ -20,6 +21,7 @@ namespace Dominio.AluguelModule
             Cliente = cliente;
             Condutor = condutor;
             DataDevolucao = dataDevolucao;
+            Cupom = cupom;
             if (condutor == null)
                 Condutor = (Condutor)cliente;
         }
@@ -36,7 +38,6 @@ namespace Dominio.AluguelModule
                 Condutor = (Condutor)aluguel.Cliente;
         }
         public Aluguel() { }
-
         public Funcionario Funcionario { get; set; }
         public Veiculo Veiculo { get; set; }
         public ICliente Cliente { get; set; }
@@ -45,6 +46,7 @@ namespace Dominio.AluguelModule
         public Plano TipoPlano { get; set; }
         public DateTime DataAluguel { get; set; }
         public DateTime DataDevolucao { get; set; }
+        public Cupom Cupom { get; set; }
 
         public virtual double CalcularTotal()
         {
@@ -120,7 +122,6 @@ namespace Dominio.AluguelModule
         {
             return DataAluguel < DataDevolucao;
         }
-
         public override string ToString()
         {
             return $"{Veiculo} {Funcionario} {Cliente} {Condutor} {TipoPlano}";

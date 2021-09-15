@@ -1,26 +1,26 @@
 ﻿using Controladores.AluguelModule;
+using Controladores.ServicoModule;
 using Controladores.Shared;
 using Dominio.AluguelModule;
-using WindowsApp.Shared;
-using WindowsApp.ClienteModule;
-using WindowsApp.VeiculoModule;
-using System;
-using Dominio.PessoaModule.ClienteModule;
 using Dominio.PessoaModule;
+using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
-using Controladores.ServicoModule;
-using System.Windows.Forms;
-using System.Linq;
-using System.Collections.Generic;
 using Dominio.VeiculoModule;
 using EmailAluguelPDF;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using WindowsApp.ClienteModule;
+using WindowsApp.Shared;
+using WindowsApp.VeiculoModule;
 
 namespace WindowsApp.AluguelModule
 {
     public partial class ResumoAluguel : CadastroEntidade<Aluguel>// Form // 
     {
-        private Aluguel Aluguel;
+        private readonly Aluguel Aluguel;
         public ResumoAluguel(Aluguel aluguel = null)
         {
             Aluguel = aluguel ?? new Aluguel();
@@ -150,7 +150,7 @@ namespace WindowsApp.AluguelModule
             listServicos.Items.Remove(listServicos.SelectedItem);
             CalcularPrecoParcial();
         }
-        private void EsconderPanel(Panel panel)
+        private static void EsconderPanel(Panel panel)
         {
             panel.Visible = false;
         }
@@ -197,7 +197,7 @@ namespace WindowsApp.AluguelModule
             if (!Salva())
                 return;
 
-            //Task.Run(() => new CriaPDFAluguel(Aluguel));
+            Task.Run(() => PDFAluguel.CriaEnvioEmail(Aluguel));
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoAluguel();
         }
         private void panelEsconderCliente_DoubleClick(object sender, EventArgs e)

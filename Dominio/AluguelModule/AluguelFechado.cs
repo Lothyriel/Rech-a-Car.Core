@@ -28,7 +28,7 @@ namespace Dominio.AluguelModule
         public override double CalcularTotal()
         {
             double PrecoFinal = base.CalcularTotal();
-          
+
             int diasAtraso = (DataDevolucao - DateTime.Today).Days;
 
             PrecoFinal += diasAtraso * 50;

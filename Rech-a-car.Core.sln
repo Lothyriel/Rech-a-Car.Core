@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurationManager", "Con
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "extensions", "extensions", "{9EEE2F75-AD20-4C68-99B7-5584F29A2922}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{EACEA745-5D99-4554-B10A-051309AFB5E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{4FD7278E-07B0-464E-9811-68AEC3504353}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FD7278E-07B0-464E-9811-68AEC3504353}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FD7278E-07B0-464E-9811-68AEC3504353}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EACEA745-5D99-4554-B10A-051309AFB5E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EACEA745-5D99-4554-B10A-051309AFB5E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EACEA745-5D99-4554-B10A-051309AFB5E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EACEA745-5D99-4554-B10A-051309AFB5E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{09145CF3-3B58-4334-AD7D-7A95A6F618AA} = {536E2352-5380-46A3-B83A-C4C3EEE85680}
 		{4FD7278E-07B0-464E-9811-68AEC3504353} = {9EEE2F75-AD20-4C68-99B7-5584F29A2922}
 		{9EEE2F75-AD20-4C68-99B7-5584F29A2922} = {536E2352-5380-46A3-B83A-C4C3EEE85680}
+		{EACEA745-5D99-4554-B10A-051309AFB5E3} = {9EEE2F75-AD20-4C68-99B7-5584F29A2922}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {588C9984-282F-4230-84B2-CF78AFC64778}

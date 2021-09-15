@@ -1,5 +1,6 @@
 ﻿using Controladores.Shared;
 using Dominio.PessoaModule;
+using ExtensionsModule;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -109,7 +110,7 @@ namespace Controladores.PessoaModule
             var cargo = Convert.ToInt32(reader["CARGO"]);
             var endereco = Convert.ToString(reader["ENDERECO"]);
             var user = Convert.ToString(reader["USER"]);
-            var foto = RecuperarImagem((byte[])reader["FOTO"]);
+            var foto = ((byte[])reader["FOTO"]).ToImage();
 
             return new Funcionario(nome, telefone, endereco, documento, (Cargo)cargo, foto, user)
             {
@@ -128,12 +129,12 @@ namespace Controladores.PessoaModule
                 { "DOCUMENTO", funcionario.Documento },
                 { "USER", funcionario.NomeUsuario },
                 { "SENHA", funcionario.Senha},
-                { "FOTO", SalvarImagem(funcionario.Foto) }
+                { "FOTO", funcionario.Foto.ToByteArray() }
             };
 
             return parametros;
         }
-        public bool ExisteUsuario(string usuario)
+        public static bool ExisteUsuario(string usuario)
         {
             return Db.Exists(sqlExisteFuncionarioPorUser, Db.AdicionarParametro("USER", usuario));
         }

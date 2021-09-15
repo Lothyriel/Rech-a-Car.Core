@@ -3,11 +3,8 @@ using Controladores.VeiculoModule;
 using Dominio.PessoaModule;
 using Dominio.VeiculoModule;
 using System;
-using System.Windows.Forms;
-using WindowsApp.Shared;
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
+using WindowsApp.Shared;
 
 namespace WindowsApp.VeiculoModule.CategoriaModule
 {

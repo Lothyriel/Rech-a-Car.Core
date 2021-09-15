@@ -17,7 +17,7 @@ namespace Controladores.Shared
         {
             var palavras = filtro.Split(' ');
 
-            return Registros.Where(i => palavras.Any(p=> i.ToString().IndexOf(p, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
+            return Registros.Where(i => palavras.Any(p => i.ToString().IndexOf(p, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
         }
-    }   
+    }
 }

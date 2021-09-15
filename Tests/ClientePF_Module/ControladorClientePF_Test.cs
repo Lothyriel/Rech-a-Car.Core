@@ -77,7 +77,7 @@ namespace Tests.Tests.ClientePF_Module
         {
             CNH cnhAnterior = cliente.Cnh;
 
-            cliente.Cnh = new CNH("36510896881", TipoCNH.C) { Id= cnhAnterior.Id};
+            cliente.Cnh = new CNH("36510896881", TipoCNH.C) { Id = cnhAnterior.Id };
 
             controladorClientePF.Editar(cliente.Id, cliente);
 

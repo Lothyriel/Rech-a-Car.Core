@@ -1,13 +1,9 @@
 ﻿using Controladores.ParceiroModule;
 using Controladores.Shared;
 using Dominio.CupomModule;
-using Dominio.ParceiroModule;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Controladores.CupomModule
 {
@@ -74,6 +70,7 @@ namespace Controladores.CupomModule
 
                         FROM TBCUPONS";
 
+
         private const string sqlSelecionarCupomPorId =
          @"SELECT
                         [ID],
@@ -89,19 +86,21 @@ namespace Controladores.CupomModule
                     WHERE 
                         ID = @ID";
 
+        private const string sqlSelecionarCupomPorNome =
+                @"SELECT *
+	                FROM
+                        [TBCUPONS]
+                    WHERE 
+                        [NOME] = @NOME";
+
 
         #endregion
 
         public override string sqlSelecionarPorId => sqlSelecionarCupomPorId;
-
         public override string sqlSelecionarTodos => sqlSelecionarTodosCupons;
-
         public override string sqlInserir => sqlInserirCupom;
-
         public override string sqlEditar => sqlEditarCupom;
-
         public override string sqlExcluir => sqlExcluirCupom;
-
         public override string sqlExists => sqlExisteCupom;
 
         public override Cupom ConverterEmEntidade(IDataReader reader)
@@ -116,25 +115,28 @@ namespace Controladores.CupomModule
 
             var parceiro = new ControladorParceiro().GetById(idParceiro);
 
-            Cupom cupons = new Cupom(nome, valor_Percentual, valor_Fixo, data, parceiro, valorMinimo);
-
-            cupons.Id = id;
-
-            return cupons;
+            return new Cupom(nome, valor_Percentual, valor_Fixo, data, parceiro, valorMinimo)
+            {
+                Id = id
+            };
         }
-
         public override Dictionary<string, object> ObterParametrosRegistro(Cupom entidade)
         {
-            var parametros = new Dictionary<string, object>();
-
-            parametros.Add("ID", entidade.Id);
-            parametros.Add("NOME", entidade.Nome);
-            parametros.Add("VALOR_PERCENTUAL", entidade.ValorPercentual);
-            parametros.Add("VALOR_FIXO", entidade.ValorFixo);
-            parametros.Add("DATA_VALIDADE", entidade.DataValidade);
-            parametros.Add("IDPARCEIRO", entidade.Parceiro.Id);
-            parametros.Add("VALOR_MINIMO", entidade.ValorMinimo);
+            var parametros = new Dictionary<string, object>
+            {
+                { "ID", entidade.Id },
+                { "NOME", entidade.Nome },
+                { "VALOR_PERCENTUAL", entidade.ValorPercentual },
+                { "VALOR_FIXO", entidade.ValorFixo },
+                { "DATA_VALIDADE", entidade.DataValidade },
+                { "IDPARCEIRO", entidade.Parceiro.Id },
+                { "VALOR_MINIMO", entidade.ValorMinimo }
+            };
             return parametros;
+        }
+        public Cupom GetByName(string nome)
+        {
+            return Db.Get(sqlSelecionarCupomPorNome, ConverterEmEntidade, Db.AdicionarParametro("NOME", nome));
         }
     }
 }

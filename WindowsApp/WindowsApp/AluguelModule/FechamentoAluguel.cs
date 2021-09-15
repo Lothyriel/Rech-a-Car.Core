@@ -1,20 +1,18 @@
-﻿using Dominio.AluguelModule;
-using Dominio.Shared;
+﻿using Controladores.AluguelModule;
+using Controladores.Shared;
+using Controladores.VeiculoModule;
+using Dominio.AluguelModule;
+using Dominio.ServicoModule;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using WindowsApp.Shared;
-using Dominio.ServicoModule;
-using Controladores.AluguelModule;
-using Controladores.VeiculoModule;
-using Controladores.Shared;
-using System.Linq;
 
 namespace WindowsApp.AluguelModule
 {
     public partial class FechamentoAluguel : CadastroEntidade<AluguelFechado>, IVisualizavel //Form//
     {
-        Aluguel aluguel;
+        public readonly Aluguel aluguel;
 
         public override Controlador<AluguelFechado> Controlador => new ControladorAluguelFechado();
 
@@ -87,7 +85,7 @@ namespace WindowsApp.AluguelModule
             if (!Salva())
                 return;
 
-            new ControladorVeiculo().AdicionarQuilometragem(aluguel.Veiculo, KmRodados());
+            ControladorVeiculo.AdicionarQuilometragem(aluguel.Veiculo, KmRodados());
         }
         #endregion
 

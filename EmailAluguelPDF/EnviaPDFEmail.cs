@@ -1,53 +1,54 @@
-﻿using System;
+﻿using iText.Layout;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
-using System.Runtime.Serialization;
 
 namespace EmailAluguelPDF
 {
-    public class EnviaPDFEmail
+    public class EnviaEmail
     {
         private const string email = "rech.a.car.alugueldeveiculos@gmail.com";
 
-        private static ControladorEmail controladorEmail = new ControladorEmail();
-        private static SmtpClient client = new SmtpClient("smtp.gmail.com", 587) 
+        private static SmtpClient client = new("smtp.gmail.com", 587)
         {
             UseDefaultCredentials = false,
             Credentials = new NetworkCredential(email, "rech#admin"),
             EnableSsl = true
         };
 
-        public EnviaPDFEmail()
+        public static void EnviaPDFEmail()
         {
-            var proxEnvio = controladorEmail.GetProxEnvio();
+            var proxEnvio = new ControladorEmail().GetProxEnvio();
 
             if (proxEnvio == null)
                 throw new FilaEmailVazia();
 
             var emailUsuario = proxEnvio.Aluguel.Cliente.Email;
             var message = new MailMessage(email, emailUsuario, "Resumo Aluguel Rech-a-car", "Confira o resumo do seu mais novo aluguel: ");
-
-            var stream = new MemoryStream();
-            proxEnvio.Pdf.Save(stream);
-
-            var data = new Attachment(stream, "Pdf Resumo Aluguel.pdf");
-            message.Attachments.Add(data);
+            Stream ms = PdfToStream(proxEnvio.Pdf);
+            message.Attachments.Add(new Attachment(ms, "Pdf Resumo Aluguel.pdf"));
 
             client.Send(message);
-            controladorEmail.AlterarEnviado(proxEnvio.Id);
+            ControladorEmail.AlterarEnviado(proxEnvio.Id);
         }
 
-    }
-        [Serializable]
-        public class FilaEmailVazia : Exception
+        private static Stream PdfToStream(Document pdf)
         {
-            public FilaEmailVazia()
-            {
-            }
-
-            public FilaEmailVazia(string message) : base(message)
-            {
-            }
+            var ms = pdf.GetPdfDocument().GetWriter().GetOutputStream();
+            ms.Position = 0;
+            return ms;
         }
+    }
+    [Serializable]
+    public class FilaEmailVazia : Exception
+    {
+        public FilaEmailVazia()
+        {
+        }
+
+        public FilaEmailVazia(string message) : base(message)
+        {
+        }
+    }
 }
