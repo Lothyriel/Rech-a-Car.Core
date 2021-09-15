@@ -28,7 +28,7 @@ namespace WindowsApp
                 {
                     try
                     {
-                        new EnviaPDFEmail();
+                        EnviaEmail.EnviaPDFEmail();
                     }
                     catch (FilaEmailVazia)
                     {

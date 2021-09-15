@@ -1,11 +1,13 @@
-﻿using System;
+﻿using iText.Kernel.Pdf;
+using iText.Layout;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
 
 namespace EmailAluguelPDF
 {
-    public class EnviaPDFEmail
+    public class EnviaEmail
     {
         private const string email = "rech.a.car.alugueldeveiculos@gmail.com";
 
@@ -16,7 +18,7 @@ namespace EmailAluguelPDF
             EnableSsl = true
         };
 
-        public EnviaPDFEmail()
+        public static void EnviaPDFEmail()
         {
             var proxEnvio = new ControladorEmail().GetProxEnvio();
 
@@ -25,15 +27,19 @@ namespace EmailAluguelPDF
 
             var emailUsuario = proxEnvio.Aluguel.Cliente.Email;
             var message = new MailMessage(email, emailUsuario, "Resumo Aluguel Rech-a-car", "Confira o resumo do seu mais novo aluguel: ");
-
-            var stream = new MemoryStream();
-
-            message.Attachments.Add(new Attachment(stream, "Pdf Resumo Aluguel.pdf"));
+            Stream ms = PdfToStream(proxEnvio.Pdf);
+            message.Attachments.Add(new Attachment(ms, "Pdf Resumo Aluguel.pdf"));
 
             client.Send(message);
             ControladorEmail.AlterarEnviado(proxEnvio.Id);
         }
 
+        private static Stream PdfToStream(Document pdf)
+        {
+            var ms = pdf.GetPdfDocument().GetWriter().GetOutputStream();
+            ms.Position = 0;
+            return ms;
+        }
     }
     [Serializable]
     public class FilaEmailVazia : Exception

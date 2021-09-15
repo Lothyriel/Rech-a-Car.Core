@@ -13,14 +13,13 @@ using iText.Layout.Properties;
 using iText.Kernel.Font;
 using iText.IO.Font.Constants;
 using iText.IO.Image;
-using iText.IO.Source;
 using ExtensionsModule;
 
 namespace EmailAluguelPDF
 {
-    public class CriaPDFAluguel
+    public class PDFAluguel
     {
-        public CriaPDFAluguel(Aluguel aluguel)
+        public static void CriaEnvioEmail(Aluguel aluguel)
         {
             #region Estilos
             Style helvetica20b = new();
@@ -32,14 +31,14 @@ namespace EmailAluguelPDF
             helvetica14r.SetFont(fontCorpo).SetFontSize(14);
             #endregion
 
-            ByteArrayOutputStream byteArray = new();
-            PdfWriter writer = new(byteArray);
-
-            PdfDocument pdf = new(writer);
-            Document document = new(pdf);
+            var ms = new MemoryStream();
+            var writer = new PdfWriter(ms);
+            writer.SetCloseStream(false);
+            var pdfDocument = new PdfDocument(writer);
+            var pdf = new Document(pdfDocument);
 
             Paragraph header = new Paragraph("RECH-A-CAR").SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica20b);
-            document.Add(header);
+            pdf.Add(header);
 
             Paragraph corpo = new Paragraph().SetTextAlignment(TextAlignment.LEFT).AddStyle(helvetica14r);
             corpo.Add(new Text($"Olá {aluguel.Cliente} aqui está o resumo do seu mais novo aluguel na Rech-a-car"));
@@ -53,11 +52,11 @@ namespace EmailAluguelPDF
                 corpo.Add(new Text($"Serviços alugados:"));
                 aluguel.Servicos.ForEach(s => corpo.Add(new Text($"{s}")));
             }
-
             corpo.Add(ImagemItextImage(aluguel.Veiculo.Foto));
 
-            ControladorEmail.InserirParaEnvio(new EnvioEmail(aluguel, document));
-            document.Close();
+            pdf.Add(corpo);
+            pdf.Close();
+            ControladorEmail.InserirParaEnvio(aluguel, ms);
         }
 
         private static Image ImagemItextImage(System.Drawing.Image imagem)

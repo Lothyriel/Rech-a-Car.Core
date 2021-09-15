@@ -193,7 +193,7 @@ namespace WindowsApp.AluguelModule
             if (!Salva())
                 return;
 
-            Task.Run(() => new CriaPDFAluguel(Aluguel));
+            Task.Run(() => PDFAluguel.CriaEnvioEmail(Aluguel));
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoAluguel();
         }
         private void panelEsconderCliente_DoubleClick(object sender, EventArgs e)

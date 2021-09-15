@@ -85,7 +85,7 @@ namespace Controladores.Shared
             }
             return list;
         }
-        public static T Get<T>(string sql, ConverterDelegate<T> convert, Dictionary<string, object> parameters=null)
+        public static T Get<T>(string sql, ConverterDelegate<T> convert, Dictionary<string, object> parameters = null)
         {
             using DbConnection connection = factory.CreateConnection();
             connection.ConnectionString = connectionString;
@@ -106,7 +106,7 @@ namespace Controladores.Shared
 
             return t;
         }
-        public static bool Exists(string sql, Dictionary<string, object> parameters)
+        public static bool Exists(string sql, Dictionary<string, object> parameters = null)
         {
             using DbConnection connection = factory.CreateConnection();
             connection.ConnectionString = connectionString;
