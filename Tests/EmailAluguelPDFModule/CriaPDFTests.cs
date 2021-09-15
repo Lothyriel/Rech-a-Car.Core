@@ -12,7 +12,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using Tests.Shared;
 
 namespace Tests.EmailAluguelPDFModule
@@ -33,7 +32,7 @@ namespace Tests.EmailAluguelPDFModule
             var funcionario = new Funcionario("Alexandre Rech", "99999999", "Rua da Ndd", "99999999", Cargo.SysAdmin, imagem, "admin", "admin123");
 
             var servicos = new List<Servico>() { new Servico("Servico 1", 100), new Servico("Servico 2", 200), new Servico("Servico 3", 300) };
-            aluguel = new Aluguel() { Veiculo = veiculo,Funcionario = funcionario, Condutor = cliente, Cliente = cliente, Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
+            aluguel = new Aluguel() { Veiculo = veiculo, Funcionario = funcionario, Condutor = cliente, Cliente = cliente, Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
         }
         [TestMethod]
         public void DeveCriarPdf()
@@ -46,7 +45,7 @@ namespace Tests.EmailAluguelPDFModule
 
             new ControladorAluguel().Inserir(aluguel);
 
-            new CriaPDFAluguel(aluguel);
+            PDFAluguel.CriaEnvioEmail(aluguel);
 
             new ControladorEmail().GetProxEnvio().Should().NotBeNull();
         }
@@ -62,9 +61,9 @@ namespace Tests.EmailAluguelPDFModule
 
             new ControladorAluguel().Inserir(aluguel);
 
-            new CriaPDFAluguel(aluguel);
+            PDFAluguel.CriaEnvioEmail(aluguel);
 
-            new EnviaPDFEmail();
+            EnviaEmail.EnviaPDFEmail();
 
             new ControladorEmail().GetProxEnvio().Should().BeNull();
         }

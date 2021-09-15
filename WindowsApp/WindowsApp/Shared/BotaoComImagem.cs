@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsApp.Shared
@@ -26,7 +22,7 @@ namespace WindowsApp.Shared
                 base.Image = RedimensionarImagem(value, this.Width, this.Height);
             }
         }
-        
+
         private Image RedimensionarImagem(Image image, int maxWidth, int maxHeight)
         {
             var ratioX = (double)maxWidth / image.Width;

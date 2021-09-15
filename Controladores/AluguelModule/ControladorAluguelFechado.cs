@@ -12,7 +12,7 @@ namespace Controladores.AluguelModule
     {
         private ControladorAluguel Controlador = new ControladorAluguel();
 
-        private const string sqlGetAlugueisFechados = 
+        private const string sqlGetAlugueisFechados =
             @"SELECT *
              FROM
                 [TBALUGUEL]

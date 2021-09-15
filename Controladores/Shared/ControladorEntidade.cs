@@ -2,10 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
 
 namespace Controladores.Shared
 {
@@ -44,21 +40,5 @@ namespace Controladores.Shared
         }
         public abstract T ConverterEmEntidade(IDataReader reader);
         public abstract Dictionary<string, object> ObterParametrosRegistro(T entidade);
-        protected static byte[] SalvarImagem(Image foto)
-        {
-            using (var ms = new MemoryStream())
-            {
-                foto = new Bitmap(foto);
-                foto.Save(ms, ImageFormat.Bmp);
-                return ms.ToArray();
-            }
-        }
-        protected static Image RecuperarImagem(byte[] imageBytes)
-        {
-            using (var ms = new MemoryStream(imageBytes))
-            {
-                return Image.FromStream(ms);
-            }
-        }
     }
 }
