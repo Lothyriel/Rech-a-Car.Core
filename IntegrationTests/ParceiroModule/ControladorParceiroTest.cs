@@ -20,6 +20,7 @@ namespace Tests.ParceiroModule
 
         public void LimparTestes()
         {
+            Db.Delete(TestExtensions.ResetId("TBCupons"));
             Db.Delete(TestExtensions.ResetId("TBParceiro"));
         }
 

@@ -31,4 +31,8 @@
     <ProjectReference Include="..\EmailAluguelPDF\Infra.ES.EnvioEmail.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EmailAluguelPDFModule\" />
+  </ItemGroup>
+
 </Project>
