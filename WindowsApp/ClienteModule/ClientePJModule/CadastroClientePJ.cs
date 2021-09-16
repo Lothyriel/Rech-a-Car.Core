@@ -10,7 +10,7 @@ namespace WindowsApp.ClienteModule
 {
     public partial class CadastroClientePJ : CadastroEntidade<ClientePJ>//Form//
     {
-        public override Controlador<ClientePJ> Controlador { get => new ControladorClientePJ(); }
+        public override Controlador<ClientePJ> Services { get => new ControladorClientePJ(); }
 
         public CadastroClientePJ()
         {
@@ -39,7 +39,7 @@ namespace WindowsApp.ClienteModule
 
         private void AtualizarListMotoristas()
         {
-            dgvMotoristas.DataSource = Controlador.GetById(entidade.Id).Motoristas;
+            dgvMotoristas.DataSource = Services.GetById(entidade.Id).Motoristas;
         }
 
         public override ClientePJ GetNovaEntidade()

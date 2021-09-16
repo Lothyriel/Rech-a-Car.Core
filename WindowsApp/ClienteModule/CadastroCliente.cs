@@ -13,7 +13,7 @@ namespace WindowsApp.ClienteModule
             InitializeComponent();
         }
 
-        public override Controlador<ICliente> Controlador => new ControladorCliente();
+        public override Controlador<ICliente> Services => new ControladorCliente();
 
         protected override IEditavel Editar()
         {

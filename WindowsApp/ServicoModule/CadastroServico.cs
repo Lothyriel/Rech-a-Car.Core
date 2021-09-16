@@ -8,7 +8,7 @@ namespace WindowsApp.ServicoModule
 {
     public partial class CadastroServico : CadastroEntidade<Servico>
     {
-        public override Controlador<Servico> Controlador { get => new ControladorServico(); }
+        public override Controlador<Servico> Services { get => new ControladorServico(); }
 
         public CadastroServico()
         {

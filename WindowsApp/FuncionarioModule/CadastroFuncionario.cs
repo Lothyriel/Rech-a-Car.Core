@@ -11,7 +11,7 @@ namespace WindowsApp.FuncionarioModule
 {
     public partial class CadastroFuncionario : CadastroEntidade<Funcionario> //Form//
     {
-        public override Controlador<Funcionario> Controlador => new ControladorFuncionario();
+        public override Controlador<Funcionario> Services => new ControladorFuncionario();
 
         public CadastroFuncionario()
         {

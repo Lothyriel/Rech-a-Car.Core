@@ -10,7 +10,7 @@ namespace WindowsApp.VeiculoModule.CategoriaModule
 {
     public partial class CadastroCategoria : CadastroEntidade<Categoria>//Form//
     {
-        public override Controlador<Categoria> Controlador { get => new ControladorCategoria(); }
+        public override Controlador<Categoria> Services { get => new ControladorCategoria(); }
 
         public CadastroCategoria()
         {

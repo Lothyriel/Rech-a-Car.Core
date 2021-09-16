@@ -1,4 +1,4 @@
-﻿using ConfigurationManager.Combustivel;
+﻿using ConfigurationManager;
 using System.Windows.Forms;
 
 namespace WindowsApp.ConfiguracoesModule

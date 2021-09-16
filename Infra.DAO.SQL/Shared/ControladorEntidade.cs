@@ -5,7 +5,7 @@ using System.Data;
 
 namespace Controladores.Shared
 {
-    public abstract class ControladorEntidade<T> : Controlador<T> where T : IEntidade
+    public abstract class EntidadeDAO<T> : DAO<T> where T : IEntidade
     {
         public abstract string sqlSelecionarPorId { get; }
         public abstract string sqlSelecionarTodos { get; }

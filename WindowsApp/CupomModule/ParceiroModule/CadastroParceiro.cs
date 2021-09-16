@@ -8,7 +8,7 @@ namespace WindowsApp.WindowsApp.CupomModule.ParceiroModule
 {
     public partial class CadastroParceiro : CadastroEntidade<Parceiro>
     {
-        public override Controlador<Parceiro> Controlador { get => new ControladorParceiro(); }
+        public override Controlador<Parceiro> Services { get => new ControladorParceiro(); }
 
         public CadastroParceiro()
         {

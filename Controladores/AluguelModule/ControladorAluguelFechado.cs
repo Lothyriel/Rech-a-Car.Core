@@ -1,4 +1,5 @@
-﻿using Controladores.ServicoModule;
+﻿using ConfigurationManager;
+using Controladores.ServicoModule;
 using Controladores.Shared;
 using Dominio.AluguelModule;
 using Dominio.ServicoModule;
@@ -77,7 +78,7 @@ namespace Controladores.AluguelModule
                 { "DATA_DEVOLVIDA", aluguel.DataDevolvida },
                 { "TANQUE_UTILIZADO", aluguel.TanqueUtilizado },
                 { "KM_RODADOS", aluguel.KmRodados },
-                { "TOTAL", aluguel.CalcularTotal() },
+                { "TOTAL", aluguel.CalcularTotal(ConfiguracoesManager.Configs) },
             };
         }
     }

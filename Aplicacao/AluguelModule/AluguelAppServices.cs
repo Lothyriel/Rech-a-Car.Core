@@ -10,15 +10,20 @@ using System.Threading.Tasks;
 
 namespace Aplicacao.AluguelModule
 {
-    public class AluguelAppService : EntidadeAppService<Aluguel>
+    public class AluguelAppServices : EntidadeAppServices<Aluguel>
     {
+        IRelatorioAluguel RelatorioRepository;
+        public AluguelAppServices(IAluguelRepository repositorio) : base(repositorio)
+        {
+        }
+
         public static async void IniciaLoopEnvioEmails()
         {
             while (true)
             {
                 try
                 {
-                    TentaEnviarEmail();
+                    TentaEnviarRelatorioEmail();
                 }
                 catch (FilaEmailVazia)
                 {
@@ -26,7 +31,7 @@ namespace Aplicacao.AluguelModule
                 }
             }
         }
-        private static void TentaEnviarEmail()
+        private static void TentaEnviarRelatorioEmail()
         {
             var proxEnvio = new ControladorEmailAluguel().GetProxEnvio();
 
@@ -42,40 +47,15 @@ namespace Aplicacao.AluguelModule
 
             Email.Envia(emailUsuario, titulo, corpoEmail, new List<Attachment>() { attachment });
         }
-
-        public override void Editar(int id, Aluguel entidade)
+        public override ResultadoOperacao Inserir(Aluguel aluguel)
         {
-            throw new System.NotImplementedException();
-        }
+            var insercao = base.Inserir(aluguel);
+            if (insercao.Resultado == EnumResultado.Falha)
+                return insercao;
 
-        public override void Excluir(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override bool Existe(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override List<Aluguel> FiltroGenerico(string filtro)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override Aluguel GetById(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void Inserir(Aluguel entidade)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override List<Aluguel> TodosRegistros()
-        {
-            throw new System.NotImplementedException();
+            var relatorio = RelatorioRepository.GerarRelatorio(aluguel);
+            ControladorEmailAluguel.InserirParaEnvio(aluguel, relatorio);
+            return insercao;
         }
     }
 }

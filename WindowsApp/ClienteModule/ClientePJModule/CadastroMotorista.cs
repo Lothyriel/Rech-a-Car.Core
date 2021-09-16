@@ -10,7 +10,7 @@ namespace WindowsApp.ClienteModule
 {
     public partial class CadastroMotorista : CadastroEntidade<MotoristaEmpresa>
     {
-        public override Controlador<MotoristaEmpresa> Controlador => new ControladorMotorista();
+        public override Controlador<MotoristaEmpresa> Services => new ControladorMotorista();
 
         private ClientePJ clientePJ;
 

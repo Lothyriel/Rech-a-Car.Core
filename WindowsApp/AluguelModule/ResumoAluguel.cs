@@ -1,4 +1,5 @@
-﻿using Controladores.AluguelModule;
+﻿using Aplicacao.AluguelModule;
+using Controladores.AluguelModule;
 using Controladores.CupomModule;
 using Controladores.ServicoModule;
 using Controladores.Shared;
@@ -11,7 +12,6 @@ using Dominio.VeiculoModule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsApp.ClienteModule;
 using WindowsApp.Shared;
@@ -46,7 +46,7 @@ namespace WindowsApp.AluguelModule
             }
         }
 
-        public override Controlador<Aluguel> Controlador => new ControladorAluguel();
+        public override AluguelAppServices Services => new AluguelAppServices();
         public override Aluguel GetNovaEntidade()
         {
             DateTime.TryParse(tbDt_Emprestimo.Text, out DateTime dataAluguel);
@@ -197,10 +197,7 @@ namespace WindowsApp.AluguelModule
         #region Eventos
         private void btFecharAluguel_Click(object sender, EventArgs e)
         {
-            if (!Salva())
-                return;
-
-            Task.Run(() => PDFAluguel.CriaEnvioEmail(Aluguel));
+            AluguelAppServices
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoAluguel();
         }
         private void panelEsconderCliente_DoubleClick(object sender, EventArgs e)

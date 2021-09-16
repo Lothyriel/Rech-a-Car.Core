@@ -12,7 +12,7 @@ namespace WindowsApp.Shared
         public GerenciamentoEntidade(string titulo, TipoTela tipo = TipoTela.CadastroBasico)
         {
             InitializeComponent();
-            AtualizarRegistros(Cadastro.Controlador.Registros);
+            AtualizarRegistros(Cadastro.Services.Registros);
             lbTitulo.Text = titulo;
             AtualizarBotoes(tipo);
             AlternarBotoes(false);
@@ -92,7 +92,7 @@ namespace WindowsApp.Shared
         }
         protected T GetEntidadeSelecionado()
         {
-            return Cadastro.Controlador.GetById(dgvEntidade.GetIdSelecionado(), GetTipoEntidade());
+            return Cadastro.Services.GetById(dgvEntidade.GetIdSelecionado(), GetTipoEntidade());
         }
         protected virtual void SalvarAluguel()
         {
@@ -104,14 +104,14 @@ namespace WindowsApp.Shared
         private void btAdicionar_Click(object sender, EventArgs e)
         {
             TelaPrincipal.Instancia.FormAtivo = Cadastro.Inserir();
-            AtualizarRegistros(Cadastro.Controlador.FiltroTunado(tbFiltro.Text));
+            AtualizarRegistros(Cadastro.Services.FiltroTunado(tbFiltro.Text));
         }
         private void bt_editar_Click(object sender, EventArgs e)
         {
-            var entidade = Cadastro.Controlador.GetById(dgvEntidade.GetIdSelecionado(), GetTipoEntidade());
+            var entidade = Cadastro.Services.GetById(dgvEntidade.GetIdSelecionado(), GetTipoEntidade());
             TelaPrincipal.Instancia.FormAtivo = (Form)Cadastro.ConfigurarEditar(entidade);
             AlternarBotoes(false);
-            AtualizarRegistros(Cadastro.Controlador.FiltroTunado(tbFiltro.Text));
+            AtualizarRegistros(Cadastro.Services.FiltroTunado(tbFiltro.Text));
         }
         private void bt_remover_Click(object sender, EventArgs e)
         {
@@ -120,9 +120,9 @@ namespace WindowsApp.Shared
             if (opcao == DialogResult.Cancel)
                 return;
 
-            Cadastro.Controlador.Excluir(dgvEntidade.GetIdSelecionado(), GetTipoEntidade());
+            Cadastro.Services.Excluir(dgvEntidade.GetIdSelecionado(), GetTipoEntidade());
             AlternarBotoes(false);
-            AtualizarRegistros(Cadastro.Controlador.FiltroTunado(tbFiltro.Text));
+            AtualizarRegistros(Cadastro.Services.FiltroTunado(tbFiltro.Text));
         }
         private void btFiltro_Click(object sender, EventArgs e)
         {
@@ -138,7 +138,7 @@ namespace WindowsApp.Shared
         }
         private void tbFiltro_TextChanged(object sender, EventArgs e)
         {
-            AtualizarRegistros(Cadastro.Controlador.FiltroTunado(tbFiltro.Text));
+            AtualizarRegistros(Cadastro.Services.FiltroTunado(tbFiltro.Text));
         }
         private void dgvEntidade_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

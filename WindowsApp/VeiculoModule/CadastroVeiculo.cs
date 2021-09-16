@@ -11,7 +11,7 @@ namespace WindowsApp.VeiculoModule
 {
     public partial class CadastroVeiculo : CadastroEntidade<Veiculo>//Form//
     {
-        public override Controlador<Veiculo> Controlador { get => new ControladorVeiculo(); }
+        public override Controlador<Veiculo> Services { get => new ControladorVeiculo(); }
         private Bitmap imagem;
 
         public CadastroVeiculo()

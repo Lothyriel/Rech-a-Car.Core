@@ -56,21 +56,21 @@ namespace Aplicacao.AluguelModule.EmailAluguel
         {
             Db.Update(sqlAlterarEmailEnviado, Db.AdicionarParametro("ID", id, Db.AdicionarParametro("DATA_ENVIADO", DateTime.Now)));
         }
-        public EnvioEmailAluguel GetProxEnvio()
+        public EnvioResumoAluguel GetProxEnvio()
         {
             if (Db.Exists(sqlExisteEmailPendente))
                 return Db.Get(sqlGetProxEnvio, ConverterEmEntidade);
             else
                 return null;
         }
-        private EnvioEmailAluguel ConverterEmEntidade(IDataReader reader)
+        private EnvioResumoAluguel ConverterEmEntidade(IDataReader reader)
         {
             var id = Convert.ToInt32(reader["ID"]);
             var aluguel = new ControladorAluguel().GetById(Convert.ToInt32(reader["ID_ALUGUEL"]));
             MemoryStream ms = ((byte[])reader["PDF"]).ToMemoryStream();
             //Document pdf = ms.ToPdf();
 
-            return new EnvioEmailAluguel(aluguel, ms) { Id = id };
+            return new EnvioResumoAluguel(aluguel, ms) { Id = id };
         }
     }
     [Serializable]
@@ -84,9 +84,9 @@ namespace Aplicacao.AluguelModule.EmailAluguel
         {
         }
     }
-    public class EnvioEmailAluguel : EnvioEmail
+    public class EnvioResumoAluguel : EnvioEmail
     {
-        public EnvioEmailAluguel(Aluguel aluguel, MemoryStream attachment) : base(attachment)
+        public EnvioResumoAluguel(Aluguel aluguel, MemoryStream attachment) : base(attachment)
         {
             Aluguel = aluguel;
         }

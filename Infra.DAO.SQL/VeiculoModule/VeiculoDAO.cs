@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Controladores.VeiculoModule
 {
-    public class VeiculoDAO : ControladorEntidade<Veiculo>
+    public class VeiculoDAO : EntidadeDAO<Veiculo>
     {
         #region Queries
         private const string sqlInserirVeiculo =

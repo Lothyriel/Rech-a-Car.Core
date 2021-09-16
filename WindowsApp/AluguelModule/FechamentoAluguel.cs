@@ -14,7 +14,7 @@ namespace WindowsApp.AluguelModule
     {
         public readonly Aluguel aluguel;
 
-        public override Controlador<AluguelFechado> Controlador => new ControladorAluguelFechado();
+        public override Controlador<AluguelFechado> Services => new ControladorAluguelFechado();
 
         public FechamentoAluguel(Aluguel aluguel)
         {

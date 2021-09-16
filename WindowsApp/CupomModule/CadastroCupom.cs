@@ -10,7 +10,7 @@ namespace WindowsApp.WindowsApp.CupomModule
 {
     public partial class CadastroCupom : CadastroEntidade<Cupom>
     {
-        public override Controlador<Cupom> Controlador { get => new ControladorCupom(); }
+        public override Controlador<Cupom> Services { get => new ControladorCupom(); }
 
         public CadastroCupom()
         {

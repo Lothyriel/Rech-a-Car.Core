@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Controladores.VeiculoModule
 {
-    public class CategoriaDAO : ControladorEntidade<Categoria>
+    public class CategoriaDAO : EntidadeDAO<Categoria>
     {
         #region Queries
         private const string sqlSelecionarGrupoPorId =

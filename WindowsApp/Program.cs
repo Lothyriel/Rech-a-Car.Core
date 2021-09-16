@@ -19,7 +19,7 @@ namespace WindowsApp
 
             new Login().Show();
 
-            Task.Run(() => AluguelAppService.IniciaLoopEnvioEmails());
+            Task.Run(() => AluguelAppServices.IniciaLoopEnvioEmails());
 
             Application.Run();
         }

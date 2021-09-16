@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Controladores.Shared
 {
-    public abstract class Controlador<T> where T : IEntidade
+    public abstract class DAO<T> where T : IEntidade
     {
         public List<T> Registros => ObterRegistros();
         public abstract void Inserir(T entidade);
