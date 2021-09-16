@@ -68,7 +68,7 @@ namespace Tests.EmailAluguelPDFModule
             new ControladorEmail().GetProxEnvio().Should().BeNull();
         }
 
-        [TestCleanup]
+        [TestCleanup()]
         public void LimparArquivo()
         {
             TestExtensions.ResetId("TBEmail");

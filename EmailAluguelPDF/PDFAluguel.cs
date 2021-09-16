@@ -1,4 +1,5 @@
 ﻿using Dominio.AluguelModule;
+using EmailAluguelPDF.Properties;
 using ExtensionsModule;
 using iText.IO.Font.Constants;
 using iText.IO.Image;
@@ -17,60 +18,73 @@ namespace EmailAluguelPDF
     {
         public static void CriaEnvioEmail(Aluguel aluguel)
         {
-            #region Estilos
-            Style helvetica32b = new Style();
-            PdfFont fontHeader = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
-            helvetica32b.SetFont(fontHeader).SetFontSize(32);
-
-            Style helvetica14r = new Style();
-            PdfFont fontCorpo = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
-            helvetica14r.SetFont(fontCorpo).SetFontSize(14);
-
-            SolidLine linha = new(1f);
-            LineSeparator separador = new(linha);
-            #endregion
-
             var ms = new MemoryStream();
             var writer = new PdfWriter(ms);
             writer.SetCloseStream(false);
             var pdfDocument = new PdfDocument(writer);
             var pdf = new Document(pdfDocument);
 
-            Paragraph header = new Paragraph("RECH-A-CAR").SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica32b);
-            pdf.Add(header);
+            #region Estilos
+            PdfFont fontCorpo = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+            PdfFont fontHeader = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
 
-            pdf.Add(separador);
+            Style helvetica32b = new();
+            helvetica32b.SetFont(fontHeader).SetFontSize(32);
 
-            Paragraph body_aluguel = new Paragraph().SetTextAlignment(TextAlignment.LEFT).AddStyle(helvetica14r);
-            body_aluguel.Add(new Text($"\nOlá, {aluguel.Cliente}. aqui está o resumo do seu mais novo aluguel na Rech-a-car!\n"));
-            body_aluguel.Add(new Text($"Veículo: {aluguel.Veiculo}\n"));
-            body_aluguel.Add(new Text($"Data de Aluguel: {aluguel.DataAluguel:d}\n"));
-            body_aluguel.Add(new Text($"Data de Devolução: {aluguel.DataDevolucao:d}\n"));
-            if (aluguel.Cupom != null)
-            {
-                body_aluguel.Add(new Text($"Cupom aplicado: {aluguel.Cupom.Nome}\n"));
-            }
-            body_aluguel.Add(new Text($"Total Parcial R$: {aluguel.CalcularTotal()}\n\n"));
-            pdf.Add(body_aluguel);
+            Style helvetica20b = new();
+            helvetica20b.SetFont(fontHeader).SetFontSize(20);
 
-            pdf.Add(separador);
+            Style helvetica14r = new();
+            helvetica14r.SetFont(fontCorpo).SetFontSize(14);
 
-            if (aluguel.Servicos.Count > 0)
-            {
-                Paragraph body_servicos = new Paragraph().SetTextAlignment(TextAlignment.LEFT).AddStyle(helvetica14r);
-                body_servicos.Add(new Text($"\nServiços alugados:\n"));
-                aluguel.Servicos.ForEach(s => body_servicos.Add(new Text($"     {s}\n")));
-                body_servicos.Add(new Text($"\n"));
-                pdf.Add(body_servicos);
-                pdf.Add(separador);
-            }
+            Style helvetica14b = new();
+            helvetica14b.SetFont(fontHeader).SetFontSize(14);
+
+            Style helvetica24b = new();
+            helvetica24b.SetFont(fontHeader).SetFontSize(24);
+
+            SolidLine linha = new SolidLine(1f);
+            LineSeparator linhaHorizontal = new LineSeparator(linha);
+
+            #endregion
+
+            #region Parágrafos
+            Paragraph header = new Paragraph().SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica24b);
+            header.Add(ImagemItextImage(Resources.logopdf));
+            header.Add(new Text($"\nOlá, {aluguel.Cliente}."));
+            header.Add(new Text($"\nAqui está o resumo do seu mais novo aluguel na Rech-a-car!"));
 
             Paragraph body_imagem = new Paragraph().SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica14r);
-            body_imagem.Add(new Text($"\n"));
             body_imagem.Add(ImagemItextImage(aluguel.Veiculo.Foto));
+
+            Paragraph body_aluguel = new Paragraph().SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica14r);
+            body_aluguel.Add(new Text($"\nVeículo: {aluguel.Veiculo}"));
+            body_aluguel.Add(new Text($"\nData de Aluguel: {aluguel.DataAluguel:d}"));
+            body_aluguel.Add(new Text($"\nData de Devolução: {aluguel.DataDevolucao:d}"));
+            if (aluguel.Cupom != null)
+            {
+                body_aluguel.Add(new Text($"\nCupom aplicado: {aluguel.Cupom.Nome}"));
+            }
+
+            Paragraph body_servicos = new Paragraph().SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica14r);
+            if (aluguel.Servicos.Count > 0)
+            {
+                body_servicos.Add(new Text($"Serviços alugados:"));
+                aluguel.Servicos.ForEach(s => body_servicos.Add(new Text($"\n{s}")));
+            }
+
+            Paragraph total = new Paragraph($"\nTotal Parcial: R${aluguel.CalcularTotal()}").SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica14b);
+            #endregion
+                
+            pdf.Add(header);
             pdf.Add(body_imagem);
+            pdf.Add(body_aluguel);
+            pdf.Add(linhaHorizontal);
+            pdf.Add(body_servicos);
+            pdf.Add(total);
 
             pdf.Close();
+
             ControladorEmail.InserirParaEnvio(aluguel, ms);
         }
 
