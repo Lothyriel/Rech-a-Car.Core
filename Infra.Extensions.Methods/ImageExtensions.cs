@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace Extensions
+namespace Infra.Extensions.Methods
 {
     public static class ImageExtensions
     {
@@ -20,13 +20,6 @@ namespace Extensions
         {
             using var ms = new MemoryStream(imageBytes);
             return Image.FromStream(ms);
-        }
-        public static iText.Layout.Element.Image ToItextImage(this Image imagem)
-        {
-            var byteArray = imagem.ToByteArray(ImageFormat.Bmp);
-
-            ImageData imageData = ImageDataFactory.Create(byteArray);
-            return new iText.Layout.Element.Image(imageData);
         }
     }
 }

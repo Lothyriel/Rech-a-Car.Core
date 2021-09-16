@@ -1,4 +1,4 @@
-﻿namespace Extensions
+﻿namespace Infra.Extensions.Methods
 {
     static class TestExtensions
     {

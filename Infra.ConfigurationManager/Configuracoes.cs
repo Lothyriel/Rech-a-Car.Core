@@ -1,26 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using Dominio.AluguelModule;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Linq;
 
-namespace ConfigurationManager.Combustivel
+namespace ConfigurationManager
 {
-    public class Configuracoes
+    public class ConfiguracoesManager
     {
-        public Configuracoes(double valorEtanol, double valorDiesel, double valorGasolina, double valorCaucao)
-        {
-            ValorEtanol = valorEtanol;
-            ValorDiesel = valorDiesel;
-            ValorGasolina = valorGasolina;
-            ValorCaucao = valorCaucao;
-        }
-
-        public double ValorEtanol { get; internal set; }
-        public double ValorDiesel { get; internal set; }
-        public double ValorGasolina { get; internal set; }
-        public double ValorCaucao { get; internal set; }
-
         public static Configuracoes Configs
         {
             get

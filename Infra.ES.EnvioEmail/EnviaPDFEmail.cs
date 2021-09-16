@@ -1,12 +1,13 @@
 ﻿using iText.Layout;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
 
 namespace EmailAluguelPDF
 {
-    public class EnviaEmail
+    public class Email
     {
         private const string email = "rech.a.car.alugueldeveiculos@gmail.com";
 
@@ -17,7 +18,7 @@ namespace EmailAluguelPDF
             EnableSsl = true
         };
 
-        public static void EnviaPDFEmail()
+        public static void Envia(string EmailDestinatario, List<Attachment> attachments)
         {
             var proxEnvio = new ControladorEmail().GetProxEnvio();
 
@@ -26,8 +27,9 @@ namespace EmailAluguelPDF
 
             var emailUsuario = proxEnvio.Aluguel.Cliente.Email;
             var message = new MailMessage(email, emailUsuario, "Resumo Aluguel Rech-a-car", "Confira o resumo do seu mais novo aluguel: ");
-            Stream ms = PdfToStream(proxEnvio.Pdf);
-            message.Attachments.Add(new Attachment(ms, "Pdf Resumo Aluguel.pdf"));
+            //Stream ms = PdfToStream(proxEnvio.Pdf);
+            attachments.ForEach(a=> message.Attachments.Add(a));
+            //new Attachment(ms, "Pdf Resumo Aluguel.pdf");
 
             client.Send(message);
             ControladorEmail.AlterarEnviado(proxEnvio.Id);

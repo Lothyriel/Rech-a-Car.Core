@@ -1,6 +1,6 @@
 ﻿using Dominio.AluguelModule;
-using EmailAluguelPDF.Properties;
-using Extensions;
+using Infra.Extensions.Methods;
+using Infra.GeraPDF.Properties;
 using iText.IO.Font.Constants;
 using iText.Kernel.Font;
 using iText.Kernel.Pdf;
@@ -14,7 +14,7 @@ namespace EmailAluguelPDF
 {
     public class PDFAluguel
     {
-        public static void CriaEnvioEmail(Aluguel aluguel)
+        public static Stream CriaPDFResumo(Aluguel aluguel)
         {
             var ms = new MemoryStream();
             var writer = new PdfWriter(ms);
@@ -83,7 +83,8 @@ namespace EmailAluguelPDF
 
             pdf.Close();
 
-            ControladorEmail.InserirParaEnvio(aluguel, ms);
+            //ControladorEmail.InserirParaEnvio(aluguel, ms);
+            return ms;
         }
     }
 }

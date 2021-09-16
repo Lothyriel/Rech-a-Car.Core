@@ -1,5 +1,4 @@
-﻿using ConfigurationManager.Combustivel;
-using Dominio.ServicoModule;
+﻿using Dominio.ServicoModule;
 using System;
 using System.Collections.Generic;
 
@@ -26,14 +25,14 @@ namespace Dominio.AluguelModule
         public double TanqueUtilizado { get; set; }
         public List<Servico> ServicosNecessarios { get; set; }
         public DateTime DataDevolvida { get; set; }
-        public override double CalcularTotal()
+        public override double CalcularTotal(Configuracoes configs)
         {
             double PrecoFinal = base.CalcularTotal();
 
             if (DateTime.Today > DataDevolucao)
                 PrecoFinal += (DateTime.Today - DataDevolucao).Days;
 
-            PrecoFinal += CalcularCombustivel();
+            PrecoFinal += CalcularCombustivel(configs);
             PrecoFinal += CalcularKmRodados();
 
             ServicosNecessarios.ForEach(x => PrecoFinal += x.Taxa);
@@ -62,16 +61,16 @@ namespace Dominio.AluguelModule
 
             return PrecoKmRodado;
         }
-        private double CalcularCombustivel()
+        private double CalcularCombustivel(Configuracoes configs)
         {
             switch (Veiculo.TipoDeCombustivel)
             {
                 case VeiculoModule.TipoCombustivel.Diesel:
-                    return TanqueUtilizado * Configuracoes.Configs.ValorDiesel;
+                    return TanqueUtilizado * configs.ValorDiesel;
                 case VeiculoModule.TipoCombustivel.Etanol:
-                    return TanqueUtilizado * Configuracoes.Configs.ValorEtanol;
+                    return TanqueUtilizado * configs.ValorEtanol;
                 case VeiculoModule.TipoCombustivel.Gasolina:
-                    return TanqueUtilizado * Configuracoes.Configs.ValorGasolina;
+                    return TanqueUtilizado * configs.ValorGasolina;
                 default: return 0;
             }
         }

@@ -48,7 +48,7 @@ namespace Dominio.AluguelModule
         public DateTime DataDevolucao { get; set; }
         public Cupom Cupom { get; set; }
 
-        public virtual double CalcularTotal()
+        public virtual double CalcularTotal(Configuracoes configs = null)
         {
             double PrecoParcial = 0;
 

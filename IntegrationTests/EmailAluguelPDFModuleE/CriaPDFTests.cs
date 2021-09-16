@@ -63,7 +63,7 @@ namespace Tests.EmailAluguelPDFModule
 
             PDFAluguel.CriaEnvioEmail(aluguel);
 
-            EnviaEmail.EnviaPDFEmail();
+            Email.Envia();
 
             new ControladorEmail().GetProxEnvio().Should().BeNull();
         }

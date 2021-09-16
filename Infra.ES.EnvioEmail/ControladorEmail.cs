@@ -1,7 +1,7 @@
 ﻿using Controladores.AluguelModule;
 using Controladores.Shared;
 using Dominio.AluguelModule;
-using iText.Kernel.Pdf;
+using Infra.Extensions.Methods;
 using iText.Layout;
 using System;
 using System.Data;
@@ -67,26 +67,10 @@ namespace EmailAluguelPDF
         {
             var id = Convert.ToInt32(reader["ID"]);
             var aluguel = new ControladorAluguel().GetById(Convert.ToInt32(reader["ID_ALUGUEL"]));
-            MemoryStream ms = BytesToStream((byte[])reader["PDF"]);
-            Document pdf = StreamToPdf(ms);
+            MemoryStream ms = ((byte[])reader["PDF"]).ToMemoryStream();
+            Document pdf = ms.ToPdf();
 
             return new EnvioEmail(aluguel, pdf) { Id = id };
-        }
-
-        private static Document StreamToPdf(MemoryStream ms)
-        {
-            var pdfReader = new PdfReader(ms);
-            var pdfWriter = new PdfWriter(ms);
-            var pdfDocument = new PdfDocument(pdfReader, pdfWriter);
-            return new Document(pdfDocument);
-        }
-
-        private static MemoryStream BytesToStream(byte[] bytes)
-        {
-            var ms = new MemoryStream();
-            ms.Write(bytes);
-            ms.Position = 0;
-            return ms;
         }
     }
 }
