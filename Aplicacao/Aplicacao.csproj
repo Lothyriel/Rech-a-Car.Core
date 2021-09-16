@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="FuncionarioModule\CadastroFuncionario.cs">
-      <SubType>Form</SubType>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="ClienteModule\" />
     <Folder Include="ConfiguracoesModule\" />
     <Folder Include="FuncionarioModule\" />

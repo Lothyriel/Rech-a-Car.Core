@@ -12,8 +12,8 @@ using System.Data;
 
 namespace Infra.DAO.AluguelModule
 {
-    public class AluguelDAO : EntidadeDAO<Aluguel>
-    {
+    public class AluguelDAO : EntidadeDAO<Aluguel>, IAluguelRepository
+    {       
         #region Queries
         private const string sqlInserirAluguel =
     @"INSERT INTO [TBALUGUEL]
@@ -144,6 +144,10 @@ namespace Infra.DAO.AluguelModule
                 { "DATA_ALUGUEL", aluguel.DataAluguel },
                 { "DATA_DEVOLUCAO", aluguel.DataDevolucao }
             };
+        }
+        public void SalvarRelatorio(EnvioResumoAluguel envio)
+        {
+            EmailAluguelDAO.InserirParaEnvio(envio);
         }
     }
 }

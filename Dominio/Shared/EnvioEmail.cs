@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace EmailAluguelPDF
+namespace Dominio.Shared
 {
     public abstract class EnvioEmail
     {

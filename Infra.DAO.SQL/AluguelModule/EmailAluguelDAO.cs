@@ -1,15 +1,13 @@
 ﻿using Dominio.AluguelModule;
-using EmailAluguelPDF;
-using Infra.DAO.AluguelModule;
 using Infra.DAO.Shared;
 using Infra.Extensions.Methods;
 using System;
 using System.Data;
 using System.IO;
 
-namespace Aplicacao.AluguelModule.EmailAluguel
+namespace Infra.DAO.AluguelModule
 {
-    public class ControladorEmailAluguel
+    public class EmailAluguelDAO
     {
         #region Queries
         private const string sqlInserirEmail =
@@ -46,10 +44,10 @@ namespace Aplicacao.AluguelModule.EmailAluguel
 
         #endregion
 
-        public static void InserirParaEnvio(Aluguel aluguel, MemoryStream msPDF)
+        public static void InserirParaEnvio(EnvioResumoAluguel envio)
         {
-            var bytesPdf = msPDF.ToArray();
-            Db.Insert(sqlInserirEmail, Db.AdicionarParametro("ID_ALUGUEL", aluguel.Id, Db.AdicionarParametro("PDF", bytesPdf)));
+            var bytesPdf = envio.StreamAttachment.ToArray();
+            Db.Insert(sqlInserirEmail, Db.AdicionarParametro("ID_ALUGUEL", envio.Aluguel.Id, Db.AdicionarParametro("PDF", bytesPdf)));
         }
 
         public static void AlterarEnviado(int id)
@@ -72,24 +70,5 @@ namespace Aplicacao.AluguelModule.EmailAluguel
 
             return new EnvioResumoAluguel(aluguel, ms) { Id = id };
         }
-    }
-    [Serializable]
-    public class FilaEmailVazia : Exception
-    {
-        public FilaEmailVazia()
-        {
-        }
-
-        public FilaEmailVazia(string message) : base(message)
-        {
-        }
-    }
-    public class EnvioResumoAluguel : EnvioEmail
-    {
-        public EnvioResumoAluguel(Aluguel aluguel, MemoryStream attachment) : base(attachment)
-        {
-            Aluguel = aluguel;
-        }
-        public Aluguel Aluguel { get; }
     }
 }

@@ -1,7 +1,7 @@
-﻿using Aplicacao.AluguelModule.EmailAluguel;
-using Aplicacao.Shared;
+﻿using Aplicacao.Shared;
 using Dominio.AluguelModule;
 using EnviaEmail;
+using Infra.DAO.AluguelModule;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +12,8 @@ namespace Aplicacao.AluguelModule
 {
     public class AluguelAppServices : EntidadeAppServices<Aluguel>
     {
-        IRelatorioAluguel Relatorio;
+        public IRelatorioAluguel Relatorio;
+        new IAluguelRepository Repositorio;
         public AluguelAppServices(IAluguelRepository repositorio, IRelatorioAluguel relatorio) : base(repositorio)
         {
             Relatorio = relatorio;
@@ -34,7 +35,7 @@ namespace Aplicacao.AluguelModule
         }
         private static void TentaEnviarRelatorioEmail()
         {
-            var proxEnvio = new ControladorEmailAluguel().GetProxEnvio();
+            var proxEnvio = new EmailAluguelDAO().GetProxEnvio();
 
             if (proxEnvio == null)
                 throw new FilaEmailVazia();
@@ -55,8 +56,20 @@ namespace Aplicacao.AluguelModule
                 return insercao;
 
             var relatorio = Relatorio.GerarRelatorio(aluguel);
-            ControladorEmailAluguel.InserirParaEnvio(aluguel, relatorio);
+
+            Repositorio.SalvarRelatorio(new EnvioResumoAluguel(aluguel, relatorio));
             return insercao;
+        }
+    }
+    [Serializable]
+    public class FilaEmailVazia : Exception
+    {
+        public FilaEmailVazia()
+        {
+        }
+
+        public FilaEmailVazia(string message) : base(message)
+        {
         }
     }
 }
