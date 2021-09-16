@@ -9,16 +9,15 @@ namespace Tests.VeiculoModule
     public class DominioCategoriaTest
     {
         [TestMethod]
-        public void Deve_retornar_dadosveiculo_valido()
+        public void Deve_retornar_grupo_valido()
         {
-            Categoria categoria = new Categoria("Economico", 100, 10, 400, 800, TipoCNH.B);
+            var categoria = new Categoria("nome", 10, 10, 10, 10, TipoCNH.A);
             categoria.Validar().Should().Be(string.Empty);
         }
-
         [TestMethod]
-        public void Deve_retornar_dadosveiculo_invalido()
+        public void Deve_retornar_grupo_invalido()
         {
-            Categoria categoria = new Categoria(string.Empty, -1, -1, -1, -1, TipoCNH.E);
+            var categoria = new Categoria("", -10, -10, -10, -10, TipoCNH.A);
             categoria.Validar().Should().NotBe(string.Empty);
         }
     }
