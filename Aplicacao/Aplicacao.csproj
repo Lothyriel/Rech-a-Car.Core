@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Controladores\Controladores.csproj" />
     <ProjectReference Include="..\Dominio\Dominio.csproj" />
     <ProjectReference Include="..\Infra.ES.EnvioEmail\Infra.ES.EnvioEmail.csproj" />
   </ItemGroup>

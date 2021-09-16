@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controladores", "Controladores\Controladores.csproj", "{1EEF1E1C-DD9E-4D2E-8236-088029FA37C2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio", "Dominio\Dominio.csproj", "{90588AD9-B45D-4A9B-BB1C-098BC165FD88}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{536E2352-5380-46A3-B83A-C4C3EEE85680}"
@@ -57,10 +55,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1EEF1E1C-DD9E-4D2E-8236-088029FA37C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1EEF1E1C-DD9E-4D2E-8236-088029FA37C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1EEF1E1C-DD9E-4D2E-8236-088029FA37C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1EEF1E1C-DD9E-4D2E-8236-088029FA37C2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{90588AD9-B45D-4A9B-BB1C-098BC165FD88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90588AD9-B45D-4A9B-BB1C-098BC165FD88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90588AD9-B45D-4A9B-BB1C-098BC165FD88}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -116,7 +110,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1EEF1E1C-DD9E-4D2E-8236-088029FA37C2} = {31885A5B-388F-4837-80EF-9D263B852206}
 		{90588AD9-B45D-4A9B-BB1C-098BC165FD88} = {C67A1F19-0135-4EBE-B443-7D4BBEC12672}
 		{E9C54F1B-1B46-44A4-A2F6-459E63760B16} = {3335B526-3BAF-42E8-A517-68B23E15ADB5}
 		{09145CF3-3B58-4334-AD7D-7A95A6F618AA} = {0574B971-26E1-4880-9FC5-48B9131E09E0}
