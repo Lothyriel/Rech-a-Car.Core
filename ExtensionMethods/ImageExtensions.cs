@@ -2,9 +2,9 @@
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace ExtensionsModule
+namespace Extensions
 {
-    public static class Extensions
+    public static class ImageExtensions
     {
         public static byte[] ToByteArray(this Image image, ImageFormat format = null)
         {
@@ -15,7 +15,6 @@ namespace ExtensionsModule
             stream.Position = 0;
             return stream.ToArray();
         }
-
         public static Image ToImage(this byte[] imageBytes)
         {
             using var ms = new MemoryStream(imageBytes);

@@ -1,6 +1,6 @@
 ﻿using Dominio.AluguelModule;
 using EmailAluguelPDF.Properties;
-using ExtensionsModule;
+using Extensions;
 using iText.IO.Font.Constants;
 using iText.IO.Image;
 using iText.Kernel.Font;

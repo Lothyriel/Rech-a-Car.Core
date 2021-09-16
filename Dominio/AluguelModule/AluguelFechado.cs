@@ -1,7 +1,7 @@
-﻿using Dominio.ServicoModule;
+﻿using ConfigurationManager.Combustivel;
+using Dominio.ServicoModule;
 using System;
 using System.Collections.Generic;
-using ConfigurationManager.Combustivel;
 
 namespace Dominio.AluguelModule
 {

@@ -1,8 +1,10 @@
 ﻿using Controladores.Shared;
 using Dominio.VeiculoModule;
+using Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 
 namespace Controladores.VeiculoModule
 {

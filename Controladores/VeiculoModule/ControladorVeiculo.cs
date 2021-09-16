@@ -1,6 +1,6 @@
 ﻿using Controladores.Shared;
 using Dominio.VeiculoModule;
-using ExtensionsModule;
+using Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data;

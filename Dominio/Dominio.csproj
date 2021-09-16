@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ConfigurationManager\ConfigurationManager.csproj" />
+    <ProjectReference Include="..\Infra.Extensions.ConfigurationManager\Infra.Extensions.ConfigurationManager.csproj" />
   </ItemGroup>
 
 </Project>

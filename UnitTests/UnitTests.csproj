@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="EmailAluguelPDFModule\**" />
+    <Compile Remove="Shared\**" />
+    <EmbeddedResource Remove="EmailAluguelPDFModule\**" />
+    <EmbeddedResource Remove="Shared\**" />
+    <None Remove="EmailAluguelPDFModule\**" />
+    <None Remove="Shared\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="appsettings.json" />
   </ItemGroup>
 
@@ -29,10 +38,6 @@
     <ProjectReference Include="..\Controladores\Controladores.csproj" />
     <ProjectReference Include="..\Dominio\Dominio.csproj" />
     <ProjectReference Include="..\EmailAluguelPDF\Infra.ES.EnvioEmail.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="EmailAluguelPDFModule\" />
   </ItemGroup>
 
 </Project>

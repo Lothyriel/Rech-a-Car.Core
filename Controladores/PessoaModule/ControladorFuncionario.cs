@@ -1,6 +1,6 @@
 ﻿using Controladores.Shared;
 using Dominio.PessoaModule;
-using ExtensionsModule;
+using Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data;
