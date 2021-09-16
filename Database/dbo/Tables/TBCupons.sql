@@ -7,6 +7,8 @@
     [valor_Minimo]     DECIMAL (18)  NOT NULL,
     [idParceiro]       INT           NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_TBCupons_TBParceiro] FOREIGN KEY ([idParceiro]) REFERENCES [dbo].[TBParceiro] ([Id])
+    CONSTRAINT [FK_TBCupons_TBParceiro] FOREIGN KEY ([idParceiro]) REFERENCES [dbo].[TBParceiro] ([Id]) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
 
