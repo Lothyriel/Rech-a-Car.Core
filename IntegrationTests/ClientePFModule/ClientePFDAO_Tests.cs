@@ -5,20 +5,20 @@ using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Tests.Shared;
+using IntegrationTests.Shared;
 
-namespace Tests.Tests.ClientePF_Module
+namespace IntegrationTests.ClientePF_Module
 {
     [TestClass]
-    public class ClientePFDAO_Test
+    public class ClientePFDAO_Tests
     {
-        ClientePFDAO ClientePFDAO = new ClientePFDAO();
+        ClientePFDAO ClientePFDAO = new();
         ClientePF cliente;
 
         [TestInitialize]
         public void Inserir_clientePF()
         {
-            CNH cnh = new CNH("36510896881", TipoCNH.A);
+            var cnh = new CNH("36510896881", TipoCNH.A);
             cliente = new ClientePF("nome", "999999999", "endereco", "99999999999", cnh, new DateTime(2001, 04, 27), "email@teste.com");
             ClientePFDAO.Inserir(cliente);
         }

@@ -4,14 +4,14 @@ using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
-using Tests.Shared;
+using IntegrationTests.Shared;
 
-namespace Tests.FuncionarioModule
+namespace IntegrationTests.FuncionarioModule
 {
     [TestClass]
-    public class FuncionarioDAOtTest
+    public class FuncionarioDAOtTests
     {
-        FuncionarioDAO controlador = new FuncionarioDAO();
+        FuncionarioDAO controlador = new();
         Image imagem = Image.FromFile(@"..\..\..\Resources\user.png");
         Funcionario funcionario;
 

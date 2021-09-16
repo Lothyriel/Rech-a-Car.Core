@@ -4,14 +4,14 @@ using FluentAssertions;
 using Infra.DAO.Shared;
 using Infra.DAO.VeiculoModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tests.Shared;
+using IntegrationTests.Shared;
 
-namespace Tests.Tests.CategoriaModule
+namespace IntegrationTests.CategoriaModule
 {
     [TestClass]
-    public class CategoriaDAO_Test
+    public class CategoriaDAOTests
     {
-        CategoriaDAO CategoriaDAO = new CategoriaDAO();
+        CategoriaDAO CategoriaDAO = new();
         Categoria categoria;
 
         [TestInitialize]

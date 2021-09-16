@@ -3,15 +3,15 @@ using FluentAssertions;
 using Infra.DAO.Shared;
 using Infra.DAO.SQL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tests.Shared;
+using IntegrationTests.Shared;
 
-namespace Tests.Tests.ServicoModule
+namespace IntegrationTests.IntegrationTests.ServicoModule
 {
     [TestClass]
-    public class ServicoDAOTest
+    public class ServicoDAOTests
     {
-        Servico servico = new Servico("nomeServico", 10);
-        ServicoDAO controlador = new ServicoDAO();
+        Servico servico = new("nomeServico", 10);
+        ServicoDAO controlador = new();
 
         [TestInitialize]
         public void Inserindo_no_banco()

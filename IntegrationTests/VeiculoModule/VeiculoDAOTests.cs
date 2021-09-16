@@ -5,21 +5,21 @@ using Infra.DAO.Shared;
 using Infra.DAO.VeiculoModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
-using Tests.Shared;
+using IntegrationTests.Shared;
 
-namespace Tests.VeiculoModule
+namespace IntegrationTests.VeiculoModule
 {
     [TestClass]
-    public class VeiculoDAOTest
+    public class VeiculoDAOTests
     {
         Veiculo veiculo1;
-        VeiculoDAO VeiculoDAO = new VeiculoDAO();
+        VeiculoDAO VeiculoDAO = new();
 
         [TestInitialize]
         public void Inserir_Veiculo()
         {
-            Image imagem = Image.FromFile(@"..\..\..\Resources\ford_ka_gay.jpg");
-            Categoria categoria = new Categoria("Economico", 100, 10, 400, 800, TipoCNH.B);
+            var imagem = Image.FromFile(@"..\..\..\Resources\ford_ka_gay.jpg");
+            var categoria = new Categoria("Economico", 100, 10, 400, 800, TipoCNH.B);
             veiculo1 = new Veiculo("Ka", "Ford", 2001, "ABC1024", 50000, 4, 4, "ASDFGHJKLQWERTYUI", 0, 50, imagem, false, categoria, TipoCombustivel.Gasolina);
             new CategoriaDAO().Inserir(categoria);
             VeiculoDAO.Inserir(veiculo1);

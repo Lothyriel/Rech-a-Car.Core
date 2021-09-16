@@ -6,27 +6,21 @@ using Infra.DAO.ParceiroModule;
 using Infra.DAO.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Tests.Shared;
+using IntegrationTests.Shared;
 
-namespace Tests.CupomModule
+namespace IntegrationTests.CupomModule
 {
     [TestClass]
-    public class CupomDAOTest
+    public class CupomDAOTests
     {
-        ParceiroDAO ParceiroDAO = new ParceiroDAO();
-        CupomDAO CupomDAO = new CupomDAO();
+        ParceiroDAO ParceiroDAO = new();
+        CupomDAO CupomDAO = new();
 
-        public CupomDAOTest()
-        {
-            LimparTestes();
-        }
-
-        private void LimparTestes()
+        [TestCleanup]
+        public void Limpar()
         {
             Db.Delete(TestExtensions.ResetId("TBCupons"));
-            Db.Delete(TestExtensions.ResetId("TBParceiro"));
         }
-
         [TestMethod]
         public void Deve_Inserir_Novo_Cupom()
         {
@@ -41,7 +35,6 @@ namespace Tests.CupomModule
             var cupomEncontrado = CupomDAO.GetById(cupom.Id);
             cupomEncontrado.Should().Be(cupom);
         }
-
         [TestMethod]
         public void Deve_Atualizar_Cupom()
         {
@@ -59,7 +52,6 @@ namespace Tests.CupomModule
             Cupom cuponsEditado = CupomDAO.GetById(cupom.Id);
             cuponsEditado.Should().Be(cupomAtualizado);
         }
-
         [TestMethod]
         public void Deve_Selecionar_Cupom_ValorPercentual()
         {
@@ -75,7 +67,6 @@ namespace Tests.CupomModule
             //assert
             cupomEncontrado.Should().NotBeNull();
         }
-
         [TestMethod]
         public void Deve_Selecionar_Cupom_ValorFixo()
         {
@@ -91,7 +82,6 @@ namespace Tests.CupomModule
             //assert
             cupomEncontrado.Should().NotBeNull();
         }
-
         [TestMethod]
         public void Deve_Excluir_Cupons()
         {

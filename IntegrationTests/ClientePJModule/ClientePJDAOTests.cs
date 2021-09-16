@@ -4,15 +4,15 @@ using FluentAssertions;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tests.Shared;
+using IntegrationTests.Shared;
 
-namespace Tests.Tests.ClientePJ_Module
+namespace IntegrationTests.ClientePJ_Module
 {
     [TestClass]
-    public class ClientePJDAO_Test
+    public class ClientePJDAOTests
     {
-        ClientePJDAO ClientePJDAO = new ClientePJDAO();
-        MotoristaDAO MotoristaDAO = new MotoristaDAO();
+        ClientePJDAO ClientePJDAO = new();
+        MotoristaDAO MotoristaDAO = new();
         ClientePJ cliente;
         MotoristaEmpresa motorista;
 
@@ -109,7 +109,6 @@ namespace Tests.Tests.ClientePJ_Module
         public void LimparTestes()
         {
             Db.Delete(TestExtensions.ResetId("TBClientePJ"));
-            Db.Delete(TestExtensions.ResetId("TBMotorista"));
         }
     }
 }

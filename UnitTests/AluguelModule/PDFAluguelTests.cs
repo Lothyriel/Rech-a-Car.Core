@@ -20,7 +20,7 @@ using Infra.DAO.Shared;
 namespace Tests.EmailAluguelPDFModule
 {
     [TestClass]
-    public class CriaPDFTests
+    public class PDFAluguelTests
     {
         Aluguel aluguel;
         static AluguelDAO ad = new();

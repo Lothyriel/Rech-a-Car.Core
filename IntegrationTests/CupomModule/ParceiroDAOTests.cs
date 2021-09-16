@@ -3,25 +3,20 @@ using FluentAssertions;
 using Infra.DAO.ParceiroModule;
 using Infra.DAO.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tests.Shared;
+using IntegrationTests.Shared;
 
-namespace Tests.ParceiroModule
+namespace IntegrationTests.ParceiroModule
 {
     [TestClass]
-    public class ParceiroDAOTest
+    public class ParceiroDAOTests
     {
-        ParceiroDAO ParceiroDAO = new ParceiroDAO();
+        ParceiroDAO ParceiroDAO = new();
         Parceiro parceiro;
 
-        public ParceiroDAOTest()
-        {
-            LimparTestes();
-        }
-
+        [TestCleanup]
         public void LimparTestes()
         {
             Db.Delete(TestExtensions.ResetId("TBCupons"));
-            Db.Delete(TestExtensions.ResetId("TBParceiro"));
         }
 
         [TestInitialize]
