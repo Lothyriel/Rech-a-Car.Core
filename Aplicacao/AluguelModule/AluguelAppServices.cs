@@ -18,9 +18,12 @@ namespace Aplicacao.AluguelModule
 
         public IServicoRepository ServicoRepositorio { get; }
 
-        public AluguelAppServices(IAluguelRepository repositorio)
+        public AluguelAppServices(IAluguelRepository repositorio, IRelatorioAluguel relatorio , IRelatorioRepository relatorioRepositorio, IServicoRepository servicoRepositorio)
         {
             Repositorio = repositorio;
+            Relatorio = relatorio;
+            RelatorioRepositorio = relatorioRepositorio;
+            ServicoRepositorio = servicoRepositorio;
         }
 
         public async void IniciaLoopEnvioEmails()
