@@ -1,7 +1,7 @@
-﻿using Controladores.AluguelModule;
-using Controladores.Shared;
-using Dominio.AluguelModule;
+﻿using Dominio.AluguelModule;
 using EmailAluguelPDF;
+using Infra.DAO.AluguelModule;
+using Infra.DAO.Shared;
 using Infra.Extensions.Methods;
 using System;
 using System.Data;
@@ -66,7 +66,7 @@ namespace Aplicacao.AluguelModule.EmailAluguel
         private EnvioResumoAluguel ConverterEmEntidade(IDataReader reader)
         {
             var id = Convert.ToInt32(reader["ID"]);
-            var aluguel = new ControladorAluguel().GetById(Convert.ToInt32(reader["ID_ALUGUEL"]));
+            var aluguel = new AluguelDAO().GetById(Convert.ToInt32(reader["ID_ALUGUEL"]));
             MemoryStream ms = ((byte[])reader["PDF"]).ToMemoryStream();
             //Document pdf = ms.ToPdf();
 

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DAO.Shared
+namespace Infra.DAO.Shared
 {
     public abstract class DAO<T> : IEntidadeRepository<T> where T : IEntidade
     {
@@ -12,12 +12,12 @@ namespace DAO.Shared
         public abstract void Excluir(int id, Type tipo = null);
         public abstract bool Existe(int id, Type tipo = null);
         public abstract T GetById(int id, Type tipo = null);
-        public abstract List<T> TodosRegistros { get; }
+        public abstract List<T> Registros { get; }
         public List<T> FiltroGenerico(string filtro)
         {
             var palavras = filtro.Split(' ');
 
-            return TodosRegistros.Where(i => palavras.Any(p => i.ToString().IndexOf(p, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
+            return Registros.Where(i => palavras.Any(p => i.ToString().IndexOf(p, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
         }
     }
 }

@@ -1,17 +1,17 @@
 ﻿using ConfigurationManager;
-using Controladores.ServicoModule;
-using Controladores.Shared;
 using Dominio.AluguelModule;
 using Dominio.ServicoModule;
+using Infra.DAO.Shared;
+using Infra.DAO.SQL;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Controladores.AluguelModule
+namespace Infra.DAO.AluguelModule
 {
-    public class ControladorAluguelFechado : Controlador<AluguelFechado>
+    public class AluguelFechadoDAO : DAO<AluguelFechado>
     {
-        private AluguelDAO Controlador = new AluguelDAO();
+        private AluguelDAO Controlador = new();
 
         private const string sqlGetAlugueisFechados =
             @"SELECT *
@@ -35,7 +35,7 @@ namespace Controladores.AluguelModule
         {
             entidade.Id = id;
             Db.Update(sqlFecharAluguel, Db.AdicionarParametro("ID", id, ObterParametrosRegistro(entidade)));
-            new ControladorServico().DesalugarServicosAlugados(id);
+            new ServicoDAO().DesalugarServicosAlugados(id);
         }
 
         public override void Excluir(int id, Type tipo = null)
@@ -47,16 +47,17 @@ namespace Controladores.AluguelModule
         {
             throw new NotSupportedException();
         }
+        public override bool Existe(int id, Type tipo = null)
+        {
+            throw new NotSupportedException();
+        }
 
         public override void Inserir(AluguelFechado entidade)
         {
             throw new NotSupportedException();
         }
 
-        protected override List<AluguelFechado> ObterRegistros()
-        {
-            return Db.GetAll(sqlGetAlugueisFechados, ConverterEmEntidade);
-        }
+        public override List<AluguelFechado> Registros => Db.GetAll(sqlGetAlugueisFechados, ConverterEmEntidade);
 
         private AluguelFechado ConverterEmEntidade(IDataReader reader)
         {
@@ -70,8 +71,7 @@ namespace Controladores.AluguelModule
 
             return new AluguelFechado(aluguel, kmRodados, tanqueUtilizado, servicosNecessarios, dataDevolvida);
         }
-
-        private Dictionary<string, object> ObterParametrosRegistro(AluguelFechado aluguel)
+        private static Dictionary<string, object> ObterParametrosRegistro(AluguelFechado aluguel)
         {
             return new Dictionary<string, object>
             {

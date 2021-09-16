@@ -41,8 +41,8 @@ namespace EmailAluguelPDF
             Style helvetica24b = new();
             helvetica24b.SetFont(fontHeader).SetFontSize(24);
 
-            SolidLine linha = new SolidLine(1f);
-            LineSeparator linhaHorizontal = new LineSeparator(linha);
+            SolidLine linha = new(1f);
+            LineSeparator linhaHorizontal = new(linha);
 
             #endregion
 

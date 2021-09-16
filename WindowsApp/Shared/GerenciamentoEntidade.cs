@@ -138,7 +138,7 @@ namespace WindowsApp.Shared
         }
         private void tbFiltro_TextChanged(object sender, EventArgs e)
         {
-            AtualizarRegistros(Cadastro.Services.FiltroTunado(tbFiltro.Text));
+            AtualizarRegistros(Cadastro.Services.FiltroGenerico(tbFiltro.Text));
         }
         private void dgvEntidade_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

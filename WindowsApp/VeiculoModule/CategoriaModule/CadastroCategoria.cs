@@ -1,6 +1,4 @@
-﻿using Controladores.Shared;
-using Controladores.VeiculoModule;
-using Dominio.PessoaModule;
+﻿using Dominio.PessoaModule;
 using Dominio.VeiculoModule;
 using System;
 using System.Linq;
@@ -10,7 +8,7 @@ namespace WindowsApp.VeiculoModule.CategoriaModule
 {
     public partial class CadastroCategoria : CadastroEntidade<Categoria>//Form//
     {
-        public override Controlador<Categoria> Services { get => new ControladorCategoria(); }
+        public override CategoriaAppServices Services { get => new CategoriaAppServices(); }
 
         public CadastroCategoria()
         {

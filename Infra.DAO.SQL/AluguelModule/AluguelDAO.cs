@@ -1,12 +1,16 @@
-﻿using DAO.Shared;
-using Dominio.AluguelModule;
+﻿using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.PessoaModule.ClienteModule;
+using Infra.DAO.CupomModule;
+using Infra.DAO.PessoaModule;
+using Infra.DAO.Shared;
+using Infra.DAO.SQL;
+using Infra.DAO.VeiculoModule;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace DAO.AluguelModule
+namespace Infra.DAO.AluguelModule
 {
     public class AluguelDAO : EntidadeDAO<Aluguel>
     {
@@ -83,12 +87,12 @@ namespace DAO.AluguelModule
         public override void Inserir(Aluguel entidade)
         {
             base.Inserir(entidade);
-            new ControladorServico().AlugarServicos(entidade.Id, entidade.Servicos);
+            new ServicoDAO().AlugarServicos(entidade.Id, entidade.Servicos);
         }
         public override void Editar(int id, Aluguel entidade)
         {
             base.Editar(id, entidade);
-            var controladorServico = new ControladorServico();
+            var controladorServico = new ServicoDAO();
             controladorServico.DesalugarServicosAlugados(id);
             controladorServico.AlugarServicos(entidade.Id, entidade.Servicos);
         }
@@ -104,22 +108,22 @@ namespace DAO.AluguelModule
             var dataDevolucao = Convert.ToDateTime(reader["DATA_DEVOLUCAO"]);
             var tipoPlano = Convert.ToInt32(reader["TIPO_PLANO"]);
 
-            var funcionario = new ControladorFuncionario().GetById(id_funcionario);
-            var veiculo = new ControladorVeiculo().GetById(id_veiculo);
+            var funcionario = new FuncionarioDAO().GetById(id_funcionario);
+            var veiculo = new VeiculoDAO().GetById(id_veiculo);
 
             var ehClientePF = id_condutor == id_cliente;
 
-            var cliente = new ControladorCliente().GetById(id_cliente, ehClientePF ? typeof(ClientePF) : typeof(ClientePJ));
+            var cliente = new ClienteDAO().GetById(id_cliente, ehClientePF ? typeof(ClientePF) : typeof(ClientePJ));
 
             var condutor = ehClientePF ? null : ((ClientePJ)cliente).Motoristas.Find(x => x.Id == id_condutor);
 
-            var servicos = new ControladorServico().GetServicosAlugados(id);
+            var servicos = new ServicoDAO().GetServicosAlugados(id);
 
             var id_cupom = reader["ID_CUPOM"];
 
             Cupom cupom = null;
             if (id_cupom is int _id_cupom)
-                cupom = new ControladorCupom().GetById(_id_cupom);
+                cupom = new CupomDAO().GetById(_id_cupom);
 
             return new Aluguel(veiculo, servicos, (Plano)tipoPlano, dataAluguel, cliente, funcionario, dataDevolucao, condutor, cupom)
             {

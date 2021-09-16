@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-namespace DAO.Shared
+namespace Infra.DAO.Shared
 {
     public abstract class EntidadeDAO<T> : DAO<T> where T : IEntidade
     {
@@ -35,7 +35,7 @@ namespace DAO.Shared
         {
             return Db.Exists(sqlExists, Db.AdicionarParametro("ID", id));
         }
-        public override List<T> TodosRegistros => Db.GetAll(sqlSelecionarTodos, ConverterEmEntidade);
+        public override List<T> Registros => Db.GetAll(sqlSelecionarTodos, ConverterEmEntidade);
         public abstract T ConverterEmEntidade(IDataReader reader);
         public abstract Dictionary<string, object> ObterParametrosRegistro(T entidade);
     }

@@ -52,7 +52,7 @@ namespace Aplicacao.Shared
         }
         public List<T> TodosRegistros()
         {
-            return Repositorio.TodosRegistros;
+            return Repositorio.Registros;
         }
 
     }

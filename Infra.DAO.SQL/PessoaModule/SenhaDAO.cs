@@ -1,13 +1,13 @@
-﻿using Controladores.Shared;
+﻿using Infra.DAO.Shared;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Security.Cryptography;
 
-namespace Controladores.PessoaModule
+namespace Infra.DAO.PessoaModule
 {
-    public static class ControladorSenha
+    public static class SenhaDAO
     {
         private const string sqlInsereSenha =
             @"INSERT INTO [TBSenha]

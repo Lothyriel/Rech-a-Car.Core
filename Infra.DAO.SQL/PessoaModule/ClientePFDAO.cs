@@ -1,12 +1,12 @@
-﻿using Controladores.Shared;
-using Dominio.PessoaModule.ClienteModule;
+﻿using Dominio.PessoaModule.ClienteModule;
+using Infra.DAO.Shared;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Controladores.PessoaModule
+namespace Infra.DAO.PessoaModule
 {
-    public class ControladorClientePF : ControladorEntidade<ClientePF>
+    public class ClientePFDAO : EntidadeDAO<ClientePF>
     {
         #region Queries
         private const string sqlInserirClientePF =
@@ -75,12 +75,12 @@ namespace Controladores.PessoaModule
         public override string sqlExists => sqlExisteClientePF;
         public override void Inserir(ClientePF cliente)
         {
-            new ControladorCNH().Inserir(cliente.Cnh);
+            new CnhDAO().Inserir(cliente.Cnh);
             base.Inserir(cliente);
         }
         public override void Editar(int id, ClientePF cliente)
         {
-            new ControladorCNH().Editar(cliente.Cnh.Id, cliente.Cnh);
+            new CnhDAO().Editar(cliente.Cnh.Id, cliente.Cnh);
             base.Editar(id, cliente);
         }
         public override ClientePF ConverterEmEntidade(IDataReader reader)
@@ -94,7 +94,7 @@ namespace Controladores.PessoaModule
             var data_nascimento = Convert.ToDateTime(reader["DATA_NASCIMENTO"]);
 
             var id_cnh = Convert.ToInt32(reader["ID_CNH"]);
-            var cnh = new ControladorCNH().GetByIdCondutor(id_cnh);
+            var cnh = new CnhDAO().GetByIdCondutor(id_cnh);
 
             return new ClientePF(nome, telefone, endereco, documento, cnh, data_nascimento, email)
             {

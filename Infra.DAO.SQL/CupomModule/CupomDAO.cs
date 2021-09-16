@@ -1,13 +1,13 @@
-﻿using Controladores.ParceiroModule;
-using Controladores.Shared;
-using Dominio.CupomModule;
+﻿using Dominio.CupomModule;
+using Infra.DAO.ParceiroModule;
+using Infra.DAO.Shared;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Controladores.CupomModule
+namespace Infra.DAO.CupomModule
 {
-    public class ControladorCupom : ControladorEntidade<Cupom>
+    public class CupomDAO : EntidadeDAO<Cupom>
     {
         #region 
         private const string sqlInserirCupom =
@@ -113,7 +113,7 @@ namespace Controladores.CupomModule
             int idParceiro = Convert.ToInt32(reader["IDPARCEIRO"]);
             double valorMinimo = Convert.ToDouble(reader["VALOR_MINIMO"]);
 
-            var parceiro = new ControladorParceiro().GetById(idParceiro);
+            var parceiro = new ParceiroDAO().GetById(idParceiro);
 
             return new Cupom(nome, valor_Percentual, valor_Fixo, data, parceiro, valorMinimo)
             {

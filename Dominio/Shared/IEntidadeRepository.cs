@@ -10,7 +10,7 @@ namespace Dominio.Shared
         void Excluir(int id, Type tipo = null);
         bool Existe(int id, Type tipo = null);
         T GetById(int id, Type tipo = null);
-        List<T> TodosRegistros { get; }
+        List<T> Registros { get; }
 
         List<T> FiltroGenerico(string filtro);
     }

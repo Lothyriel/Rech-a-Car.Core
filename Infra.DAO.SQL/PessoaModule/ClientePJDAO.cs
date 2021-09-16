@@ -1,13 +1,13 @@
-﻿using Controladores.Shared;
-using Dominio.PessoaModule;
+﻿using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Infra.DAO.Shared;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Controladores.PessoaModule
+namespace Infra.DAO.PessoaModule
 {
-    public class ControladorClientePJ : ControladorEntidade<ClientePJ>
+    public class ClientePJDAO : EntidadeDAO<ClientePJ>
     {
         #region Queries
         private const string sqlInserirClientePJ =
@@ -105,7 +105,7 @@ namespace Controladores.PessoaModule
                 var documento_motorista = Convert.ToString(reader["DOCUMENTO_MOTORISTA"]);
 
                 var id_cnh = Convert.ToInt32(reader["ID_CNH"]);
-                var cnh = new ControladorCNH().GetByIdCondutor(id_cnh);
+                var cnh = new CnhDAO().GetByIdCondutor(id_cnh);
 
                 motoristas.Add(new MotoristaEmpresa(nome_motorista, telefone_motorista, endereco_motorista, documento_motorista, cnh, empresa)
                 {
@@ -132,7 +132,7 @@ namespace Controladores.PessoaModule
             return parametros;
         }
     }
-    public class ControladorMotorista : Controlador<MotoristaEmpresa>
+    public class MotoristaDAO : DAO<MotoristaEmpresa>
     {
         #region Queries
         private const string sqlSelecionarMotoristaPorId =
@@ -176,17 +176,19 @@ namespace Controladores.PessoaModule
             @"DELETE FROM [TBMOTORISTA] 
                             WHERE [ID] = @ID";
 
+        public override List<MotoristaEmpresa> Registros => throw new NotImplementedException();
+
         #endregion
 
         public override void Inserir(MotoristaEmpresa motorista)
         {
-            new ControladorCNH().Inserir(motorista.Cnh);
+            new CnhDAO().Inserir(motorista.Cnh);
             motorista.Id = Db.Insert(sqlInserirMotorista, ObterParametrosMotorista(motorista));
         }
 
         public override void Editar(int id, MotoristaEmpresa motorista)
         {
-            new ControladorCNH().Editar(motorista.Cnh.Id, motorista.Cnh);
+            new CnhDAO().Editar(motorista.Cnh.Id, motorista.Cnh);
             motorista.Id = id;
             Db.Update(sqlEditarMotorista, ObterParametrosMotorista(motorista));
         }
@@ -201,7 +203,7 @@ namespace Controladores.PessoaModule
             throw new NotSupportedException();
         }
 
-        protected Dictionary<string, object> ObterParametrosMotorista(MotoristaEmpresa motorista)
+        protected static Dictionary<string, object> ObterParametrosMotorista(MotoristaEmpresa motorista)
         {
             var parametros = new Dictionary<string, object>
                 {
@@ -217,9 +219,9 @@ namespace Controladores.PessoaModule
             return parametros;
         }
 
-        protected override List<MotoristaEmpresa> ObterRegistros()
+        public override bool Existe(int id, Type tipo = null)
         {
-            throw new NotSupportedException();
+            throw new NotImplementedException();
         }
     }
 }

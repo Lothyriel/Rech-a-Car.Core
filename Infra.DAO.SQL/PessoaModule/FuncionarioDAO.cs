@@ -1,13 +1,13 @@
-﻿using Controladores.Shared;
-using Dominio.PessoaModule;
+﻿using Dominio.PessoaModule;
+using Infra.DAO.Shared;
 using Infra.Extensions.Methods;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Controladores.PessoaModule
+namespace Infra.DAO.PessoaModule
 {
-    public class ControladorFuncionario : ControladorEntidade<Funcionario>
+    public class FuncionarioDAO : EntidadeDAO<Funcionario>
     {
         #region Queries
         private const string sqlInserirFuncionario =
@@ -94,12 +94,12 @@ namespace Controladores.PessoaModule
         public override void Inserir(Funcionario entidade)
         {
             base.Inserir(entidade);
-            ControladorSenha.Inserir(entidade.Id, entidade.Senha);
+            SenhaDAO.Inserir(entidade.Id, entidade.Senha);
         }
         public override void Editar(int id, Funcionario entidade)
         {
             base.Editar(id, entidade);
-            ControladorSenha.Editar(entidade.Id, entidade.Senha);
+            SenhaDAO.Editar(entidade.Id, entidade.Senha);
         }
         public override Funcionario ConverterEmEntidade(IDataReader reader)
         {

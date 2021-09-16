@@ -1,12 +1,12 @@
-﻿using Controladores.Shared;
-using Dominio.PessoaModule;
+﻿using Dominio.PessoaModule;
+using Infra.DAO.Shared;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Controladores.PessoaModule
+namespace Infra.DAO.PessoaModule
 {
-    public class ControladorCNH
+    public class CnhDAO
     {
         #region Queries
         private const string sqlSelecionarCnhPorIdCondutor =

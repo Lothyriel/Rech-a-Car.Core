@@ -1,12 +1,12 @@
-﻿using Controladores.Shared;
-using Dominio.ParceiroModule;
+﻿using Dominio.ParceiroModule;
+using Infra.DAO.Shared;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Controladores.ParceiroModule
+namespace Infra.DAO.ParceiroModule
 {
-    public class ControladorParceiro : ControladorEntidade<Parceiro>
+    public class ParceiroDAO : EntidadeDAO<Parceiro>
     {
         #region
 
@@ -78,23 +78,16 @@ namespace Controladores.ParceiroModule
             int id = Convert.ToInt32(reader["ID"]);
             string descricao = Convert.ToString(reader["PARCEIRO"]);
 
-
-            Parceiro parceiros = new Parceiro(descricao);
-
-            parceiros.Id = id;
-
-            return parceiros;
+            return new Parceiro(descricao) { Id = id };
         }
 
         public override Dictionary<string, object> ObterParametrosRegistro(Parceiro parceiro)
         {
-            var parametros = new Dictionary<string, object>();
-
-            parametros.Add("ID", parceiro.Id);
-            parametros.Add("PARCEIRO", parceiro.nome);
-            ;
-
-            return parametros;
+            return new Dictionary<string, object>
+            {
+                { "ID", parceiro.Id },
+                { "PARCEIRO", parceiro.nome }
+            };
         }
     }
 }

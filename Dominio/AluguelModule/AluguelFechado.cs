@@ -63,16 +63,13 @@ namespace Dominio.AluguelModule
         }
         private double CalcularCombustivel(Configuracoes configs)
         {
-            switch (Veiculo.TipoDeCombustivel)
+            return Veiculo.TipoDeCombustivel switch
             {
-                case VeiculoModule.TipoCombustivel.Diesel:
-                    return TanqueUtilizado * configs.ValorDiesel;
-                case VeiculoModule.TipoCombustivel.Etanol:
-                    return TanqueUtilizado * configs.ValorEtanol;
-                case VeiculoModule.TipoCombustivel.Gasolina:
-                    return TanqueUtilizado * configs.ValorGasolina;
-                default: return 0;
-            }
+                VeiculoModule.TipoCombustivel.Diesel => TanqueUtilizado * configs.ValorDiesel,
+                VeiculoModule.TipoCombustivel.Etanol => TanqueUtilizado * configs.ValorEtanol,
+                VeiculoModule.TipoCombustivel.Gasolina => TanqueUtilizado * configs.ValorGasolina,
+                _ => 0,
+            };
         }
         public override string Validar()
         {

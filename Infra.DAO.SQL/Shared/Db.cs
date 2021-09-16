@@ -5,7 +5,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 
-namespace DAO.Shared
+namespace Infra.DAO.Shared
 {
     public delegate T ConverterDelegate<T>(IDataReader reader);
 

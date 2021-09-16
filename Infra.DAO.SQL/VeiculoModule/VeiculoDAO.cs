@@ -1,11 +1,11 @@
-﻿using DAO.Shared;
-using Dominio.VeiculoModule;
+﻿using Dominio.VeiculoModule;
+using Infra.DAO.Shared;
 using Infra.Extensions.Methods;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace DAO.VeiculoModule
+namespace Infra.DAO.VeiculoModule
 {
     public class VeiculoDAO : EntidadeDAO<Veiculo>
     {
