@@ -44,13 +44,13 @@ namespace Infra.DAO.AluguelModule
 
         #endregion
 
-        public static void InserirParaEnvio(EnvioResumoAluguel envio)
+        public void SalvarRelatorio(EnvioResumoAluguel envio)
         {
             var bytesPdf = envio.StreamAttachment.ToArray();
             Db.Insert(sqlInserirEmail, Db.AdicionarParametro("ID_ALUGUEL", envio.Aluguel.Id, Db.AdicionarParametro("PDF", bytesPdf)));
         }
 
-        public static void AlterarEnviado(int id)
+        public void MarcarEnviado(int id)
         {
             Db.Update(sqlAlterarEmailEnviado, Db.AdicionarParametro("ID", id, Db.AdicionarParametro("DATA_ENVIADO", DateTime.Now)));
         }

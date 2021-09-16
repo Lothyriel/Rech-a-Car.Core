@@ -84,6 +84,8 @@ namespace Infra.DAO.AluguelModule
         public override string sqlExcluir => sqlExcluirAluguel;
         public override string sqlExists => sqlExisteAluguel;
 
+        private EmailAluguelDAO EmailAluguel = new EmailAluguelDAO();
+
         public override void Inserir(Aluguel entidade)
         {
             base.Inserir(entidade);
@@ -147,7 +149,17 @@ namespace Infra.DAO.AluguelModule
         }
         public void SalvarRelatorio(EnvioResumoAluguel envio)
         {
-            EmailAluguelDAO.InserirParaEnvio(envio);
+            EmailAluguel.SalvarRelatorio(envio);
+        }
+
+        public EnvioResumoAluguel GetProxEnvio()
+        {
+            return EmailAluguel.GetProxEnvio();
+        }
+
+        public void MarcarEnviado(int envioId)
+        {
+            EmailAluguel.MarcarEnviado(envioId);
         }
     }
 }

@@ -83,7 +83,6 @@ namespace EmailAluguelPDF
 
             pdf.Close();
 
-            //ControladorEmail.InserirParaEnvio(aluguel, ms);
             return ms;
         }
     }

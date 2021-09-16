@@ -1,7 +1,6 @@
 ﻿using Aplicacao.Shared;
 using Dominio.AluguelModule;
 using EnviaEmail;
-using Infra.DAO.AluguelModule;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,13 +20,14 @@ namespace Aplicacao.AluguelModule
             Repositorio = repositorio;
         }
 
-        public static async void IniciaLoopEnvioEmails()
+        public async void IniciaLoopEnvioEmails()
         {
             while (true)
             {
                 try
                 {
-                    TentaEnviarRelatorioEmail();
+                    var envioId = TentaEnviarRelatorioEmail();
+                    Repositorio.MarcarEnviado(envioId);
                 }
                 catch (FilaEmailVazia)
                 {
@@ -35,9 +35,9 @@ namespace Aplicacao.AluguelModule
                 }
             }
         }
-        private static void TentaEnviarRelatorioEmail()
+        private int TentaEnviarRelatorioEmail()
         {
-            var proxEnvio = new EmailAluguelDAO().GetProxEnvio();
+            var proxEnvio = Repositorio.GetProxEnvio();
 
             if (proxEnvio == null)
                 throw new FilaEmailVazia();
@@ -50,6 +50,7 @@ namespace Aplicacao.AluguelModule
             var emailUsuario = proxEnvio.Aluguel.Cliente.Email;
 
             Email.Envia(emailUsuario, titulo, corpoEmail, new List<Attachment>() { attachment });
+            return proxEnvio.Id;
         }
         public override ResultadoOperacao Inserir(Aluguel aluguel)
         {
