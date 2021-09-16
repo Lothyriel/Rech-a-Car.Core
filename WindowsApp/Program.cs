@@ -1,4 +1,5 @@
-﻿using EmailAluguelPDF;
+﻿using Aplicacao.AluguelModule;
+using EmailAluguelPDF;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,20 +19,7 @@ namespace WindowsApp
 
             new Login().Show();
 
-            Task.Run(async () =>
-            {
-                while (true)
-                {
-                    try
-                    {
-                        Email.Envia();
-                    }
-                    catch (FilaEmailVazia)
-                    {
-                        await Task.Delay(new TimeSpan(0, 5, 0));
-                    }
-                }
-            });
+            Task.Run(() => AluguelAppService.IniciaLoopEnvioEmails());
 
             Application.Run();
         }

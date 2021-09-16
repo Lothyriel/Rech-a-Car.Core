@@ -1,15 +1,15 @@
 ﻿using Controladores.AluguelModule;
 using Controladores.Shared;
 using Dominio.AluguelModule;
+using EmailAluguelPDF;
 using Infra.Extensions.Methods;
-using iText.Layout;
 using System;
 using System.Data;
 using System.IO;
 
-namespace EmailAluguelPDF
+namespace Aplicacao.AluguelModule.EmailAluguel
 {
-    public class ControladorEmail
+    public class ControladorEmailAluguel
     {
         #region Queries
         private const string sqlInserirEmail =
@@ -56,21 +56,40 @@ namespace EmailAluguelPDF
         {
             Db.Update(sqlAlterarEmailEnviado, Db.AdicionarParametro("ID", id, Db.AdicionarParametro("DATA_ENVIADO", DateTime.Now)));
         }
-        public EnvioEmail GetProxEnvio()
+        public EnvioEmailAluguel GetProxEnvio()
         {
             if (Db.Exists(sqlExisteEmailPendente))
                 return Db.Get(sqlGetProxEnvio, ConverterEmEntidade);
             else
                 return null;
         }
-        private EnvioEmail ConverterEmEntidade(IDataReader reader)
+        private EnvioEmailAluguel ConverterEmEntidade(IDataReader reader)
         {
             var id = Convert.ToInt32(reader["ID"]);
             var aluguel = new ControladorAluguel().GetById(Convert.ToInt32(reader["ID_ALUGUEL"]));
             MemoryStream ms = ((byte[])reader["PDF"]).ToMemoryStream();
-            Document pdf = ms.ToPdf();
+            //Document pdf = ms.ToPdf();
 
-            return new EnvioEmail(aluguel, pdf) { Id = id };
+            return new EnvioEmailAluguel(aluguel, ms) { Id = id };
         }
+    }
+    [Serializable]
+    public class FilaEmailVazia : Exception
+    {
+        public FilaEmailVazia()
+        {
+        }
+
+        public FilaEmailVazia(string message) : base(message)
+        {
+        }
+    }
+    public class EnvioEmailAluguel : EnvioEmail
+    {
+        public EnvioEmailAluguel(Aluguel aluguel, MemoryStream attachment) : base(attachment)
+        {
+            Aluguel = aluguel;
+        }
+        public Aluguel Aluguel { get; }
     }
 }

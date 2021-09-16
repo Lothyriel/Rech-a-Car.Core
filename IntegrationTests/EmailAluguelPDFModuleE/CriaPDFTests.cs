@@ -47,7 +47,7 @@ namespace Tests.EmailAluguelPDFModule
 
             PDFAluguel.CriaEnvioEmail(aluguel);
 
-            new ControladorEmail().GetProxEnvio().Should().NotBeNull();
+            new ControladorEmailAluguel().GetProxEnvio().Should().NotBeNull();
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace Tests.EmailAluguelPDFModule
 
             Email.Envia();
 
-            new ControladorEmail().GetProxEnvio().Should().BeNull();
+            new ControladorEmailAluguel().GetProxEnvio().Should().BeNull();
         }
 
         [TestCleanup()]
