@@ -1,11 +1,11 @@
-﻿using Controladores.Shared;
+﻿using DAO.Shared;
 using Dominio.PessoaModule;
 using Dominio.VeiculoModule;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Controladores.VeiculoModule
+namespace DAO.VeiculoModule
 {
     public class CategoriaDAO : EntidadeDAO<Categoria>
     {

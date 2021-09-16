@@ -29,24 +29,17 @@ namespace WindowsApp.Shared
             }
 
             T entidade = GetNovaEntidade();
-            var validacao = entidade.Validar();
-
-            if (validacao != string.Empty)
-            {
-                MessageBox.Show(validacao);
-                return false;
-            }
-
+            ResultadoOperacao resultado;
             if (this.entidade == null)
-                Services.Inserir(entidade);
+                resultado = Services.Inserir(entidade);
             else
             {
                 AdicionarDependencias(entidade);
-                Services.Editar(this.entidade.Id, entidade);
+                resultado = Services.Editar(this.entidade.Id, entidade);
             }
 
             if (mostraSucesso)
-                MessageBox.Show("Realizado com sucesso!!!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(resultado.Mensagem, resultado.Resultado.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Information);
             return true;
         }
         protected virtual void AdicionarDependencias(T entidade)

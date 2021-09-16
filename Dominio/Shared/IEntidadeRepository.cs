@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Dominio.Shared
 {
@@ -6,10 +7,11 @@ namespace Dominio.Shared
     {
         void Inserir(T entidade);
         void Editar(int id, T entidade);
-        void Excluir(int id);
-        bool Existe(int id);
-        T GetById(int id);
-        List<T> TodosRegistros();
+        void Excluir(int id, Type tipo = null);
+        bool Existe(int id, Type tipo = null);
+        T GetById(int id, Type tipo = null);
+        List<T> TodosRegistros { get; }
+
         List<T> FiltroGenerico(string filtro);
     }
 }

@@ -1,11 +1,11 @@
-﻿using Controladores.Shared;
+﻿using DAO.Shared;
 using Dominio.VeiculoModule;
 using Infra.Extensions.Methods;
 using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Controladores.VeiculoModule
+namespace DAO.VeiculoModule
 {
     public class VeiculoDAO : EntidadeDAO<Veiculo>
     {

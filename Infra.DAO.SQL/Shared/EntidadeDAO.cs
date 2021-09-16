@@ -2,8 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
-namespace Controladores.Shared
+namespace DAO.Shared
 {
     public abstract class EntidadeDAO<T> : DAO<T> where T : IEntidade
     {
@@ -30,14 +31,11 @@ namespace Controladores.Shared
         {
             Db.Delete(sqlExcluir, Db.AdicionarParametro("ID", id));
         }
-        public bool Exists(int id)
+        public override bool Existe(int id, Type tipo = null)
         {
             return Db.Exists(sqlExists, Db.AdicionarParametro("ID", id));
         }
-        protected override List<T> ObterRegistros()
-        {
-            return Db.GetAll(sqlSelecionarTodos, ConverterEmEntidade);
-        }
+        public override List<T> TodosRegistros => Db.GetAll(sqlSelecionarTodos, ConverterEmEntidade);
         public abstract T ConverterEmEntidade(IDataReader reader);
         public abstract Dictionary<string, object> ObterParametrosRegistro(T entidade);
     }

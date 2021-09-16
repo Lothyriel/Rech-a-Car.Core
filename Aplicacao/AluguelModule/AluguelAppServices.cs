@@ -12,9 +12,10 @@ namespace Aplicacao.AluguelModule
 {
     public class AluguelAppServices : EntidadeAppServices<Aluguel>
     {
-        IRelatorioAluguel RelatorioRepository;
-        public AluguelAppServices(IAluguelRepository repositorio) : base(repositorio)
+        IRelatorioAluguel Relatorio;
+        public AluguelAppServices(IAluguelRepository repositorio, IRelatorioAluguel relatorio) : base(repositorio)
         {
+            Relatorio = relatorio;
         }
 
         public static async void IniciaLoopEnvioEmails()
@@ -53,7 +54,7 @@ namespace Aplicacao.AluguelModule
             if (insercao.Resultado == EnumResultado.Falha)
                 return insercao;
 
-            var relatorio = RelatorioRepository.GerarRelatorio(aluguel);
+            var relatorio = Relatorio.GerarRelatorio(aluguel);
             ControladorEmailAluguel.InserirParaEnvio(aluguel, relatorio);
             return insercao;
         }

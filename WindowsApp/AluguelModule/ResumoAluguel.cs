@@ -197,7 +197,9 @@ namespace WindowsApp.AluguelModule
         #region Eventos
         private void btFecharAluguel_Click(object sender, EventArgs e)
         {
-            AluguelAppServices
+            if (!Salva())
+                return;
+
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoAluguel();
         }
         private void panelEsconderCliente_DoubleClick(object sender, EventArgs e)
@@ -265,7 +267,5 @@ namespace WindowsApp.AluguelModule
 
         }
         #endregion
-
-
     }
 }

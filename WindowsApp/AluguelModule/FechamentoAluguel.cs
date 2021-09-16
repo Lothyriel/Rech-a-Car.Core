@@ -1,4 +1,5 @@
-﻿using Controladores.AluguelModule;
+﻿using ConfigurationManager;
+using Controladores.AluguelModule;
 using Controladores.Shared;
 using Controladores.VeiculoModule;
 using Dominio.AluguelModule;
@@ -30,14 +31,14 @@ namespace WindowsApp.AluguelModule
         private void CalcularPrecoTotal()
         {
             AluguelFechado aluguelFechado = GetNovaEntidade();
-
+            var configs = ConfiguracoesManager.Configs;
             if (aluguelFechado.Cupom != null)
             {
-                lbValorFinal.Text = aluguelFechado.Cupom.CalcularDesconto(aluguelFechado.CalcularTotal()).ToString();
-                lbDesconto.Text = (aluguelFechado.Cupom.CalcularDesconto(aluguelFechado.CalcularTotal()) - aluguelFechado.CalcularTotal()).ToString();
+                lbValorFinal.Text = aluguelFechado.Cupom.CalcularDesconto(aluguelFechado.CalcularTotal(configs)).ToString();
+                lbDesconto.Text = (aluguelFechado.Cupom.CalcularDesconto(aluguelFechado.CalcularTotal(configs)) - aluguelFechado.CalcularTotal(configs)).ToString();
             }
 
-            lbValor.Text = aluguelFechado.CalcularTotal().ToString();
+            lbValor.Text = aluguelFechado.CalcularTotal(configs).ToString();
         }
         private int KmRodados()
         {
@@ -65,6 +66,14 @@ namespace WindowsApp.AluguelModule
         protected override IEditavel Editar()
         {
             throw new NotImplementedException();
+        }
+        private void validaCampoNumerico(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                    (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
         }
 
         #region eventos
@@ -120,14 +129,5 @@ namespace WindowsApp.AluguelModule
                 bt_RemoveDespesa.Enabled = false;
         }
         #endregion
-
-        private void validaCampoNumerico(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                    (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
     }
 }

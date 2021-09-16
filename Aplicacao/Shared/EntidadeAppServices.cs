@@ -52,19 +52,19 @@ namespace Aplicacao.Shared
         }
         public List<T> TodosRegistros()
         {
-            return Repositorio.TodosRegistros();
+            return Repositorio.TodosRegistros;
         }
 
-        public enum EnumResultado { Sucesso, Falha }
-        public class ResultadoOperacao
+    }
+    public enum EnumResultado { Sucesso, Falha }
+    public class ResultadoOperacao
+    {
+        public string Mensagem;
+        public EnumResultado Resultado;
+        public ResultadoOperacao(string mensagem, EnumResultado resultado)
         {
-            public string Mensagem;
-            public EnumResultado Resultado;
-            public ResultadoOperacao(string mensagem, EnumResultado resultado)
-            {
-                Mensagem = mensagem;
-                Resultado = resultado;
-            }
+            Mensagem = mensagem;
+            Resultado = resultado;
         }
     }
 }
