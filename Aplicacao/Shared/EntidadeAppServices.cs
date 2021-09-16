@@ -5,13 +5,7 @@ namespace Aplicacao.Shared
 {
     public abstract class EntidadeAppServices<T> where T : IEntidade
     {
-        public IEntidadeRepository<T> Repositorio;
-
-        protected EntidadeAppServices(IEntidadeRepository<T> repositorio)
-        {
-            Repositorio = repositorio;
-        }
-
+        public abstract IEntidadeRepository<T> Repositorio { get; }
         public virtual ResultadoOperacao Inserir(T entidade)
         {
             var validacao = entidade.Validar();

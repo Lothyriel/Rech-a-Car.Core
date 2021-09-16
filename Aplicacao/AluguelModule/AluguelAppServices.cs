@@ -13,10 +13,12 @@ namespace Aplicacao.AluguelModule
     public class AluguelAppServices : EntidadeAppServices<Aluguel>
     {
         public IRelatorioAluguel Relatorio;
-        new IAluguelRepository Repositorio;
-        public AluguelAppServices(IAluguelRepository repositorio, IRelatorioAluguel relatorio) : base(repositorio)
+        public override IAluguelRepository Repositorio { get; }
+
+        public AluguelAppServices(IAluguelRepository repositorio, IRelatorioAluguel relatorio)
         {
             Relatorio = relatorio;
+            Repositorio = repositorio;
         }
 
         public static async void IniciaLoopEnvioEmails()

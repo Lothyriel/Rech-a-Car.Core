@@ -6,8 +6,10 @@ namespace Aplicacao.VeiculoModule
 {
     public class CategoriaAppServices : EntidadeAppServices<Categoria>
     {
-        public CategoriaAppServices(IEntidadeRepository<Categoria> repositorio) : base(repositorio)
+        public CategoriaAppServices(IEntidadeRepository<Categoria> repositorio)
         {
+            Repositorio = repositorio;
         }
+        public override IEntidadeRepository<Categoria> Repositorio { get; }
     }
 }
