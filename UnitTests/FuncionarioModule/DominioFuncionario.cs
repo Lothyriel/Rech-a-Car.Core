@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
+using UnitTests.Properties;
 
 namespace Tests.Tests.FuncionarioModule
 {
@@ -9,7 +10,7 @@ namespace Tests.Tests.FuncionarioModule
     public class DominioFuncionario
     {
         Funcionario funcionario;
-        Image imagem = Image.FromFile(@"..\..\..\Resources\user.png");
+        Image imagem = Resources.rech;
 
         [TestMethod]
         public void Deve_retornar_funcionario_valido()

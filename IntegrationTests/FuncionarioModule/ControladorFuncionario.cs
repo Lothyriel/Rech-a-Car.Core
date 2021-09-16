@@ -1,7 +1,7 @@
-﻿using Controladores.PessoaModule;
-using Controladores.Shared;
-using Dominio.PessoaModule;
+﻿using Dominio.PessoaModule;
 using FluentAssertions;
+using Infra.DAO.PessoaModule;
+using Infra.DAO.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
 using Tests.Shared;
@@ -9,9 +9,9 @@ using Tests.Shared;
 namespace Tests.FuncionarioModule
 {
     [TestClass]
-    public class ControladorFuncionariotTest
+    public class FuncionarioDAOtTest
     {
-        ControladorFuncionario controlador = new ControladorFuncionario();
+        FuncionarioDAO controlador = new FuncionarioDAO();
         Image imagem = Image.FromFile(@"..\..\..\Resources\user.png");
         Funcionario funcionario;
 

@@ -1,18 +1,18 @@
-﻿using Controladores.PessoaModule;
-using Controladores.Shared;
-using Dominio.PessoaModule;
+﻿using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using FluentAssertions;
+using Infra.DAO.PessoaModule;
+using Infra.DAO.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.Shared;
 
 namespace Tests.Tests.ClientePJ_Module
 {
     [TestClass]
-    public class ControladorClientePJ_Test
+    public class ClientePJDAO_Test
     {
-        ControladorClientePJ controladorClientePJ = new ControladorClientePJ();
-        ControladorMotorista controladorMotorista = new ControladorMotorista();
+        ClientePJDAO ClientePJDAO = new ClientePJDAO();
+        MotoristaDAO MotoristaDAO = new MotoristaDAO();
         ClientePJ cliente;
         MotoristaEmpresa motorista;
 
@@ -21,10 +21,10 @@ namespace Tests.Tests.ClientePJ_Module
         public void Inserir_clientePJ()
         {
             cliente = new ClientePJ("nome", "99999999999", "endereco", "99999999999999", "email@teste.com");
-            controladorClientePJ.Inserir(cliente);
+            ClientePJDAO.Inserir(cliente);
             motorista = new MotoristaEmpresa("nomeMotorista", "99999999999", "endereco", "99999999999999", new CNH("59778304921", TipoCNH.A), cliente);
-            controladorMotorista.Inserir(motorista);
-            cliente = controladorClientePJ.GetById(cliente.Id);
+            MotoristaDAO.Inserir(motorista);
+            cliente = ClientePJDAO.GetById(cliente.Id);
         }
         [TestMethod]
         public void Deve_inserir_cliente()
@@ -39,8 +39,8 @@ namespace Tests.Tests.ClientePJ_Module
         [TestMethod]
         public void Deve_remover_motorista()
         {
-            controladorMotorista.Excluir(cliente.Motoristas[0].Id);
-            cliente = controladorClientePJ.GetById(cliente.Id);
+            MotoristaDAO.Excluir(cliente.Motoristas[0].Id);
+            cliente = ClientePJDAO.GetById(cliente.Id);
             cliente.Motoristas.Count.Should().Be(0);
         }
         [TestMethod]
@@ -51,8 +51,8 @@ namespace Tests.Tests.ClientePJ_Module
             string nomeAntigo = motoristaEmpresa.Nome;
             motoristaEmpresa.Nome = "NOME EDITADO";
 
-            controladorMotorista.Editar(motoristaEmpresa.Id, motoristaEmpresa);
-            cliente = controladorClientePJ.GetById(cliente.Id);
+            MotoristaDAO.Editar(motoristaEmpresa.Id, motoristaEmpresa);
+            cliente = ClientePJDAO.GetById(cliente.Id);
             nomeAntigo.Should().NotBe(motoristaEmpresa.Nome);
         }
         [TestMethod]
@@ -62,9 +62,9 @@ namespace Tests.Tests.ClientePJ_Module
 
             cliente.Nome = "Nome editado";
 
-            controladorClientePJ.Editar(cliente.Id, cliente);
+            ClientePJDAO.Editar(cliente.Id, cliente);
 
-            controladorClientePJ.GetById(cliente.Id).Nome.Should().NotBe(nomeAnterior);
+            ClientePJDAO.GetById(cliente.Id).Nome.Should().NotBe(nomeAnterior);
         }
         [TestMethod]
         public void Deve_editar_telefone_cliente()
@@ -73,9 +73,9 @@ namespace Tests.Tests.ClientePJ_Module
 
             cliente.Telefone = "000000000";
 
-            controladorClientePJ.Editar(cliente.Id, cliente);
+            ClientePJDAO.Editar(cliente.Id, cliente);
 
-            controladorClientePJ.GetById(cliente.Id).Telefone.Should().NotBe(telefoneAnterior);
+            ClientePJDAO.GetById(cliente.Id).Telefone.Should().NotBe(telefoneAnterior);
         }
         [TestMethod]
         public void Deve_editar_endereco_cliente()
@@ -84,9 +84,9 @@ namespace Tests.Tests.ClientePJ_Module
 
             cliente.Endereco = "Endereco editado";
 
-            controladorClientePJ.Editar(cliente.Id, cliente);
+            ClientePJDAO.Editar(cliente.Id, cliente);
 
-            controladorClientePJ.GetById(cliente.Id).Endereco.Should().NotBe(enderecoAnterior);
+            ClientePJDAO.GetById(cliente.Id).Endereco.Should().NotBe(enderecoAnterior);
         }
         [TestMethod]
         public void Deve_editar_documento_cliente()
@@ -95,14 +95,14 @@ namespace Tests.Tests.ClientePJ_Module
 
             cliente.Documento = "00000000000000";
 
-            controladorClientePJ.Editar(cliente.Id, cliente);
+            ClientePJDAO.Editar(cliente.Id, cliente);
 
-            controladorClientePJ.GetById(cliente.Id).Documento.Should().NotBe(documentoAnterior);
+            ClientePJDAO.GetById(cliente.Id).Documento.Should().NotBe(documentoAnterior);
         }
         [TestMethod]
         public void Deve_retornar_todos_os_clientesPJ()
         {
-            controladorClientePJ.Registros.Count.Should().Be(1);
+            ClientePJDAO.Registros.Count.Should().Be(1);
         }
 
         [TestCleanup]

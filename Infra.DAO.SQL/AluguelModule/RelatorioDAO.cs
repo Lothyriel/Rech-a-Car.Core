@@ -49,9 +49,9 @@ namespace Infra.DAO.AluguelModule
             var bytesPdf = envio.StreamAttachment.ToArray();
             Db.Insert(sqlInserirEmail, Db.AdicionarParametro("ID_ALUGUEL", envio.Aluguel.Id, Db.AdicionarParametro("PDF", bytesPdf)));
         }
-        public void MarcarEnviado(int id)
+        public void MarcarEnviado(int idEnvio)
         {
-            Db.Update(sqlAlterarEmailEnviado, Db.AdicionarParametro("ID", id, Db.AdicionarParametro("DATA_ENVIADO", DateTime.Now)));
+            Db.Update(sqlAlterarEmailEnviado, Db.AdicionarParametro("ID", idEnvio, Db.AdicionarParametro("DATA_ENVIADO", DateTime.Now)));
         }
         public RelatorioAluguel GetProxEnvio()
         {

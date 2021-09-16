@@ -1,17 +1,17 @@
-﻿using Controladores.ServicoModule;
-using Controladores.Shared;
-using Dominio.ServicoModule;
+﻿using Dominio.ServicoModule;
 using FluentAssertions;
+using Infra.DAO.Shared;
+using Infra.DAO.SQL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.Shared;
 
 namespace Tests.Tests.ServicoModule
 {
     [TestClass]
-    public class ControladorServicoTest
+    public class ServicoDAOTest
     {
         Servico servico = new Servico("nomeServico", 10);
-        ControladorServico controlador = new ControladorServico();
+        ServicoDAO controlador = new ServicoDAO();
 
         [TestInitialize]
         public void Inserindo_no_banco()

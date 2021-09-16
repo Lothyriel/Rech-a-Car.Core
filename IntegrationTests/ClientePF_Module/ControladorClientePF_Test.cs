@@ -1,8 +1,8 @@
-﻿using Controladores.PessoaModule;
-using Controladores.Shared;
-using Dominio.PessoaModule;
+﻿using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using FluentAssertions;
+using Infra.DAO.PessoaModule;
+using Infra.DAO.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Tests.Shared;
@@ -10,9 +10,9 @@ using Tests.Shared;
 namespace Tests.Tests.ClientePF_Module
 {
     [TestClass]
-    public class ControladorClientePF_Test
+    public class ClientePFDAO_Test
     {
-        ControladorClientePF controladorClientePF = new ControladorClientePF();
+        ClientePFDAO ClientePFDAO = new ClientePFDAO();
         ClientePF cliente;
 
         [TestInitialize]
@@ -20,7 +20,7 @@ namespace Tests.Tests.ClientePF_Module
         {
             CNH cnh = new CNH("36510896881", TipoCNH.A);
             cliente = new ClientePF("nome", "999999999", "endereco", "99999999999", cnh, new DateTime(2001, 04, 27), "email@teste.com");
-            controladorClientePF.Inserir(cliente);
+            ClientePFDAO.Inserir(cliente);
         }
         [TestMethod]
         public void Deve_inserir_cliente()
@@ -34,9 +34,9 @@ namespace Tests.Tests.ClientePF_Module
 
             cliente.Nome = "Nome editado";
 
-            controladorClientePF.Editar(cliente.Id, cliente);
+            ClientePFDAO.Editar(cliente.Id, cliente);
 
-            controladorClientePF.GetById(cliente.Id).Nome.Should().NotBe(nomeAnterior);
+            ClientePFDAO.GetById(cliente.Id).Nome.Should().NotBe(nomeAnterior);
         }
         [TestMethod]
         public void Deve_editar_telefone_cliente()
@@ -45,9 +45,9 @@ namespace Tests.Tests.ClientePF_Module
 
             cliente.Telefone = "000000000";
 
-            controladorClientePF.Editar(cliente.Id, cliente);
+            ClientePFDAO.Editar(cliente.Id, cliente);
 
-            controladorClientePF.GetById(cliente.Id).Telefone.Should().NotBe(telefoneAnterior);
+            ClientePFDAO.GetById(cliente.Id).Telefone.Should().NotBe(telefoneAnterior);
         }
         [TestMethod]
         public void Deve_editar_endereco_cliente()
@@ -56,9 +56,9 @@ namespace Tests.Tests.ClientePF_Module
 
             cliente.Endereco = "Endereco editado";
 
-            controladorClientePF.Editar(cliente.Id, cliente);
+            ClientePFDAO.Editar(cliente.Id, cliente);
 
-            controladorClientePF.GetById(cliente.Id).Endereco.Should().NotBe(enderecoAnterior);
+            ClientePFDAO.GetById(cliente.Id).Endereco.Should().NotBe(enderecoAnterior);
         }
         [TestMethod]
         public void Deve_editar_documento_cliente()
@@ -67,9 +67,9 @@ namespace Tests.Tests.ClientePF_Module
 
             cliente.Documento = "00000000000";
 
-            controladorClientePF.Editar(cliente.Id, cliente);
+            ClientePFDAO.Editar(cliente.Id, cliente);
 
-            controladorClientePF.GetById(cliente.Id).Documento.Should().NotBe(documentoAnterior);
+            ClientePFDAO.GetById(cliente.Id).Documento.Should().NotBe(documentoAnterior);
         }
 
         [TestMethod]
@@ -79,15 +79,15 @@ namespace Tests.Tests.ClientePF_Module
 
             cliente.Cnh = new CNH("36510896881", TipoCNH.C) { Id = cnhAnterior.Id };
 
-            controladorClientePF.Editar(cliente.Id, cliente);
+            ClientePFDAO.Editar(cliente.Id, cliente);
 
-            controladorClientePF.GetById(cliente.Id).Cnh.TipoCnh.Should().NotBe(cnhAnterior.TipoCnh);
+            ClientePFDAO.GetById(cliente.Id).Cnh.TipoCnh.Should().NotBe(cnhAnterior.TipoCnh);
         }
 
         [TestMethod]
         public void Deve_retornar_todos_os_clientesPF()
         {
-            controladorClientePF.Registros.Count.Should().Be(1);
+            ClientePFDAO.Registros.Count.Should().Be(1);
         }
 
         [TestCleanup]

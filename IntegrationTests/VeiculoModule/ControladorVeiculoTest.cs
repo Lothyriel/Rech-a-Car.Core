@@ -1,8 +1,8 @@
-﻿using Controladores.Shared;
-using Controladores.VeiculoModule;
-using Dominio.PessoaModule;
+﻿using Dominio.PessoaModule;
 using Dominio.VeiculoModule;
 using FluentAssertions;
+using Infra.DAO.Shared;
+using Infra.DAO.VeiculoModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
 using Tests.Shared;
@@ -10,10 +10,10 @@ using Tests.Shared;
 namespace Tests.VeiculoModule
 {
     [TestClass]
-    public class ControladorVeiculoTest
+    public class VeiculoDAOTest
     {
         Veiculo veiculo1;
-        ControladorVeiculo controladorVeiculo = new ControladorVeiculo();
+        VeiculoDAO VeiculoDAO = new VeiculoDAO();
 
         [TestInitialize]
         public void Inserir_Veiculo()
@@ -21,8 +21,8 @@ namespace Tests.VeiculoModule
             Image imagem = Image.FromFile(@"..\..\..\Resources\ford_ka_gay.jpg");
             Categoria categoria = new Categoria("Economico", 100, 10, 400, 800, TipoCNH.B);
             veiculo1 = new Veiculo("Ka", "Ford", 2001, "ABC1024", 50000, 4, 4, "ASDFGHJKLQWERTYUI", 0, 50, imagem, false, categoria, TipoCombustivel.Gasolina);
-            new ControladorCategoria().Inserir(categoria);
-            controladorVeiculo.Inserir(veiculo1);
+            new CategoriaDAO().Inserir(categoria);
+            VeiculoDAO.Inserir(veiculo1);
         }
 
         [TestMethod]
@@ -37,9 +37,9 @@ namespace Tests.VeiculoModule
             string marcaOriginal = veiculo1.Marca;
 
             veiculo1.Marca = "Marca diferente";
-            controladorVeiculo.Editar(veiculo1.Id, veiculo1);
+            VeiculoDAO.Editar(veiculo1.Id, veiculo1);
 
-            controladorVeiculo.GetById(veiculo1.Id).Marca.Should().NotBe(marcaOriginal);
+            VeiculoDAO.GetById(veiculo1.Id).Marca.Should().NotBe(marcaOriginal);
         }
 
         [TestMethod]
@@ -49,22 +49,22 @@ namespace Tests.VeiculoModule
 
             veiculo1.Ano = 2017;
 
-            controladorVeiculo.Editar(veiculo1.Id, veiculo1);
+            VeiculoDAO.Editar(veiculo1.Id, veiculo1);
 
-            controladorVeiculo.GetById(veiculo1.Id).Ano.Should().NotBe(anoOriginal);
+            VeiculoDAO.GetById(veiculo1.Id).Ano.Should().NotBe(anoOriginal);
         }
 
         [TestMethod]
         public void Deve_remover_veiculo()
         {
-            controladorVeiculo.Excluir(veiculo1.Id);
-            controladorVeiculo.Exists(veiculo1.Id).Should().BeFalse();
+            VeiculoDAO.Excluir(veiculo1.Id);
+            VeiculoDAO.Existe(veiculo1.Id).Should().BeFalse();
         }
 
         [TestMethod]
         public void Deve_retornar_todos_os_veiculos()
         {
-            controladorVeiculo.Registros.Count.Should().Be(1);
+            VeiculoDAO.Registros.Count.Should().Be(1);
         }
 
         [TestCleanup]

@@ -1,19 +1,19 @@
-﻿using Controladores.ParceiroModule;
-using Controladores.Shared;
-using Dominio.ParceiroModule;
+﻿using Dominio.ParceiroModule;
 using FluentAssertions;
+using Infra.DAO.ParceiroModule;
+using Infra.DAO.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.Shared;
 
 namespace Tests.ParceiroModule
 {
     [TestClass]
-    public class ControladorParceiroTest
+    public class ParceiroDAOTest
     {
-        ControladorParceiro controladorParceiro = new ControladorParceiro();
+        ParceiroDAO ParceiroDAO = new ParceiroDAO();
         Parceiro parceiro;
 
-        public ControladorParceiroTest()
+        public ParceiroDAOTest()
         {
             LimparTestes();
         }
@@ -28,13 +28,13 @@ namespace Tests.ParceiroModule
         public void Inserindo()
         {
             parceiro = new Parceiro("Desconto do Deko");
-            controladorParceiro.Inserir(parceiro);
+            ParceiroDAO.Inserir(parceiro);
         }
 
         [TestMethod]
         public void Deve_inserir_Parceiro()
         {
-            controladorParceiro.Registros.Count.Should().Be(1);
+            ParceiroDAO.Registros.Count.Should().Be(1);
         }
 
         [TestMethod]
@@ -44,22 +44,22 @@ namespace Tests.ParceiroModule
 
             parceiro.nome = "Nome editado";
 
-            controladorParceiro.Editar(parceiro.Id, parceiro);
+            ParceiroDAO.Editar(parceiro.Id, parceiro);
 
-            controladorParceiro.GetById(parceiro.Id).nome.Should().NotBe(parceiroAnterior);
+            ParceiroDAO.GetById(parceiro.Id).nome.Should().NotBe(parceiroAnterior);
         }
 
         [TestMethod]
         public void Deve_Visualizar_todos_as_categorias()
         {
-            controladorParceiro.Registros.Count.Should().Be(1);
+            ParceiroDAO.Registros.Count.Should().Be(1);
         }
 
         [TestMethod]
         public void Deve_excluir_Parceiro()
         {
-            controladorParceiro.Excluir(parceiro.Id);
-            controladorParceiro.Registros.Count.Should().Be(0);
+            ParceiroDAO.Excluir(parceiro.Id);
+            ParceiroDAO.Registros.Count.Should().Be(0);
         }
     }
 }

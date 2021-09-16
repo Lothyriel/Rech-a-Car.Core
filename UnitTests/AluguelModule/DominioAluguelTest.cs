@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using UnitTests.Properties;
 
 namespace Tests.Tests.AlguelModule
 {
@@ -21,12 +22,11 @@ namespace Tests.Tests.AlguelModule
         MotoristaEmpresa motoristaEmpresa;
         ClientePF clientepf;
         ClientePJ clientepj;
-        Image imagemVeiculo = Image.FromFile(@"..\..\..\Resources\ford_ka_gay.jpg");
-        Image imagemFuncionario = Image.FromFile(@"..\..\..\Resources\rech.png");
+        Image imagemVeiculo = Resources.ford_ka_gay;
+        Image imagemFuncionario = Resources.rech;
         Categoria categoria;
         List<Servico> servicos;
         Funcionario funcionario;
-
 
         [TestInitialize]
         public void InicializaAluguel()

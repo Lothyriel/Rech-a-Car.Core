@@ -55,7 +55,7 @@ namespace Aplicacao.AluguelModule
             var emailUsuario = proxEnvio.Aluguel.Cliente.Email;
 
             Email.Envia(emailUsuario, titulo, corpoEmail, new List<Attachment>() { attachment });
-            RelatorioRepositorio.MarcarEnviado(proxEnvio.Aluguel.Id);
+            RelatorioRepositorio.MarcarEnviado(proxEnvio.Id);
         }
         public override ResultadoOperacao Inserir(Aluguel aluguel)
         {

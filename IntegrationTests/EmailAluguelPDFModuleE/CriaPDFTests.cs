@@ -8,12 +8,14 @@ using EmailAluguelPDF;
 using FluentAssertions;
 using Infra.DAO.AluguelModule;
 using Infra.DAO.PessoaModule;
+using Infra.DAO.SQL;
 using Infra.DAO.VeiculoModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using Tests.Shared;
+using IntegrationTests.Properties;
+using Infra.DAO.Shared;
 
 namespace Tests.EmailAluguelPDFModule
 {
@@ -21,15 +23,20 @@ namespace Tests.EmailAluguelPDFModule
     public class CriaPDFTests
     {
         Aluguel aluguel;
+        static AluguelDAO ad = new();
+        static PDFAluguel pa = new();
+        static RelatorioDAO rd = new();
+        static ServicoDAO sd = new();
+        AluguelAppServices AluguelAppServices = new(ad, pa, rd, sd);
 
         [TestInitialize]
         public void InicializarDados()
         {
             var categoria = new Categoria("Joaninha", 100, 5, 300, 500, TipoCNH.B);
-            var imagem = Image.FromFile(@"..\..\..\Resources\ford_ka_gay.jpg");
+            var imagem = Resources.ford_ka_gay;
             var veiculo = new Veiculo("Ka", "Ford", 1997, "ABC1234", 50000, 4, 2, "LDSAPLDPLADAS", 0, 50, imagem, false, categoria, TipoCombustivel.Gasolina);
             var cnh = new CNH("01648986", TipoCNH.B);
-            var cliente = new ClientePF("João Xavier", "49998300761", "Rua Jose Linhares", "01384972900", cnh, new DateTime(2001, 04, 27), "arkhandyr@gmail.com");
+            var cliente = new ClientePF("João Xavier", "49998300761", "Rua Jose Linhares", "01384972900", cnh, new DateTime(2001, 04, 27), "fastjonh@gmail.com");
             var funcionario = new Funcionario("Alexandre Rech", "99999999", "Rua da Ndd", "99999999", Cargo.SysAdmin, imagem, "admin", "admin123");
 
             var servicos = new List<Servico>() { new Servico("Servico 1", 100), new Servico("Servico 2", 200), new Servico("Servico 3", 300) };
@@ -46,26 +53,23 @@ namespace Tests.EmailAluguelPDFModule
         [TestMethod]
         public void DeveCriarPdf()
         {
-            var ms = new PDFAluguel().GerarRelatorio(aluguel);
-            new RelatorioDAO().SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
-
-            new RelatorioDAO().GetProxEnvio().Should().NotBeNull();
+            var ms = pa.GerarRelatorio(aluguel);
+            rd.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
+            rd.GetProxEnvio().Should().NotBeNull();
         }
-
         [TestMethod]
         public void DeveEnviarPdf()
         {
             var ms = new PDFAluguel().GerarRelatorio(aluguel);
-            new RelatorioDAO().SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
-            new AluguelAppServices(new AluguelDAO()).TentaEnviarRelatorioEmail();
+            rd.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
+            AluguelAppServices.TentaEnviarRelatorioEmail();
 
-            new RelatorioDAO().GetProxEnvio().Should().BeNull();
+            rd.GetProxEnvio().Should().BeNull();
         }
-
-        [TestCleanup()]
+        [TestCleanup]
         public void LimparArquivo()
         {
-            TestExtensions.ResetId("TBEmail");
+            Db.Delete(TestExtensions.ResetId("TBEmail"));
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using Controladores.CupomModule;
-using Controladores.ParceiroModule;
-using Controladores.Shared;
-using Dominio.CupomModule;
+﻿using Dominio.CupomModule;
 using Dominio.ParceiroModule;
 using FluentAssertions;
+using Infra.DAO.CupomModule;
+using Infra.DAO.ParceiroModule;
+using Infra.DAO.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Tests.Shared;
@@ -11,12 +11,12 @@ using Tests.Shared;
 namespace Tests.CupomModule
 {
     [TestClass]
-    public class ControladorCupomTest
+    public class CupomDAOTest
     {
-        ControladorParceiro controladorParceiro = new ControladorParceiro();
-        ControladorCupom controladorCupom = new ControladorCupom();
+        ParceiroDAO ParceiroDAO = new ParceiroDAO();
+        CupomDAO CupomDAO = new CupomDAO();
 
-        public ControladorCupomTest()
+        public CupomDAOTest()
         {
             LimparTestes();
         }
@@ -34,11 +34,11 @@ namespace Tests.CupomModule
             var cupom = new Cupom("Deko", 50, 0, new DateTime(2021, 08, 26), parceiro, 230);
 
             //action
-            controladorParceiro.Inserir(parceiro);
-            controladorCupom.Inserir(cupom);
+            ParceiroDAO.Inserir(parceiro);
+            CupomDAO.Inserir(cupom);
 
             //assert
-            var cupomEncontrado = controladorCupom.GetById(cupom.Id);
+            var cupomEncontrado = CupomDAO.GetById(cupom.Id);
             cupomEncontrado.Should().Be(cupom);
         }
 
@@ -51,12 +51,12 @@ namespace Tests.CupomModule
             var cupomAtualizado = new Cupom("Deko-5946", 10, 0, new DateTime(2021, 08, 26).Date, parceiro, 250);
 
             //action
-            controladorParceiro.Inserir(parceiro);
-            controladorCupom.Inserir(cupom);
-            controladorCupom.Editar(cupom.Id, cupomAtualizado);
+            ParceiroDAO.Inserir(parceiro);
+            CupomDAO.Inserir(cupom);
+            CupomDAO.Editar(cupom.Id, cupomAtualizado);
 
             //assert
-            Cupom cuponsEditado = controladorCupom.GetById(cupom.Id);
+            Cupom cuponsEditado = CupomDAO.GetById(cupom.Id);
             cuponsEditado.Should().Be(cupomAtualizado);
         }
 
@@ -68,9 +68,9 @@ namespace Tests.CupomModule
             var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26), parceiro, 300);
 
             //action
-            controladorParceiro.Inserir(parceiro);
-            controladorCupom.Inserir(cupom);
-            Cupom cupomEncontrado = controladorCupom.GetById(cupom.Id);
+            ParceiroDAO.Inserir(parceiro);
+            CupomDAO.Inserir(cupom);
+            Cupom cupomEncontrado = CupomDAO.GetById(cupom.Id);
 
             //assert
             cupomEncontrado.Should().NotBeNull();
@@ -84,9 +84,9 @@ namespace Tests.CupomModule
             var cupom = new Cupom("Deko-1236", 0, 50, new DateTime(2021, 08, 26), parceiro, 300);
 
             //action
-            controladorParceiro.Inserir(parceiro);
-            controladorCupom.Inserir(cupom);
-            Cupom cupomEncontrado = controladorCupom.GetById(cupom.Id);
+            ParceiroDAO.Inserir(parceiro);
+            CupomDAO.Inserir(cupom);
+            Cupom cupomEncontrado = CupomDAO.GetById(cupom.Id);
 
             //assert
             cupomEncontrado.Should().NotBeNull();
@@ -100,12 +100,12 @@ namespace Tests.CupomModule
             var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26), parceiro, 300);
 
             //action
-            controladorParceiro.Inserir(parceiro);
-            controladorCupom.Inserir(cupom);
-            controladorCupom.Excluir(cupom.Id);
+            ParceiroDAO.Inserir(parceiro);
+            CupomDAO.Inserir(cupom);
+            CupomDAO.Excluir(cupom.Id);
 
             //assert
-            var cupomEncrontrado = controladorCupom.GetById(cupom.Id);
+            var cupomEncrontrado = CupomDAO.GetById(cupom.Id);
             cupomEncrontrado.Should().BeNull();
         }
     }
