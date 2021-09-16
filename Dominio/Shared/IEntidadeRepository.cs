@@ -2,7 +2,7 @@
 
 namespace Dominio.Shared
 {
-    public interface IEntidadeRepository<T>
+    public interface IEntidadeRepository<T> where T : IEntidade
     {
         void Inserir(T entidade);
         void Editar(int id, T entidade);

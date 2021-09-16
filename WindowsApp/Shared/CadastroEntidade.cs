@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace WindowsApp.Shared
 {
-    public abstract class CadastroEntidade<T> : Form, IEditavel where T : IControlavel
+    public abstract class CadastroEntidade<T> : Form, IEditavel where T : IEntidade
     {
         public T entidade { get; set; }
         public abstract Controlador<T> Controlador { get; }

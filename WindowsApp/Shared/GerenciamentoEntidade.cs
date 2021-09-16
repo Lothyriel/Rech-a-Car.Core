@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace WindowsApp.Shared
 {
-    public abstract partial class GerenciamentoEntidade<T> : Form, IVisualizavel where T : IControlavel
+    public abstract partial class GerenciamentoEntidade<T> : Form, IVisualizavel where T : IEntidade
     {
         protected abstract CadastroEntidade<T> Cadastro { get; }
         public GerenciamentoEntidade(string titulo, TipoTela tipo = TipoTela.CadastroBasico)
