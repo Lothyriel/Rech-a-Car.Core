@@ -10,7 +10,7 @@ using WindowsApp.Shared;
 
 namespace WindowsApp.AluguelModule
 {
-    public partial class FechamentoAluguel : CadastroEntidade<AluguelFechado>, IVisualizavel //Form//
+    public partial class FechamentoAluguel : CadastroEntidade<AluguelFechado>, IVisualizavel //Form, IVisualizavel//
     {
         public readonly Aluguel aluguel;
 
@@ -21,29 +21,38 @@ namespace WindowsApp.AluguelModule
             this.aluguel = aluguel;
             InitializeComponent();
             tb_OdometroInicial.Text = aluguel.Veiculo.Quilometragem.ToString();
+            tb_TanqueInicial.Text = aluguel.Veiculo.CapacidadeTanque.ToString();
         }
-
         public IVisualizavel Visualizar()
         {
             return this;
         }
-
         private void CalcularPrecoTotal()
         {
-            lbValor.Text = GetNovaEntidade().CalcularTotal().ToString();
+            AluguelFechado aluguelFechado = GetNovaEntidade();
+
+            if (aluguelFechado.Cupom != null)
+            {
+                lbValorFinal.Text = aluguelFechado.Cupom.CalcularDesconto(aluguelFechado.CalcularTotal()).ToString();
+                lbDesconto.Text = (aluguelFechado.Cupom.CalcularDesconto(aluguelFechado.CalcularTotal()) - aluguelFechado.CalcularTotal()).ToString();
+            }
+
+            lbValor.Text = aluguelFechado.CalcularTotal().ToString();
         }
         private int KmRodados()
         {
             if (int.TryParse(tb_OdometroFinal.Text, out int odometroFinal) && odometroFinal >= aluguel.Veiculo.Quilometragem)
                 return odometroFinal - aluguel.Veiculo.Quilometragem;
 
-            return -1;
+            return 0;
         }
         private double TanqueUtilizado()
         {
-            return 0.5;
-        }
+            if (int.TryParse(tb_TanqueAtual.Text, out int tanqueFinal) && int.TryParse(tb_TanqueInicial.Text, out int tanqueInicial))
+                return tanqueInicial - tanqueFinal;
 
+            return 0;
+        }
         public override AluguelFechado GetNovaEntidade()
         {
             var servicos = new List<Servico>();
@@ -53,14 +62,12 @@ namespace WindowsApp.AluguelModule
 
             return aluguel.Fechar(KmRodados(), TanqueUtilizado(), servicos);
         }
-
         protected override IEditavel Editar()
         {
             throw new NotImplementedException();
         }
 
         #region eventos
-
         private void bt_AddDespesa_Click(object sender, EventArgs e)
         {
             if (tb_NomeDespesa.Text != "" && mtb_PrecoDespesa.Text != "" && double.TryParse(mtb_PrecoDespesa.Text, out double precoDespesa))
@@ -71,7 +78,7 @@ namespace WindowsApp.AluguelModule
         private void bt_RemoveDespesa_Click(object sender, EventArgs e)
         {
             listDespesas.Items.Remove(listDespesas.SelectedItem);
-            lbValor.Text = entidade.CalcularTotal().ToString();
+            CalcularPrecoTotal();
         }
         private void tb_KmFinal_TextChanged(object sender, EventArgs e)
         {
@@ -87,6 +94,30 @@ namespace WindowsApp.AluguelModule
                 return;
 
             ControladorVeiculo.AdicionarQuilometragem(aluguel.Veiculo, KmRodados());
+            TelaPrincipal.Instancia.FormAtivo = new GerenciamentoAluguel();
+
+        }
+        private void tb_TanqueAtual_TextChanged(object sender, EventArgs e)
+        {
+            entidade = GetNovaEntidade();
+            CalcularPrecoTotal();
+        }
+        private void tb_OdometroFinal_TextChanged(object sender, EventArgs e)
+        {
+            entidade = GetNovaEntidade();
+            CalcularPrecoTotal();
+        }
+        private void FechamentoAluguel_Load(object sender, EventArgs e)
+        {
+            entidade = GetNovaEntidade();
+            CalcularPrecoTotal();
+        }
+        private void listDespesas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listDespesas.SelectedIndex != -1)
+                bt_RemoveDespesa.Enabled = true;
+            else
+                bt_RemoveDespesa.Enabled = false;
         }
         #endregion
 
@@ -97,11 +128,6 @@ namespace WindowsApp.AluguelModule
             {
                 e.Handled = true;
             }
-        }
-
-        private void maskedTextBox2_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
         }
     }
 }

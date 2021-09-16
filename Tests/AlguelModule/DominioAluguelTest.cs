@@ -38,7 +38,7 @@ namespace Tests.Tests.AlguelModule
             clientepj = new ClientePJ("nome", "4999915522", "endereço", "0131038190371", "email@teste.com");
             motoristaEmpresa = new MotoristaEmpresa("nome", "123123123", "endereço", "d12398127", cnh, clientepj);
             funcionario = new Funcionario("nome", "49999155922", "endereco", "01308174983", Cargo.SysAdmin, imagemFuncionario, "usuario");
-            aluguel = new Aluguel(veiculo, servicos, Plano.diario, DateTime.Today.AddDays(10), clientepj, funcionario, DateTime.Today.AddDays(15), motoristaEmpresa);
+            aluguel = new Aluguel(veiculo, servicos, Plano.Diário, DateTime.Today.AddDays(10), clientepj, funcionario, DateTime.Today.AddDays(15), motoristaEmpresa);
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace Tests.Tests.AlguelModule
         [TestMethod]
         public void Deve_retornar_aluguel_invalido()
         {
-            aluguel = new Aluguel(null, null, Plano.controlado, new DateTime(), null, null, new DateTime());
+            aluguel = new Aluguel(null, null, Plano.Controlado, new DateTime(), null, null, new DateTime());
 
             aluguel.Validar().Should().NotBe(string.Empty);
         }

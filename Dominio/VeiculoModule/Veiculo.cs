@@ -54,8 +54,8 @@ namespace Dominio.VeiculoModule
         }
         public override string Validar()
         {
-            Regex templatePlacaMercoSul = new(@"\b[A-Z]{3}[0-9][A-Z][0-9]{2}\b", RegexOptions.IgnoreCase);
-            Regex templatePlacaAntiga = new(@"\b[A-Z]{3}[0-9]{4}\b", RegexOptions.IgnoreCase);
+            Regex templatePlacaMercoSul = new Regex(@"\b[A-Z]{3}[0-9][A-Z][0-9]{2}\b" , RegexOptions.IgnoreCase);
+            Regex templatePlacaAntiga = new Regex(@"\b[A-Z]{3}[0-9]{4}\b", RegexOptions.IgnoreCase);
 
             string validacao = "";
 
@@ -93,5 +93,5 @@ namespace Dominio.VeiculoModule
             return $"{Marca} {Modelo} {Ano} {Categoria}";
         }
     }
-    public enum TipoCombustivel { Diesel, Etanol, Flex, Gasolina }
+    public enum TipoCombustivel { Diesel, Etanol,Gasolina }
 }

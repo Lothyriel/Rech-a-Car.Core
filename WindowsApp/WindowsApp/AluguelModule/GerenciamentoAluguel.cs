@@ -39,7 +39,7 @@ namespace WindowsApp.AluguelModule
         }
         protected override IVisualizavel Visualizar(Aluguel entidade)
         {
-            return entidade is AluguelFechado ? new FechamentoAluguel(GetEntidadeSelecionado()) : this;
+            return entidade is AluguelFechado ? this : new FechamentoAluguel(GetEntidadeSelecionado());
         }
     }
 }
