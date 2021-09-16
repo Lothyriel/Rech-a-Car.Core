@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Dominio\Dominio.csproj" />
     <ProjectReference Include="..\Infra.Extensions.ConfigurationManager\Infra.Extensions.ConfigurationManager.csproj" />
+    <ProjectReference Include="..\Infra.Extensions.Methods\Infra.Extensions.Methods.csproj" />
   </ItemGroup>
 
 </Project>

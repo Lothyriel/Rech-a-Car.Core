@@ -2,14 +2,12 @@
 using EmailAluguelPDF.Properties;
 using Extensions;
 using iText.IO.Font.Constants;
-using iText.IO.Image;
 using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Draw;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
-using System.Drawing.Imaging;
 using System.IO;
 
 namespace EmailAluguelPDF
@@ -50,12 +48,12 @@ namespace EmailAluguelPDF
 
             #region Parágrafos
             Paragraph header = new Paragraph().SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica24b);
-            header.Add(ImagemItextImage(Resources.logopdf));
+            header.Add(Resources.logopdf.ToItextImage());
             header.Add(new Text($"\nOlá, {aluguel.Cliente}."));
             header.Add(new Text($"\nAqui está o resumo do seu mais novo aluguel na Rech-a-car!"));
 
             Paragraph body_imagem = new Paragraph().SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica14r);
-            body_imagem.Add(ImagemItextImage(aluguel.Veiculo.Foto));
+            body_imagem.Add(aluguel.Veiculo.Foto.ToItextImage());
 
             Paragraph body_aluguel = new Paragraph().SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica14r);
             body_aluguel.Add(new Text($"\nVeículo: {aluguel.Veiculo}"));
@@ -86,14 +84,6 @@ namespace EmailAluguelPDF
             pdf.Close();
 
             ControladorEmail.InserirParaEnvio(aluguel, ms);
-        }
-
-        private static Image ImagemItextImage(System.Drawing.Image imagem)
-        {
-            var byteArray = imagem.ToByteArray(ImageFormat.Bmp);
-
-            ImageData imageData = ImageDataFactory.Create(byteArray);
-            return new Image(imageData);
         }
     }
 }

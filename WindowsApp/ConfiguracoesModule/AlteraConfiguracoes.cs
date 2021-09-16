@@ -1,5 +1,6 @@
 ﻿using ConfigurationManager.Combustivel;
 using System.Windows.Forms;
+
 namespace WindowsApp.ConfiguracoesModule
 {
     public partial class AlterarConfiguracoes : Form

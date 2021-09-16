@@ -1,14 +1,13 @@
 ﻿using Controladores.AluguelModule;
+using Controladores.CupomModule;
 using Controladores.ServicoModule;
 using Controladores.Shared;
-using Controladores.CupomModule;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
 using Dominio.VeiculoModule;
-using EmailAluguelPDF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
