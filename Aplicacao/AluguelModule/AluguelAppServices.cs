@@ -1,5 +1,6 @@
 ﻿using Aplicacao.Shared;
 using Dominio.AluguelModule;
+using Dominio.ServicoModule;
 using EnviaEmail;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,14 @@ namespace Aplicacao.AluguelModule
 {
     public class AluguelAppServices : EntidadeAppServices<Aluguel>
     {
-        public IRelatorioAluguel Relatorio;
         public override IAluguelRepository Repositorio { get; }
+        public IRelatorioRepository RelatorioRepositorio { get; }
+        public IRelatorioAluguel Relatorio { get; }
 
-        public AluguelAppServices(IAluguelRepository repositorio, IRelatorioAluguel relatorio)
+        public IServicoRepository ServicoRepositorio { get; }
+
+        public AluguelAppServices(IAluguelRepository repositorio)
         {
-            Relatorio = relatorio;
             Repositorio = repositorio;
         }
 
@@ -26,8 +29,7 @@ namespace Aplicacao.AluguelModule
             {
                 try
                 {
-                    var envioId = TentaEnviarRelatorioEmail();
-                    Repositorio.MarcarEnviado(envioId);
+                    TentaEnviarRelatorioEmail();
                 }
                 catch (FilaEmailVazia)
                 {
@@ -35,9 +37,9 @@ namespace Aplicacao.AluguelModule
                 }
             }
         }
-        private int TentaEnviarRelatorioEmail()
+        public void TentaEnviarRelatorioEmail()
         {
-            var proxEnvio = Repositorio.GetProxEnvio();
+            var proxEnvio = RelatorioRepositorio.GetProxEnvio();
 
             if (proxEnvio == null)
                 throw new FilaEmailVazia();
@@ -50,7 +52,7 @@ namespace Aplicacao.AluguelModule
             var emailUsuario = proxEnvio.Aluguel.Cliente.Email;
 
             Email.Envia(emailUsuario, titulo, corpoEmail, new List<Attachment>() { attachment });
-            return proxEnvio.Id;
+            RelatorioRepositorio.MarcarEnviado(proxEnvio.Aluguel.Id);
         }
         public override ResultadoOperacao Inserir(Aluguel aluguel)
         {
@@ -58,10 +60,21 @@ namespace Aplicacao.AluguelModule
             if (insercao.Resultado == EnumResultado.Falha)
                 return insercao;
 
-            var relatorio = Relatorio.GerarRelatorio(aluguel);
+            ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
 
-            Repositorio.SalvarRelatorio(new EnvioResumoAluguel(aluguel, relatorio));
+            var relatorio = Relatorio.GerarRelatorio(aluguel);
+            RelatorioRepositorio.SalvarRelatorio(new RelatorioAluguel(aluguel, relatorio));
             return insercao;
+        }
+        public override ResultadoOperacao Editar(int id, Aluguel entidade)
+        {
+            var edicao = base.Editar(id, entidade);
+            if (edicao.Resultado == EnumResultado.Falha)
+                return edicao;
+
+            ServicoRepositorio.DesalugarServicosAlugados(id);
+            ServicoRepositorio.AlugarServicos(entidade.Id, entidade.Servicos);
+            return edicao;
         }
     }
     [Serializable]

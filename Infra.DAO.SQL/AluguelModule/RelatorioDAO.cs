@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Infra.DAO.AluguelModule
 {
-    public class EmailAluguelDAO
+    public class RelatorioDAO : IRelatorioRepository
     {
         #region Queries
         private const string sqlInserirEmail =
@@ -44,31 +44,30 @@ namespace Infra.DAO.AluguelModule
 
         #endregion
 
-        public void SalvarRelatorio(EnvioResumoAluguel envio)
+        public void SalvarRelatorio(RelatorioAluguel envio)
         {
             var bytesPdf = envio.StreamAttachment.ToArray();
             Db.Insert(sqlInserirEmail, Db.AdicionarParametro("ID_ALUGUEL", envio.Aluguel.Id, Db.AdicionarParametro("PDF", bytesPdf)));
         }
-
         public void MarcarEnviado(int id)
         {
             Db.Update(sqlAlterarEmailEnviado, Db.AdicionarParametro("ID", id, Db.AdicionarParametro("DATA_ENVIADO", DateTime.Now)));
         }
-        public EnvioResumoAluguel GetProxEnvio()
+        public RelatorioAluguel GetProxEnvio()
         {
             if (Db.Exists(sqlExisteEmailPendente))
                 return Db.Get(sqlGetProxEnvio, ConverterEmEntidade);
             else
                 return null;
         }
-        private EnvioResumoAluguel ConverterEmEntidade(IDataReader reader)
+        private RelatorioAluguel ConverterEmEntidade(IDataReader reader)
         {
             var id = Convert.ToInt32(reader["ID"]);
             var aluguel = new AluguelDAO().GetById(Convert.ToInt32(reader["ID_ALUGUEL"]));
             MemoryStream ms = ((byte[])reader["PDF"]).ToMemoryStream();
             //Document pdf = ms.ToPdf();
 
-            return new EnvioResumoAluguel(aluguel, ms) { Id = id };
+            return new RelatorioAluguel(aluguel, ms) { Id = id };
         }
     }
 }

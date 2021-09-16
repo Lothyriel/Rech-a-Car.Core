@@ -1,6 +1,4 @@
-﻿using Controladores.AluguelModule;
-using Controladores.PessoaModule;
-using Controladores.VeiculoModule;
+﻿using Aplicacao.AluguelModule;
 using Dominio.AluguelModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
@@ -8,6 +6,9 @@ using Dominio.ServicoModule;
 using Dominio.VeiculoModule;
 using EmailAluguelPDF;
 using FluentAssertions;
+using Infra.DAO.AluguelModule;
+using Infra.DAO.PessoaModule;
+using Infra.DAO.VeiculoModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -33,39 +34,32 @@ namespace Tests.EmailAluguelPDFModule
 
             var servicos = new List<Servico>() { new Servico("Servico 1", 100), new Servico("Servico 2", 200), new Servico("Servico 3", 300) };
             aluguel = new Aluguel() { Veiculo = veiculo, Funcionario = funcionario, Condutor = cliente, Cliente = cliente, Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
+
+            new CategoriaDAO().Inserir(aluguel.Veiculo.Categoria);
+            new VeiculoDAO().Inserir(aluguel.Veiculo);
+
+            new ClientePFDAO().Inserir((ClientePF)aluguel.Cliente);
+            new FuncionarioDAO().Inserir(aluguel.Funcionario);
+
+            new AluguelDAO().Inserir(aluguel);
         }
         [TestMethod]
         public void DeveCriarPdf()
         {
-            new ControladorCategoria().Inserir(aluguel.Veiculo.Categoria);
-            new ControladorVeiculo().Inserir(aluguel.Veiculo);
+            var ms = new PDFAluguel().GerarRelatorio(aluguel);
+            new RelatorioDAO().SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
 
-            new ControladorClientePF().Inserir((ClientePF)aluguel.Cliente);
-            new ControladorFuncionario().Inserir(aluguel.Funcionario);
-
-            new ControladorAluguel().Inserir(aluguel);
-
-            PDFAluguel.CriaEnvioEmail(aluguel);
-
-            new ControladorEmailAluguel().GetProxEnvio().Should().NotBeNull();
+            new RelatorioDAO().GetProxEnvio().Should().NotBeNull();
         }
 
         [TestMethod]
         public void DeveEnviarPdf()
         {
-            new ControladorCategoria().Inserir(aluguel.Veiculo.Categoria);
-            new ControladorVeiculo().Inserir(aluguel.Veiculo);
+            var ms = new PDFAluguel().GerarRelatorio(aluguel);
+            new RelatorioDAO().SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
+            new AluguelAppServices(new AluguelDAO()).TentaEnviarRelatorioEmail();
 
-            new ControladorClientePF().Inserir((ClientePF)aluguel.Cliente);
-            new ControladorFuncionario().Inserir(aluguel.Funcionario);
-
-            new ControladorAluguel().Inserir(aluguel);
-
-            PDFAluguel.CriaEnvioEmail(aluguel);
-
-            Email.Envia();
-
-            new ControladorEmailAluguel().GetProxEnvio().Should().BeNull();
+            new RelatorioDAO().GetProxEnvio().Should().BeNull();
         }
 
         [TestCleanup()]

@@ -84,20 +84,6 @@ namespace Infra.DAO.AluguelModule
         public override string sqlExcluir => sqlExcluirAluguel;
         public override string sqlExists => sqlExisteAluguel;
 
-        private EmailAluguelDAO EmailAluguel = new EmailAluguelDAO();
-
-        public override void Inserir(Aluguel entidade)
-        {
-            base.Inserir(entidade);
-            new ServicoDAO().AlugarServicos(entidade.Id, entidade.Servicos);
-        }
-        public override void Editar(int id, Aluguel entidade)
-        {
-            base.Editar(id, entidade);
-            var controladorServico = new ServicoDAO();
-            controladorServico.DesalugarServicosAlugados(id);
-            controladorServico.AlugarServicos(entidade.Id, entidade.Servicos);
-        }
         public override Aluguel ConverterEmEntidade(IDataReader reader)
         {
             var id = Convert.ToInt32(reader["ID"]);
@@ -146,20 +132,6 @@ namespace Infra.DAO.AluguelModule
                 { "DATA_ALUGUEL", aluguel.DataAluguel },
                 { "DATA_DEVOLUCAO", aluguel.DataDevolucao }
             };
-        }
-        public void SalvarRelatorio(EnvioResumoAluguel envio)
-        {
-            EmailAluguel.SalvarRelatorio(envio);
-        }
-
-        public EnvioResumoAluguel GetProxEnvio()
-        {
-            return EmailAluguel.GetProxEnvio();
-        }
-
-        public void MarcarEnviado(int envioId)
-        {
-            EmailAluguel.MarcarEnviado(envioId);
         }
     }
 }

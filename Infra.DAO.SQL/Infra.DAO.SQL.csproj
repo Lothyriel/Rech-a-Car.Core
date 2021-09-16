@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Dominio\Dominio.csproj" />
     <ProjectReference Include="..\Infra.ConfigurationManager\Infra.ConfigurationManager.csproj" />
+    <ProjectReference Include="..\Infra.ES.GeraPDF\Infra.GeraPDF.csproj" />
     <ProjectReference Include="..\Infra.Extensions.Methods\Infra.Extensions.Methods.csproj" />
   </ItemGroup>
 

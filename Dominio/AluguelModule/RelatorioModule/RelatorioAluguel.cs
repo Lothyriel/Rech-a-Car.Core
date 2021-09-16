@@ -3,9 +3,9 @@ using System.IO;
 
 namespace Dominio.AluguelModule
 {
-    public class EnvioResumoAluguel : EnvioEmail
+    public class RelatorioAluguel : EnvioEmail
     {
-        public EnvioResumoAluguel(Aluguel aluguel, MemoryStream attachment) : base(attachment)
+        public RelatorioAluguel(Aluguel aluguel, MemoryStream relatorioStream) : base(relatorioStream)
         {
             Aluguel = aluguel;
         }

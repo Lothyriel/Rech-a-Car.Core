@@ -12,9 +12,9 @@ using System.IO;
 
 namespace EmailAluguelPDF
 {
-    public class PDFAluguel
+    public class PDFAluguel : IRelatorioAluguel
     {
-        public static Stream CriaPDFResumo(Aluguel aluguel)
+        public MemoryStream GerarRelatorio(Aluguel aluguel)
         {
             var ms = new MemoryStream();
             var writer = new PdfWriter(ms);

@@ -4,9 +4,9 @@ namespace Dominio.Shared
 {
     public abstract class EnvioEmail
     {
-        public EnvioEmail(MemoryStream attachment)
+        public EnvioEmail(MemoryStream streamAttachment)
         {
-            StreamAttachment = attachment;
+            StreamAttachment = streamAttachment;
         }
         public MemoryStream StreamAttachment { get; }
         public int Id { get; set; }

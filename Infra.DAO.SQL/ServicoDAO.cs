@@ -6,7 +6,7 @@ using System.Data;
 
 namespace Infra.DAO.SQL
 {
-    public class ServicoDAO : EntidadeDAO<Servico>
+    public class ServicoDAO : EntidadeDAO<Servico>, IServicoRepository
     {
         #region Queries
         private const string sqlInserirServico =
