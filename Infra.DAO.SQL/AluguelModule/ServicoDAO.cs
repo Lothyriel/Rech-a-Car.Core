@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Infra.DAO.SQL
+namespace Infra.DAO.SQL.AluguelModule
 {
     public class ServicoDAO : EntidadeDAO<Servico>, IServicoRepository
     {

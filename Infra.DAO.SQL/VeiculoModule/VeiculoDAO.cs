@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Infra.DAO.VeiculoModule
 {
-    public class VeiculoDAO : EntidadeDAO<Veiculo>
+    public class VeiculoDAO : EntidadeDAO<Veiculo>, IVeiculoRepository
     {
         #region Queries
         private const string sqlInserirVeiculo =
@@ -115,7 +115,7 @@ namespace Infra.DAO.VeiculoModule
         public override string sqlExcluir => sqlExcluirVeiculo;
         public override string sqlExists => sqlExisteVeiculo;
 
-        public static void AdicionarQuilometragem(Veiculo veiculo, int kmRodados)
+        public void AdicionarQuilometragem(Veiculo veiculo, int kmRodados)
         {
             Db.Update(sqlAdicionarQuilometragem, Db.AdicionarParametro("NOVA_QUILOMETRAGEM", kmRodados + veiculo.Quilometragem, Db.AdicionarParametro("ID", veiculo.Id)));
         }

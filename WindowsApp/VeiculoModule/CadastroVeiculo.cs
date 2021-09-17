@@ -1,5 +1,5 @@
-﻿using Controladores.Shared;
-using Controladores.VeiculoModule;
+﻿using Aplicacao.VeiculoModule;
+using Dominio.Shared;
 using Dominio.VeiculoModule;
 using System;
 using System.Drawing;
@@ -11,18 +11,19 @@ namespace WindowsApp.VeiculoModule
 {
     public partial class CadastroVeiculo : CadastroEntidade<Veiculo>//Form//
     {
-        public override Controlador<Veiculo> Services { get => new ControladorVeiculo(); }
+        public override VeiculoAppServices Services { get; }
         private Bitmap imagem;
 
-        public CadastroVeiculo()
+        public CadastroVeiculo(IEntidadeRepository<Veiculo> repositorio, IEntidadeRepository<Categoria> repositorioCategoria)
         {
+            Services = new VeiculoAppServices(repositorio, repositorioCategoria);
             InitializeComponent();
             cb_cambio.SelectedIndex = 0;
             cb_capacidade.SelectedIndex = 1;
             cb_portaMalas.SelectedIndex = 1;
             cb_portas.SelectedIndex = 0;
             cb_tipoCombustivel.SelectedIndex = 4;
-            cb_categoria.DataSource = new ControladorCategoria().Registros;
+            cb_categoria.DataSource = Services.RepositorioCategoria.Registros;
             bt_foto.Image = new Bitmap(Resources.inserir_icone_de_imagem);
         }
 

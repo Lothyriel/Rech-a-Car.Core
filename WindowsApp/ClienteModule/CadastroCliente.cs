@@ -19,9 +19,9 @@ namespace WindowsApp.ClienteModule
         protected override IEditavel Editar()
         {
             if (entidade is ClientePF)
-                return new CadastroClientePF().ConfigurarEditar((ClientePF)entidade);
+                return new CadastroClientePF(Services.Repositorio.RepositorioClientePF).ConfigurarEditar((ClientePF)entidade);
             if (entidade is ClientePJ)
-                return new CadastroClientePJ().ConfigurarEditar((ClientePJ)entidade);
+                return new CadastroClientePJ(Services.Repositorio.RepositorioClientePJ, Services.Repositorio.RepositorioClientePJ).ConfigurarEditar((ClientePJ)entidade);
             else
                 throw new ArgumentException();
         }

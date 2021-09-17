@@ -1,5 +1,4 @@
-﻿using Controladores.VeiculoModule;
-using Dominio.AluguelModule;
+﻿using Dominio.AluguelModule;
 using Dominio.VeiculoModule;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -15,7 +14,7 @@ namespace WindowsApp.VeiculoModule
         {
             Aluguel = aluguel;
             if (tipo == TipoTela.ApenasConfirma)
-                AtualizarRegistros(new ControladorVeiculo().GetDisponiveis());      //da pra melhorar isso aq, e os overrides, pq o programa acaba dando muitas voltas e instanciando coisas q nem vai usar
+                AtualizarRegistros(Cadastro.Services.Repositorio.GetDisponiveis());      //da pra melhorar isso aq, e os overrides, pq o programa acaba dando muitas voltas e instanciando coisas q nem vai usar
         }
         protected override CadastroEntidade<Veiculo> Cadastro => new CadastroVeiculo();
         protected override void SalvarAluguel()
