@@ -2,9 +2,9 @@
 
 namespace Dominio.PessoaModule.ClienteModule
 {
-    public interface IClienteRepository : IEntidadeRepository<ICliente>
+    public interface IClienteRepository : IRepository<ICliente>
     {
-        public IEntidadeRepository<ClientePF> RepositorioClientePF { get; }
+        public IRepository<ClientePF> RepositorioClientePF { get; }
         public IClientePJRepository RepositorioClientePJ { get; }
     }
 }

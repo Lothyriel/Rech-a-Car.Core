@@ -14,9 +14,9 @@ namespace WindowsApp.VeiculoModule
         public override VeiculoAppServices Services { get; }
         private Bitmap imagem;
 
-        public CadastroVeiculo(IVeiculoRepository repositorio, IEntidadeRepository<Categoria> repositorioCategoria)
+        public CadastroVeiculo(VeiculoAppServices services)
         {
-            Services = new VeiculoAppServices(repositorio, repositorioCategoria);
+            Services = services;
             InitializeComponent();
             cb_cambio.SelectedIndex = 0;
             cb_capacidade.SelectedIndex = 1;
@@ -76,7 +76,7 @@ namespace WindowsApp.VeiculoModule
         {
             try
             {
-                OpenFileDialog open = new OpenFileDialog
+                var open = new OpenFileDialog
                 {
                     Filter = "Image Files(*.jpeg;*.bmp;*.png;*.jpg)|*.jpeg;*.bmp;*.png;*.jpg"
                 };

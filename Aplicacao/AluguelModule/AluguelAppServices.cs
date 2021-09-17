@@ -1,5 +1,7 @@
 ﻿using Aplicacao.Shared;
+using Aplicacao.VeiculoModule;
 using Dominio.AluguelModule;
+using Dominio.CupomModule;
 using Dominio.ServicoModule;
 using EnviaEmail;
 using System;
@@ -16,13 +18,17 @@ namespace Aplicacao.AluguelModule
         public IRelatorioRepository RelatorioRepositorio { get; }
         public IRelatorioAluguel Relatorio { get; }
         public IServicoRepository ServicoRepositorio { get; }
+        public ICupomRepository CupomRepositorio { get; }
 
-        public AluguelAppServices(IAluguelRepository repositorio, IRelatorioAluguel relatorio , IRelatorioRepository relatorioRepositorio, IServicoRepository servicoRepositorio)
+        public VeiculoAppServices ServicosVeiculo { get; }
+
+        public AluguelAppServices(IAluguelRepository repositorio, IRelatorioAluguel relatorio, IRelatorioRepository relatorioRepositorio, IServicoRepository servicoRepositorio, ICupomRepository cupomRepositorio)
         {
             Repositorio = repositorio;
             Relatorio = relatorio;
             RelatorioRepositorio = relatorioRepositorio;
             ServicoRepositorio = servicoRepositorio;
+            CupomRepositorio = cupomRepositorio;
         }
 
         public async void IniciaLoopEnvioEmails()

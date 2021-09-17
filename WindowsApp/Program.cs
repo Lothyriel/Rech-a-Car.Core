@@ -1,6 +1,4 @@
-﻿using Aplicacao.AluguelModule;
-using EmailAluguelPDF;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,9 +15,10 @@ namespace WindowsApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            new ConfigServices(ConfigRepositories.SQL);
             new Login().Show();
 
-            Task.Run(() => AluguelAppServices.IniciaLoopEnvioEmails());
+            Task.Run(() => ConfigServices.Services.AluguelServices.IniciaLoopEnvioEmails());
 
             Application.Run();
         }

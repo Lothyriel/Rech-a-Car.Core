@@ -6,15 +6,16 @@ using Dominio.ServicoModule;
 using Dominio.VeiculoModule;
 using FluentAssertions;
 using Infra.DAO.PessoaModule;
-using Infra.DAO.SQL;
 using Infra.DAO.VeiculoModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using Infra.DAO.Shared;
-using EmailAluguelPDF;
 using IntegrationTests.Properties;
 using IntegrationTests.Shared;
+using AluguelPDF;
+using Infra.DAO.SQL.AluguelModule;
+using Infra.DAO.CupomModule;
 
 namespace Infra.DAO.AluguelModule
 {
@@ -26,7 +27,8 @@ namespace Infra.DAO.AluguelModule
         static PDFAluguel pa = new();
         static RelatorioDAO rd = new();
         static ServicoDAO sd = new();
-        AluguelAppServices AluguelAppServices = new(ad, pa, rd, sd);
+        static CupomDAO cd = new ();
+        AluguelAppServices AluguelAppServices = new(ad, pa, rd, sd, cd);
 
         [TestInitialize]
         public void InicializarDados()

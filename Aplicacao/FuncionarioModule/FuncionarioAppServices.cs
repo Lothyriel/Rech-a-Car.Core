@@ -11,9 +11,9 @@ namespace Aplicacao.FuncionarioModule
 {
     public class FuncionarioAppServices : EntidadeAppServices<Funcionario>
     {
-        public override IEntidadeRepository<Funcionario> Repositorio { get; }
+        public override IFuncionarioRepository Repositorio { get; }
 
-        public FuncionarioAppServices(IEntidadeRepository<Funcionario> repositorio)
+        public FuncionarioAppServices(IFuncionarioRepository repositorio)
         {
             Repositorio = repositorio;
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Dominio.Shared
 {
-    public interface IEntidadeRepository<T> where T : IEntidade
+    public interface IRepository<T> where T : IEntidade
     {
         void Inserir(T entidade);
         void Editar(int id, T entidade);

@@ -1,11 +1,12 @@
 ﻿using Dominio.Shared;
+using System;
 using System.Collections.Generic;
 
 namespace Aplicacao.Shared
 {
     public abstract class EntidadeAppServices<T> where T : IEntidade
     {
-        public abstract IEntidadeRepository<T> Repositorio { get; }
+        public abstract IRepository<T> Repositorio { get; }
         public virtual ResultadoOperacao Inserir(T entidade)
         {
             var validacao = entidade.Validar();
@@ -28,9 +29,9 @@ namespace Aplicacao.Shared
             Repositorio.Editar(id, entidade);
             return new ResultadoOperacao("Editado com sucesso!", EnumResultado.Falha);
         }
-        public virtual void Excluir(int id)
+        public virtual void Excluir(int id, Type tipo = null)
         {
-            Repositorio.Excluir(id);
+            Repositorio.Excluir(id, tipo);
         }
         public bool Existe(int id)
         {
@@ -40,9 +41,9 @@ namespace Aplicacao.Shared
         {
             return Repositorio.FiltroGenerico(filtro);
         }
-        public T GetById(int id)
+        public T GetById(int id, Type tipo = null)
         {
-            return Repositorio.GetById(id);
+            return Repositorio.GetById(id, tipo);
         }
         public List<T> TodosRegistros()
         {

@@ -8,7 +8,7 @@ namespace Infra.DAO.PessoaModule
 {
     public class ClienteDAO : DAO<ICliente>, IClienteRepository
     {
-        public IEntidadeRepository<ClientePF> RepositorioClientePF => new ClientePFDAO();
+        public IRepository<ClientePF> RepositorioClientePF => new ClientePFDAO();
         public IClientePJRepository RepositorioClientePJ => new ClientePJDAO();
 
         public override void Inserir(ICliente cliente)
@@ -30,9 +30,6 @@ namespace Infra.DAO.PessoaModule
                 throw new ArgumentException();
         }
         public override List<ICliente> Registros => TodosRegistros();
-
-        IEntidadeRepository<ClientePF> IClienteRepository.RepositorioClientePF => throw new NotImplementedException();
-
 
         private List<ICliente> TodosRegistros()
         {

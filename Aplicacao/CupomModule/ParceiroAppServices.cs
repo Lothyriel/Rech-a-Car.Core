@@ -11,9 +11,9 @@ namespace Aplicacao.CupomModule
 {
     public class ParceiroAppServices : EntidadeAppServices<Parceiro>
     {
-        public override IEntidadeRepository<Parceiro> Repositorio { get; }
+        public override IRepository<Parceiro> Repositorio { get; }
 
-        public ParceiroAppServices(IEntidadeRepository<Parceiro> repositorio)
+        public ParceiroAppServices(IRepository<Parceiro> repositorio)
         {
             Repositorio = repositorio;
         }

@@ -10,7 +10,7 @@ using iText.Layout.Element;
 using iText.Layout.Properties;
 using System.IO;
 
-namespace EmailAluguelPDF
+namespace AluguelPDF
 {
     public class PDFAluguel : IRelatorioAluguel
     {

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Infra.DAO.Shared
 {
-    public abstract class DAO<T> : IEntidadeRepository<T> where T : IEntidade
+    public abstract class DAO<T> : IRepository<T> where T : IEntidade
     {
         public abstract void Inserir(T entidade);
         public abstract void Editar(int id, T entidade);

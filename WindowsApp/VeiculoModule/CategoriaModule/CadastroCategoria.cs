@@ -1,6 +1,5 @@
 ﻿using Aplicacao.VeiculoModule;
 using Dominio.PessoaModule;
-using Dominio.Shared;
 using Dominio.VeiculoModule;
 using System;
 using System.Linq;
@@ -12,9 +11,9 @@ namespace WindowsApp.VeiculoModule.CategoriaModule
     {
         public override CategoriaAppServices Services { get; }
 
-        public CadastroCategoria(IEntidadeRepository<Categoria> repositorio)
+        public CadastroCategoria()
         {
-            Services = new CategoriaAppServices(repositorio);
+            Services = ConfigServices.Services.CategoriaServices;
             InitializeComponent();
             PreencherCbCnh();
             cbCNH.SelectedIndex = 1;

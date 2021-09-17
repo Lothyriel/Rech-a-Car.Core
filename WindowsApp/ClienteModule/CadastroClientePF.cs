@@ -11,9 +11,9 @@ namespace WindowsApp.ClienteModule
     {
         public override ClientePFAppServices Services { get; }
 
-        public CadastroClientePF(IEntidadeRepository<ClientePF> repositorio)
+        public CadastroClientePF()
         {
-            Services = new ClientePFAppServices(repositorio);
+            Services = ConfigServices.Services.ClientePFServices;
             InitializeComponent();
             cbTipoCNH.SelectedIndex = 2;
         }

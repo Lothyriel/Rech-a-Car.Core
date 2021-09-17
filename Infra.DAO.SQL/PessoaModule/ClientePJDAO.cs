@@ -77,7 +77,7 @@ namespace Infra.DAO.PessoaModule
         public override string sqlExcluir => sqlExcluirClientePJ;
         public override string sqlExists => sqlExisteClientePJ;
 
-        public IEntidadeRepository<Motorista> MotoristaRepository => new MotoristaDAO();
+        public IRepository<Motorista> MotoristaRepository => new MotoristaDAO();
 
         public override ClientePJ ConverterEmEntidade(IDataReader reader)
         {

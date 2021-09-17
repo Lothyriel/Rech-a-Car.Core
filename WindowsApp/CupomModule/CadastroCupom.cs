@@ -1,7 +1,6 @@
 ﻿using Aplicacao.CupomModule;
 using Dominio.CupomModule;
 using Dominio.ParceiroModule;
-using Dominio.Shared;
 using System;
 using WindowsApp.Shared;
 
@@ -11,11 +10,11 @@ namespace WindowsApp.WindowsApp.CupomModule
     {
         public override CupomAppServices Services { get; }
 
-        public CadastroCupom(IEntidadeRepository<Cupom> repositorio)
+        public CadastroCupom()
         {
             InitializeComponent();
-            cbParceiro.DataSource = new CupomAppServices(repositorio); // GAMBIARRA PARA PARCEIRO VERIFICAR SE TA PEGANDO
-            Services = new CupomAppServices(repositorio);
+            Services = ConfigServices.Services.CupomServices;
+            cbParceiro.DataSource = Services.Repositorio.Registros;
         }
 
         protected override IEditavel Editar()

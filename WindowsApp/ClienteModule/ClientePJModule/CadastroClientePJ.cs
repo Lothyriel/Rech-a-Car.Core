@@ -1,7 +1,6 @@
 ﻿using Aplicacao.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
-using Dominio.Shared;
 using System;
 using System.Windows.Forms;
 using WindowsApp.Shared;
@@ -12,9 +11,9 @@ namespace WindowsApp.ClienteModule
     {
         public override ClientePJAppServices Services { get; }
 
-        public CadastroClientePJ(IEntidadeRepository<ClientePJ> repositorio, IEntidadeRepository<Motorista> repositorioMotorista)
+        public CadastroClientePJ()
         {
-            Services = new ClientePJAppServices(repositorio, repositorioMotorista);
+            Services = ConfigServices.Services.ClientePJServices;
             InitializeComponent();
             dgvMotoristas.ConfigurarGrid(ConfigurarColunas());
         }
@@ -81,12 +80,12 @@ namespace WindowsApp.ClienteModule
         }
         private void bt_editar_motorista_Click(object sender, EventArgs e)
         {
-            TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroMotorista(Services.RepositorioMotorista, entidade).ConfigurarEditar(GetMotoristaSelecionado());
+            TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroMotorista(entidade).ConfigurarEditar(GetMotoristaSelecionado());
             HabilitarBotoes(false);
         }
         private void bt_remover_motorista_Click(object sender, EventArgs e)
         {
-            Services.RepositorioMotorista.Excluir(GetMotoristaSelecionado().Id);
+            ConfigServices.Services.MotoristaServices.Excluir(GetMotoristaSelecionado().Id);
             HabilitarBotoes(false);
             AtualizarListMotoristas();
         }

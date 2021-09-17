@@ -1,8 +1,6 @@
-﻿
-using Aplicacao.ClienteModule;
+﻿using Aplicacao.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
-using Dominio.Shared;
 using System;
 using System.Windows.Forms;
 using WindowsApp.Shared;
@@ -13,13 +11,13 @@ namespace WindowsApp.ClienteModule
     {
         public override MotoristaAppServices Services { get; }
 
-        public ClientePJ Empresa;
-        public CadastroMotorista(IEntidadeRepository<Motorista> repositorio, ClientePJ empresa)
+        private ClientePJ Empresa;
+        public CadastroMotorista(ClientePJ empresa)
         {
             Empresa = empresa;
             InitializeComponent();
             cbTipoCNH.SelectedIndex = 2;
-            Services = new MotoristaAppServices(repositorio);
+            Services = ConfigServices.Services.MotoristaServices;
         }
 
         protected override IEditavel Editar()
@@ -42,7 +40,7 @@ namespace WindowsApp.ClienteModule
             var telefone = tbTelefone.Text;
             var endereco = tbEndereco.Text;
             var documento = tbCPF.Text;
-            return new Motorista(nome, telefone, endereco, documento, GetCNH(), clientePJ);
+            return new Motorista(nome, telefone, endereco, documento, GetCNH(), Empresa);
         }
         public CNH GetCNH()
         {
@@ -53,8 +51,11 @@ namespace WindowsApp.ClienteModule
         }
         private void btAdicionarMotorista_Click(object sender, EventArgs e)
         {
-            if (Salva())
-                TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroClientePJ(repositorioMotorista).ConfigurarEditar(new ControladorClientePJ().GetById(clientePJ.Id));
+            if (!Salva())
+                return;
+
+            var pjRepo = ConfigServices.Services.ClientePJServices;
+                TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroClientePJ().ConfigurarEditar(pjRepo.GetById(Empresa.Id));
         }
     }
 }

@@ -24,14 +24,13 @@ namespace WindowsApp.FuncionarioModule
         }
         public override object[] ObterCamposLinha(Funcionario funcionario)
         {
-            List<object> linha = new List<object>()
+            return new List<object>()
             {
                 funcionario.Nome,
                 funcionario.Telefone,
                 funcionario.Endereco,
                 funcionario.Documento,
-            };
-            return linha.ToArray();
+            }.ToArray();
         }
 
         protected override IVisualizavel Visualizar(Funcionario entidade)

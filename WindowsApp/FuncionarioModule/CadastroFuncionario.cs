@@ -1,6 +1,5 @@
 ﻿using Aplicacao.FuncionarioModule;
 using Dominio.PessoaModule;
-using Dominio.Shared;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,12 +13,12 @@ namespace WindowsApp.FuncionarioModule
 
         public override FuncionarioAppServices Services { get; }
 
-        public CadastroFuncionario(IEntidadeRepository<Funcionario> repositorio)
+        public CadastroFuncionario()
         {
             InitializeComponent();
             bt_foto.Image = new Bitmap(Resources.user);
             cb_cargo.SelectedIndex = 1;
-            Services = new FuncionarioAppServices(repositorio);
+            Services = ConfigServices.Services.FuncionarioServices;
         }
         protected override IEditavel Editar()
         {
@@ -57,7 +56,7 @@ namespace WindowsApp.FuncionarioModule
         {
             try
             {
-                OpenFileDialog open = new OpenFileDialog
+                var open = new OpenFileDialog
                 {
                     Filter = "Image Files(*.jpeg;*.bmp;*.png;*.jpg)|*.jpeg;*.bmp;*.png;*.jpg"
                 };

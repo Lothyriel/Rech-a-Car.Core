@@ -1,9 +1,9 @@
 ﻿using Dominio.ServicoModule;
 using FluentAssertions;
 using Infra.DAO.Shared;
-using Infra.DAO.SQL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IntegrationTests.Shared;
+using Infra.DAO.SQL.AluguelModule;
 
 namespace IntegrationTests.IntegrationTests.ServicoModule
 {

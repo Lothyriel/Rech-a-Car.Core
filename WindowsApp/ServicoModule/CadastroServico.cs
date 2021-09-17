@@ -10,11 +10,11 @@ namespace WindowsApp.ServicoModule
     {
         public override ServicosAppServices Services { get; }
 
-        public CadastroServico(IEntidadeRepository<Servico> repositorio)
+        public CadastroServico()
         {
             InitializeComponent();
             tbQuantidade.Text = "1";
-            Services = new ServicosAppServices(repositorio);
+            Services = ConfigServices.Services.ServicosServices;
         }
 
         protected override IEditavel Editar()

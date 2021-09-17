@@ -7,12 +7,10 @@ namespace Aplicacao.ClienteModule
 {
     public class ClientePJAppServices : EntidadeAppServices<ClientePJ>
     {
-        public IEntidadeRepository<Motorista> RepositorioMotorista { get; }
-        public ClientePJAppServices(IEntidadeRepository<ClientePJ> repositorio, IEntidadeRepository<Motorista> repositorioMotorista)
+        public ClientePJAppServices(IRepository<ClientePJ> repositorio)
         {
-            RepositorioMotorista = repositorioMotorista;
             Repositorio = repositorio;
         }
-        public override IEntidadeRepository<ClientePJ> Repositorio { get; }
+        public override IRepository<ClientePJ> Repositorio { get; }
     }
 }

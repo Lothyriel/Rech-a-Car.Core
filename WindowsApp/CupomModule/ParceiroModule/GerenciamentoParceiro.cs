@@ -23,11 +23,10 @@ namespace WindowsApp.WindowsApp.CupomModule.ParceiroModule
         }
         public override object[] ObterCamposLinha(Parceiro parceiro)
         {
-            List<object> linha = new List<object>()
+            return new List<object>()
             {
                 parceiro.nome
-            };
-            return linha.ToArray();
+            }.ToArray();
         }
 
         protected override IVisualizavel Visualizar(Parceiro entidade)

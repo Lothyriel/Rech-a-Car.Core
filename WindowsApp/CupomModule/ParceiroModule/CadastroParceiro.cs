@@ -1,6 +1,5 @@
 ﻿using Aplicacao.CupomModule;
 using Dominio.ParceiroModule;
-using Dominio.Shared;
 using System;
 using WindowsApp.Shared;
 
@@ -11,10 +10,10 @@ namespace WindowsApp.WindowsApp.CupomModule.ParceiroModule
 
         public override ParceiroAppServices Services { get; }
 
-        public CadastroParceiro(IEntidadeRepository<Parceiro> repositorio)
+        public CadastroParceiro()
         {
             InitializeComponent();
-            Services = new ParceiroAppServices(repositorio);
+            Services = ConfigServices.Services.ParceiroServices;
         }
 
         protected override IEditavel Editar()

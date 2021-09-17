@@ -12,7 +12,7 @@ namespace WindowsApp.Shared
         public GerenciamentoEntidade(string titulo, TipoTela tipo = TipoTela.CadastroBasico)
         {
             InitializeComponent();
-            AtualizarRegistros(Cadastro.Services.Registros);
+            AtualizarRegistros(Cadastro.Services.Repositorio.Registros);
             lbTitulo.Text = titulo;
             AtualizarBotoes(tipo);
             AlternarBotoes(false);
@@ -104,14 +104,14 @@ namespace WindowsApp.Shared
         private void btAdicionar_Click(object sender, EventArgs e)
         {
             TelaPrincipal.Instancia.FormAtivo = Cadastro.Inserir();
-            AtualizarRegistros(Cadastro.Services.FiltroTunado(tbFiltro.Text));
+            AtualizarRegistros(Cadastro.Services.Repositorio.FiltroGenerico(tbFiltro.Text));
         }
         private void bt_editar_Click(object sender, EventArgs e)
         {
             var entidade = Cadastro.Services.GetById(dgvEntidade.GetIdSelecionado(), GetTipoEntidade());
             TelaPrincipal.Instancia.FormAtivo = (Form)Cadastro.ConfigurarEditar(entidade);
             AlternarBotoes(false);
-            AtualizarRegistros(Cadastro.Services.FiltroTunado(tbFiltro.Text));
+            AtualizarRegistros(Cadastro.Services.Repositorio.FiltroGenerico(tbFiltro.Text));
         }
         private void bt_remover_Click(object sender, EventArgs e)
         {
@@ -122,7 +122,7 @@ namespace WindowsApp.Shared
 
             Cadastro.Services.Excluir(dgvEntidade.GetIdSelecionado(), GetTipoEntidade());
             AlternarBotoes(false);
-            AtualizarRegistros(Cadastro.Services.FiltroTunado(tbFiltro.Text));
+            AtualizarRegistros(Cadastro.Services.Repositorio.FiltroGenerico(tbFiltro.Text));
         }
         private void btFiltro_Click(object sender, EventArgs e)
         {

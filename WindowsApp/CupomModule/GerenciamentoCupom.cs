@@ -27,7 +27,7 @@ namespace WindowsApp.WindowsApp.CupomModule
         }
         public override object[] ObterCamposLinha(Cupom cupom)
         {
-            List<object> linha = new List<object>()
+            return new List<object>()
             {
                 cupom.Nome,
                 cupom.ValorPercentual,
@@ -35,8 +35,7 @@ namespace WindowsApp.WindowsApp.CupomModule
                 cupom.DataValidade,
                 cupom.Parceiro,
                 cupom.ValorMinimo
-            };
-            return linha.ToArray();
+            }.ToArray();
         }
 
         protected override IVisualizavel Visualizar(Cupom entidade)

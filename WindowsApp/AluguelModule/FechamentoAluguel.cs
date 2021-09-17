@@ -17,9 +17,9 @@ namespace WindowsApp.AluguelModule
 
         public override AluguelFechadoAppServices Services { get; }
 
-        public FechamentoAluguel(Aluguel aluguel, IEntidadeRepository<AluguelFechado> repositorio, IVeiculoRepository repositorioVeiculo)
+        public FechamentoAluguel(Aluguel aluguel)
         {
-            Services = new AluguelFechadoAppServices(repositorio, repositorioVeiculo);
+            Services = ConfigServices.Services.AluguelFechadoServices;
             this.aluguel = aluguel;
             InitializeComponent();
             tb_OdometroInicial.Text = aluguel.Veiculo.Quilometragem.ToString();

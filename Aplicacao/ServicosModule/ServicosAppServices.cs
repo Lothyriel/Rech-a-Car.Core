@@ -11,9 +11,9 @@ namespace Aplicacao.ServicosModule
 {
     public class ServicosAppServices : EntidadeAppServices<Servico>
     {
-        public override IEntidadeRepository<Servico> Repositorio { get; }
+        public override IServicoRepository Repositorio { get; }
 
-        public ServicosAppServices(IEntidadeRepository<Servico> repositorio)
+        public ServicosAppServices(IServicoRepository repositorio)
         {
             Repositorio = repositorio;
         }

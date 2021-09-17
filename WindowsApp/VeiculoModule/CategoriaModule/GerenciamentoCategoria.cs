@@ -27,7 +27,7 @@ namespace WindowsApp.VeiculoModule.CategoriaModule
         }
         public override object[] ObterCamposLinha(Categoria categoria)
         {
-            List<object> linha = new List<object>()
+            return new List<object>()
             {
                 categoria.Nome,
                 categoria.PrecoDiaria,
@@ -35,8 +35,7 @@ namespace WindowsApp.VeiculoModule.CategoriaModule
                 categoria.PrecoLivre,
                 categoria.QuilometragemFranquia,
                 categoria.TipoDeCnh
-            };
-            return linha.ToArray();
+            }.ToArray();
         }
 
         protected override IVisualizavel Visualizar(Categoria entidade)

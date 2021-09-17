@@ -11,9 +11,9 @@ namespace Aplicacao.CupomModule
 {
     public class CupomAppServices : EntidadeAppServices<Cupom>
     {
-        public override IEntidadeRepository<Cupom> Repositorio { get; }
+        public override IRepository<Cupom> Repositorio { get; }
 
-        public CupomAppServices(IEntidadeRepository<Cupom> repositorio)
+        public CupomAppServices(IRepository<Cupom> repositorio)
         {
             Repositorio = repositorio;
         }

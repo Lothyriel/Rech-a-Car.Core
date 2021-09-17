@@ -8,7 +8,7 @@ namespace WindowsApp
 {
     public partial class Login : Form
     {
-        private FuncionarioDAO FuncionarioDAO = new FuncionarioDAO();
+        private IFuncionarioRepository FuncionarioDAO = ConfigServices.Services.FuncionarioServices.Repositorio;
         private Funcionario funcionario;
 
         public Login()
@@ -31,7 +31,7 @@ namespace WindowsApp
 
             funcionario = FuncionarioDAO.GetByUserName(tbUsuario.Text);
 
-            if (!Logar(funcionario.Id, senha))
+            if (!SenhaDAO.SenhaCorreta(funcionario.Id, senha))
                 return ResultadoLogin.SenhaErrada;
 
             return ResultadoLogin.Sucesso;
@@ -56,10 +56,6 @@ namespace WindowsApp
                 FuncionarioDAO.Inserir(new Funcionario("Alexandre Rech", "99999999999", "Rua do Flamengo", "999999", Cargo.SysAdmin, Properties.Resources.rech, userAdmin, senhaAdmin));
             funcionario = FuncionarioDAO.GetByUserName(userAdmin);
         }
-        private bool Logar(int id_funcionario, string senha)
-        {
-            return SenhaDAO.SenhaCorreta(id_funcionario, senha);
-        }
         private string mostraResultado(ResultadoLogin resultado)
         {
             switch (resultado)
@@ -70,28 +66,12 @@ namespace WindowsApp
                 default: return "Error";
             }
         }
-        private void bt_entrar_Click(object sender, EventArgs e)
+        private void EnterPressionado(object sender, KeyPressEventArgs e)
         {
-            Logar();
-        }
-        private void Logar()
-        {
-            var resultadoLogin = LoginUsuario();
-            if (resultadoLogin != ResultadoLogin.Sucesso)
+            if (e.KeyChar == (char)13)
             {
-                MessageBox.Show(this, mostraResultado(resultadoLogin), "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                Logar();
             }
-            new TelaPrincipal(funcionario).Show();
-            Close();
-        }
-        private void tbUsuario_TextChanged(object sender, EventArgs e)
-        {
-            BloquearBotaoLogin();
-        }
-        private void tbSenha_TextChanged(object sender, EventArgs e)
-        {
-            BloquearBotaoLogin();
         }
         private void BloquearBotaoLogin()
         {
@@ -104,18 +84,35 @@ namespace WindowsApp
         {
             return tbSenha.Text.Length < 8 || tbUsuario.Text.Length < 5;
         }
+        private void Logar()
+        {
+            var resultadoLogin = LoginUsuario();
+            if (resultadoLogin != ResultadoLogin.Sucesso)
+            {
+                MessageBox.Show(this, mostraResultado(resultadoLogin), "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            new TelaPrincipal(funcionario).Show();
+            Close();
+        }
+        public enum ResultadoLogin { Sucesso, SenhaErrada, UsuarioNaoCadastrado }
+
+        private void bt_entrar_Click(object sender, EventArgs e)
+        {
+            Logar();
+        }
+        private void tbUsuario_TextChanged(object sender, EventArgs e)
+        {
+            BloquearBotaoLogin();
+        }
+        private void tbSenha_TextChanged(object sender, EventArgs e)
+        {
+            BloquearBotaoLogin();
+        }
         private void Login_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (TelaPrincipal.Instancia == null)
                 Application.Exit();
         }
-        private void EnterPressionado(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13)
-            {
-                Logar();
-            }
-        }
-        public enum ResultadoLogin { Sucesso, SenhaErrada, UsuarioNaoCadastrado }
     }
 }

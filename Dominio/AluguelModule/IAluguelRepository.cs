@@ -2,7 +2,7 @@
 
 namespace Dominio.AluguelModule
 {
-    public interface IAluguelRepository : IEntidadeRepository<Aluguel>
+    public interface IAluguelRepository : IRepository<Aluguel>
     {
     }
 }

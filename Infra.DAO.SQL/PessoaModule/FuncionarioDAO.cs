@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Infra.DAO.PessoaModule
 {
-    public class FuncionarioDAO : EntidadeDAO<Funcionario>
+    public class FuncionarioDAO : EntidadeDAO<Funcionario>, IFuncionarioRepository
     {
         #region Queries
         private const string sqlInserirFuncionario =
@@ -134,7 +134,7 @@ namespace Infra.DAO.PessoaModule
 
             return parametros;
         }
-        public static bool ExisteUsuario(string usuario)
+        public bool ExisteUsuario(string usuario)
         {
             return Db.Exists(sqlExisteFuncionarioPorUser, Db.AdicionarParametro("USER", usuario));
         }

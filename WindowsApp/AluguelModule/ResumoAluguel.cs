@@ -18,9 +18,9 @@ namespace WindowsApp.AluguelModule
     public partial class ResumoAluguel : CadastroEntidade<Aluguel>// Form // 
     {
         private readonly Aluguel Aluguel;
-        public ResumoAluguel(IAluguelRepository repositorio, IRelatorioAluguel relatorioAluguel, IRelatorioRepository repositorioRelatorio, IServicoRepository repositorioServico, Aluguel aluguel = null)
+        public ResumoAluguel(Aluguel aluguel = null)
         {
-            Services = new AluguelAppServices(repositorio, relatorioAluguel, repositorioRelatorio, repositorioServico);
+            Services = ConfigServices.Services.AluguelServices;
             Aluguel = aluguel ?? new Aluguel();
 
             InitializeComponent();
@@ -54,7 +54,7 @@ namespace WindowsApp.AluguelModule
             Aluguel.Funcionario = TelaPrincipal.Instancia.FuncionarioLogado;
             Aluguel.DataAluguel = dataAluguel;
             Aluguel.DataDevolucao = dataDevolucao;
-            Aluguel.Cupom = new ControladorCupom().GetByName(tb_Cupom.Text);
+            Aluguel.Cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text);
 
             return Aluguel;
         }
@@ -250,10 +250,9 @@ namespace WindowsApp.AluguelModule
         }
         private void bt_Aplicar_Click(object sender, EventArgs e)
         {
-            ControladorCupom controladorCupom = new();
             double valorParcial = CalcularPrecoParcial();
 
-            Cupom cupom = controladorCupom.GetByName(tb_Cupom.Text);
+            Cupom cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text);
 
             if (cupom != null && valorParcial >= cupom.ValorMinimo)
             {

@@ -6,13 +6,13 @@ namespace Aplicacao.VeiculoModule
 {
     public class VeiculoAppServices : EntidadeAppServices<Veiculo>
     {
-        public VeiculoAppServices(IVeiculoRepository repositorio, IEntidadeRepository<Categoria> repositorioCategoria)
+        public VeiculoAppServices(IVeiculoRepository repositorio, IRepository<Categoria> repositorioCategoria)
         {
             Repositorio = repositorio;
             RepositorioCategoria = repositorioCategoria;
         }
 
         public override IVeiculoRepository Repositorio { get; }
-        public IEntidadeRepository<Categoria> RepositorioCategoria { get; }
+        public IRepository<Categoria> RepositorioCategoria { get; }
     }
 }

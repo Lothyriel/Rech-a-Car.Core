@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Infra.DAO.CupomModule
 {
-    public class CupomDAO : EntidadeDAO<Cupom>
+    public class CupomDAO : EntidadeDAO<Cupom>, ICupomRepository
     {
         #region 
         private const string sqlInserirCupom =

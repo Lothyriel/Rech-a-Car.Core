@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Dominio.VeiculoModule
 {
-    public interface IVeiculoRepository : IEntidadeRepository<Veiculo>
+    public interface IVeiculoRepository : IRepository<Veiculo>
     {
         void AdicionarQuilometragem(Veiculo veiculo, int kmRodados);
         List<Veiculo> GetDisponiveis();

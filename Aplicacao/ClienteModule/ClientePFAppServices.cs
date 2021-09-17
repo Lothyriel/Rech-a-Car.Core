@@ -6,10 +6,10 @@ namespace Aplicacao.ClienteModule
 {
     public class ClientePFAppServices : EntidadeAppServices<ClientePF>
     {
-        public ClientePFAppServices(IEntidadeRepository<ClientePF> repositorio)
+        public ClientePFAppServices(IRepository<ClientePF> repositorio)
         {
             Repositorio = repositorio;
         }
-        public override IEntidadeRepository<ClientePF> Repositorio { get; }
+        public override IRepository<ClientePF> Repositorio { get; }
     }
 }

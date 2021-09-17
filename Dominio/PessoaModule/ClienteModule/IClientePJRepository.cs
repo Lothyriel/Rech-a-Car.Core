@@ -2,8 +2,8 @@
 
 namespace Dominio.PessoaModule.ClienteModule
 {
-    public interface IClientePJRepository : IEntidadeRepository<ClientePJ>
+    public interface IClientePJRepository : IRepository<ClientePJ>
     {
-        public IEntidadeRepository<Motorista> MotoristaRepository { get; }
+        public IRepository<Motorista> MotoristaRepository { get; }
     }
 }
