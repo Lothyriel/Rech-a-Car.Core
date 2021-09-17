@@ -9,7 +9,7 @@ namespace WindowsApp.ClienteModule
     public partial class CadastroCliente : CadastroEntidade<ICliente>
     {
         public override ClienteAppServices Services { get; }
-        public CadastroCliente(IEntidadeRepository<ICliente> repositorio)
+        public CadastroCliente(IClienteRepository repositorio)
         {
             Services = new ClienteAppServices(repositorio);
             InitializeComponent();
@@ -21,7 +21,7 @@ namespace WindowsApp.ClienteModule
             if (entidade is ClientePF)
                 return new CadastroClientePF(Services.Repositorio.RepositorioClientePF).ConfigurarEditar((ClientePF)entidade);
             if (entidade is ClientePJ)
-                return new CadastroClientePJ(Services.Repositorio.RepositorioClientePJ, Services.Repositorio.RepositorioClientePJ).ConfigurarEditar((ClientePJ)entidade);
+                return new CadastroClientePJ(Services.Repositorio.RepositorioClientePJ, Services.Repositorio.RepositorioClientePJ.MotoristaRepository).ConfigurarEditar((ClientePJ)entidade);
             else
                 throw new ArgumentException();
         }

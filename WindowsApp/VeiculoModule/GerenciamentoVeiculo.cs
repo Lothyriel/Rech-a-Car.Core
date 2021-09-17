@@ -16,7 +16,7 @@ namespace WindowsApp.VeiculoModule
             if (tipo == TipoTela.ApenasConfirma)
                 AtualizarRegistros(Cadastro.Services.Repositorio.GetDisponiveis());      //da pra melhorar isso aq, e os overrides, pq o programa acaba dando muitas voltas e instanciando coisas q nem vai usar
         }
-        protected override CadastroEntidade<Veiculo> Cadastro => new CadastroVeiculo();
+        protected override CadastroVeiculo Cadastro => new CadastroVeiculo();
         protected override void SalvarAluguel()
         {
             Aluguel.Veiculo = GetEntidadeSelecionado();

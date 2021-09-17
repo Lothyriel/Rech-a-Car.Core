@@ -1,5 +1,6 @@
 ﻿using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.Shared;
 using Infra.DAO.Shared;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Data;
 
 namespace Infra.DAO.PessoaModule
 {
-    public class ClientePJDAO : EntidadeDAO<ClientePJ>
+    public class ClientePJDAO : EntidadeDAO<ClientePJ>, IClientePJRepository
     {
         #region Queries
         private const string sqlInserirClientePJ =
@@ -75,6 +76,8 @@ namespace Infra.DAO.PessoaModule
         public override string sqlEditar => sqlEditarClientePJ;
         public override string sqlExcluir => sqlExcluirClientePJ;
         public override string sqlExists => sqlExisteClientePJ;
+
+        public IEntidadeRepository<Motorista> MotoristaRepository => new MotoristaDAO();
 
         public override ClientePJ ConverterEmEntidade(IDataReader reader)
         {

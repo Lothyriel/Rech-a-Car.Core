@@ -5,6 +5,7 @@ using Infra.DAO.CupomModule;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;
 using Infra.DAO.SQL;
+using Infra.DAO.SQL.AluguelModule;
 using Infra.DAO.VeiculoModule;
 using System;
 using System.Collections.Generic;

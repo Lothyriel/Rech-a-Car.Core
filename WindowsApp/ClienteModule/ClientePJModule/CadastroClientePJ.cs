@@ -81,7 +81,7 @@ namespace WindowsApp.ClienteModule
         }
         private void bt_editar_motorista_Click(object sender, EventArgs e)
         {
-            TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroMotorista(entidade).ConfigurarEditar(GetMotoristaSelecionado());
+            TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroMotorista(Services.RepositorioMotorista, entidade).ConfigurarEditar(GetMotoristaSelecionado());
             HabilitarBotoes(false);
         }
         private void bt_remover_motorista_Click(object sender, EventArgs e)

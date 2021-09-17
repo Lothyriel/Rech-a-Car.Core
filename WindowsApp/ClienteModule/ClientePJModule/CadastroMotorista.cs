@@ -13,9 +13,10 @@ namespace WindowsApp.ClienteModule
     {
         public override MotoristaAppServices Services { get; }
 
-        public ClientePJ clientePJ;
-        public CadastroMotorista(IEntidadeRepository<Motorista> repositorio)
+        public ClientePJ Empresa;
+        public CadastroMotorista(IEntidadeRepository<Motorista> repositorio, ClientePJ empresa)
         {
+            Empresa = empresa;
             InitializeComponent();
             cbTipoCNH.SelectedIndex = 2;
             Services = new MotoristaAppServices(repositorio);

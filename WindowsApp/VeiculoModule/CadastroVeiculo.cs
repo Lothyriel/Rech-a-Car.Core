@@ -14,7 +14,7 @@ namespace WindowsApp.VeiculoModule
         public override VeiculoAppServices Services { get; }
         private Bitmap imagem;
 
-        public CadastroVeiculo(IEntidadeRepository<Veiculo> repositorio, IEntidadeRepository<Categoria> repositorioCategoria)
+        public CadastroVeiculo(IVeiculoRepository repositorio, IEntidadeRepository<Categoria> repositorioCategoria)
         {
             Services = new VeiculoAppServices(repositorio, repositorioCategoria);
             InitializeComponent();
