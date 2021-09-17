@@ -1,6 +1,4 @@
 ﻿using Aplicacao.FuncionarioModule;
-using Controladores.PessoaModule;
-using Controladores.Shared;
 using Dominio.PessoaModule;
 using Dominio.Shared;
 using System;

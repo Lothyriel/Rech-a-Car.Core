@@ -1,18 +1,20 @@
-﻿using Controladores.ParceiroModule;
-using Controladores.Shared;
+﻿using Aplicacao.CupomModule;
 using Dominio.ParceiroModule;
+using Dominio.Shared;
 using System;
 using WindowsApp.Shared;
 
 namespace WindowsApp.WindowsApp.CupomModule.ParceiroModule
 {
     public partial class CadastroParceiro : CadastroEntidade<Parceiro>
-    {
-        public override Controlador<Parceiro> Services { get => new ControladorParceiro(); }
+    { 
 
-        public CadastroParceiro()
+        public override ParceiroAppServices Services { get; }
+
+        public CadastroParceiro(IEntidadeRepository<Parceiro> repositorio)
         {
             InitializeComponent();
+            Services = new ParceiroAppServices(repositorio);
         }
 
         protected override IEditavel Editar()
