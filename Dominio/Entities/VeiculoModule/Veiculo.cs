@@ -24,6 +24,7 @@ namespace Dominio.VeiculoModule
             Quilometragem = quilometragem;
             CapacidadeTanque = capacidadeTanque;
         }
+
         public string Modelo { get; set; }
         public string Marca { get; set; }
         public Categoria Categoria { get; set; }

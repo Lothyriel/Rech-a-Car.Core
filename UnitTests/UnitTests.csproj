@@ -8,11 +8,8 @@
 
   <ItemGroup>
     <Compile Remove="EmailAluguelPDFModule\**" />
-    <Compile Remove="Shared\**" />
     <EmbeddedResource Remove="EmailAluguelPDFModule\**" />
-    <EmbeddedResource Remove="Shared\**" />
     <None Remove="EmailAluguelPDFModule\**" />
-    <None Remove="Shared\**" />
   </ItemGroup>
 
   <ItemGroup>
