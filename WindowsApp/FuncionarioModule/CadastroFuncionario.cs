@@ -1,6 +1,8 @@
-﻿using Controladores.PessoaModule;
+﻿using Aplicacao.FuncionarioModule;
+using Controladores.PessoaModule;
 using Controladores.Shared;
 using Dominio.PessoaModule;
+using Dominio.Shared;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -10,14 +12,16 @@ using WindowsApp.Shared;
 namespace WindowsApp.FuncionarioModule
 {
     public partial class CadastroFuncionario : CadastroEntidade<Funcionario> //Form//
-    {
-        public override Controlador<Funcionario> Services => new ControladorFuncionario();
+    { 
 
-        public CadastroFuncionario()
+        public override FuncionarioAppServices Services { get; }
+
+        public CadastroFuncionario(IEntidadeRepository<Funcionario> repositorio)
         {
             InitializeComponent();
             bt_foto.Image = new Bitmap(Resources.user);
             cb_cargo.SelectedIndex = 1;
+            Services = new FuncionarioAppServices(repositorio);
         }
         protected override IEditavel Editar()
         {

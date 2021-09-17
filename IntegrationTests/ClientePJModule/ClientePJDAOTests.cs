@@ -14,7 +14,7 @@ namespace IntegrationTests.ClientePJ_Module
         ClientePJDAO ClientePJDAO = new();
         MotoristaDAO MotoristaDAO = new();
         ClientePJ cliente;
-        MotoristaEmpresa motorista;
+        Motorista motorista;
 
 
         [TestInitialize]
@@ -22,7 +22,7 @@ namespace IntegrationTests.ClientePJ_Module
         {
             cliente = new ClientePJ("nome", "99999999999", "endereco", "99999999999999", "email@teste.com");
             ClientePJDAO.Inserir(cliente);
-            motorista = new MotoristaEmpresa("nomeMotorista", "99999999999", "endereco", "99999999999999", new CNH("59778304921", TipoCNH.A), cliente);
+            motorista = new Motorista("nomeMotorista", "99999999999", "endereco", "99999999999999", new CNH("59778304921", TipoCNH.A), cliente);
             MotoristaDAO.Inserir(motorista);
             cliente = ClientePJDAO.GetById(cliente.Id);
         }

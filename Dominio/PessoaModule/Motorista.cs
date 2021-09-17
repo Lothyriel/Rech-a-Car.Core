@@ -2,9 +2,9 @@
 
 namespace Dominio.PessoaModule
 {
-    public class MotoristaEmpresa : Condutor
+    public class Motorista : Condutor
     {
-        public MotoristaEmpresa(string nome, string telefone, string endereco, string documento, CNH cnh, ClientePJ empresa)
+        public Motorista(string nome, string telefone, string endereco, string documento, CNH cnh, ClientePJ empresa)
         {
             Nome = nome;
             Telefone = telefone;

@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="ConfiguracoesModule\" />
-    <Folder Include="FuncionarioModule\" />
     <Folder Include="ServicoModule\" />
   </ItemGroup>
 

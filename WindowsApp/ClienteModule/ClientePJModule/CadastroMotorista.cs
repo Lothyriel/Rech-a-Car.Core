@@ -1,24 +1,24 @@
-﻿using Controladores.PessoaModule;
-using Controladores.Shared;
+﻿
+using Aplicacao.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.Shared;
 using System;
 using System.Windows.Forms;
 using WindowsApp.Shared;
 
 namespace WindowsApp.ClienteModule
 {
-    public partial class CadastroMotorista : CadastroEntidade<MotoristaEmpresa>
+    public partial class CadastroMotorista : CadastroEntidade<Motorista>
     {
-        public override Controlador<MotoristaEmpresa> Services => new ControladorMotorista();
+        public override MotoristaAppServices Services { get; }
 
-        private ClientePJ clientePJ;
-
-        public CadastroMotorista(ClientePJ clientePJ)
+        public ClientePJ clientePJ;
+        public CadastroMotorista(IEntidadeRepository<Motorista> repositorio)
         {
             InitializeComponent();
             cbTipoCNH.SelectedIndex = 2;
-            this.clientePJ = clientePJ;
+            Services = new MotoristaAppServices(repositorio);
         }
 
         protected override IEditavel Editar()
@@ -31,17 +31,17 @@ namespace WindowsApp.ClienteModule
             cbTipoCNH.SelectedIndex = (int)entidade.Cnh.TipoCnh;
             return this;
         }
-        protected override void AdicionarDependencias(MotoristaEmpresa motorista)
+        protected override void AdicionarDependencias(Motorista motorista)
         {
             motorista.Cnh.Id = entidade.Cnh.Id;
         }
-        public override MotoristaEmpresa GetNovaEntidade()
+        public override Motorista GetNovaEntidade()
         {
             var nome = tbNome.Text;
             var telefone = tbTelefone.Text;
             var endereco = tbEndereco.Text;
             var documento = tbCPF.Text;
-            return new MotoristaEmpresa(nome, telefone, endereco, documento, GetCNH(), clientePJ);
+            return new Motorista(nome, telefone, endereco, documento, GetCNH(), clientePJ);
         }
         public CNH GetCNH()
         {
@@ -53,7 +53,7 @@ namespace WindowsApp.ClienteModule
         private void btAdicionarMotorista_Click(object sender, EventArgs e)
         {
             if (Salva())
-                TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroClientePJ().ConfigurarEditar(new ControladorClientePJ().GetById(clientePJ.Id));
+                TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroClientePJ(repositorioMotorista).ConfigurarEditar(new ControladorClientePJ().GetById(clientePJ.Id));
         }
     }
 }

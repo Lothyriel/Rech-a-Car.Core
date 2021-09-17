@@ -12,7 +12,7 @@ namespace WindowsApp.ClienteModule
     {
         public override ClientePJAppServices Services { get; }
 
-        public CadastroClientePJ(IEntidadeRepository<ClientePJ> repositorio, IEntidadeRepository<MotoristaEmpresa> repositorioMotorista)
+        public CadastroClientePJ(IEntidadeRepository<ClientePJ> repositorio, IEntidadeRepository<Motorista> repositorioMotorista)
         {
             Services = new ClientePJAppServices(repositorio, repositorioMotorista);
             InitializeComponent();
@@ -53,7 +53,7 @@ namespace WindowsApp.ClienteModule
 
             return new ClientePJ(nome, telefone, endereco, documento, email);
         }
-        private MotoristaEmpresa GetMotoristaSelecionado()
+        private Motorista GetMotoristaSelecionado()
         {
             return entidade.Motoristas.Find(x => x.Id == dgvMotoristas.GetIdSelecionado());
         }

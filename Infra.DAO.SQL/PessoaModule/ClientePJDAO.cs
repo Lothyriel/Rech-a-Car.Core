@@ -91,7 +91,7 @@ namespace Infra.DAO.PessoaModule
                 Id = id,
             };
 
-            var motoristas = new List<MotoristaEmpresa>();
+            var motoristas = new List<Motorista>();
 
             do
             {
@@ -107,7 +107,7 @@ namespace Infra.DAO.PessoaModule
                 var id_cnh = Convert.ToInt32(reader["ID_CNH"]);
                 var cnh = new CnhDAO().GetByIdCondutor(id_cnh);
 
-                motoristas.Add(new MotoristaEmpresa(nome_motorista, telefone_motorista, endereco_motorista, documento_motorista, cnh, empresa)
+                motoristas.Add(new Motorista(nome_motorista, telefone_motorista, endereco_motorista, documento_motorista, cnh, empresa)
                 {
                     Id = id_motorista
                 });
@@ -132,7 +132,7 @@ namespace Infra.DAO.PessoaModule
             return parametros;
         }
     }
-    public class MotoristaDAO : DAO<MotoristaEmpresa>
+    public class MotoristaDAO : DAO<Motorista>
     {
         #region Queries
         private const string sqlSelecionarMotoristaPorId =
@@ -176,17 +176,17 @@ namespace Infra.DAO.PessoaModule
             @"DELETE FROM [TBMOTORISTA] 
                             WHERE [ID] = @ID";
 
-        public override List<MotoristaEmpresa> Registros => throw new NotImplementedException();
+        public override List<Motorista> Registros => throw new NotImplementedException();
 
         #endregion
 
-        public override void Inserir(MotoristaEmpresa motorista)
+        public override void Inserir(Motorista motorista)
         {
             new CnhDAO().Inserir(motorista.Cnh);
             motorista.Id = Db.Insert(sqlInserirMotorista, ObterParametrosMotorista(motorista));
         }
 
-        public override void Editar(int id, MotoristaEmpresa motorista)
+        public override void Editar(int id, Motorista motorista)
         {
             new CnhDAO().Editar(motorista.Cnh.Id, motorista.Cnh);
             motorista.Id = id;
@@ -198,12 +198,12 @@ namespace Infra.DAO.PessoaModule
             Db.Delete(sqlExcluirMotorista, Db.AdicionarParametro("ID", id_motorista));
         }
 
-        public override MotoristaEmpresa GetById(int id, Type tipo = null)
+        public override Motorista GetById(int id, Type tipo = null)
         {
             throw new NotSupportedException();
         }
 
-        protected static Dictionary<string, object> ObterParametrosMotorista(MotoristaEmpresa motorista)
+        protected static Dictionary<string, object> ObterParametrosMotorista(Motorista motorista)
         {
             var parametros = new Dictionary<string, object>
                 {

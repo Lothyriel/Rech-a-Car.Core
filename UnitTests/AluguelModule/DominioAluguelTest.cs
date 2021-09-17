@@ -19,7 +19,7 @@ namespace Tests.Tests.AlguelModule
         AluguelFechado aluguelFechado;
         Veiculo veiculo;
         CNH cnh;
-        MotoristaEmpresa motoristaEmpresa;
+        Motorista motoristaEmpresa;
         ClientePF clientepf;
         ClientePJ clientepj;
         Image imagemVeiculo = Resources.ford_ka_gay;
@@ -36,7 +36,7 @@ namespace Tests.Tests.AlguelModule
             servicos = new List<Servico>() { new Servico("1", 1), new Servico("2", 2) };
             cnh = new CNH("numero", TipoCNH.A);
             clientepj = new ClientePJ("nome", "4999915522", "endereço", "0131038190371", "email@teste.com");
-            motoristaEmpresa = new MotoristaEmpresa("nome", "123123123", "endereço", "d12398127", cnh, clientepj);
+            motoristaEmpresa = new Motorista("nome", "123123123", "endereço", "d12398127", cnh, clientepj);
             funcionario = new Funcionario("nome", "49999155922", "endereco", "01308174983", Cargo.SysAdmin, imagemFuncionario, "usuario");
             aluguel = new Aluguel(veiculo, servicos, Plano.Diário, DateTime.Today.AddDays(10), clientepj, funcionario, DateTime.Today.AddDays(15), motoristaEmpresa);
         }
