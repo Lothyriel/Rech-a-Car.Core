@@ -1,6 +1,6 @@
-﻿using Controladores.PessoaModule;
-using Controladores.Shared;
+﻿using Aplicacao.ClienteModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.Shared;
 using System;
 using WindowsApp.Shared;
 
@@ -8,12 +8,13 @@ namespace WindowsApp.ClienteModule
 {
     public partial class CadastroCliente : CadastroEntidade<ICliente>
     {
-        public CadastroCliente()
+        public override ClienteAppServices Services { get; }
+        public CadastroCliente(IEntidadeRepository<ICliente> repositorio)
         {
+            Services = new ClienteAppServices(repositorio);
             InitializeComponent();
         }
 
-        public override Controlador<ICliente> Services => new ControladorCliente();
 
         protected override IEditavel Editar()
         {

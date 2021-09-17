@@ -7,5 +7,6 @@ namespace Dominio.ServicoModule
     {
         void AlugarServicos(int id, List<Servico> servicos);
         void DesalugarServicosAlugados(int id);
+        List<Servico> ServicosDisponiveis();
     }
 }

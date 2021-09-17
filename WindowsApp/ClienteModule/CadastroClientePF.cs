@@ -1,7 +1,7 @@
-﻿using Controladores.PessoaModule;
-using Controladores.Shared;
+﻿using Aplicacao.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.Shared;
 using System;
 using WindowsApp.Shared;
 
@@ -9,10 +9,11 @@ namespace WindowsApp.ClienteModule
 {
     public partial class CadastroClientePF : CadastroEntidade<ClientePF> //Form //
     {
-        public override Controlador<ClientePF> Services { get => new ControladorClientePF(); }
+        public override ClientePJAppServices Services { get; }
 
-        public CadastroClientePF()
+        public CadastroClientePF(IEntidadeRepository<ClientePF> repositorio)
         {
+            Services = new ClientePFAppServices(repositorio);
             InitializeComponent();
             cbTipoCNH.SelectedIndex = 2;
         }

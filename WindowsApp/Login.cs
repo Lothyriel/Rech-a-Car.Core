@@ -1,6 +1,6 @@
 ﻿using ConfigurationManager;
-using Controladores.PessoaModule;
 using Dominio.PessoaModule;
+using Infra.DAO.PessoaModule;
 using System;
 using System.Windows.Forms;
 
@@ -8,7 +8,7 @@ namespace WindowsApp
 {
     public partial class Login : Form
     {
-        private ControladorFuncionario ControladorFuncionario = new ControladorFuncionario();
+        private FuncionarioDAO FuncionarioDAO = new FuncionarioDAO();
         private Funcionario funcionario;
 
         public Login()
@@ -26,17 +26,16 @@ namespace WindowsApp
             if (EhSuperAdm(usuario, senha))
                 return ResultadoLogin.Sucesso;
 
-            if (!ExisteUsuario(usuario))
+            if (!FuncionarioDAO.ExisteUsuario(usuario))
                 return ResultadoLogin.UsuarioNaoCadastrado;
 
-            GetFuncionario();
+            funcionario = FuncionarioDAO.GetByUserName(tbUsuario.Text);
 
             if (!Logar(funcionario.Id, senha))
                 return ResultadoLogin.SenhaErrada;
 
             return ResultadoLogin.Sucesso;
         }
-
         private bool EhSuperAdm(string usuario, string senha)
         {
             var config = Config.AppConfig;
@@ -51,26 +50,15 @@ namespace WindowsApp
             SetSuperAdm(userAdmin, senhaAdmin);
             return true;
         }
-
         private void SetSuperAdm(string userAdmin, string senhaAdmin)
         {
-            var Controlador = new ControladorFuncionario();
-            if (!ControladorFuncionario.ExisteUsuario("admin"))
-                Controlador.Inserir(new Funcionario("Alexandre Rech", "99999999999", "Rua do Flamengo", "999999", Cargo.SysAdmin, Properties.Resources.rech, userAdmin, senhaAdmin));
-            funcionario = Controlador.GetByUserName(userAdmin);
+            if (!FuncionarioDAO.ExisteUsuario("admin"))
+                FuncionarioDAO.Inserir(new Funcionario("Alexandre Rech", "99999999999", "Rua do Flamengo", "999999", Cargo.SysAdmin, Properties.Resources.rech, userAdmin, senhaAdmin));
+            funcionario = FuncionarioDAO.GetByUserName(userAdmin);
         }
-
         private bool Logar(int id_funcionario, string senha)
         {
-            return ControladorSenha.SenhaCorreta(id_funcionario, senha);
-        }
-        private bool ExisteUsuario(string usuario)
-        {
-            return ControladorFuncionario.ExisteUsuario(usuario);
-        }
-        private void GetFuncionario()
-        {
-            funcionario = ControladorFuncionario.GetByUserName(tbUsuario.Text);
+            return SenhaDAO.SenhaCorreta(id_funcionario, senha);
         }
         private string mostraResultado(ResultadoLogin resultado)
         {
@@ -86,7 +74,6 @@ namespace WindowsApp
         {
             Logar();
         }
-
         private void Logar()
         {
             var resultadoLogin = LoginUsuario();
@@ -98,7 +85,6 @@ namespace WindowsApp
             new TelaPrincipal(funcionario).Show();
             Close();
         }
-
         private void tbUsuario_TextChanged(object sender, EventArgs e)
         {
             BloquearBotaoLogin();
@@ -123,7 +109,6 @@ namespace WindowsApp
             if (TelaPrincipal.Instancia == null)
                 Application.Exit();
         }
-
         private void EnterPressionado(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)

@@ -1,7 +1,7 @@
-﻿using Controladores.PessoaModule;
-using Controladores.Shared;
+﻿using Aplicacao.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.Shared;
 using System;
 using System.Windows.Forms;
 using WindowsApp.Shared;
@@ -10,10 +10,11 @@ namespace WindowsApp.ClienteModule
 {
     public partial class CadastroClientePJ : CadastroEntidade<ClientePJ>//Form//
     {
-        public override Controlador<ClientePJ> Services { get => new ControladorClientePJ(); }
+        public override ClientePJAppServices Services { get; }
 
-        public CadastroClientePJ()
+        public CadastroClientePJ(IEntidadeRepository<ClientePJ> repositorio, IEntidadeRepository<MotoristaEmpresa> repositorioMotorista)
         {
+            Services = new ClientePJAppServices(repositorio, repositorioMotorista);
             InitializeComponent();
             dgvMotoristas.ConfigurarGrid(ConfigurarColunas());
         }
@@ -85,7 +86,7 @@ namespace WindowsApp.ClienteModule
         }
         private void bt_remover_motorista_Click(object sender, EventArgs e)
         {
-            new ControladorMotorista().Excluir(GetMotoristaSelecionado().Id);
+            Services.RepositorioMotorista.Excluir(GetMotoristaSelecionado().Id);
             HabilitarBotoes(false);
             AtualizarListMotoristas();
         }

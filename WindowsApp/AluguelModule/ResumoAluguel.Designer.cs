@@ -1,7 +1,4 @@
-﻿
-using Controladores.Shared;
-using Dominio.AluguelModule;
-using WindowsApp.Shared;
+﻿using WindowsApp.Shared;
 
 namespace WindowsApp.AluguelModule
 {

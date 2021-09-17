@@ -15,7 +15,6 @@ namespace Aplicacao.AluguelModule
         public override IAluguelRepository Repositorio { get; }
         public IRelatorioRepository RelatorioRepositorio { get; }
         public IRelatorioAluguel Relatorio { get; }
-
         public IServicoRepository ServicoRepositorio { get; }
 
         public AluguelAppServices(IAluguelRepository repositorio, IRelatorioAluguel relatorio , IRelatorioRepository relatorioRepositorio, IServicoRepository servicoRepositorio)

@@ -1,4 +1,6 @@
-﻿using Dominio.PessoaModule;
+﻿using Aplicacao.VeiculoModule;
+using Dominio.PessoaModule;
+using Dominio.Shared;
 using Dominio.VeiculoModule;
 using System;
 using System.Linq;
@@ -8,10 +10,11 @@ namespace WindowsApp.VeiculoModule.CategoriaModule
 {
     public partial class CadastroCategoria : CadastroEntidade<Categoria>//Form//
     {
-        public override CategoriaAppServices Services { get => new CategoriaAppServices(); }
+        public override CategoriaAppServices Services { get; }
 
-        public CadastroCategoria()
+        public CadastroCategoria(IEntidadeRepository<Categoria> repositorio)
         {
+            Services = new CategoriaAppServices(repositorio);
             InitializeComponent();
             PreencherCbCnh();
             cbCNH.SelectedIndex = 1;

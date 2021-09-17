@@ -1,9 +1,9 @@
-﻿using ConfigurationManager;
-using Controladores.AluguelModule;
-using Controladores.Shared;
-using Controladores.VeiculoModule;
+﻿using Aplicacao.AluguelModule;
+using ConfigurationManager;
 using Dominio.AluguelModule;
 using Dominio.ServicoModule;
+using Dominio.Shared;
+using Dominio.VeiculoModule;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -15,10 +15,11 @@ namespace WindowsApp.AluguelModule
     {
         public readonly Aluguel aluguel;
 
-        public override Controlador<AluguelFechado> Services => new ControladorAluguelFechado();
+        public override AluguelFechadoAppServices Services { get; }
 
-        public FechamentoAluguel(Aluguel aluguel)
+        public FechamentoAluguel(Aluguel aluguel, IEntidadeRepository<AluguelFechado> repositorio, IVeiculoRepository repositorioVeiculo)
         {
+            Services = new AluguelFechadoAppServices(repositorio, repositorioVeiculo);
             this.aluguel = aluguel;
             InitializeComponent();
             tb_OdometroInicial.Text = aluguel.Veiculo.Quilometragem.ToString();
@@ -102,9 +103,8 @@ namespace WindowsApp.AluguelModule
             if (!Salva())
                 return;
 
-            ControladorVeiculo.AdicionarQuilometragem(aluguel.Veiculo, KmRodados());
+            Services.RepositorioVeiculo.AdicionarQuilometragem(entidade.Veiculo, KmRodados());
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoAluguel();
-
         }
         private void tb_TanqueAtual_TextChanged(object sender, EventArgs e)
         {

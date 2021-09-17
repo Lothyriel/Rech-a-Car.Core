@@ -4,20 +4,19 @@ using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
 using Dominio.VeiculoModule;
-using EmailAluguelPDF;
 using FluentAssertions;
-using Infra.DAO.AluguelModule;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.SQL;
 using Infra.DAO.VeiculoModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using Tests.Shared;
-using IntegrationTests.Properties;
 using Infra.DAO.Shared;
+using EmailAluguelPDF;
+using IntegrationTests.Properties;
+using IntegrationTests.Shared;
 
-namespace Tests.EmailAluguelPDFModule
+namespace Infra.DAO.AluguelModule
 {
     [TestClass]
     public class PDFAluguelTests

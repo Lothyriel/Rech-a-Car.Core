@@ -36,7 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Aplicacao\Aplicacao.csproj" />
     <ProjectReference Include="..\Dominio\Dominio.csproj" />
+    <ProjectReference Include="..\Infra.DAO.SQL\Infra.DAO.SQL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

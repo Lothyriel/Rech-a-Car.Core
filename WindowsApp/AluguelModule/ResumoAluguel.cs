@@ -1,8 +1,4 @@
 ﻿using Aplicacao.AluguelModule;
-using Controladores.AluguelModule;
-using Controladores.CupomModule;
-using Controladores.ServicoModule;
-using Controladores.Shared;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.PessoaModule;
@@ -22,8 +18,9 @@ namespace WindowsApp.AluguelModule
     public partial class ResumoAluguel : CadastroEntidade<Aluguel>// Form // 
     {
         private readonly Aluguel Aluguel;
-        public ResumoAluguel(Aluguel aluguel = null)
+        public ResumoAluguel(IAluguelRepository repositorio, IRelatorioAluguel relatorioAluguel, IRelatorioRepository repositorioRelatorio, IServicoRepository repositorioServico, Aluguel aluguel = null)
         {
+            Services = new AluguelAppServices(repositorio, relatorioAluguel, repositorioRelatorio, repositorioServico);
             Aluguel = aluguel ?? new Aluguel();
 
             InitializeComponent();
@@ -46,7 +43,7 @@ namespace WindowsApp.AluguelModule
             }
         }
 
-        public override AluguelAppServices Services => new AluguelAppServices();
+        public override AluguelAppServices Services { get; }
         public override Aluguel GetNovaEntidade()
         {
             DateTime.TryParse(tbDt_Emprestimo.Text, out DateTime dataAluguel);
@@ -102,7 +99,7 @@ namespace WindowsApp.AluguelModule
         }
         private List<Servico> GetServicosDiponiveis()
         {
-            return new ControladorServico().ServicosDisponiveis().Except(Aluguel.Servicos).ToList();
+            return Services.ServicoRepositorio.ServicosDisponiveis().Except(Aluguel.Servicos).ToList();
         }
         private void SetCondutor()
         {
