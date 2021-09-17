@@ -1,5 +1,4 @@
-﻿using Controladores.VeiculoModule;
-using Dominio.AluguelModule;
+﻿using Dominio.AluguelModule;
 using Dominio.VeiculoModule;
 using System.Collections.Generic;
 using System.Windows.Forms;

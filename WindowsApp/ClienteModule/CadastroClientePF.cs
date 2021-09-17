@@ -9,7 +9,7 @@ namespace WindowsApp.ClienteModule
 {
     public partial class CadastroClientePF : CadastroEntidade<ClientePF> //Form //
     {
-        public override ClientePJAppServices Services { get; }
+        public override ClientePFAppServices Services { get; }
 
         public CadastroClientePF(IEntidadeRepository<ClientePF> repositorio)
         {
