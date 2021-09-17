@@ -1,6 +1,6 @@
-﻿using Controladores.ServicoModule;
-using Controladores.Shared;
+﻿using Aplicacao.ServicosModule;
 using Dominio.ServicoModule;
+using Dominio.Shared;
 using System;
 using WindowsApp.Shared;
 
@@ -8,12 +8,13 @@ namespace WindowsApp.ServicoModule
 {
     public partial class CadastroServico : CadastroEntidade<Servico>
     {
-        public override Controlador<Servico> Services { get => new ControladorServico(); }
+        public override ServicosAppServices Services { get; }
 
-        public CadastroServico()
+        public CadastroServico(IEntidadeRepository<Servico> repositorio)
         {
             InitializeComponent();
             tbQuantidade.Text = "1";
+            Services = new ServicosAppServices(repositorio);
         }
 
         protected override IEditavel Editar()
