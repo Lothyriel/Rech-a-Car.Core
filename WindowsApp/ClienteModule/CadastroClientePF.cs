@@ -1,7 +1,6 @@
 ﻿using Aplicacao.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
-using Dominio.Shared;
 using System;
 using WindowsApp.Shared;
 

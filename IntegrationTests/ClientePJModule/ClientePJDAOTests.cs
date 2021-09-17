@@ -3,8 +3,8 @@ using Dominio.PessoaModule.ClienteModule;
 using FluentAssertions;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IntegrationTests.Shared;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntegrationTests.ClientePJ_Module
 {

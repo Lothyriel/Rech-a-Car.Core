@@ -1,5 +1,4 @@
 ﻿using Aplicacao.Shared;
-using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.Shared;
 

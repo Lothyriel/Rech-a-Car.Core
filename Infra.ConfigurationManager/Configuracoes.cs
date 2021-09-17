@@ -9,12 +9,13 @@ namespace ConfigurationManager
 {
     public class ConfiguracoesManager
     {
+        private const string pathAppConfig = @"..\..\..\appsettings.json";
+
         public static Configuracoes Configs
         {
             get
             {
-                var path = Directory.GetCurrentDirectory() + "\\appsettings.json";
-                JObject o1 = JObject.Parse(File.ReadAllText(path));
+                JObject o1 = JObject.Parse(File.ReadAllText(pathAppConfig));
 
                 var gasolina = o1["Gasolina"].ToObject<double>();
                 var diesel = o1["Diesel"].ToObject<double>();
@@ -40,15 +41,14 @@ namespace ConfigurationManager
         }
         private static void SalvaConfiguracoes(Configuracoes config)
         {
-            var path = Directory.GetCurrentDirectory() + "appsettings.json";
-            JObject o1 = JObject.Parse(File.ReadAllText(path));
+            JObject o1 = JObject.Parse(File.ReadAllText(pathAppConfig));
             o1["Gasolina"] = new JValue(config.ValorGasolina);
             o1["Diesel"] = new JValue(config.ValorDiesel);
             o1["Etanol"] = new JValue(config.ValorEtanol);
 
             o1["Caucao"] = new JValue(config.ValorCaucao);
 
-            File.WriteAllText(path, JsonConvert.SerializeObject(o1));
+            File.WriteAllText(pathAppConfig, JsonConvert.SerializeObject(o1));
         }
     }
 }

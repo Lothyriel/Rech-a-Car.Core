@@ -2,8 +2,6 @@
 using ConfigurationManager;
 using Dominio.AluguelModule;
 using Dominio.ServicoModule;
-using Dominio.Shared;
-using Dominio.VeiculoModule;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

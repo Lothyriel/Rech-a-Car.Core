@@ -73,7 +73,7 @@ namespace AluguelPDF
 
             Paragraph total = new Paragraph($"\nTotal Parcial: R${aluguel.CalcularTotal()}").SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica14b);
             #endregion
-                
+
             pdf.Add(header);
             pdf.Add(body_imagem);
             pdf.Add(body_aluguel);

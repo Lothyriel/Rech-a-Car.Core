@@ -1,6 +1,5 @@
 ﻿using Aplicacao.ServicosModule;
 using Dominio.ServicoModule;
-using Dominio.Shared;
 using System;
 using WindowsApp.Shared;
 

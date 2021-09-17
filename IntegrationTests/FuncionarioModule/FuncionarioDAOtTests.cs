@@ -2,9 +2,9 @@
 using FluentAssertions;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;
+using IntegrationTests.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
-using IntegrationTests.Shared;
 
 namespace IntegrationTests.FuncionarioModule
 {

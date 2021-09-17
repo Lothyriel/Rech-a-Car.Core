@@ -2,7 +2,6 @@
 using Dominio.AluguelModule;
 using Dominio.ServicoModule;
 using Infra.DAO.Shared;
-using Infra.DAO.SQL;
 using Infra.DAO.SQL.AluguelModule;
 using System;
 using System.Collections.Generic;

@@ -2,7 +2,7 @@
 
 namespace Dominio.AluguelModule
 {
-    public interface IRelatorioAluguel //pode depois herdar de um IRelatorioEntidade
+    public interface IRelatorioAluguel
     {
         MemoryStream GerarRelatorio(Aluguel aluguel);
     }

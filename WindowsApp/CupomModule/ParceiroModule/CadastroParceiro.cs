@@ -6,7 +6,7 @@ using WindowsApp.Shared;
 namespace WindowsApp.WindowsApp.CupomModule.ParceiroModule
 {
     public partial class CadastroParceiro : CadastroEntidade<Parceiro>
-    { 
+    {
 
         public override ParceiroAppServices Services { get; }
 

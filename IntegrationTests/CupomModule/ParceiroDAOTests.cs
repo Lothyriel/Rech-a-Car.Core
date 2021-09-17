@@ -2,8 +2,8 @@
 using FluentAssertions;
 using Infra.DAO.ParceiroModule;
 using Infra.DAO.Shared;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IntegrationTests.Shared;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntegrationTests.ParceiroModule
 {

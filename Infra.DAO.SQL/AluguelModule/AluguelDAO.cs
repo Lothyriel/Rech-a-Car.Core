@@ -4,7 +4,6 @@ using Dominio.PessoaModule.ClienteModule;
 using Infra.DAO.CupomModule;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;
-using Infra.DAO.SQL;
 using Infra.DAO.SQL.AluguelModule;
 using Infra.DAO.VeiculoModule;
 using System;
@@ -14,7 +13,7 @@ using System.Data;
 namespace Infra.DAO.AluguelModule
 {
     public class AluguelDAO : EntidadeDAO<Aluguel>, IAluguelRepository
-    {       
+    {
         #region Queries
         private const string sqlInserirAluguel =
     @"INSERT INTO [TBALUGUEL]

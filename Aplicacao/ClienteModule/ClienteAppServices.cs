@@ -1,7 +1,5 @@
 ﻿using Aplicacao.Shared;
 using Dominio.PessoaModule.ClienteModule;
-using Dominio.Shared;
-using System;
 
 namespace Aplicacao.ClienteModule
 {

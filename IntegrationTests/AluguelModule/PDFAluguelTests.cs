@@ -1,21 +1,21 @@
-﻿using Aplicacao.AluguelModule;
+﻿using AluguelPDF;
+using Aplicacao.AluguelModule;
 using Dominio.AluguelModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
 using Dominio.VeiculoModule;
 using FluentAssertions;
+using Infra.DAO.CupomModule;
 using Infra.DAO.PessoaModule;
+using Infra.DAO.Shared;
+using Infra.DAO.SQL.AluguelModule;
 using Infra.DAO.VeiculoModule;
+using IntegrationTests.Properties;
+using IntegrationTests.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using Infra.DAO.Shared;
-using IntegrationTests.Properties;
-using IntegrationTests.Shared;
-using AluguelPDF;
-using Infra.DAO.SQL.AluguelModule;
-using Infra.DAO.CupomModule;
 
 namespace Infra.DAO.AluguelModule
 {
@@ -27,7 +27,7 @@ namespace Infra.DAO.AluguelModule
         static PDFAluguel pa = new();
         static RelatorioDAO rd = new();
         static ServicoDAO sd = new();
-        static CupomDAO cd = new ();
+        static CupomDAO cd = new();
         AluguelAppServices AluguelAppServices = new(ad, pa, rd, sd, cd);
 
         [TestInitialize]

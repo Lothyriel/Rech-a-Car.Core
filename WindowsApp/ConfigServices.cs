@@ -5,6 +5,7 @@ using Aplicacao.CupomModule;
 using Aplicacao.FuncionarioModule;
 using Aplicacao.ServicosModule;
 using Aplicacao.VeiculoModule;
+using Dominio.AluguelModule;
 using Infra.DAO.AluguelModule;
 using Infra.DAO.CupomModule;
 using Infra.DAO.ParceiroModule;
@@ -18,15 +19,31 @@ namespace WindowsApp
     public class ConfigServices
     {
         public static ConfigServices Services;
-        public ConfigServices(ConfigRepositories config)
+
+        private IRelatorioAluguel RelatorioAluguel;
+        public ConfigServices(ConfigRepositories configRepos, ConfigRelatorio configRelatorio)
         {
             Services = this;
 
-            switch (config)
+            RelatorioAluguel = GetRelatorio(configRelatorio);
+
+
+            switch (configRepos)
             {
                 case ConfigRepositories.SQL: GerarRepositoriosSQL(); break;
                 case ConfigRepositories.ORM: throw new NotImplementedException();
-                default: throw new NotSupportedException();
+                default: GerarRepositoriosSQL(); break;
+            }
+        }
+
+        private IRelatorioAluguel GetRelatorio(ConfigRelatorio configRelatorio)
+        {
+            switch (configRelatorio)
+            {
+                case ConfigRelatorio.PDF: return new PDFAluguel();
+                case ConfigRelatorio.TXT: throw new NotImplementedException();
+                case ConfigRelatorio.CSV: throw new NotImplementedException();
+                default: return new PDFAluguel();
             }
         }
 
@@ -61,7 +78,6 @@ namespace WindowsApp
             var aluguelRepo = new AluguelDAO();
             var servicoRepo = new ServicoDAO();
             var cupomRepo = new CupomDAO();
-            var relatorio = new PDFAluguel();
             var relatorioRepo = new RelatorioDAO();
 
             Services.CupomServices = new CupomAppServices(cupomRepo);
@@ -75,8 +91,10 @@ namespace WindowsApp
             Services.FuncionarioServices = new FuncionarioAppServices(funcionarioRepo);
             Services.VeiculoServices = new VeiculoAppServices(veiculoRepo, categoriaRepo);
             Services.AluguelFechadoServices = new AluguelFechadoAppServices(aluguelFechadoRepo, veiculoRepo);
-            Services.AluguelServices = new AluguelAppServices(aluguelRepo, relatorio, relatorioRepo, servicoRepo, cupomRepo);
+            Services.AluguelServices = new AluguelAppServices(aluguelRepo, RelatorioAluguel, relatorioRepo, servicoRepo, cupomRepo);
         }
     }
     public enum ConfigRepositories { SQL, ORM }
+
+    public enum ConfigRelatorio { PDF, TXT, CSV}
 }
