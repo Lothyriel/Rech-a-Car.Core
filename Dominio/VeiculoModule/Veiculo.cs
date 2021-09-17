@@ -25,10 +25,6 @@ namespace Dominio.VeiculoModule
             CapacidadeTanque = capacidadeTanque;
         }
 
-        public Veiculo()
-        { 
-        }
-
         public string Modelo { get; set; }
         public string Marca { get; set; }
         public Categoria Categoria { get; set; }
