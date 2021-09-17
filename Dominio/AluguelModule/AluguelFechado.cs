@@ -14,6 +14,7 @@ namespace Dominio.AluguelModule
             Condutor = aluguel.Condutor;
             TipoPlano = aluguel.TipoPlano;
             DataAluguel = aluguel.DataAluguel;
+            Cupom = aluguel.Cupom;
             KmRodados = kmRodados;
             TanqueUtilizado = tanqueUtilizado;
             ServicosNecessarios = servicosNecessarios;
@@ -24,20 +25,51 @@ namespace Dominio.AluguelModule
         public double TanqueUtilizado { get; set; }
         public List<Servico> ServicosNecessarios { get; set; }
         public DateTime DataDevolvida { get; set; }
-        public override double CalcularTotal()
+        public override double CalcularTotal(Configuracoes configs)
         {
             double PrecoFinal = base.CalcularTotal();
 
-            int diasAtraso = (DataDevolucao - DateTime.Today).Days;
+            if (DateTime.Today > DataDevolucao)
+                PrecoFinal += (DateTime.Today - DataDevolucao).Days;
 
-            PrecoFinal += diasAtraso * 50;
-
-            //CALCULAR GASOLINA DEPOIS.
+            PrecoFinal += CalcularCombustivel(configs);
+            PrecoFinal += CalcularKmRodados();
 
             ServicosNecessarios.ForEach(x => PrecoFinal += x.Taxa);
 
             return PrecoFinal;
+        }
+        private double CalcularKmRodados()
+        {
+            double PrecoKmRodado = 0;
 
+            if (TipoPlano == Plano.Controlado && KmRodados > Veiculo.Categoria.QuilometragemFranquia)
+            {
+                PrecoKmRodado = (KmRodados - Veiculo.Categoria.QuilometragemFranquia) * Veiculo.Categoria.PrecoKm;
+                PrecoKmRodado += PrecoKmRodado * 0.15;
+            }
+
+            if (TipoPlano == Plano.Controlado && KmRodados < Veiculo.Categoria.QuilometragemFranquia && KmRodados != 0)
+            {
+                PrecoKmRodado = (KmRodados - Veiculo.Categoria.QuilometragemFranquia) * Veiculo.Categoria.PrecoKm;
+                PrecoKmRodado -= PrecoKmRodado * 0.15;
+            }
+
+            if (TipoPlano == Plano.Diário)
+                PrecoKmRodado = KmRodados * Veiculo.Categoria.PrecoKm;
+
+
+            return PrecoKmRodado;
+        }
+        private double CalcularCombustivel(Configuracoes configs)
+        {
+            return Veiculo.TipoDeCombustivel switch
+            {
+                VeiculoModule.TipoCombustivel.Diesel => TanqueUtilizado * configs.ValorDiesel,
+                VeiculoModule.TipoCombustivel.Etanol => TanqueUtilizado * configs.ValorEtanol,
+                VeiculoModule.TipoCombustivel.Gasolina => TanqueUtilizado * configs.ValorGasolina,
+                _ => 0,
+            };
         }
         public override string Validar()
         {

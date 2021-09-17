@@ -1,6 +1,6 @@
 ﻿namespace Dominio.Shared
 {
-    public abstract class Entidade : IControlavel
+    public abstract class Entidade : IEntidade
     {
         public int Id { get; set; }
         public abstract string Validar();

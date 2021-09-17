@@ -2,7 +2,7 @@
 
 namespace Dominio.PessoaModule.ClienteModule
 {
-    public interface ICliente : IControlavel
+    public interface ICliente : IEntidade
     {
         string Nome { get; set; }
         string Telefone { get; set; }
