@@ -6,20 +6,15 @@ using Dominio.ServicoModule;
 using Dominio.VeiculoModule;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationTests.Shared
 {
     class AluguelDataBuilder
     {
-        Aluguel aluguel = null;
+        Aluguel aluguel = new Aluguel();
 
         public AluguelDataBuilder DeVeiculo(Veiculo veiculo)
         {
-            aluguel = new Aluguel();
-
             aluguel.Veiculo = veiculo;
 
             return this;
