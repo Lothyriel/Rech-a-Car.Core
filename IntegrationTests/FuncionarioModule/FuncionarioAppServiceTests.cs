@@ -1,14 +1,15 @@
-﻿using Dominio.ServicoModule;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Dominio.Shared;
 using Aplicacao.ServicosModule;
 using Aplicacao.Shared;
+using Dominio.ServicoModule;
 
-namespace IntegrationTests.ServicoModule
+namespace IntegrationTests.FuncionarioModule
 {
     [TestClass]
-    public class ServicoAppServiceTest
+    public class FuncionarioAppServiceTests
     {
         Mock<Servico> servicoMock;
         Servico servico;
@@ -23,11 +24,12 @@ namespace IntegrationTests.ServicoModule
 
             servico = servicoMock.Object;
 
+
             mockRepoServico = new();
             sut = new ServicosAppServices(mockRepoServico.Object);
         }
         [TestMethod]
-        public void Deve_inserir_servico()
+        public void Deve_inserir_veiculo()
         {
             sut.Inserir(servico).Resultado.Should().Be(EnumResultado.Sucesso);
             mockRepoServico.Verify(x => x.Inserir(servico));
@@ -35,7 +37,7 @@ namespace IntegrationTests.ServicoModule
         [TestMethod]
         public void Nao_deve_inserir_veiculo()
         {
-            servicoMock.Setup(x => x.Validar()).Returns("sexo");
+            servicoMock.Setup(x => x.Validar()).Returns("INVÁLIDO");
             servico = servicoMock.Object;
 
             sut.Inserir(servico).Resultado.Should().Be(EnumResultado.Falha);
@@ -57,12 +59,8 @@ namespace IntegrationTests.ServicoModule
         [TestMethod]
         public void Deve_editar_veiculo()
         {
-            sut.Editar(servico.Id,servico);
+            sut.Editar(servico.Id, servico);
             mockRepoServico.Verify(x => x.Editar(servico.Id, servico));
         }
-
-
-
-
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IntegrationTests.Shared;
 using Infra.DAO.SQL.AluguelModule;
 
-namespace IntegrationTests.IntegrationTests.ServicoModule
+namespace IntegrationTests.ServicoModule
 {
     [TestClass]
     public class ServicoDAOTests
