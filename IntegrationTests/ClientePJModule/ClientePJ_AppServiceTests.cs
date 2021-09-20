@@ -2,8 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Aplicacao.Shared;
-using Dominio.CupomModule;
-using Aplicacao.CupomModule;
 using Dominio.PessoaModule.ClienteModule;
 using Aplicacao.ClienteModule;
 
@@ -14,7 +12,7 @@ namespace IntegrationTests.ClientePJ_Module
     {
         Mock<ClientePJ> clientePJ_Mock;
         ClientePJ clientePJ;
-        Mock<IClientePJRepository> mockClientePJ;
+        Mock<IClientePJRepository> mockClientePJ_Repo;
         ClientePJAppServices sut;
 
         [TestInitialize]
@@ -25,14 +23,14 @@ namespace IntegrationTests.ClientePJ_Module
 
             clientePJ = clientePJ_Mock.Object;
 
-            mockClientePJ = new();
-            sut = new ClientePJAppServices(mockClientePJ.Object);
+            mockClientePJ_Repo = new();
+            sut = new ClientePJAppServices(mockClientePJ_Repo.Object);
         }
         [TestMethod]
         public void Deve_inserir_cupom()
         {
             sut.Inserir(clientePJ).Resultado.Should().Be(EnumResultado.Sucesso);
-            mockClientePJ.Verify(x => x.Inserir(clientePJ));
+            mockClientePJ_Repo.Verify(x => x.Inserir(clientePJ));
         }
         [TestMethod]
         public void Nao_deve_inserir_cupom()
@@ -41,19 +39,19 @@ namespace IntegrationTests.ClientePJ_Module
             clientePJ = clientePJ_Mock.Object;
 
             sut.Inserir(clientePJ).Resultado.Should().Be(EnumResultado.Falha);
-            mockClientePJ.VerifyNoOtherCalls();
+            mockClientePJ_Repo.VerifyNoOtherCalls();
         }
         [TestMethod]
         public void Deve_remover_cupom()
         {
             sut.Excluir(clientePJ.Id);
-            mockClientePJ.Verify(x => x.Excluir(clientePJ.Id, null));
+            mockClientePJ_Repo.Verify(x => x.Excluir(clientePJ.Id, null));
         }
         [TestMethod]
         public void Deve_editar_cupom()
         {
             sut.Editar(clientePJ.Id, clientePJ);
-            mockClientePJ.Verify(x => x.Editar(clientePJ.Id, clientePJ));
+            mockClientePJ_Repo.Verify(x => x.Editar(clientePJ.Id, clientePJ));
         }
 
 
