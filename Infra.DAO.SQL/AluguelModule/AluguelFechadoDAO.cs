@@ -2,7 +2,6 @@
 using Dominio.AluguelModule;
 using Dominio.ServicoModule;
 using Infra.DAO.Shared;
-using Infra.DAO.SQL.AluguelModule;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -35,7 +34,6 @@ namespace Infra.DAO.AluguelModule
         {
             entidade.Id = id;
             Db.Update(sqlFecharAluguel, Db.AdicionarParametro("ID", id, ObterParametrosRegistro(entidade)));
-            new ServicoDAO().DesalugarServicosAlugados(id);
         }
 
         public override void Excluir(int id, Type tipo = null)
