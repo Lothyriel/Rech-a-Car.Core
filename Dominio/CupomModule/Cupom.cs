@@ -18,6 +18,10 @@ namespace Dominio.CupomModule
             ValorMinimo = valorMInimo;
 
         }
+        public Cupom()
+        {
+
+        }
 
         public string Nome { get; }
 
