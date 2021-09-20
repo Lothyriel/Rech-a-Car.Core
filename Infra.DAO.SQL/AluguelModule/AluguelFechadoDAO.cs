@@ -11,7 +11,7 @@ namespace Infra.DAO.AluguelModule
 {
     public class AluguelFechadoDAO : DAO<AluguelFechado>
     {
-        private AluguelDAO Controlador = new();
+        private AluguelDAO AluguelDAO = new();
 
         private const string sqlGetAlugueisFechados =
             @"SELECT *
@@ -61,7 +61,7 @@ namespace Infra.DAO.AluguelModule
 
         private AluguelFechado ConverterEmEntidade(IDataReader reader)
         {
-            var aluguel = Controlador.ConverterEmEntidade(reader);
+            var aluguel = AluguelDAO.ConverterEmEntidade(reader);
 
             var tanqueUtilizado = Convert.ToDouble(reader["TANQUE_UTILIZADO"]);
             var kmRodados = Convert.ToInt32(reader["KM_RODADOS"]);

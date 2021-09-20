@@ -14,7 +14,7 @@ namespace WindowsApp.WindowsApp.CupomModule
         {
             InitializeComponent();
             Services = ConfigServices.Services.CupomServices;
-            cbParceiro.DataSource = Services.Repositorio.Registros;
+            cbParceiro.DataSource = ConfigServices.Services.ParceiroServices.Repositorio.Registros;
         }
 
         protected override IEditavel Editar()
@@ -38,7 +38,12 @@ namespace WindowsApp.WindowsApp.CupomModule
             DateTime.TryParse(tbData.Text, out DateTime data);
             Double.TryParse(tbValorMinimo.Text, out double valorMinimo);
 
-            return new Cupom(nome, valorPercentual, valorFixo, data, parceiro, valorMinimo);
+            return new Cupom(nome, valorPercentual, valorFixo, data, parceiro, valorMinimo, 0);
+        }
+        protected override void AdicionarDependencias(Cupom cupom)
+        {
+            var usos = entidade?.Usos;
+            cupom.Usos = usos ?? 0;
         }
 
         private void btAdicionar_Click(object sender, EventArgs e)

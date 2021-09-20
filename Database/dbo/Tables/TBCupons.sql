@@ -3,6 +3,7 @@
     [Nome]             VARCHAR (100) NOT NULL,
     [Valor_Fixo]       DECIMAL (18)  NULL,
     [Valor_Percentual] INT           NULL,
+    [USOS]             INT           NOT NULL,
     [Data_Validade]    DATE          NOT NULL,
     [valor_Minimo]     DECIMAL (18)  NOT NULL,
     [idParceiro]       INT           NOT NULL,

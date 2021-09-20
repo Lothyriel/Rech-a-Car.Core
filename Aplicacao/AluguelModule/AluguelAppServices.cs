@@ -20,8 +20,6 @@ namespace Aplicacao.AluguelModule
         public IServicoRepository ServicoRepositorio { get; }
         public ICupomRepository CupomRepositorio { get; }
 
-        public VeiculoAppServices ServicosVeiculo { get; }
-
         public AluguelAppServices(IAluguelRepository repositorio, IRelatorioAluguel relatorio, IRelatorioRepository relatorioRepositorio, IServicoRepository servicoRepositorio, ICupomRepository cupomRepositorio)
         {
             Repositorio = repositorio;
@@ -68,6 +66,8 @@ namespace Aplicacao.AluguelModule
             if (insercao.Resultado == EnumResultado.Falha)
                 return insercao;
 
+            aluguel.Cupom.Usos++;
+            CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
             ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
 
             var relatorio = Relatorio.GerarRelatorio(aluguel);

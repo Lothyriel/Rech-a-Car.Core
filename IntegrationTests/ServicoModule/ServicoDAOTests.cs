@@ -11,19 +11,18 @@ namespace IntegrationTests.IntegrationTests.ServicoModule
     public class ServicoDAOTests
     {
         Servico servico = new("nomeServico", 10);
-        ServicoDAO controlador = new();
+        ServicoDAO ServicoDAO = new();
 
         [TestInitialize]
         public void Inserindo_no_banco()
         {
-            controlador.Inserir(servico);
+            ServicoDAO.Inserir(servico);
 
         }
         [TestMethod]
         public void Deve_inserir_um_servico()
         {
-            controlador.Registros.Count.Should().NotBe(0);
-
+            ServicoDAO.Registros.Count.Should().NotBe(0);
         }
 
         [TestMethod]
@@ -33,17 +32,17 @@ namespace IntegrationTests.IntegrationTests.ServicoModule
 
             servico.Nome = "novoNome";
 
-            controlador.Editar(servico.Id, servico);
+            ServicoDAO.Editar(servico.Id, servico);
 
-            controlador.GetById(servico.Id).Nome.Should().NotBe(nomeAnterior);
+            ServicoDAO.GetById(servico.Id).Nome.Should().NotBe(nomeAnterior);
 
         }
 
         [TestMethod]
         public void Deve_remover_servico()
         {
-            controlador.Excluir(servico.Id);
-            controlador.Registros.Count.Should().Be(0);
+            ServicoDAO.Excluir(servico.Id);
+            ServicoDAO.Registros.Count.Should().Be(0);
         }
 
         [TestCleanup]

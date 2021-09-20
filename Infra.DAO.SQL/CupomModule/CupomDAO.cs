@@ -18,6 +18,7 @@ namespace Infra.DAO.CupomModule
 		                [VALOR_FIXO],
                         [DATA_VALIDADE],
                         [IDPARCEIRO],
+                        [USOS],
                         [VALOR_MINIMO]
 	                )
 	                VALUES
@@ -27,6 +28,7 @@ namespace Infra.DAO.CupomModule
 		                @VALOR_FIXO,
                         @DATA_VALIDADE,
                         @IDPARCEIRO,
+                        @USOS,
                         @VALOR_MINIMO
 	                )";
 
@@ -38,6 +40,7 @@ namespace Infra.DAO.CupomModule
 		                [VALOR_FIXO] = @VALOR_FIXO,
                         [DATA_VALIDADE] = @DATA_VALIDADE,
                         [IDPARCEIRO] = @IDPARCEIRO,
+                        [USOS] = @USOS,
                         [VALOR_MINIMO] = @VALOR_MINIMO
                      
                     WHERE 
@@ -59,28 +62,14 @@ namespace Infra.DAO.CupomModule
                     [ID] = @ID";
 
         private const string sqlSelecionarTodosCupons =
-        @"SELECT
-                        [ID],
-                        [NOME], 
-		                [VALOR_PERCENTUAL], 
-		                [VALOR_FIXO],
-                        [DATA_VALIDADE],
-                        [IDPARCEIRO],
-                        [VALOR_MINIMO]
+        @"SELECT * FROM TBCUPONS";
 
-                        FROM TBCUPONS";
+        private const string sqlSelecionarTodosCuponsOrdenadosPorUso =
+        @"SELECT * FROM TBCUPONS ORDER BY [USOS] DESC";
 
 
         private const string sqlSelecionarCupomPorId =
-         @"SELECT
-                        [ID],
-                        [NOME], 
-		                [VALOR_PERCENTUAL], 
-		                [VALOR_FIXO],
-                        [DATA_VALIDADE],
-                        [IDPARCEIRO],
-                        [VALOR_MINIMO]
-
+                @"SELECT *
 	                FROM
                         TBCUPONS
                     WHERE 
@@ -103,6 +92,11 @@ namespace Infra.DAO.CupomModule
         public override string sqlExcluir => sqlExcluirCupom;
         public override string sqlExists => sqlExisteCupom;
 
+        public override List<Cupom> Registros => OrdenadoPorUsos();
+        public List<Cupom> OrdenadoPorUsos() 
+        {
+            return Db.GetAll(sqlSelecionarTodosCuponsOrdenadosPorUso, ConverterEmEntidade);
+        }
         public override Cupom ConverterEmEntidade(IDataReader reader)
         {
             int id = Convert.ToInt32(reader["ID"]);
@@ -111,26 +105,28 @@ namespace Infra.DAO.CupomModule
             double valor_Fixo = Convert.ToDouble(reader["VALOR_FIXO"]);
             DateTime data = Convert.ToDateTime(reader["DATA_VALIDADE"]);
             int idParceiro = Convert.ToInt32(reader["IDPARCEIRO"]);
+            int usos = Convert.ToInt32(reader["USOS"]);
             double valorMinimo = Convert.ToDouble(reader["VALOR_MINIMO"]);
 
             var parceiro = new ParceiroDAO().GetById(idParceiro);
 
-            return new Cupom(nome, valor_Percentual, valor_Fixo, data, parceiro, valorMinimo)
+            return new Cupom(nome, valor_Percentual, valor_Fixo, data, parceiro, valorMinimo, usos)
             {
                 Id = id
             };
         }
-        public override Dictionary<string, object> ObterParametrosRegistro(Cupom entidade)
+        public override Dictionary<string, object> ObterParametrosRegistro(Cupom cupom)
         {
             var parametros = new Dictionary<string, object>
             {
-                { "ID", entidade.Id },
-                { "NOME", entidade.Nome },
-                { "VALOR_PERCENTUAL", entidade.ValorPercentual },
-                { "VALOR_FIXO", entidade.ValorFixo },
-                { "DATA_VALIDADE", entidade.DataValidade },
-                { "IDPARCEIRO", entidade.Parceiro.Id },
-                { "VALOR_MINIMO", entidade.ValorMinimo }
+                { "ID", cupom.Id },
+                { "NOME", cupom.Nome },
+                { "VALOR_PERCENTUAL", cupom.ValorPercentual },
+                { "VALOR_FIXO", cupom.ValorFixo },
+                { "DATA_VALIDADE", cupom.DataValidade },
+                { "IDPARCEIRO", cupom.Parceiro.Id },
+                { "USOS", cupom.Usos },
+                { "VALOR_MINIMO", cupom.ValorMinimo }
             };
             return parametros;
         }
