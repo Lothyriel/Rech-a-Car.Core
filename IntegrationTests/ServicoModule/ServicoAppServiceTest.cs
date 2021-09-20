@@ -33,7 +33,7 @@ namespace IntegrationTests.ServicoModule
             mockRepoServico.Verify(x => x.Inserir(servico));
         }
         [TestMethod]
-        public void Nao_deve_inserir_veiculo()
+        public void Nao_deve_inserir_servico()
         {
             servicoMock.Setup(x => x.Validar()).Returns("sexo");
             servico = servicoMock.Object;
@@ -42,7 +42,7 @@ namespace IntegrationTests.ServicoModule
             mockRepoServico.VerifyNoOtherCalls();
         }
         [TestMethod]
-        public void Deve_remover_veiculo()
+        public void Deve_remover_servico()
         {
             sut.Excluir(servico.Id);
             mockRepoServico.Verify(x => x.Excluir(servico.Id, null));
@@ -55,14 +55,10 @@ namespace IntegrationTests.ServicoModule
         //    mockrepoVeiculo.Verify(x => x.Excluir(veiculo.Id, null));
         //}
         [TestMethod]
-        public void Deve_editar_veiculo()
+        public void Deve_editar_servico()
         {
             sut.Editar(servico.Id,servico);
             mockRepoServico.Verify(x => x.Editar(servico.Id, servico));
         }
-
-
-
-
     }
 }

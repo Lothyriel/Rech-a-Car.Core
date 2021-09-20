@@ -15,6 +15,10 @@ namespace Dominio.PessoaModule
             NomeUsuario = usuario;
             Senha = senha;
         }
+        public Funcionario()
+        {
+
+        }
         public Image Foto { get; set; }
         public string NomeUsuario { get; set; }
         public string Senha { get; set; }

@@ -1,66 +1,58 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Dominio.Shared;
 using Aplicacao.ServicosModule;
 using Aplicacao.Shared;
-using Dominio.ServicoModule;
+using Dominio.PessoaModule;
+using Aplicacao.FuncionarioModule;
 
 namespace IntegrationTests.FuncionarioModule
 {
     [TestClass]
     public class FuncionarioAppServiceTests
     {
-        Mock<Servico> servicoMock;
-        Servico servico;
-        Mock<IServicoRepository> mockRepoServico;
-        ServicosAppServices sut;
+        Mock<Funcionario> funcionarioMock;
+        Funcionario funcionario;
+        Mock<IFuncionarioRepository> mockRepoFuncionario;
+        FuncionarioAppServices sut;
 
         [TestInitialize]
         public void InicializarClasse()
         {
-            servicoMock = new();
-            servicoMock.Setup(x => x.Validar()).Returns("");
+            funcionarioMock = new();
+            funcionarioMock.Setup(x => x.Validar()).Returns("");
 
-            servico = servicoMock.Object;
+            funcionario = funcionarioMock.Object;
 
-
-            mockRepoServico = new();
-            sut = new ServicosAppServices(mockRepoServico.Object);
+            mockRepoFuncionario = new();
+            sut = new FuncionarioAppServices(mockRepoFuncionario.Object);
         }
         [TestMethod]
-        public void Deve_inserir_veiculo()
+        public void Deve_inserir_funcionario()
         {
-            sut.Inserir(servico).Resultado.Should().Be(EnumResultado.Sucesso);
-            mockRepoServico.Verify(x => x.Inserir(servico));
+            sut.Inserir(funcionario).Resultado.Should().Be(EnumResultado.Sucesso);
+            mockRepoFuncionario.Verify(x => x.Inserir(funcionario));
         }
         [TestMethod]
-        public void Nao_deve_inserir_veiculo()
+        public void Nao_deve_inserir_funcionario()
         {
-            servicoMock.Setup(x => x.Validar()).Returns("INVÁLIDO");
-            servico = servicoMock.Object;
+            funcionarioMock.Setup(x => x.Validar()).Returns("INVÁLIDO");
+            funcionario = funcionarioMock.Object;
 
-            sut.Inserir(servico).Resultado.Should().Be(EnumResultado.Falha);
-            mockRepoServico.VerifyNoOtherCalls();
+            sut.Inserir(funcionario).Resultado.Should().Be(EnumResultado.Falha);
+            mockRepoFuncionario.VerifyNoOtherCalls();
         }
         [TestMethod]
-        public void Deve_remover_veiculo()
+        public void Deve_remover_funcionario()
         {
-            sut.Excluir(servico.Id);
-            mockRepoServico.Verify(x => x.Excluir(servico.Id, null));
+            sut.Excluir(funcionario.Id);
+            mockRepoFuncionario.Verify(x => x.Excluir(funcionario.Id, null));
         }
-        // VERIFICAR DEPOIS
-        //[TestMethod]
-        //public void Nao_deve_remover_veiculo()
-        //{
-        //    sut.Excluir(543);
-        //    mockrepoVeiculo.Verify(x => x.Excluir(veiculo.Id, null));
-        //}
         [TestMethod]
-        public void Deve_editar_veiculo()
+        public void Deve_editar_funcionario()
         {
-            sut.Editar(servico.Id, servico);
-            mockRepoServico.Verify(x => x.Editar(servico.Id, servico));
+            sut.Editar(funcionario.Id, funcionario);
+            mockRepoFuncionario.Verify(x => x.Editar(funcionario.Id, funcionario));
         }
     }
 }

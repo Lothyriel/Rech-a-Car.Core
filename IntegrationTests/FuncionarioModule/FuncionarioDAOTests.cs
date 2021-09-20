@@ -9,7 +9,7 @@ using IntegrationTests.Shared;
 namespace IntegrationTests.FuncionarioModule
 {
     [TestClass]
-    public class FuncionarioDAOtTests
+    public class FuncionarioDAOTests
     {
         FuncionarioDAO controlador = new();
         Image imagem = Image.FromFile(@"..\..\..\Resources\user.png");
