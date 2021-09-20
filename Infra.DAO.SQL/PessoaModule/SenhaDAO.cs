@@ -1,4 +1,5 @@
-﻿using Infra.DAO.Shared;
+﻿using Dominio.Entities.PessoaModule;
+using Infra.DAO.Shared;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;
 using System.Collections.Generic;
@@ -88,15 +89,5 @@ namespace Infra.DAO.PessoaModule
                                         numBytesRequested: 256 / 8));
         }
 
-        public class Senha
-        {
-            public Senha(byte[] salt, string hash)
-            {
-                Salt = salt;
-                Hash = hash;
-            }
-            public byte[] Salt { get; }
-            public string Hash { get; }
-        }
     }
 }

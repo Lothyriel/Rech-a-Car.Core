@@ -11,5 +11,15 @@ namespace Aplicacao.FuncionarioModule
         {
             Repositorio = repositorio;
         }
+
+        public override ResultadoOperacao Inserir(Funcionario entidade)
+        {
+            var inserir = base.Inserir(entidade);
+
+            if (inserir.Resultado == EnumResultado.Falha)
+                return inserir;
+
+            return inserir;
+        }
     }
 }

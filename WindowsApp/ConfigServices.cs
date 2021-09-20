@@ -72,6 +72,7 @@ namespace WindowsApp
             var cliente = new ClienteDAO();
             var pjRepo = new ClientePJDAO();
             var pfRepo = new ClientePFDAO();
+            var cnhRepo = new CnhDAO();
 
             var aluguelFechadoRepo = new AluguelFechadoDAO();
 
@@ -83,7 +84,7 @@ namespace WindowsApp
             Services.CupomServices = new CupomAppServices(cupomRepo);
             Services.ParceiroServices = new ParceiroAppServices(parceiro);
             Services.ServicosServices = new ServicosAppServices(servicoRepo);
-            Services.ClienteServices = new ClienteAppServices(cliente, servicoRepo);
+            Services.ClienteServices = new ClienteAppServices(cliente, cnhRepo);
             Services.ClientePJServices = new ClientePJAppServices(pjRepo);
             Services.ClientePFServices = new ClientePFAppServices(pfRepo);
             Services.MotoristaServices = new MotoristaAppServices(motoristaRepo);
