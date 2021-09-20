@@ -9,7 +9,7 @@ using WindowsApp.Shared;
 
 namespace WindowsApp.AluguelModule
 {
-    public partial class FechamentoAluguel : CadastroEntidade<AluguelFechado>, IVisualizavel //Form, IVisualizavel//
+    public partial class FechamentoAluguel : CadastroEntidade<AluguelFechado>, IVisualizavel //Form, IVisualizavel
     {
         public readonly Aluguel aluguel;
 
