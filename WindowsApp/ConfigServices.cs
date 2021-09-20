@@ -80,6 +80,7 @@ namespace WindowsApp
             var servicoRepo = new ServicoDAO();
             var cupomRepo = new CupomDAO();
             var relatorioRepo = new RelatorioDAO();
+            var senhaRepo = new SenhaDAO();
 
             Services.CupomServices = new CupomAppServices(cupomRepo);
             Services.ParceiroServices = new ParceiroAppServices(parceiro);
@@ -89,7 +90,7 @@ namespace WindowsApp
             Services.ClientePFServices = new ClientePFAppServices(pfRepo);
             Services.MotoristaServices = new MotoristaAppServices(motoristaRepo);
             Services.CategoriaServices = new CategoriaAppServices(categoriaRepo);
-            Services.FuncionarioServices = new FuncionarioAppServices(funcionarioRepo);
+            Services.FuncionarioServices = new FuncionarioAppServices(funcionarioRepo, senhaRepo);
             Services.VeiculoServices = new VeiculoAppServices(veiculoRepo, categoriaRepo);
             Services.AluguelFechadoServices = new AluguelFechadoAppServices(aluguelFechadoRepo,servicoRepo, veiculoRepo);
             Services.AluguelServices = new AluguelAppServices(aluguelRepo, RelatorioAluguel, relatorioRepo, servicoRepo, cupomRepo);

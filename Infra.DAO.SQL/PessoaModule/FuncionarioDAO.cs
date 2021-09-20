@@ -91,6 +91,9 @@ namespace Infra.DAO.PessoaModule
         public override string sqlExcluir => sqlExcluirFuncionario;
         public override string sqlExists => sqlExisteFuncionario;
 
+
+        SenhaDAO SenhaDAO = new SenhaDAO();
+
         public override void Inserir(Funcionario entidade)
         {
             base.Inserir(entidade);
