@@ -83,7 +83,7 @@ namespace WindowsApp
             Services.CupomServices = new CupomAppServices(cupomRepo);
             Services.ParceiroServices = new ParceiroAppServices(parceiro);
             Services.ServicosServices = new ServicosAppServices(servicoRepo);
-            Services.ClienteServices = new ClienteAppServices(cliente);
+            Services.ClienteServices = new ClienteAppServices(cliente, servicoRepo);
             Services.ClientePJServices = new ClientePJAppServices(pjRepo);
             Services.ClientePFServices = new ClientePFAppServices(pfRepo);
             Services.MotoristaServices = new MotoristaAppServices(motoristaRepo);

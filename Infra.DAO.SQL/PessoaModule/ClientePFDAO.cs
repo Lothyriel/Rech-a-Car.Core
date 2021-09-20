@@ -73,16 +73,7 @@ namespace Infra.DAO.PessoaModule
         public override string sqlEditar => sqlEditarClientePF;
         public override string sqlExcluir => sqlExcluirClientePF;
         public override string sqlExists => sqlExisteClientePF;
-        public override void Inserir(ClientePF cliente)
-        {
-            new CnhDAO().Inserir(cliente.Cnh);
-            base.Inserir(cliente);
-        }
-        public override void Editar(int id, ClientePF cliente)
-        {
-            new CnhDAO().Editar(cliente.Cnh.Id, cliente.Cnh);
-            base.Editar(id, cliente);
-        }
+
         public override ClientePF ConverterEmEntidade(IDataReader reader)
         {
             var id = Convert.ToInt32(reader["ID"]);
