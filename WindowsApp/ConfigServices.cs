@@ -90,7 +90,7 @@ namespace WindowsApp
             Services.CategoriaServices = new CategoriaAppServices(categoriaRepo);
             Services.FuncionarioServices = new FuncionarioAppServices(funcionarioRepo);
             Services.VeiculoServices = new VeiculoAppServices(veiculoRepo, categoriaRepo);
-            Services.AluguelFechadoServices = new AluguelFechadoAppServices(aluguelFechadoRepo, veiculoRepo);
+            Services.AluguelFechadoServices = new AluguelFechadoAppServices(aluguelFechadoRepo,servicoRepo, veiculoRepo);
             Services.AluguelServices = new AluguelAppServices(aluguelRepo, RelatorioAluguel, relatorioRepo, servicoRepo, cupomRepo);
         }
     }
