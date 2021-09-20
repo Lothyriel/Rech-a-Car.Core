@@ -20,13 +20,13 @@ namespace IntegrationTests.VeiculoModule
         VeiculoAppServices sut;
 
        [TestInitialize]
-        public void InicializarTestes()
+        public void InicializarClasse()
         {
             veiculoMock = new();
             veiculoMock.Setup(x => x.Validar()).Returns("");
 
             veiculo = veiculoMock.Object;
-
+                    
 
             mockrepoVeiculo = new();
             mockrepoCategoria = new();
