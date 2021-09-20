@@ -1,10 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Aplicacao.ServicosModule;
 using Aplicacao.Shared;
-using Dominio.PessoaModule;
-using Aplicacao.FuncionarioModule;
 using Dominio.CupomModule;
 using Aplicacao.CupomModule;
 
