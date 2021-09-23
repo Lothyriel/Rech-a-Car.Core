@@ -72,7 +72,7 @@ namespace WindowsApp
             var cliente = new ClienteDAO();
             var pjRepo = new ClientePJDAO();
             var pfRepo = new ClientePFDAO();
-            var cnhRepo = new CnhDAO();
+
 
             var aluguelFechadoRepo = new AluguelFechadoDAO();
 
@@ -80,6 +80,7 @@ namespace WindowsApp
             var servicoRepo = new ServicoDAO();
             var cupomRepo = new CupomDAO();
             var relatorioRepo = new RelatorioDAO();
+            var cnhRepo = new CnhDAO();
             var senhaRepo = new SenhaDAO();
 
             Services.CupomServices = new CupomAppServices(cupomRepo);
