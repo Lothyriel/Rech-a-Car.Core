@@ -8,6 +8,9 @@ namespace Dominio.ParceiroModule
         {
             this.nome = parceiro;
         }
+        public Parceiro()
+        {
+        }
 
         public string nome { get; set; }
         public override string Validar()

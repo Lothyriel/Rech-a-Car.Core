@@ -4,9 +4,9 @@ using FluentAssertions;
 using Infra.DAO.CupomModule;
 using Infra.DAO.ParceiroModule;
 using Infra.DAO.Shared;
+using IntegrationTests.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using IntegrationTests.Shared;
 
 namespace IntegrationTests.CupomModule
 {
@@ -25,7 +25,7 @@ namespace IntegrationTests.CupomModule
         public void Deve_Inserir_Novo_Cupom()
         {
             var parceiro = new Parceiro("Desconto do Deko");
-            var cupom = new Cupom("Deko", 50, 0, new DateTime(2021, 08, 26), parceiro, 230);
+            var cupom = new Cupom("Deko", 50, 0, new DateTime(2021, 08, 26), parceiro, 230,0);
 
             //action
             ParceiroDAO.Inserir(parceiro);
@@ -40,8 +40,8 @@ namespace IntegrationTests.CupomModule
         {
             //arrange
             var parceiro = new Parceiro("Desconto do Deko");
-            var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26).Date, parceiro, 300);
-            var cupomAtualizado = new Cupom("Deko-5946", 10, 0, new DateTime(2021, 08, 26).Date, parceiro, 250);
+            var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26).Date, parceiro, 300,0);
+            var cupomAtualizado = new Cupom("Deko-5946", 10, 0, new DateTime(2021, 08, 26).Date, parceiro, 250,0);
 
             //action
             ParceiroDAO.Inserir(parceiro);
@@ -57,7 +57,7 @@ namespace IntegrationTests.CupomModule
         {
             //arrange
             var parceiro = new Parceiro("Desconto do Deko");
-            var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26), parceiro, 300);
+            var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26), parceiro, 300,0);
 
             //action
             ParceiroDAO.Inserir(parceiro);
@@ -72,7 +72,7 @@ namespace IntegrationTests.CupomModule
         {
             //arrange
             var parceiro = new Parceiro("Desconto do Deko");
-            var cupom = new Cupom("Deko-1236", 0, 50, new DateTime(2021, 08, 26), parceiro, 300);
+            var cupom = new Cupom("Deko-1236", 0, 50, new DateTime(2021, 08, 26), parceiro, 300,0);
 
             //action
             ParceiroDAO.Inserir(parceiro);
@@ -87,7 +87,7 @@ namespace IntegrationTests.CupomModule
         {
             //arrange
             var parceiro = new Parceiro("Desconto do Deko");
-            var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26), parceiro, 300);
+            var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26), parceiro, 300,0);
 
             //action
             ParceiroDAO.Inserir(parceiro);
@@ -97,6 +97,12 @@ namespace IntegrationTests.CupomModule
             //assert
             var cupomEncrontrado = CupomDAO.GetById(cupom.Id);
             cupomEncrontrado.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void Deve_Ordenar_Cupons()
+        {
+            throw new NotImplementedException();
         }
     }
 }

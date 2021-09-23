@@ -16,6 +16,10 @@ namespace Dominio.PessoaModule.ClienteModule
             Documento = documento;
             Email = email;
         }
+        public ClientePJ()
+        {
+
+        }
         public override string Validar()
         {
             string validacao = base.Validar();

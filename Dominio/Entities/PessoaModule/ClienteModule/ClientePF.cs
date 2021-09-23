@@ -18,6 +18,10 @@ namespace Dominio.PessoaModule.ClienteModule
             DataNascimento = dataNascimento;
             Email = email;
         }
+        public ClientePF()
+        {
+
+        }
         public int GetIdade()
         {
             return (DateTime.Now - DataNascimento).Days / 365;

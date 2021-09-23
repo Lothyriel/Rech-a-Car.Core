@@ -1,5 +1,6 @@
 ﻿using ConfigurationManager;
 using Dominio.PessoaModule;
+using Dominio.Repositories;
 using Infra.DAO.PessoaModule;
 using System;
 using System.Windows.Forms;
@@ -9,6 +10,9 @@ namespace WindowsApp
     public partial class Login : Form
     {
         private IFuncionarioRepository FuncionarioDAO = ConfigServices.Services.FuncionarioServices.Repositorio;
+
+        private ISenhaRepository SenhaRepo = ConfigServices.Services.FuncionarioServices.RepositorioSenha;
+
         private Funcionario funcionario;
 
         public Login()
@@ -31,7 +35,7 @@ namespace WindowsApp
 
             funcionario = FuncionarioDAO.GetByUserName(tbUsuario.Text);
 
-            if (!SenhaDAO.SenhaCorreta(funcionario.Id, senha))
+            if (!SenhaRepo.SenhaCorreta(funcionario.Id, senha))
                 return ResultadoLogin.SenhaErrada;
 
             return ResultadoLogin.Sucesso;

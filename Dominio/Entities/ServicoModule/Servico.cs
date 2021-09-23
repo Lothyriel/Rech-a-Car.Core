@@ -9,6 +9,9 @@ namespace Dominio.ServicoModule
             Nome = nome;
             Taxa = taxa;
         }
+        public Servico()
+        {
+        }
 
         public string Nome { get; set; }
         public double Taxa { get; set; }

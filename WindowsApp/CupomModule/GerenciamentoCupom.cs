@@ -22,7 +22,8 @@ namespace WindowsApp.WindowsApp.CupomModule
                 new DataGridViewTextBoxColumn { DataPropertyName = "ValorFixo", HeaderText = "Valor Fixo"},
                 new DataGridViewTextBoxColumn { DataPropertyName = "DataValidade", HeaderText = "Data Validade"},
                 new DataGridViewTextBoxColumn { DataPropertyName = "Parceiro", HeaderText = "Parceiro"},
-                new DataGridViewTextBoxColumn { DataPropertyName = "ValorMinimo", HeaderText = "Valor Mínimo"}
+                new DataGridViewTextBoxColumn { DataPropertyName = "ValorMinimo", HeaderText = "Valor Mínimo"},
+                new DataGridViewTextBoxColumn { DataPropertyName = "Usos", HeaderText = "Usos"}
             };
         }
         public override object[] ObterCamposLinha(Cupom cupom)
@@ -32,9 +33,10 @@ namespace WindowsApp.WindowsApp.CupomModule
                 cupom.Nome,
                 cupom.ValorPercentual,
                 cupom.ValorFixo,
-                cupom.DataValidade,
+                cupom.DataValidade.ToString("d"),
                 cupom.Parceiro,
-                cupom.ValorMinimo
+                cupom.ValorMinimo,
+                cupom.Usos
             }.ToArray();
         }
 

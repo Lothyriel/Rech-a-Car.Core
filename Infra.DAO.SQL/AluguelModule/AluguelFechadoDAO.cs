@@ -2,8 +2,6 @@
 using Dominio.AluguelModule;
 using Dominio.ServicoModule;
 using Infra.DAO.Shared;
-using Infra.DAO.SQL;
-using Infra.DAO.SQL.AluguelModule;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +10,7 @@ namespace Infra.DAO.AluguelModule
 {
     public class AluguelFechadoDAO : DAO<AluguelFechado>
     {
-        private AluguelDAO Controlador = new();
+        private AluguelDAO AluguelDAO = new();
 
         private const string sqlGetAlugueisFechados =
             @"SELECT *
@@ -36,7 +34,6 @@ namespace Infra.DAO.AluguelModule
         {
             entidade.Id = id;
             Db.Update(sqlFecharAluguel, Db.AdicionarParametro("ID", id, ObterParametrosRegistro(entidade)));
-            new ServicoDAO().DesalugarServicosAlugados(id);
         }
 
         public override void Excluir(int id, Type tipo = null)
@@ -62,7 +59,7 @@ namespace Infra.DAO.AluguelModule
 
         private AluguelFechado ConverterEmEntidade(IDataReader reader)
         {
-            var aluguel = Controlador.ConverterEmEntidade(reader);
+            var aluguel = AluguelDAO.ConverterEmEntidade(reader);
 
             var tanqueUtilizado = Convert.ToDouble(reader["TANQUE_UTILIZADO"]);
             var kmRodados = Convert.ToInt32(reader["KM_RODADOS"]);

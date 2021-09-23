@@ -2,8 +2,8 @@
 using FluentAssertions;
 using Infra.DAO.ParceiroModule;
 using Infra.DAO.Shared;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IntegrationTests.Shared;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntegrationTests.ParceiroModule
 {
@@ -16,7 +16,7 @@ namespace IntegrationTests.ParceiroModule
         [TestCleanup]
         public void LimparTestes()
         {
-            Db.Delete(TestExtensions.ResetId("TBCupons"));
+            Db.Delete(TestExtensions.ResetId("TBParceiro"));
         }
 
         [TestInitialize]
@@ -42,12 +42,6 @@ namespace IntegrationTests.ParceiroModule
             ParceiroDAO.Editar(parceiro.Id, parceiro);
 
             ParceiroDAO.GetById(parceiro.Id).nome.Should().NotBe(parceiroAnterior);
-        }
-
-        [TestMethod]
-        public void Deve_Visualizar_todos_as_categorias()
-        {
-            ParceiroDAO.Registros.Count.Should().Be(1);
         }
 
         [TestMethod]

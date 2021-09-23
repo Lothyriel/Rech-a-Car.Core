@@ -15,7 +15,7 @@ namespace WindowsApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            new ConfigServices(ConfigRepositories.SQL);
+            new ConfigServices(ConfigRepositories.SQL, ConfigRelatorio.PDF);
             new Login().Show();
 
             Task.Run(() => ConfigServices.Services.AluguelServices.IniciaLoopEnvioEmails());

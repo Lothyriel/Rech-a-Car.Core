@@ -3,8 +3,8 @@ using Dominio.VeiculoModule;
 using FluentAssertions;
 using Infra.DAO.Shared;
 using Infra.DAO.VeiculoModule;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IntegrationTests.Shared;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntegrationTests.CategoriaModule
 {

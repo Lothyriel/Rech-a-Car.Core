@@ -55,7 +55,7 @@ namespace WindowsApp.ClienteModule
                 return;
 
             var pjRepo = ConfigServices.Services.ClientePJServices;
-                TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroClientePJ().ConfigurarEditar(pjRepo.GetById(Empresa.Id));
+            TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroClientePJ().ConfigurarEditar(pjRepo.GetById(Empresa.Id));
         }
     }
 }

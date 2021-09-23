@@ -1,5 +1,4 @@
 ﻿using Aplicacao.VeiculoModule;
-using Dominio.Shared;
 using Dominio.VeiculoModule;
 using System;
 using System.Drawing;
@@ -14,9 +13,9 @@ namespace WindowsApp.VeiculoModule
         public override VeiculoAppServices Services { get; }
         private Bitmap imagem;
 
-        public CadastroVeiculo(VeiculoAppServices services)
+        public CadastroVeiculo()
         {
-            Services = services;
+            Services = ConfigServices.Services.VeiculoServices;
             InitializeComponent();
             cb_cambio.SelectedIndex = 0;
             cb_capacidade.SelectedIndex = 1;

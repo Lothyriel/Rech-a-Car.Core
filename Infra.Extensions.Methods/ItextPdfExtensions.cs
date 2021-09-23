@@ -1,14 +1,9 @@
 ﻿using iText.IO.Image;
 using iText.Kernel.Pdf;
 using iText.Layout;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infra.Extensions.Methods
 {

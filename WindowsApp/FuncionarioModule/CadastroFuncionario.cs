@@ -9,7 +9,7 @@ using WindowsApp.Shared;
 namespace WindowsApp.FuncionarioModule
 {
     public partial class CadastroFuncionario : CadastroEntidade<Funcionario> //Form//
-    { 
+    {
 
         public override FuncionarioAppServices Services { get; }
 

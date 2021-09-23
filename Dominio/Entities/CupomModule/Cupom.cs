@@ -6,9 +6,7 @@ namespace Dominio.CupomModule
 {
     public class Cupom : Entidade
     {
-
-
-        public Cupom(string nome, int valorPercentual, double valorFixo, DateTime dataValidade, Parceiro parceiro, double valorMInimo)
+        public Cupom(string nome, int valorPercentual, double valorFixo, DateTime dataValidade, Parceiro parceiro, double valorMInimo, int usos)
         {
             Nome = nome;
             ValorPercentual = valorPercentual;
@@ -16,20 +14,20 @@ namespace Dominio.CupomModule
             DataValidade = dataValidade;
             Parceiro = parceiro;
             ValorMinimo = valorMInimo;
+            Usos = usos;
+        }
+        public Cupom()
+        {
 
         }
 
         public string Nome { get; }
-
         public int ValorPercentual { get; }
-
         public double ValorFixo { get; }
-
         public DateTime DataValidade { get; }
-
         public Parceiro Parceiro { get; }
-
         public double ValorMinimo { get; }
+        public int Usos { get; set; }
 
         public double CalcularDesconto(double valorTotal)
         {

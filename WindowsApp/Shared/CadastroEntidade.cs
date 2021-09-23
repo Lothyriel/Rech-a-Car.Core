@@ -29,7 +29,9 @@ namespace WindowsApp.Shared
             }
 
             T entidade = GetNovaEntidade();
+
             ResultadoOperacao resultado;
+
             if (this.entidade == null)
                 resultado = Services.Inserir(entidade);
             else
@@ -40,13 +42,13 @@ namespace WindowsApp.Shared
 
             if (mostraSucesso)
                 MessageBox.Show(resultado.Mensagem, resultado.Resultado.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Information);
-            return true;
+
+            return resultado.Resultado == EnumResultado.Sucesso;
         }
         protected virtual void AdicionarDependencias(T entidade)
         {
             return;//if entidade tem chaves estrangeiras adicionarDependencias else return;
         }
-
         protected virtual string ValidacaoCampos() { return string.Empty; }
     }
 }

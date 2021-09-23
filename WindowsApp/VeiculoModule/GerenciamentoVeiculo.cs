@@ -12,12 +12,11 @@ namespace WindowsApp.VeiculoModule
         private Aluguel Aluguel { get; }
         public GerenciamentoVeiculo(string titulo = "Gerenciamento de Veículo", TipoTela tipo = TipoTela.CadastroBasico, Aluguel aluguel = null) : base(titulo, tipo)
         {
-            Cadastro = new CadastroVeiculo(ConfigServices.Services.VeiculoServices);
             Aluguel = aluguel;
             if (tipo == TipoTela.ApenasConfirma)
                 AtualizarRegistros(Cadastro.Services.Repositorio.GetDisponiveis());
         }
-        protected override CadastroVeiculo Cadastro { get; }
+        protected override CadastroVeiculo Cadastro => new CadastroVeiculo();
         protected override void SalvarAluguel()
         {
             Aluguel.Veiculo = GetEntidadeSelecionado();

@@ -1,4 +1,5 @@
 ﻿using Dominio.Shared;
+using System.Collections.Generic;
 
 namespace Dominio.CupomModule
 {

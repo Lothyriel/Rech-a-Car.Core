@@ -1,8 +1,8 @@
 ﻿using Aplicacao.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
-using Dominio.Shared;
 using System;
+using System.Windows.Forms;
 using WindowsApp.Shared;
 
 namespace WindowsApp.ClienteModule

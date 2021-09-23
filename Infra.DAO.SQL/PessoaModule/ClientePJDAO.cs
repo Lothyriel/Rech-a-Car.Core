@@ -135,8 +135,9 @@ namespace Infra.DAO.PessoaModule
             return parametros;
         }
     }
-    public class MotoristaDAO : DAO<Motorista>
+    public class MotoristaDAO : DAO<Motorista>, IRepository<Motorista>
     {
+
         #region Queries
         private const string sqlSelecionarMotoristaPorId =
             @"SELECT *
