@@ -15,7 +15,7 @@ using WindowsApp.VeiculoModule;
 
 namespace WindowsApp.AluguelModule
 {
-    public partial class ResumoAluguel : CadastroEntidade<Aluguel>// Form // 
+    public partial class ResumoAluguel : CadastroEntidade<Aluguel>//Form// 
     {
         private readonly Aluguel Aluguel;
         public ResumoAluguel(Aluguel aluguel = null)
@@ -162,7 +162,7 @@ namespace WindowsApp.AluguelModule
             Aluguel.DataDevolucao = dtDevolucao;
 
             if (cbPlano.SelectedItem != null)
-                Aluguel.TipoPlano = (Plano)Enum.Parse(typeof(Plano), cbPlano.SelectedItem.ToString());
+                Aluguel.TipoPlano = (Plano)cbPlano.SelectedIndex;
 
             lbValor.Text = Aluguel.CalcularTotal().ToString();
             return Aluguel.CalcularTotal();

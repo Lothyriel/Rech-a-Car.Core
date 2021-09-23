@@ -9,7 +9,7 @@ using WindowsApp.Shared;
 
 namespace WindowsApp.AluguelModule
 {
-    public partial class FechamentoAluguel : CadastroEntidade<AluguelFechado>, IVisualizavel //Form, IVisualizavel//
+    public partial class FechamentoAluguel : CadastroEntidade<AluguelFechado>, IVisualizavel //Form//
     {
         public readonly Aluguel aluguel;
 
@@ -101,7 +101,6 @@ namespace WindowsApp.AluguelModule
             if (!Salva())
                 return;
 
-            Services.RepositorioVeiculo.AdicionarQuilometragem(entidade.Veiculo, KmRodados());
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoAluguel();
         }
         private void tb_TanqueAtual_TextChanged(object sender, EventArgs e)

@@ -17,13 +17,14 @@ namespace Aplicacao.AluguelModule
             Repositorio = repositorio;
             ServicoRepository = servicoRepository;
         }
-        public override ResultadoOperacao Editar(int id, AluguelFechado entidade)
+        public override ResultadoOperacao Editar(int id, AluguelFechado aluguel)
         {
-            var edicao = base.Editar(id, entidade);
+            var edicao = base.Editar(id, aluguel);
             if (edicao.Resultado == EnumResultado.Falha)
                 return edicao;
 
             ServicoRepository.DesalugarServicosAlugados(id);
+            RepositorioVeiculo.AdicionarQuilometragem(aluguel.Veiculo, aluguel.KmRodados);
             return edicao;
         }
     }
