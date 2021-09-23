@@ -51,9 +51,10 @@ namespace WindowsApp.ClienteModule
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(216, 9);
+            this.label1.Location = new System.Drawing.Point(252, 10);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(225, 25);
             this.label1.TabIndex = 0;
@@ -62,9 +63,10 @@ namespace WindowsApp.ClienteModule
             // lbNome
             // 
             this.lbNome.AutoSize = true;
-            this.lbNome.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNome.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbNome.ForeColor = System.Drawing.Color.White;
-            this.lbNome.Location = new System.Drawing.Point(48, 180);
+            this.lbNome.Location = new System.Drawing.Point(56, 208);
+            this.lbNome.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbNome.Name = "lbNome";
             this.lbNome.Size = new System.Drawing.Size(53, 21);
             this.lbNome.TabIndex = 1;
@@ -72,18 +74,20 @@ namespace WindowsApp.ClienteModule
             // 
             // tbNome
             // 
-            this.tbNome.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNome.Location = new System.Drawing.Point(107, 177);
+            this.tbNome.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbNome.Location = new System.Drawing.Point(125, 204);
+            this.tbNome.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbNome.Name = "tbNome";
-            this.tbNome.Size = new System.Drawing.Size(204, 29);
+            this.tbNome.Size = new System.Drawing.Size(237, 29);
             this.tbNome.TabIndex = 1;
             // 
             // lbTelefone
             // 
             this.lbTelefone.AutoSize = true;
-            this.lbTelefone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTelefone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbTelefone.ForeColor = System.Drawing.Color.White;
-            this.lbTelefone.Location = new System.Drawing.Point(34, 226);
+            this.lbTelefone.Location = new System.Drawing.Point(40, 261);
+            this.lbTelefone.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTelefone.Name = "lbTelefone";
             this.lbTelefone.Size = new System.Drawing.Size(67, 21);
             this.lbTelefone.TabIndex = 1;
@@ -92,9 +96,10 @@ namespace WindowsApp.ClienteModule
             // lbEndereco
             // 
             this.lbEndereco.AutoSize = true;
-            this.lbEndereco.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEndereco.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbEndereco.ForeColor = System.Drawing.Color.White;
-            this.lbEndereco.Location = new System.Drawing.Point(27, 272);
+            this.lbEndereco.Location = new System.Drawing.Point(31, 314);
+            this.lbEndereco.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbEndereco.Name = "lbEndereco";
             this.lbEndereco.Size = new System.Drawing.Size(74, 21);
             this.lbEndereco.TabIndex = 1;
@@ -102,18 +107,20 @@ namespace WindowsApp.ClienteModule
             // 
             // tbEndereco
             // 
-            this.tbEndereco.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbEndereco.Location = new System.Drawing.Point(107, 269);
+            this.tbEndereco.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbEndereco.Location = new System.Drawing.Point(125, 310);
+            this.tbEndereco.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbEndereco.Name = "tbEndereco";
-            this.tbEndereco.Size = new System.Drawing.Size(204, 29);
+            this.tbEndereco.Size = new System.Drawing.Size(237, 29);
             this.tbEndereco.TabIndex = 3;
             // 
             // lbCPF
             // 
             this.lbCPF.AutoSize = true;
-            this.lbCPF.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCPF.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbCPF.ForeColor = System.Drawing.Color.White;
-            this.lbCPF.Location = new System.Drawing.Point(383, 180);
+            this.lbCPF.Location = new System.Drawing.Point(447, 208);
+            this.lbCPF.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCPF.Name = "lbCPF";
             this.lbCPF.Size = new System.Drawing.Size(37, 21);
             this.lbCPF.TabIndex = 1;
@@ -122,9 +129,10 @@ namespace WindowsApp.ClienteModule
             // lbNascimento
             // 
             this.lbNascimento.AutoSize = true;
-            this.lbNascimento.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNascimento.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbNascimento.ForeColor = System.Drawing.Color.White;
-            this.lbNascimento.Location = new System.Drawing.Point(327, 272);
+            this.lbNascimento.Location = new System.Drawing.Point(382, 314);
+            this.lbNascimento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbNascimento.Name = "lbNascimento";
             this.lbNascimento.Size = new System.Drawing.Size(93, 21);
             this.lbNascimento.TabIndex = 1;
@@ -133,9 +141,10 @@ namespace WindowsApp.ClienteModule
             // lbCNH
             // 
             this.lbCNH.AutoSize = true;
-            this.lbCNH.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCNH.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbCNH.ForeColor = System.Drawing.Color.White;
-            this.lbCNH.Location = new System.Drawing.Point(377, 226);
+            this.lbCNH.Location = new System.Drawing.Point(440, 261);
+            this.lbCNH.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCNH.Name = "lbCNH";
             this.lbCNH.Size = new System.Drawing.Size(43, 21);
             this.lbCNH.TabIndex = 1;
@@ -143,12 +152,13 @@ namespace WindowsApp.ClienteModule
             // 
             // mtbNascimento
             // 
-            this.mtbNascimento.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mtbNascimento.Location = new System.Drawing.Point(426, 269);
+            this.mtbNascimento.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mtbNascimento.Location = new System.Drawing.Point(497, 310);
+            this.mtbNascimento.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.mtbNascimento.Mask = "00 / 00 / 0000";
             this.mtbNascimento.Name = "mtbNascimento";
-            this.mtbNascimento.Size = new System.Drawing.Size(211, 29);
-            this.mtbNascimento.TabIndex = 7;
+            this.mtbNascimento.Size = new System.Drawing.Size(245, 29);
+            this.mtbNascimento.TabIndex = 8;
             this.mtbNascimento.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.mtbNascimento.ValidatingType = typeof(System.DateTime);
             // 
@@ -157,9 +167,10 @@ namespace WindowsApp.ClienteModule
             this.btAdicionar.FlatAppearance.BorderSize = 0;
             this.btAdicionar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btAdicionar.Image = global::WindowsApp.Properties.Resources.check;
-            this.btAdicionar.Location = new System.Drawing.Point(581, 430);
+            this.btAdicionar.Location = new System.Drawing.Point(678, 496);
+            this.btAdicionar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btAdicionar.Name = "btAdicionar";
-            this.btAdicionar.Size = new System.Drawing.Size(75, 80);
+            this.btAdicionar.Size = new System.Drawing.Size(88, 92);
             this.btAdicionar.TabIndex = 8;
             this.btAdicionar.UseVisualStyleBackColor = true;
             this.btAdicionar.Click += new System.EventHandler(this.btAdicionar_Click);
@@ -167,7 +178,7 @@ namespace WindowsApp.ClienteModule
             // cbTipoCNH
             // 
             this.cbTipoCNH.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTipoCNH.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbTipoCNH.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cbTipoCNH.FormattingEnabled = true;
             this.cbTipoCNH.Items.AddRange(new object[] {
             "A",
@@ -176,59 +187,65 @@ namespace WindowsApp.ClienteModule
             "C",
             "D",
             "E"});
-            this.cbTipoCNH.Location = new System.Drawing.Point(581, 223);
+            this.cbTipoCNH.Location = new System.Drawing.Point(678, 257);
+            this.cbTipoCNH.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbTipoCNH.Name = "cbTipoCNH";
-            this.cbTipoCNH.Size = new System.Drawing.Size(56, 29);
-            this.cbTipoCNH.TabIndex = 6;
+            this.cbTipoCNH.Size = new System.Drawing.Size(65, 29);
+            this.cbTipoCNH.TabIndex = 7;
             // 
             // tbCPF
             // 
-            this.tbCPF.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbCPF.Location = new System.Drawing.Point(426, 177);
+            this.tbCPF.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbCPF.Location = new System.Drawing.Point(497, 204);
+            this.tbCPF.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbCPF.Mask = "000.000.000-00";
             this.tbCPF.Name = "tbCPF";
-            this.tbCPF.Size = new System.Drawing.Size(211, 29);
-            this.tbCPF.TabIndex = 4;
+            this.tbCPF.Size = new System.Drawing.Size(245, 29);
+            this.tbCPF.TabIndex = 5;
             this.tbCPF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbCPF.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // tbTelefone
             // 
-            this.tbTelefone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbTelefone.Location = new System.Drawing.Point(107, 223);
+            this.tbTelefone.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbTelefone.Location = new System.Drawing.Point(125, 257);
+            this.tbTelefone.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbTelefone.Mask = "(99) 00000-0000";
             this.tbTelefone.Name = "tbTelefone";
-            this.tbTelefone.Size = new System.Drawing.Size(204, 29);
+            this.tbTelefone.Size = new System.Drawing.Size(237, 29);
             this.tbTelefone.TabIndex = 2;
             this.tbTelefone.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbTelefone.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // tbCNH
             // 
-            this.tbCNH.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbCNH.Location = new System.Drawing.Point(426, 223);
+            this.tbCNH.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbCNH.Location = new System.Drawing.Point(497, 257);
+            this.tbCNH.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbCNH.Mask = "00000000000";
             this.tbCNH.Name = "tbCNH";
-            this.tbCNH.Size = new System.Drawing.Size(149, 29);
-            this.tbCNH.TabIndex = 5;
+            this.tbCNH.Size = new System.Drawing.Size(173, 29);
+            this.tbCNH.TabIndex = 6;
             this.tbCNH.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbCNH.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.tbCNH.ValidatingType = typeof(int);
             // 
             // tb_email
             // 
-            this.tb_email.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_email.Location = new System.Drawing.Point(107, 316);
+            this.tb_email.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tb_email.Location = new System.Drawing.Point(125, 365);
+            this.tb_email.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_email.Name = "tb_email";
-            this.tb_email.Size = new System.Drawing.Size(204, 29);
-            this.tb_email.TabIndex = 7;
+            this.tb_email.Size = new System.Drawing.Size(237, 29);
+            this.tb_email.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(27, 319);
+            this.label2.Location = new System.Drawing.Point(31, 368);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 21);
             this.label2.TabIndex = 13;
@@ -236,10 +253,10 @@ namespace WindowsApp.ClienteModule
             // 
             // CadastroClientePF
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(33)))), ((int)(((byte)(34)))));
-            this.ClientSize = new System.Drawing.Size(668, 522);
+            this.ClientSize = new System.Drawing.Size(779, 602);
             this.Controls.Add(this.tb_email);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbCNH);
@@ -257,6 +274,7 @@ namespace WindowsApp.ClienteModule
             this.Controls.Add(this.tbNome);
             this.Controls.Add(this.lbNome);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "CadastroClientePF";
             this.Text = "CadastrarClientePF";
             this.ResumeLayout(false);

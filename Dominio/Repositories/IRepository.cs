@@ -11,7 +11,6 @@ namespace Dominio.Shared
         bool Existe(int id, Type tipo = null);
         T GetById(int id, Type tipo = null);
         List<T> Registros { get; }
-
         List<T> FiltroGenerico(string filtro);
     }
 }

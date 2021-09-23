@@ -1,4 +1,5 @@
 ﻿using Dominio.PessoaModule;
+using Dominio.Repositories;
 using Infra.DAO.Shared;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Data;
 
 namespace Infra.DAO.PessoaModule
 {
-    public class CnhDAO
+    public class CnhDAO : ICnhRepository
     {
         #region Queries
         private const string sqlSelecionarCnhPorIdCondutor =

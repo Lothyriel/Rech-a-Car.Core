@@ -18,6 +18,8 @@ namespace WindowsApp.AluguelModule
     public partial class ResumoAluguel : CadastroEntidade<Aluguel>//Form// 
     {
         private readonly Aluguel Aluguel;
+        private Cupom cupom;
+
         public ResumoAluguel(Aluguel aluguel = null)
         {
             Services = ConfigServices.Services.AluguelServices;
@@ -207,6 +209,15 @@ namespace WindowsApp.AluguelModule
         {
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoVeiculo("Selecione um Veículo", TipoTela.ApenasConfirma, Aluguel);
         }
+        private void label18_DoubleClick(object sender, EventArgs e)
+        {
+            TelaPrincipal.Instancia.FormAtivo = new GerenciamentoCliente("Selecione um Cliente", TipoTela.ApenasConfirma, Aluguel);
+        }
+
+        private void label19_DoubleClick(object sender, EventArgs e)
+        {
+            TelaPrincipal.Instancia.FormAtivo = new GerenciamentoVeiculo("Selecione um Veículo", TipoTela.ApenasConfirma, Aluguel);
+        }
         private void bt_AddServico_Click(object sender, EventArgs e)
         {
             var selecionado = listServicos.SelectedIndex;
@@ -248,20 +259,23 @@ namespace WindowsApp.AluguelModule
             else
                 bt_RemoveServico.Enabled = NaotemZero;
         }
-        private void bt_Aplicar_Click(object sender, EventArgs e)
+        private void tb_Cupom_TextChanged(object sender, EventArgs e)
+        {
+            cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text);
+        }
+        #endregion
+
+        private void btAplicar_Click(object sender, EventArgs e)
         {
             double valorParcial = CalcularPrecoParcial();
-
-            Cupom cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text);
 
             if (cupom != null && valorParcial >= cupom.ValorMinimo)
             {
                 MessageBox.Show($"Cupom {cupom.Nome} aplicado com sucesso!", "Sucesso", MessageBoxButtons.OK);
             }
             else
-                MessageBox.Show($"Cupom {cupom.Nome} não existe ou o aluguel não atingiu o valor mínimo!", "Erro", MessageBoxButtons.OK);
-
+                MessageBox.Show($"Cupom {tb_Cupom.Text} não existe ou o aluguel não atingiu o valor mínimo!", "Erro", MessageBoxButtons.OK);
         }
-        #endregion
+
     }
 }

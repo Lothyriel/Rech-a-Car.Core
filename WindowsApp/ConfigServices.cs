@@ -73,22 +73,25 @@ namespace WindowsApp
             var pjRepo = new ClientePJDAO();
             var pfRepo = new ClientePFDAO();
 
+
             var aluguelFechadoRepo = new AluguelFechadoDAO();
 
             var aluguelRepo = new AluguelDAO();
             var servicoRepo = new ServicoDAO();
             var cupomRepo = new CupomDAO();
             var relatorioRepo = new RelatorioDAO();
+            var cnhRepo = new CnhDAO();
+            var senhaRepo = new SenhaDAO();
 
             Services.CupomServices = new CupomAppServices(cupomRepo);
             Services.ParceiroServices = new ParceiroAppServices(parceiro);
             Services.ServicosServices = new ServicosAppServices(servicoRepo);
-            Services.ClienteServices = new ClienteAppServices(cliente);
+            Services.ClienteServices = new ClienteAppServices(cliente, cnhRepo);
             Services.ClientePJServices = new ClientePJAppServices(pjRepo);
             Services.ClientePFServices = new ClientePFAppServices(pfRepo);
             Services.MotoristaServices = new MotoristaAppServices(motoristaRepo);
             Services.CategoriaServices = new CategoriaAppServices(categoriaRepo);
-            Services.FuncionarioServices = new FuncionarioAppServices(funcionarioRepo);
+            Services.FuncionarioServices = new FuncionarioAppServices(funcionarioRepo, senhaRepo);
             Services.VeiculoServices = new VeiculoAppServices(veiculoRepo, categoriaRepo);
             Services.AluguelFechadoServices = new AluguelFechadoAppServices(aluguelFechadoRepo,servicoRepo, veiculoRepo);
             Services.AluguelServices = new AluguelAppServices(aluguelRepo, RelatorioAluguel, relatorioRepo, servicoRepo, cupomRepo);

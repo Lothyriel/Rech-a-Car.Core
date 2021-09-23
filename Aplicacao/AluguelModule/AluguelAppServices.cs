@@ -66,8 +66,12 @@ namespace Aplicacao.AluguelModule
             if (insercao.Resultado == EnumResultado.Falha)
                 return insercao;
 
-            aluguel.Cupom.Usos++;
-            CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
+            if (aluguel.Cupom != null) 
+            {
+                aluguel.Cupom.Usos++;
+                CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
+            }
+
             ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
 
             var relatorio = Relatorio.GerarRelatorio(aluguel);
