@@ -9,7 +9,7 @@ using System.Drawing;
 namespace IntegrationTests.FuncionarioModule
 {
     [TestClass]
-    public class FuncionarioDAOtTests
+    public class FuncionarioDAOTests
     {
         FuncionarioDAO FuncionarioDAO = new();
         Image imagem = Image.FromFile(@"..\..\..\Resources\user.png");
