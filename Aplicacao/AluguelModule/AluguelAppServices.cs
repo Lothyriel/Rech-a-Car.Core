@@ -87,6 +87,18 @@ namespace Aplicacao.AluguelModule
             ServicoRepositorio.AlugarServicos(entidade.Id, entidade.Servicos);
             return edicao;
         }
+        public ResultadoOperacao ValidarCupom(Aluguel aluguel)
+        {
+            if (aluguel.Cupom == null)
+                return new ResultadoOperacao("Cupom não existe", EnumResultado.Falha);
+
+            var validacao = aluguel.ValidarCupom();
+
+            if (validacao == string.Empty)
+                return new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso);
+
+            return new ResultadoOperacao(validacao, EnumResultado.Falha);
+        }
     }
     [Serializable]
     public class FilaEmailVazia : Exception

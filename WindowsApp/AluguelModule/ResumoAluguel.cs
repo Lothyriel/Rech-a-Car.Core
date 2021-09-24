@@ -1,4 +1,5 @@
 ﻿using Aplicacao.AluguelModule;
+using Aplicacao.Shared;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.PessoaModule;
@@ -15,7 +16,7 @@ using WindowsApp.VeiculoModule;
 
 namespace WindowsApp.AluguelModule
 {
-    public partial class ResumoAluguel : CadastroEntidade<Aluguel>//Form// 
+    public partial class ResumoAluguel : CadastroEntidade<Aluguel>//Form // 
     {
         private readonly Aluguel Aluguel;
 
@@ -256,6 +257,12 @@ namespace WindowsApp.AluguelModule
                 bt_AddServico.Enabled = NaotemZero;
             else
                 bt_RemoveServico.Enabled = NaotemZero;
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var resultado = Services.ValidarCupom(GetNovaEntidade());
+
+            MessageBox.Show(resultado.Mensagem);
         }
         #endregion
     }
