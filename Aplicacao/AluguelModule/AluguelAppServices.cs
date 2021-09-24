@@ -62,7 +62,7 @@ namespace Aplicacao.AluguelModule
             Email.Envia(emailUsuario, titulo, corpoEmail, new List<Attachment>() { attachment });
             RelatorioRepositorio.MarcarEnviado(proxEnvio.Id);
 
-            NLogger.Logger.Info($"Email {proxEnvio.Id} Enviado");
+            NLogger.Logger.Info("Email {email.id} Enviado", proxEnvio.Id);
         }
         public override ResultadoOperacao Inserir(Aluguel aluguel)
         {
@@ -79,6 +79,7 @@ namespace Aplicacao.AluguelModule
             ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
 
             var relatorio = Relatorio.GerarRelatorio(aluguel);
+            NLogger.Logger.Info("Gerando relatório de {aluguel}", aluguel);
             RelatorioRepositorio.SalvarRelatorio(new RelatorioAluguel(aluguel, relatorio));
             return insercao;
         }

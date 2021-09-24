@@ -10,15 +10,15 @@ namespace Aplicacao.Shared
         public abstract IRepository<T> Repositorio { get; }
         public virtual ResultadoOperacao Inserir(T entidade)
         {
-            NLogger.Logger.Info($"Validando Entidade: {typeof(T).Name}");
+            NLogger.Logger.Info("Validando Entidade {entidade}", entidade);
             var validacao = entidade.Validar();
-            NLogger.Logger.Info($"Validado com sucesso{(validacao != string.Empty ? ", erros: {validacao}": "")}");
+            NLogger.Logger.Info("Validação completa {resultado}", validacao != string.Empty ? ", erros: {validacao}": "");
 
             if (validacao != string.Empty)
             {
                 return new ResultadoOperacao(validacao, EnumResultado.Falha);
             }
-            NLogger.Logger.Info($"Inserindo Entidade: {typeof(T).Name}");
+            NLogger.Logger.Info($"Inserindo Entidade: ", entidade);
             Repositorio.Inserir(entidade);
             NLogger.Logger.Info("Inserido com sucesso");
 
@@ -26,22 +26,22 @@ namespace Aplicacao.Shared
         }
         public virtual ResultadoOperacao Editar(int id, T entidade)
         {
-            NLogger.Logger.Info($"Validando Entidade: {typeof(T).Name}");
+            NLogger.Logger.Info("Validando Entidade {entidade}", entidade);
             var validacao = entidade.Validar();
-            NLogger.Logger.Info($"Validado com sucesso{(validacao != string.Empty ? $", erros: {validacao}" : "")}");
+            NLogger.Logger.Info("Validação completa {resultado}", validacao != string.Empty ? ", erros: {validacao}" : "");
 
             if (validacao != string.Empty)
             {
                 return new ResultadoOperacao(validacao, EnumResultado.Falha);
             }
-            NLogger.Logger.Info($"Editando Entidade: {typeof(T).Name} | ID: {id}");
+            NLogger.Logger.Info("Editando Entidade: {entidade}", entidade);
             Repositorio.Editar(id, entidade);
             NLogger.Logger.Info("Editado com sucesso");
             return new ResultadoOperacao("Editado com sucesso!", EnumResultado.Sucesso);
         }
         public virtual void Excluir(int id, Type tipo = null)
         {
-            NLogger.Logger.Info($"Excluindo Entidade: {typeof(T).Name} | ID: {id}");
+            NLogger.Logger.Info("Excluindo Entidade: {entidade} | ID: {id} ", tipo.Name, id);
             Repositorio.Excluir(id, tipo);
             NLogger.Logger.Info("Excluido com sucesso");
         }
