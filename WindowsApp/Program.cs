@@ -24,7 +24,15 @@ namespace WindowsApp
 
             Task.Run(() => ConfigServices.Services.AluguelServices.IniciaLoopEnvioEmails());
 
-            Application.Run();
+            try
+            {
+                Application.Run();
+            }
+            catch (Exception e)
+            {
+                NLogger.Logger.Fatal(e, "Erro muito fatal e catastrófico meu deus do céu");
+                throw;
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using ConfigurationManager;
 using Dominio.PessoaModule;
 using Dominio.Repositories;
-using Infra.DAO.PessoaModule;
+using Infra.NLogger;
 using System;
 using System.Windows.Forms;
 
@@ -97,6 +97,7 @@ namespace WindowsApp
                 return;
             }
             new TelaPrincipal(funcionario).Show();
+            NLogger.Logger.Info($"Funcionário: {funcionario.Nome} | ID: {funcionario.Id} logado");
             Close();
         }
         public enum ResultadoLogin { Sucesso, SenhaErrada, UsuarioNaoCadastrado }
