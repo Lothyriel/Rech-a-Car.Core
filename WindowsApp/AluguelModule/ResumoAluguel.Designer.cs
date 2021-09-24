@@ -705,7 +705,6 @@ namespace WindowsApp.AluguelModule
             this.button1.Size = new System.Drawing.Size(43, 38);
             this.button1.TabIndex = 19;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btAplicar_Click);
             // 
             // button2
             // 

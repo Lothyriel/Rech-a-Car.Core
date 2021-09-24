@@ -1,5 +1,4 @@
 ﻿using Aplicacao.Shared;
-using Aplicacao.VeiculoModule;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.ServicoModule;
@@ -66,7 +65,7 @@ namespace Aplicacao.AluguelModule
             if (insercao.Resultado == EnumResultado.Falha)
                 return insercao;
 
-            if (aluguel.Cupom != null) 
+            if (aluguel.Cupom != null)
             {
                 aluguel.Cupom.Usos++;
                 CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);

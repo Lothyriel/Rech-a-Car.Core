@@ -18,7 +18,6 @@ namespace WindowsApp.AluguelModule
     public partial class ResumoAluguel : CadastroEntidade<Aluguel>//Form// 
     {
         private readonly Aluguel Aluguel;
-        private Cupom cupom;
 
         public ResumoAluguel(Aluguel aluguel = null)
         {
@@ -213,7 +212,6 @@ namespace WindowsApp.AluguelModule
         {
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoCliente("Selecione um Cliente", TipoTela.ApenasConfirma, Aluguel);
         }
-
         private void label19_DoubleClick(object sender, EventArgs e)
         {
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoVeiculo("Selecione um Veículo", TipoTela.ApenasConfirma, Aluguel);
@@ -264,18 +262,5 @@ namespace WindowsApp.AluguelModule
             cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text);
         }
         #endregion
-
-        private void btAplicar_Click(object sender, EventArgs e)
-        {
-            double valorParcial = CalcularPrecoParcial();
-
-            if (cupom != null && valorParcial >= cupom.ValorMinimo)
-            {
-                MessageBox.Show($"Cupom {cupom.Nome} aplicado com sucesso!", "Sucesso", MessageBoxButtons.OK);
-            }
-            else
-                MessageBox.Show($"Cupom {tb_Cupom.Text} não existe ou o aluguel não atingiu o valor mínimo!", "Erro", MessageBoxButtons.OK);
-        }
-
     }
 }

@@ -106,7 +106,6 @@ namespace Dominio.AluguelModule
             if (validacao != string.Empty)
                 return validacao;
 
-
             if (Condutor.Cnh.TipoCnh < Veiculo.Categoria.TipoDeCnh)
                 validacao += "Condutor não tem a carteira necessária para dirigir o veículo selecionado\n";
 
@@ -117,7 +116,7 @@ namespace Dominio.AluguelModule
                 validacao += "Data de devolução deve ser após data de aluguel";
 
             if (Cupom?.ValorMinimo < CalcularTotal())
-                validacao += $"Cupom válido para aluguel acima de R${Cupom.ValorMinimo}";
+                validacao += $"Cupom válido para aluguel acima de R${Cupom.ValorMinimo}";   
 
             return validacao;
         }
