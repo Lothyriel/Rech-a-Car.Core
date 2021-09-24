@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infra.NLogger;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,6 +15,8 @@ namespace WindowsApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            NLogger.Logger.Info("Eu amo fazer sexo!");
 
             new ConfigServices(ConfigRepositories.SQL, ConfigRelatorio.PDF);
             new Login().Show();

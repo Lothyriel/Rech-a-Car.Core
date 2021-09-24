@@ -257,10 +257,6 @@ namespace WindowsApp.AluguelModule
             else
                 bt_RemoveServico.Enabled = NaotemZero;
         }
-        private void tb_Cupom_TextChanged(object sender, EventArgs e)
-        {
-            cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text);
-        }
         #endregion
     }
 }

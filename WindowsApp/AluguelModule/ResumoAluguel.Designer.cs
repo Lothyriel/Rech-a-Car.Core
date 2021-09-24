@@ -679,7 +679,6 @@ namespace WindowsApp.AluguelModule
             this.tb_Cupom.Name = "tb_Cupom";
             this.tb_Cupom.Size = new System.Drawing.Size(148, 23);
             this.tb_Cupom.TabIndex = 15;
-            this.tb_Cupom.TextChanged += new System.EventHandler(this.tb_Cupom_TextChanged);
             // 
             // panelColorido3
             // 
