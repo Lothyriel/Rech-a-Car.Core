@@ -3,6 +3,7 @@ using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.ServicoModule;
 using EnviaEmail;
+using Infra.NLogger;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,10 +35,12 @@ namespace Aplicacao.AluguelModule
             {
                 try
                 {
+                    NLogger.Logger.Info("Serviço de Envio de Emails Iniciado");
                     TentaEnviarRelatorioEmail();
                 }
                 catch (FilaEmailVazia)
                 {
+                    NLogger.Logger.Info("Sem emails para envio, esperando 5 minutos para tentar novamente");
                     await Task.Delay(new TimeSpan(0, 5, 0));
                 }
             }
@@ -58,6 +61,8 @@ namespace Aplicacao.AluguelModule
 
             Email.Envia(emailUsuario, titulo, corpoEmail, new List<Attachment>() { attachment });
             RelatorioRepositorio.MarcarEnviado(proxEnvio.Id);
+
+            NLogger.Logger.Info($"Email {proxEnvio.Id} Enviado");
         }
         public override ResultadoOperacao Inserir(Aluguel aluguel)
         {

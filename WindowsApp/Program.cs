@@ -16,9 +16,10 @@ namespace WindowsApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            NLogger.Logger.Info("Eu amo fazer sexo!");
+            NLogger.Logger.Info("Programa Iniciado");
 
             new ConfigServices(ConfigRepositories.SQL, ConfigRelatorio.PDF);
+
             new Login().Show();
 
             Task.Run(() => ConfigServices.Services.AluguelServices.IniciaLoopEnvioEmails());

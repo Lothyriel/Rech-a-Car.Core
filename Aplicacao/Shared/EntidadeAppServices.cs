@@ -1,4 +1,5 @@
 ﻿using Dominio.Shared;
+using Infra.NLogger;
 using System;
 using System.Collections.Generic;
 
@@ -9,29 +10,40 @@ namespace Aplicacao.Shared
         public abstract IRepository<T> Repositorio { get; }
         public virtual ResultadoOperacao Inserir(T entidade)
         {
+            NLogger.Logger.Info($"Validando Entidade: {nameof(T)}");
             var validacao = entidade.Validar();
+            NLogger.Logger.Info($"Validado com sucesso{(validacao != string.Empty ? ", erros: {validacao}": "")}");
 
             if (validacao != string.Empty)
             {
                 return new ResultadoOperacao(validacao, EnumResultado.Falha);
             }
+            NLogger.Logger.Info($"Inserindo Entidade: {nameof(T)}");
             Repositorio.Inserir(entidade);
+            NLogger.Logger.Info("Inserido com sucesso");
+
             return new ResultadoOperacao("Inserido com sucesso!", EnumResultado.Sucesso);
         }
         public virtual ResultadoOperacao Editar(int id, T entidade)
         {
+            NLogger.Logger.Info($"Validando Entidade: {nameof(T)}");
             var validacao = entidade.Validar();
+            NLogger.Logger.Info($"Validado com sucesso{(validacao != string.Empty ? ", erros: {validacao}" : "")}");
 
             if (validacao != string.Empty)
             {
                 return new ResultadoOperacao(validacao, EnumResultado.Falha);
             }
+            NLogger.Logger.Info($"Editando Entidade: {nameof(T)} | ID: {id}");
             Repositorio.Editar(id, entidade);
-            return new ResultadoOperacao("Editado com sucesso!", EnumResultado.Falha);
+            NLogger.Logger.Info("Editado com sucesso");
+            return new ResultadoOperacao("Editado com sucesso!", EnumResultado.Sucesso);
         }
         public virtual void Excluir(int id, Type tipo = null)
         {
+            NLogger.Logger.Info($"Excluindo Entidade: {nameof(T)} | ID: {id}");
             Repositorio.Excluir(id, tipo);
+            NLogger.Logger.Info("Excluido com sucesso");
         }
         public bool Existe(int id)
         {
@@ -45,11 +57,6 @@ namespace Aplicacao.Shared
         {
             return Repositorio.GetById(id, tipo);
         }
-        public List<T> TodosRegistros()
-        {
-            return Repositorio.Registros;
-        }
-
     }
     public enum EnumResultado { Sucesso, Falha }
     public class ResultadoOperacao
