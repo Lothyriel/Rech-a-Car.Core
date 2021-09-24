@@ -70,6 +70,7 @@ namespace Infra.DAO.AluguelModule
         [TestCleanup]
         public void LimparArquivo()
         {
+
             Db.Delete(TestExtensions.ResetId("TBEmail"));
         }
     }

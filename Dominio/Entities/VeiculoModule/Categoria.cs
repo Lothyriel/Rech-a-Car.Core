@@ -15,6 +15,11 @@ namespace Dominio.VeiculoModule
             QuilometragemFranquia = quilometragemFranquia;
             TipoDeCnh = tipoCnh;
         }
+
+        public Categoria()
+        {
+
+        }
         public string Nome { get; set; }
         public double PrecoDiaria { get; set; }
         public double PrecoKm { get; set; }
