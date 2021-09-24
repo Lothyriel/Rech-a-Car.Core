@@ -5,13 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ConfiguracoesModule\**" />
     <Compile Remove="ServicoModule\**" />
+    <EmbeddedResource Remove="ConfiguracoesModule\**" />
     <EmbeddedResource Remove="ServicoModule\**" />
+    <None Remove="ConfiguracoesModule\**" />
     <None Remove="ServicoModule\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ConfiguracoesModule\" />
   </ItemGroup>
 
   <ItemGroup>
