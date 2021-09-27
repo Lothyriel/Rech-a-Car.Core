@@ -10,9 +10,7 @@ namespace WindowsApp
     public partial class Login : Form
     {
         private IFuncionarioRepository FuncionarioDAO = ConfigServices.Services.FuncionarioServices.Repositorio;
-
         private ISenhaRepository SenhaRepo = ConfigServices.Services.FuncionarioServices.RepositorioSenha;
-
         private Funcionario funcionario;
 
         public Login()
@@ -25,7 +23,6 @@ namespace WindowsApp
         {
             var usuario = tbUsuario.Text;
             var senha = tbSenha.Text;
-
 
             if (EhSuperAdm(usuario, senha))
                 return ResultadoLogin.Sucesso;
@@ -97,10 +94,10 @@ namespace WindowsApp
                 return;
             }
             new TelaPrincipal(funcionario).Show();
-            NLogger.Logger.Info($"Funcionário: {funcionario.Nome} | ID: {funcionario.Id} logado");
+            NLogger.Logger.Info("Funcionário: {nomeFuncionario} | ID: {idFuncionario} logado", funcionario.Nome, funcionario.Id);
             Close();
         }
-        public enum ResultadoLogin { Sucesso, SenhaErrada, UsuarioNaoCadastrado }
+        private enum ResultadoLogin { Sucesso, SenhaErrada, UsuarioNaoCadastrado }
 
         private void bt_entrar_Click(object sender, EventArgs e)
         {

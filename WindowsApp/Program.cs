@@ -31,7 +31,7 @@ namespace WindowsApp
             catch (Exception e)
             {
                 NLogger.Logger.Fatal(e, "Erro muito fatal e catastrófico meu deus do céu");
-                throw;
+                Main();
             }
         }
     }
