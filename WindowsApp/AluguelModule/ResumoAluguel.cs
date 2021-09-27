@@ -16,7 +16,7 @@ using WindowsApp.VeiculoModule;
 
 namespace WindowsApp.AluguelModule
 {
-    public partial class ResumoAluguel : CadastroEntidade<Aluguel>//Form // 
+    public partial class ResumoAluguel : CadastroEntidade<Aluguel>// 
     {
         private readonly Aluguel Aluguel;
 
@@ -29,6 +29,9 @@ namespace WindowsApp.AluguelModule
 
             PopulaServicos(GetServicosDiponiveis());
             PopulaDatas();
+
+            lb_informativoCupom.Visible = false;
+            lb_informativoDesconto.Visible = false;
 
             cbPlano.SelectedIndex = 0;
             bt_RemoveServico.Enabled = false;
@@ -261,8 +264,21 @@ namespace WindowsApp.AluguelModule
         private void button1_Click(object sender, EventArgs e)
         {
             var resultado = Services.ValidarCupom(GetNovaEntidade());
+            var cupom = GetNovaEntidade().Cupom;
 
             MessageBox.Show(resultado.Mensagem);
+            lb_informativoCupom.Visible = true;
+            lb_informativoCupom.Text = $"Cupom {cupom.Nome} aplicado.";
+
+            lb_informativoDesconto.Visible = true;
+            if (cupom.ValorFixo > 0)
+            {
+                lb_informativoDesconto.Text = $"Desconto: R${cupom.ValorFixo}.";
+            }
+            else if (cupom.ValorPercentual > 0)
+            {
+                lb_informativoDesconto.Text = $"Desconto: {cupom.ValorPercentual}%.";
+            }
         }
         #endregion
     }
