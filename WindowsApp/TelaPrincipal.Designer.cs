@@ -1,4 +1,6 @@
-﻿namespace WindowsApp
+﻿using WindowsApp.Shared;
+
+namespace WindowsApp
 {
     partial class TelaPrincipal
     {
