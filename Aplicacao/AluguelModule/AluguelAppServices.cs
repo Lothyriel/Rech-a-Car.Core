@@ -79,7 +79,7 @@ namespace Aplicacao.AluguelModule
             ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
 
             var relatorio = Relatorio.GerarRelatorio(aluguel);
-            NLogger.Logger.Info("Gerando relatório de {aluguel}", aluguel);
+            NLogger.Logger.Info("Gerando relatório de {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
             RelatorioRepositorio.SalvarRelatorio(new RelatorioAluguel(aluguel, relatorio));
             return insercao;
         }

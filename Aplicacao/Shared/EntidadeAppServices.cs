@@ -26,7 +26,9 @@ namespace Aplicacao.Shared
         }
         public virtual ResultadoOperacao Editar(int id, T entidade)
         {
-            NLogger.Logger.Info("Validando {tipo} {entidade}", entidade.GetType().Name, entidade);
+            var tipo = entidade.GetType().Name;
+
+            NLogger.Logger.Info("Validando {tipo} {entidade}", tipo, entidade);
             var validacao = entidade.Validar();
             NLogger.Logger.Info("Validação completa{resultado}", validacao != string.Empty ? $" , erros: {validacao}" : "");
 
@@ -34,14 +36,15 @@ namespace Aplicacao.Shared
             {
                 return new ResultadoOperacao(validacao, EnumResultado.Falha);
             }
-            NLogger.Logger.Info("Editando {tipo} {entidade}", entidade.GetType().Name, entidade);
+            NLogger.Logger.Info($"Editando {{tipo}} {{entidade}} | ID: {{id{char.ToUpper(tipo[0]) + tipo.Substring(1)}}}", tipo, entidade, id);
             Repositorio.Editar(id, entidade);
             NLogger.Logger.Info("Editado com sucesso");
             return new ResultadoOperacao("Editado com sucesso!", EnumResultado.Sucesso);
         }
         public virtual void Excluir(int id, Type tipo = null)
         {
-            NLogger.Logger.Info("Excluindo {entidade} | ID: {id} ", tipo.Name, id);
+            var nTipo = tipo.Name;
+            NLogger.Logger.Info($"Excluindo {{tipo}} | ID: {{id{char.ToUpper(nTipo[0]) + nTipo.Substring(1)}}}", nTipo, id);
             Repositorio.Excluir(id, tipo);
             NLogger.Logger.Info("Excluido com sucesso");
         }
