@@ -11,9 +11,10 @@ namespace Aplicacao.ClienteModule
 
         public ICnhRepository CnhRepository { get; }
 
-        public ClientePFAppServices(IRepository<ClientePF> repositorio)
+        public ClientePFAppServices(IRepository<ClientePF> repositorio, ICnhRepository cnhRepositorio)
         {
             Repositorio = repositorio;
+            CnhRepository = cnhRepositorio;
         }
         public override IRepository<ClientePF> Repositorio { get; }
 
