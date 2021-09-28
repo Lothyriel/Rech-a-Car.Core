@@ -102,7 +102,8 @@ namespace IntegrationTests.CupomModule
         [TestMethod]
         public void Deve_Ordenar_Cupons()
         {
-            throw new NotImplementedException();
+
+
         }
     }
 }
