@@ -15,14 +15,12 @@ namespace Aplicacao.FuncionarioModule
             RepositorioSenha = senhaRepository;
         }
 
-        public override ResultadoOperacao Inserir(Funcionario entidade)
+        public override ResultadoOperacao Inserir(Funcionario funcionario)
         {
-            var inserir = base.Inserir(entidade);
+            if (Repositorio.ExisteUsuario(funcionario.NomeUsuario))
+                return new ResultadoOperacao("Nome de usuário já está cadastrado", EnumResultado.Falha);
 
-            if (inserir.Resultado == EnumResultado.Falha)
-                return inserir;
-
-            return inserir;
+            return base.Inserir(funcionario);
         }
     }
 }

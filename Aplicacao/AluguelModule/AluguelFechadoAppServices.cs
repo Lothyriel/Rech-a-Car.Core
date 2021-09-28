@@ -3,6 +3,7 @@ using Dominio.AluguelModule;
 using Dominio.ServicoModule;
 using Dominio.Shared;
 using Dominio.VeiculoModule;
+using Infra.NLogger;
 
 namespace Aplicacao.AluguelModule
 {
@@ -25,6 +26,8 @@ namespace Aplicacao.AluguelModule
 
             ServicoRepository.DesalugarServicosAlugados(id);
             RepositorioVeiculo.AdicionarQuilometragem(aluguel.Veiculo, aluguel.KmRodados);
+
+            NLogger.Logger.Info("Devolvendo {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
             return edicao;
         }
     }

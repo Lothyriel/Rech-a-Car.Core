@@ -12,6 +12,7 @@ using Infra.DAO.ParceiroModule;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.SQL.AluguelModule;
 using Infra.DAO.VeiculoModule;
+using Infra.NLogger;
 using System;
 
 namespace WindowsApp
@@ -34,6 +35,8 @@ namespace WindowsApp
                 case ConfigRepositories.ORM: throw new NotImplementedException();
                 default: GerarRepositoriosSQL(); break;
             }
+
+            NLogger.Logger.Info($"Repositórios Configurados como {configRepos}");
         }
 
         private IRelatorioAluguel GetRelatorio(ConfigRelatorio configRelatorio)
@@ -88,7 +91,7 @@ namespace WindowsApp
             Services.ServicosServices = new ServicosAppServices(servicoRepo);
             Services.ClienteServices = new ClienteAppServices(cliente, cnhRepo);
             Services.ClientePJServices = new ClientePJAppServices(pjRepo);
-            Services.ClientePFServices = new ClientePFAppServices(pfRepo);
+            Services.ClientePFServices = new ClientePFAppServices(pfRepo, cnhRepo);
             Services.MotoristaServices = new MotoristaAppServices(motoristaRepo);
             Services.CategoriaServices = new CategoriaAppServices(categoriaRepo);
             Services.FuncionarioServices = new FuncionarioAppServices(funcionarioRepo, senhaRepo);

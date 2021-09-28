@@ -6,6 +6,10 @@ namespace Dominio.PessoaModule
 {
     public class CNH : Entidade
     {
+        public CNH()
+        {
+
+        }
         public string NumeroCnh { get; set; }
 
         public TipoCNH TipoCnh { get; set; }

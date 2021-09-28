@@ -1,7 +1,7 @@
 ﻿using ConfigurationManager;
 using Dominio.PessoaModule;
 using Dominio.Repositories;
-using Infra.DAO.PessoaModule;
+using Infra.NLogger;
 using System;
 using System.Windows.Forms;
 
@@ -10,9 +10,7 @@ namespace WindowsApp
     public partial class Login : Form
     {
         private IFuncionarioRepository FuncionarioDAO = ConfigServices.Services.FuncionarioServices.Repositorio;
-
         private ISenhaRepository SenhaRepo = ConfigServices.Services.FuncionarioServices.RepositorioSenha;
-
         private Funcionario funcionario;
 
         public Login()
@@ -25,7 +23,6 @@ namespace WindowsApp
         {
             var usuario = tbUsuario.Text;
             var senha = tbSenha.Text;
-
 
             if (EhSuperAdm(usuario, senha))
                 return ResultadoLogin.Sucesso;
@@ -97,9 +94,10 @@ namespace WindowsApp
                 return;
             }
             new TelaPrincipal(funcionario).Show();
+            NLogger.Logger.Info("Funcionário: {nomeFuncionario} | ID: {idFuncionario} logado", funcionario.Nome, funcionario.Id);
             Close();
         }
-        public enum ResultadoLogin { Sucesso, SenhaErrada, UsuarioNaoCadastrado }
+        private enum ResultadoLogin { Sucesso, SenhaErrada, UsuarioNaoCadastrado }
 
         private void bt_entrar_Click(object sender, EventArgs e)
         {

@@ -14,7 +14,7 @@ namespace WindowsApp.ConfiguracoesModule
 
         private void CarregarDados()
         {
-            var dados = ConfiguracoesManager.Configs;
+            var dados = ConfigAluguel.Configs;
 
             tb_etanol.Text = dados.ValorEtanol.ToString();
             tb_diesel.Text = dados.ValorDiesel.ToString();
@@ -26,7 +26,7 @@ namespace WindowsApp.ConfiguracoesModule
         {
             var mensagem = "Sucesso";
 
-            if (!ConfiguracoesManager.SalvaValores(tb_etanol.Text, tb_diesel.Text, tb_gasolina.Text, tb_caucao.Text))
+            if (!ConfigAluguel.SalvaValores(tb_etanol.Text, tb_diesel.Text, tb_gasolina.Text, tb_caucao.Text))
                 mensagem = "Insira Dados Válidos";
 
             MessageBox.Show(mensagem);

@@ -13,14 +13,19 @@ namespace IntegrationTests.ClientePF_Module
     public class ClientePFDAO_Tests
     {
         ClientePFDAO ClientePFDAO = new();
+        CnhDAO CnhDAO = new();
         ClientePF cliente;
+        CNH cnh;
+
 
         [TestInitialize]
         public void Inserir_clientePF()
         {
-            var cnh = new CNH("36510896881", TipoCNH.A);
+            cnh = new CNH("1212120", TipoCNH.A);
+            CnhDAO.Inserir(cnh);
             cliente = new ClientePF("nome", "999999999", "endereco", "99999999999", cnh, new DateTime(2001, 04, 27), "email@teste.com");
             ClientePFDAO.Inserir(cliente);
+            
         }
         [TestMethod]
         public void Deve_inserir_cliente()
@@ -72,17 +77,7 @@ namespace IntegrationTests.ClientePF_Module
             ClientePFDAO.GetById(cliente.Id).Documento.Should().NotBe(documentoAnterior);
         }
 
-        [TestMethod]
-        public void Deve_editar_cnh_cliente()
-        {
-            CNH cnhAnterior = cliente.Cnh;
 
-            cliente.Cnh = new CNH("36510896881", TipoCNH.C) { Id = cnhAnterior.Id };
-
-            ClientePFDAO.Editar(cliente.Id, cliente);
-
-            ClientePFDAO.GetById(cliente.Id).Cnh.TipoCnh.Should().NotBe(cnhAnterior.TipoCnh);
-        }
 
         [TestMethod]
         public void Deve_retornar_todos_os_clientesPF()

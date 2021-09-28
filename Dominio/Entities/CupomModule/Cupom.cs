@@ -16,10 +16,6 @@ namespace Dominio.CupomModule
             ValorMinimo = valorMInimo;
             Usos = usos;
         }
-        public Cupom()
-        {
-
-        }
 
         public string Nome { get; }
         public int ValorPercentual { get; }
@@ -55,28 +51,28 @@ namespace Dominio.CupomModule
             string resultadoValidacao = "";
 
             if (string.IsNullOrEmpty(Nome))
-                resultadoValidacao += "O campo nome é obrigatório e não pode ser vazio.";
+                resultadoValidacao += "O campo nome é obrigatório e não pode ser vazio.\n";
 
             if (ValorPercentual < 0)
-                resultadoValidacao += "Valor Percentual não pode ser menor que Zero.";
+                resultadoValidacao += "Valor Percentual não pode ser menor que Zero.\n";
 
             if (ValorFixo < 0)
-                resultadoValidacao += "Valor Fixo não pode ser Menor que Zero.";
+                resultadoValidacao += "Valor Fixo não pode ser Menor que Zero.\n";
 
             if (ValorPercentual > 100)
-                resultadoValidacao += "Valor Percentual não pode ser Maior que Cem.";
+                resultadoValidacao += "Valor Percentual não pode ser Maior que Cem.\n";
 
-            if (DataValidade == DateTime.MinValue || DataValidade == DateTime.MaxValue)
-                resultadoValidacao += "A data Invalida, Insira uma data valida";
+            if (DataValidade < DateTime.Today)
+                resultadoValidacao += "A data Invalida, Insira uma data valida.\n";
 
             if (Parceiro == null)
-                resultadoValidacao += "O campo Parceiro é obrigatório e não pode ser vazio.";
+                resultadoValidacao += "O campo Parceiro é obrigatório e não pode ser vazio.\n";
 
             if (ValorMinimo < 0)
-                resultadoValidacao += "O campo Valor Minimo não pode ser menor que Zero.";
+                resultadoValidacao += "O campo Valor Minimo não pode ser menor que Zero.\n";
 
             if (ValorFixo > ValorMinimo)
-                resultadoValidacao += "O valor Minimo não pode ser menor que o valor de Desconto";
+                resultadoValidacao += "O valor Minimo não pode ser menor que o valor de Desconto.";
 
             return resultadoValidacao;
 

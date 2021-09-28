@@ -82,9 +82,11 @@ namespace WindowsApp.AluguelModule
             this.btFecharAluguel = new System.Windows.Forms.Button();
             this.tb_Cupom = new System.Windows.Forms.TextBox();
             this.panelColorido3 = new Shared.PanelColorido();
+            this.lb_informativoCupom = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
+            this.lb_informativoDesconto = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelEsconderCliente.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -461,7 +463,6 @@ namespace WindowsApp.AluguelModule
             // 
             // tbDt_Devolucao
             // 
-            this.tbDt_Devolucao.Culture = new System.Globalization.CultureInfo("pt-BR");
             this.tbDt_Devolucao.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tbDt_Devolucao.Location = new System.Drawing.Point(18, 142);
             this.tbDt_Devolucao.Margin = new System.Windows.Forms.Padding(4);
@@ -488,7 +489,6 @@ namespace WindowsApp.AluguelModule
             // 
             // tbDt_Emprestimo
             // 
-            this.tbDt_Emprestimo.Culture = new System.Globalization.CultureInfo("pt-BR");
             this.tbDt_Emprestimo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tbDt_Emprestimo.Location = new System.Drawing.Point(18, 86);
             this.tbDt_Emprestimo.Margin = new System.Windows.Forms.Padding(4);
@@ -530,7 +530,7 @@ namespace WindowsApp.AluguelModule
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(522, 517);
+            this.label3.Location = new System.Drawing.Point(522, 506);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(120, 25);
@@ -623,7 +623,7 @@ namespace WindowsApp.AluguelModule
             this.listServicos.Location = new System.Drawing.Point(11, 49);
             this.listServicos.Margin = new System.Windows.Forms.Padding(4);
             this.listServicos.Name = "listServicos";
-            this.listServicos.Size = new System.Drawing.Size(176, 106);
+            this.listServicos.Size = new System.Drawing.Size(176, 89);
             this.listServicos.TabIndex = 11;
             this.listServicos.SelectedValueChanged += new System.EventHandler(this.listServicos_SelectedValueChanged);
             // 
@@ -674,16 +674,17 @@ namespace WindowsApp.AluguelModule
             // 
             // tb_Cupom
             // 
-            this.tb_Cupom.Location = new System.Drawing.Point(25, 46);
+            this.tb_Cupom.Location = new System.Drawing.Point(25, 29);
             this.tb_Cupom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tb_Cupom.Name = "tb_Cupom";
             this.tb_Cupom.Size = new System.Drawing.Size(148, 23);
             this.tb_Cupom.TabIndex = 15;
-            this.tb_Cupom.TextChanged += new System.EventHandler(this.tb_Cupom_TextChanged);
             // 
             // panelColorido3
             // 
             this.panelColorido3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(7)))), ((int)(((byte)(49)))));
+            this.panelColorido3.Controls.Add(this.lb_informativoDesconto);
+            this.panelColorido3.Controls.Add(this.lb_informativoCupom);
             this.panelColorido3.Controls.Add(this.button1);
             this.panelColorido3.Controls.Add(this.button2);
             this.panelColorido3.Controls.Add(this.label22);
@@ -694,18 +695,30 @@ namespace WindowsApp.AluguelModule
             this.panelColorido3.Size = new System.Drawing.Size(241, 93);
             this.panelColorido3.TabIndex = 18;
             // 
+            // lb_informativoCupom
+            // 
+            this.lb_informativoCupom.AutoSize = true;
+            this.lb_informativoCupom.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lb_informativoCupom.ForeColor = System.Drawing.Color.White;
+            this.lb_informativoCupom.Location = new System.Drawing.Point(49, 57);
+            this.lb_informativoCupom.Name = "lb_informativoCupom";
+            this.lb_informativoCupom.Size = new System.Drawing.Size(138, 15);
+            this.lb_informativoCupom.TabIndex = 20;
+            this.lb_informativoCupom.Text = "Cupom xxxxxx aplicado.";
+            this.lb_informativoCupom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // button1
             // 
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = global::WindowsApp.Properties.Resources.checked_mini;
-            this.button1.Location = new System.Drawing.Point(178, 37);
+            this.button1.Location = new System.Drawing.Point(178, 20);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(43, 38);
             this.button1.TabIndex = 19;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btAplicar_Click);
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -730,6 +743,18 @@ namespace WindowsApp.AluguelModule
             this.label22.Size = new System.Drawing.Size(74, 25);
             this.label22.TabIndex = 9;
             this.label22.Text = "Cupom";
+            // 
+            // lb_informativoDesconto
+            // 
+            this.lb_informativoDesconto.AutoSize = true;
+            this.lb_informativoDesconto.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lb_informativoDesconto.ForeColor = System.Drawing.Color.White;
+            this.lb_informativoDesconto.Location = new System.Drawing.Point(73, 72);
+            this.lb_informativoDesconto.Name = "lb_informativoDesconto";
+            this.lb_informativoDesconto.Size = new System.Drawing.Size(87, 15);
+            this.lb_informativoDesconto.TabIndex = 21;
+            this.lb_informativoDesconto.Text = "Desconto: xxxx";
+            this.lb_informativoDesconto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ResumoAluguel
             // 
@@ -826,5 +851,7 @@ namespace WindowsApp.AluguelModule
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lb_informativoCupom;
+        private System.Windows.Forms.Label lb_informativoDesconto;
     }
 }

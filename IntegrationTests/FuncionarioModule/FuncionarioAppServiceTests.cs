@@ -5,6 +5,7 @@ using Aplicacao.ServicosModule;
 using Aplicacao.Shared;
 using Dominio.PessoaModule;
 using Aplicacao.FuncionarioModule;
+using Dominio.Repositories;
 
 namespace IntegrationTests.FuncionarioModule
 {
@@ -14,18 +15,20 @@ namespace IntegrationTests.FuncionarioModule
         Mock<Funcionario> funcionarioMock;
         Funcionario funcionario;
         Mock<IFuncionarioRepository> mockRepoFuncionario;
+        Mock<ISenhaRepository> mockRepoSenha;
         FuncionarioAppServices sut;
 
         [TestInitialize]
         public void InicializarClasse()
         {
             funcionarioMock = new();
+            mockRepoSenha = new();
             funcionarioMock.Setup(x => x.Validar()).Returns("");
 
             funcionario = funcionarioMock.Object;
 
             mockRepoFuncionario = new();
-            sut = new FuncionarioAppServices(mockRepoFuncionario.Object);
+            sut = new FuncionarioAppServices(mockRepoFuncionario.Object, mockRepoSenha.Object);
         }
         [TestMethod]
         public void Deve_inserir_funcionario()

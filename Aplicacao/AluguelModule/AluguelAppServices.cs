@@ -1,9 +1,10 @@
 ﻿using Aplicacao.Shared;
-using Aplicacao.VeiculoModule;
+using ConfigurationManager;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.ServicoModule;
 using EnviaEmail;
+using Infra.NLogger;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,10 +36,12 @@ namespace Aplicacao.AluguelModule
             {
                 try
                 {
+                    NLogger.Logger.Info("Serviço de Envio de Emails Iniciado");
                     TentaEnviarRelatorioEmail();
                 }
                 catch (FilaEmailVazia)
                 {
+                    NLogger.Logger.Info("Sem emails para envio, esperando 5 minutos para tentar novamente");
                     await Task.Delay(new TimeSpan(0, 5, 0));
                 }
             }
@@ -59,6 +62,8 @@ namespace Aplicacao.AluguelModule
 
             Email.Envia(emailUsuario, titulo, corpoEmail, new List<Attachment>() { attachment });
             RelatorioRepositorio.MarcarEnviado(proxEnvio.Id);
+
+            NLogger.Logger.Info("Email {email.id} Enviado", proxEnvio.Id);
         }
         public override ResultadoOperacao Inserir(Aluguel aluguel)
         {
@@ -66,15 +71,23 @@ namespace Aplicacao.AluguelModule
             if (insercao.Resultado == EnumResultado.Falha)
                 return insercao;
 
-            if (aluguel.Cupom != null) 
+            if (aluguel.Cupom != null)
             {
                 aluguel.Cupom.Usos++;
                 CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
+
+                if (aluguel.Cupom.ValorMinimo < aluguel.CalcularTotal(ConfigAluguel.Configs))
+                {
+                    insercao.AppendMensagem($"Cupom válido para aluguel acima de R${aluguel.Cupom.ValorMinimo}");
+                    return insercao;
+                }
+                    
             }
 
             ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
 
             var relatorio = Relatorio.GerarRelatorio(aluguel);
+            NLogger.Logger.Info("Gerando relatório de {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
             RelatorioRepositorio.SalvarRelatorio(new RelatorioAluguel(aluguel, relatorio));
             return insercao;
         }
@@ -87,6 +100,18 @@ namespace Aplicacao.AluguelModule
             ServicoRepositorio.DesalugarServicosAlugados(id);
             ServicoRepositorio.AlugarServicos(entidade.Id, entidade.Servicos);
             return edicao;
+        }
+        public ResultadoOperacao ValidarCupom(Aluguel aluguel)
+        {
+            if (aluguel.Cupom == null)
+                return new ResultadoOperacao("Cupom não existe", EnumResultado.Falha);
+
+            var validacao = aluguel.ValidarCupom();
+
+            if (validacao == string.Empty)
+                return new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso);
+
+            return new ResultadoOperacao(validacao, EnumResultado.Falha);
         }
     }
     [Serializable]

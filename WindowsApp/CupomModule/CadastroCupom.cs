@@ -48,7 +48,7 @@ namespace WindowsApp.WindowsApp.CupomModule
 
         private void btAdicionar_Click(object sender, EventArgs e)
         {
-            if (!Salva(mostraSucesso: false))
+            if (!Salva())
                 return;
 
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoCupom();

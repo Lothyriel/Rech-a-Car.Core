@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infra.NLogger;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,12 +16,23 @@ namespace WindowsApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            NLogger.Logger.Info("Programa Iniciado");
+
             new ConfigServices(ConfigRepositories.SQL, ConfigRelatorio.PDF);
+
             new Login().Show();
 
             Task.Run(() => ConfigServices.Services.AluguelServices.IniciaLoopEnvioEmails());
 
-            Application.Run();
+            try
+            {
+                Application.Run();
+            }
+            catch (Exception e)
+            {
+                NLogger.Logger.Fatal(e, "Erro muito fatal e catastrófico meu deus do céu");
+                Main();
+            }
         }
     }
 }

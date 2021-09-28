@@ -1,4 +1,5 @@
 ﻿using Aplicacao.AluguelModule;
+using Aplicacao.Shared;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.PessoaModule;
@@ -15,10 +16,9 @@ using WindowsApp.VeiculoModule;
 
 namespace WindowsApp.AluguelModule
 {
-    public partial class ResumoAluguel : CadastroEntidade<Aluguel>//Form// 
+    public partial class ResumoAluguel : CadastroEntidade<Aluguel>// 
     {
         private readonly Aluguel Aluguel;
-        private Cupom cupom;
 
         public ResumoAluguel(Aluguel aluguel = null)
         {
@@ -29,6 +29,9 @@ namespace WindowsApp.AluguelModule
 
             PopulaServicos(GetServicosDiponiveis());
             PopulaDatas();
+
+            lb_informativoCupom.Visible = false;
+            lb_informativoDesconto.Visible = false;
 
             cbPlano.SelectedIndex = 0;
             bt_RemoveServico.Enabled = false;
@@ -213,7 +216,6 @@ namespace WindowsApp.AluguelModule
         {
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoCliente("Selecione um Cliente", TipoTela.ApenasConfirma, Aluguel);
         }
-
         private void label19_DoubleClick(object sender, EventArgs e)
         {
             TelaPrincipal.Instancia.FormAtivo = new GerenciamentoVeiculo("Selecione um Veículo", TipoTela.ApenasConfirma, Aluguel);
@@ -259,23 +261,33 @@ namespace WindowsApp.AluguelModule
             else
                 bt_RemoveServico.Enabled = NaotemZero;
         }
-        private void tb_Cupom_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text);
+            GetNovaEntidade().CalcularTotal();
+            var resultado = Services.ValidarCupom(GetNovaEntidade());
+            var cupom = GetNovaEntidade().Cupom;
+
+            MessageBox.Show(resultado.Mensagem);
+            
+            if (resultado == new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso))
+            {
+                lb_informativoCupom.Visible = true;
+                lb_informativoDesconto.Visible = true;
+
+                lb_informativoCupom.Text = $"Cupom {cupom.Nome} aplicado.";
+
+                if (cupom.ValorFixo > 0)
+                {
+                    lb_informativoDesconto.Text = $"Desconto: R${cupom.ValorFixo}.";
+                }
+                else if (cupom.ValorPercentual > 0)
+                {
+                    lb_informativoDesconto.Text = $"Desconto: {cupom.ValorPercentual}%.";
+                }
+
+                PrecoParcial - cupom.CalcularDesconto(PrecoParcial);
+            }
         }
         #endregion
-
-        private void btAplicar_Click(object sender, EventArgs e)
-        {
-            double valorParcial = CalcularPrecoParcial();
-
-            if (cupom != null && valorParcial >= cupom.ValorMinimo)
-            {
-                MessageBox.Show($"Cupom {cupom.Nome} aplicado com sucesso!", "Sucesso", MessageBoxButtons.OK);
-            }
-            else
-                MessageBox.Show($"Cupom {tb_Cupom.Text} não existe ou o aluguel não atingiu o valor mínimo!", "Erro", MessageBoxButtons.OK);
-        }
-
     }
 }
