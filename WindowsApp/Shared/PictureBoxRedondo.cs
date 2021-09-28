@@ -2,17 +2,18 @@
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-class PictureBoxRedondo : PictureBox
+namespace WindowsApp.Shared
 {
-    public PictureBoxRedondo()
+    class PictureBoxRedondo : PictureBox
     {
-        this.BackColor = Color.DarkGray;
-    }
-    protected override void OnPaint(PaintEventArgs e)
-    {
-        base.OnPaint(e);
-        using (GraphicsPath gp = new GraphicsPath())
+        public PictureBoxRedondo()
         {
+            BackColor = Color.DarkGray;
+        }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            using GraphicsPath gp = new();
             gp.AddEllipse(0, 0, this.Width - 1, this.Height - 1);
             Region = new Region(gp);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;

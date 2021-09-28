@@ -23,7 +23,7 @@ namespace WindowsApp.Shared
             }
         }
 
-        private Image RedimensionarImagem(Image image, int maxWidth, int maxHeight)
+        private static Image RedimensionarImagem(Image image, int maxWidth, int maxHeight)
         {
             var ratioX = (double)maxWidth / image.Width;
             var ratioY = (double)maxHeight / image.Height;

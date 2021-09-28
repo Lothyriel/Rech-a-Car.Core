@@ -1,5 +1,4 @@
-﻿
-using WindowsApp.Shared;
+﻿using WindowsApp.Shared;
 
 namespace WindowsApp.AluguelModule
 {
@@ -33,8 +32,6 @@ namespace WindowsApp.AluguelModule
         {
             this.label1 = new System.Windows.Forms.Label();
             this.btFecharAluguel = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lbValor = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panelColorido3 = new Shared.PanelColorido();
             this.panelColorido2 = new Shared.PanelColorido();
@@ -56,9 +53,6 @@ namespace WindowsApp.AluguelModule
             this.bt_RemoveDespesa = new System.Windows.Forms.Button();
             this.bt_AddDespesa = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lbDesconto = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.lbValorFinal = new System.Windows.Forms.Label();
             this.panelColorido2.SuspendLayout();
@@ -90,37 +84,12 @@ namespace WindowsApp.AluguelModule
             this.btFecharAluguel.UseVisualStyleBackColor = true;
             this.btFecharAluguel.Click += new System.EventHandler(this.btFecharAluguel_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(553, 505);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 25);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "R$";
-            // 
-            // lbValor
-            // 
-            this.lbValor.AutoSize = true;
-            this.lbValor.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbValor.ForeColor = System.Drawing.Color.White;
-            this.lbValor.Location = new System.Drawing.Point(596, 505);
-            this.lbValor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbValor.Name = "lbValor";
-            this.lbValor.Size = new System.Drawing.Size(50, 25);
-            this.lbValor.TabIndex = 15;
-            this.lbValor.Text = "0.00";
-            this.lbValor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(438, 568);
+            this.label3.Location = new System.Drawing.Point(445, 534);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 25);
@@ -159,7 +128,7 @@ namespace WindowsApp.AluguelModule
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(15, 114);
+            this.label6.Location = new System.Drawing.Point(119, 105);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(156, 21);
@@ -171,7 +140,7 @@ namespace WindowsApp.AluguelModule
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(293, 114);
+            this.label10.Location = new System.Drawing.Point(397, 105);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(159, 21);
@@ -182,7 +151,7 @@ namespace WindowsApp.AluguelModule
             // 
             this.tb_TanqueInicial.Enabled = false;
             this.tb_TanqueInicial.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_TanqueInicial.Location = new System.Drawing.Point(19, 143);
+            this.tb_TanqueInicial.Location = new System.Drawing.Point(123, 134);
             this.tb_TanqueInicial.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_TanqueInicial.Name = "tb_TanqueInicial";
             this.tb_TanqueInicial.Size = new System.Drawing.Size(166, 29);
@@ -192,7 +161,7 @@ namespace WindowsApp.AluguelModule
             // tb_TanqueAtual
             // 
             this.tb_TanqueAtual.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_TanqueAtual.Location = new System.Drawing.Point(298, 142);
+            this.tb_TanqueAtual.Location = new System.Drawing.Point(402, 133);
             this.tb_TanqueAtual.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_TanqueAtual.Name = "tb_TanqueAtual";
             this.tb_TanqueAtual.Size = new System.Drawing.Size(166, 29);
@@ -216,7 +185,7 @@ namespace WindowsApp.AluguelModule
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(15, 50);
+            this.label5.Location = new System.Drawing.Point(119, 41);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(133, 21);
@@ -228,7 +197,7 @@ namespace WindowsApp.AluguelModule
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(293, 50);
+            this.label9.Location = new System.Drawing.Point(397, 41);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(124, 21);
@@ -239,7 +208,7 @@ namespace WindowsApp.AluguelModule
             // 
             this.tb_OdometroInicial.Enabled = false;
             this.tb_OdometroInicial.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_OdometroInicial.Location = new System.Drawing.Point(20, 77);
+            this.tb_OdometroInicial.Location = new System.Drawing.Point(124, 68);
             this.tb_OdometroInicial.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_OdometroInicial.Name = "tb_OdometroInicial";
             this.tb_OdometroInicial.Size = new System.Drawing.Size(166, 29);
@@ -250,7 +219,7 @@ namespace WindowsApp.AluguelModule
             // tb_OdometroFinal
             // 
             this.tb_OdometroFinal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_OdometroFinal.Location = new System.Drawing.Point(298, 77);
+            this.tb_OdometroFinal.Location = new System.Drawing.Point(402, 68);
             this.tb_OdometroFinal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tb_OdometroFinal.Name = "tb_OdometroFinal";
             this.tb_OdometroFinal.Size = new System.Drawing.Size(166, 29);
@@ -281,7 +250,7 @@ namespace WindowsApp.AluguelModule
             this.mtb_PrecoDespesa.Location = new System.Drawing.Point(56, 143);
             this.mtb_PrecoDespesa.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.mtb_PrecoDespesa.Name = "mtb_PrecoDespesa";
-            this.mtb_PrecoDespesa.Size = new System.Drawing.Size(116, 29);
+            this.mtb_PrecoDespesa.Size = new System.Drawing.Size(138, 29);
             this.mtb_PrecoDespesa.TabIndex = 6;
             this.mtb_PrecoDespesa.ValidatingType = typeof(int);
             // 
@@ -349,7 +318,7 @@ namespace WindowsApp.AluguelModule
             this.bt_AddDespesa.FlatAppearance.BorderSize = 0;
             this.bt_AddDespesa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bt_AddDespesa.Image = global::WindowsApp.Properties.Resources.addmini;
-            this.bt_AddDespesa.Location = new System.Drawing.Point(197, 140);
+            this.bt_AddDespesa.Location = new System.Drawing.Point(196, 135);
             this.bt_AddDespesa.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.bt_AddDespesa.Name = "bt_AddDespesa";
             this.bt_AddDespesa.Size = new System.Drawing.Size(42, 42);
@@ -369,49 +338,12 @@ namespace WindowsApp.AluguelModule
             this.label7.TabIndex = 5;
             this.label7.Text = "Checklist";
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(554, 537);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(92, 25);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "__________";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(540, 530);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(48, 25);
-            this.label12.TabIndex = 19;
-            this.label12.Text = "- R$";
-            // 
-            // lbDesconto
-            // 
-            this.lbDesconto.AutoSize = true;
-            this.lbDesconto.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbDesconto.ForeColor = System.Drawing.Color.White;
-            this.lbDesconto.Location = new System.Drawing.Point(596, 530);
-            this.lbDesconto.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbDesconto.Name = "lbDesconto";
-            this.lbDesconto.Size = new System.Drawing.Size(50, 25);
-            this.lbDesconto.TabIndex = 20;
-            this.lbDesconto.Text = "0.00";
-            this.lbDesconto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(553, 568);
+            this.label13.Location = new System.Drawing.Point(560, 534);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(35, 25);
@@ -423,7 +355,7 @@ namespace WindowsApp.AluguelModule
             this.lbValorFinal.AutoSize = true;
             this.lbValorFinal.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbValorFinal.ForeColor = System.Drawing.Color.White;
-            this.lbValorFinal.Location = new System.Drawing.Point(596, 568);
+            this.lbValorFinal.Location = new System.Drawing.Point(591, 534);
             this.lbValorFinal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbValorFinal.Name = "lbValorFinal";
             this.lbValorFinal.Size = new System.Drawing.Size(50, 25);
@@ -439,13 +371,8 @@ namespace WindowsApp.AluguelModule
             this.ClientSize = new System.Drawing.Size(779, 602);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.lbValorFinal);
-            this.Controls.Add(this.lbDesconto);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.panelColorido3);
             this.Controls.Add(this.btFecharAluguel);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.lbValor);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.panelColorido2);
             this.Controls.Add(this.panelColorido1);
@@ -474,8 +401,6 @@ namespace WindowsApp.AluguelModule
         private System.Windows.Forms.Label label1;
         private PanelColorido panelColorido3;
         private System.Windows.Forms.Button btFecharAluguel;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lbValor;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button bt_RemoveDespesa;
         private System.Windows.Forms.Button bt_AddDespesa;
@@ -490,9 +415,6 @@ namespace WindowsApp.AluguelModule
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.MaskedTextBox tb_TanqueInicial;
         private System.Windows.Forms.MaskedTextBox tb_TanqueAtual;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label lbDesconto;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lbValorFinal;
     }

@@ -1,5 +1,4 @@
-﻿
-using WindowsApp.Shared;
+﻿using WindowsApp.Shared;
 
 namespace WindowsApp.FuncionarioModule
 {
