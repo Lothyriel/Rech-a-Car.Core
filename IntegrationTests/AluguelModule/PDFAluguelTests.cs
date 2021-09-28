@@ -28,6 +28,9 @@ namespace Infra.DAO.AluguelModule
         static RelatorioDAO rd = new();
         static ServicoDAO sd = new();
         static CupomDAO cd = new();
+        static CnhDAO cn = new();
+        static ClientePFDAO cf = new();
+
         AluguelAppServices AluguelAppServices = new(ad, pa, rd, sd, cd);
 
         [TestInitialize]
@@ -41,15 +44,17 @@ namespace Infra.DAO.AluguelModule
             var funcionario = new Funcionario("Alexandre Rech", "99999999", "Rua da Ndd", "99999999", Cargo.SysAdmin, imagem, "admin", "admin123");
 
             var servicos = new List<Servico>() { new Servico("Servico 1", 100), new Servico("Servico 2", 200), new Servico("Servico 3", 300) };
+
+            cn.Inserir(cliente.Cnh);
+            cf.Inserir(cliente);
+
+            new CategoriaDAO().Inserir(categoria);
+            new VeiculoDAO().Inserir(veiculo);
+
+            new FuncionarioDAO().Inserir(funcionario);
+
             aluguel = new Aluguel() { Veiculo = veiculo, Funcionario = funcionario, Condutor = cliente, Cliente = cliente, Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
-
-            new CategoriaDAO().Inserir(aluguel.Veiculo.Categoria);
-            new VeiculoDAO().Inserir(aluguel.Veiculo);
-
-            new ClientePFDAO().Inserir((ClientePF)aluguel.Cliente);
-            new FuncionarioDAO().Inserir(aluguel.Funcionario);
-
-            new AluguelDAO().Inserir(aluguel);
+            ad.Inserir(aluguel);
         }
         [TestMethod]
         public void DeveCriarPdf()
@@ -61,7 +66,7 @@ namespace Infra.DAO.AluguelModule
         [TestMethod]
         public void DeveEnviarPdf()
         {
-            var ms = new PDFAluguel().GerarRelatorio(aluguel);
+            var ms = pa.GerarRelatorio(aluguel);
             rd.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
             AluguelAppServices.TentaEnviarRelatorioEmail();
 
@@ -70,7 +75,6 @@ namespace Infra.DAO.AluguelModule
         [TestCleanup]
         public void LimparArquivo()
         {
-
             Db.Delete(TestExtensions.ResetId("TBEmail"));
         }
     }

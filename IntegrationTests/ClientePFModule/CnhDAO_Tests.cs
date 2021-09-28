@@ -1,13 +1,7 @@
 ﻿using Dominio.PessoaModule;
-using Dominio.PessoaModule.ClienteModule;
 using FluentAssertions;
 using Infra.DAO.PessoaModule;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationTests.ClientePFModule
 {
@@ -21,10 +15,10 @@ namespace IntegrationTests.ClientePFModule
         {
             var cnhAnterior = new CNH("1212120", TipoCNH.A);
             CnhDAO.Inserir(cnhAnterior);
-            var cnhnova = new CNH("36510896881", TipoCNH.C);
+            var cnhnova = new CNH("1212120", TipoCNH.C);
             CnhDAO.Editar(cnhAnterior.Id, cnhnova);
 
-            ((int)CnhDAO.GetByIdCondutor(cnhAnterior.Id).TipoCnh).Should().NotBe(((int)cnhnova.TipoCnh));
+            CnhDAO.GetByIdCondutor(cnhAnterior.Id).TipoCnh.Should().Be(cnhnova.TipoCnh);
         }
     }
 }

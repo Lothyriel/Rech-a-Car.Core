@@ -1,5 +1,4 @@
 ﻿using Aplicacao.Shared;
-using Aplicacao.VeiculoModule;
 using ConfigurationManager;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
