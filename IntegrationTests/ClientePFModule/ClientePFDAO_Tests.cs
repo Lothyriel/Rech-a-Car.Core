@@ -77,17 +77,7 @@ namespace IntegrationTests.ClientePF_Module
             ClientePFDAO.GetById(cliente.Id).Documento.Should().NotBe(documentoAnterior);
         }
 
-        [TestMethod]
-        public void Deve_editar_cnh_cliente()
-        {
-            CNH cnhAnterior = cliente.Cnh;
 
-            cliente.Cnh = new CNH("36510896881", TipoCNH.C) { Id = cnhAnterior.Id };
-
-            ClientePFDAO.Editar(cliente.Id, cliente);
-
-            ClientePFDAO.GetById(cliente.Id).Cnh.TipoCnh.Should().NotBe(cnhAnterior.TipoCnh);
-        }
 
         [TestMethod]
         public void Deve_retornar_todos_os_clientesPF()

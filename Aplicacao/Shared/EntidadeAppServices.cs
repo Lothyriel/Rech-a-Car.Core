@@ -50,10 +50,17 @@ namespace Aplicacao.Shared
             return Repositorio.Registros;
         }
 
+
+
     }
     public enum EnumResultado { Sucesso, Falha }
     public class ResultadoOperacao
     {
+        public void AppendMensagem(string mensagem)
+        {
+            Mensagem += "\n" + mensagem;
+        }
+
         public string Mensagem;
         public EnumResultado Resultado;
         public ResultadoOperacao(string mensagem, EnumResultado resultado)

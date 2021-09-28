@@ -116,8 +116,7 @@ namespace Dominio.AluguelModule
             if (!DatasValidas())
                 validacao += "Data de devolução deve ser após data de aluguel";
 
-            if (Cupom?.ValorMinimo < CalcularTotal())
-                validacao += $"Cupom válido para aluguel acima de R${Cupom.ValorMinimo}";
+
 
             return validacao;
         }

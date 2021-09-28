@@ -1,5 +1,6 @@
 ﻿using Aplicacao.Shared;
 using Aplicacao.VeiculoModule;
+using ConfigurationManager;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.ServicoModule;
@@ -70,6 +71,13 @@ namespace Aplicacao.AluguelModule
             {
                 aluguel.Cupom.Usos++;
                 CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
+
+                if (aluguel.Cupom.ValorMinimo < aluguel.CalcularTotal(ConfigAluguel.Configs))
+                {
+                    insercao.AppendMensagem($"Cupom válido para aluguel acima de R${aluguel.Cupom.ValorMinimo}");
+                    return insercao;
+                }
+                    
             }
 
             ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);

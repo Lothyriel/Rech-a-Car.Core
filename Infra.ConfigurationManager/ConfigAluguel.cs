@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace ConfigurationManager
 {
-    public class ConfiguracoesManager
+    public class ConfigAluguel
     {
         private const string pathAppConfig = @"..\..\..\appsettings.json";
 
