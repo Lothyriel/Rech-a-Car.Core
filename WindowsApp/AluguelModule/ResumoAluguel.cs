@@ -263,21 +263,29 @@ namespace WindowsApp.AluguelModule
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            GetNovaEntidade().CalcularTotal();
             var resultado = Services.ValidarCupom(GetNovaEntidade());
             var cupom = GetNovaEntidade().Cupom;
 
             MessageBox.Show(resultado.Mensagem);
-            lb_informativoCupom.Visible = true;
-            lb_informativoCupom.Text = $"Cupom {cupom.Nome} aplicado.";
+            
+            if (resultado == new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso))
+            {
+                lb_informativoCupom.Visible = true;
+                lb_informativoDesconto.Visible = true;
 
-            lb_informativoDesconto.Visible = true;
-            if (cupom.ValorFixo > 0)
-            {
-                lb_informativoDesconto.Text = $"Desconto: R${cupom.ValorFixo}.";
-            }
-            else if (cupom.ValorPercentual > 0)
-            {
-                lb_informativoDesconto.Text = $"Desconto: {cupom.ValorPercentual}%.";
+                lb_informativoCupom.Text = $"Cupom {cupom.Nome} aplicado.";
+
+                if (cupom.ValorFixo > 0)
+                {
+                    lb_informativoDesconto.Text = $"Desconto: R${cupom.ValorFixo}.";
+                }
+                else if (cupom.ValorPercentual > 0)
+                {
+                    lb_informativoDesconto.Text = $"Desconto: {cupom.ValorPercentual}%.";
+                }
+
+                PrecoParcial - cupom.CalcularDesconto(PrecoParcial);
             }
         }
         #endregion

@@ -31,10 +31,7 @@ namespace WindowsApp.AluguelModule
         {
             AluguelFechado aluguelFechado = GetNovaEntidade();
             var configs = ConfiguracoesManager.Configs;
-            if (aluguelFechado.Cupom != null)
-            {
-                lbValorFinal.Text = aluguelFechado.CalcularTotal(configs).ToString();
-            }
+            lbValorFinal.Text = aluguelFechado.CalcularTotal(configs).ToString();
         }
         private int KmRodados()
         {
