@@ -171,7 +171,7 @@ namespace WindowsApp.ClienteModule
             this.btAdicionar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btAdicionar.Name = "btAdicionar";
             this.btAdicionar.Size = new System.Drawing.Size(88, 92);
-            this.btAdicionar.TabIndex = 8;
+            this.btAdicionar.TabIndex = 9;
             this.btAdicionar.UseVisualStyleBackColor = true;
             this.btAdicionar.Click += new System.EventHandler(this.btAdicionar_Click);
             // 
