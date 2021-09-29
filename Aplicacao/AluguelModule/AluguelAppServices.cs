@@ -1,5 +1,4 @@
 ﻿using Aplicacao.Shared;
-using ConfigurationManager;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.ServicoModule;
@@ -29,7 +28,6 @@ namespace Aplicacao.AluguelModule
             ServicoRepositorio = servicoRepositorio;
             CupomRepositorio = cupomRepositorio;
         }
-
         public async void IniciaLoopEnvioEmails()
         {
             while (true)
@@ -41,7 +39,7 @@ namespace Aplicacao.AluguelModule
                 }
                 catch (FilaEmailVazia)
                 {
-                    NLogger.Logger.Info("Sem emails para envio, esperando 5 minutos para tentar novamente");
+                    NLogger.Logger.Warn("Sem emails para envio, esperando 5 minutos para tentar novamente");
                     await Task.Delay(new TimeSpan(0, 5, 0));
                 }
             }
@@ -67,6 +65,10 @@ namespace Aplicacao.AluguelModule
         }
         public override ResultadoOperacao Inserir(Aluguel aluguel)
         {
+            var validacaoCupom = ValidarCupom(aluguel);
+            if (validacaoCupom.Resultado == EnumResultado.Falha)
+                return validacaoCupom;
+
             var insercao = base.Inserir(aluguel);
             if (insercao.Resultado == EnumResultado.Falha)
                 return insercao;
@@ -75,22 +77,21 @@ namespace Aplicacao.AluguelModule
             {
                 aluguel.Cupom.Usos++;
                 CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
-
-                if (aluguel.Cupom.ValorMinimo < aluguel.CalcularTotal(ConfigAluguel.Configs))
-                {
-                    insercao.AppendMensagem($"Cupom válido para aluguel acima de R${aluguel.Cupom.ValorMinimo}");
-                    return insercao;
-                }
-                    
             }
-
             ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
 
-            var relatorio = Relatorio.GerarRelatorio(aluguel);
-            NLogger.Logger.Info("Gerando relatório de {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
-            RelatorioRepositorio.SalvarRelatorio(new RelatorioAluguel(aluguel, relatorio));
+            GerarRelatorio(aluguel);
+
             return insercao;
         }
+
+        private void GerarRelatorio(Aluguel aluguel)
+        {
+            NLogger.Logger.Info("Gerando relatório de {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
+            var relatorio = Task.Run(() => Relatorio.GerarRelatorio(aluguel));
+            RelatorioRepositorio.SalvarRelatorio(new RelatorioAluguel(aluguel, relatorio.Result));
+        }
+
         public override ResultadoOperacao Editar(int id, Aluguel entidade)
         {
             var edicao = base.Editar(id, entidade);
@@ -104,14 +105,17 @@ namespace Aplicacao.AluguelModule
         public ResultadoOperacao ValidarCupom(Aluguel aluguel)
         {
             if (aluguel.Cupom == null)
+                return new ResultadoOperacao("", EnumResultado.Sucesso);
+
+            if (aluguel.Cupom == Cupom.Invalido)
                 return new ResultadoOperacao("Cupom não existe", EnumResultado.Falha);
 
             var validacao = aluguel.ValidarCupom();
 
-            if (validacao == string.Empty)
-                return new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso);
+            if (validacao != string.Empty)
+                return new ResultadoOperacao(validacao, EnumResultado.Falha);
 
-            return new ResultadoOperacao(validacao, EnumResultado.Falha);
+            return new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso);
         }
     }
     [Serializable]

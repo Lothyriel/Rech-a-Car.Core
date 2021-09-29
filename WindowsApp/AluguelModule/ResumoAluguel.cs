@@ -1,5 +1,4 @@
 ﻿using Aplicacao.AluguelModule;
-using Aplicacao.Shared;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.PessoaModule;
@@ -16,10 +15,9 @@ using WindowsApp.VeiculoModule;
 
 namespace WindowsApp.AluguelModule
 {
-    public partial class ResumoAluguel : CadastroEntidade<Aluguel>// 
+    public partial class ResumoAluguel : CadastroEntidade<Aluguel>//Form//
     {
         private readonly Aluguel Aluguel;
-
         public ResumoAluguel(Aluguel aluguel = null)
         {
             Services = ConfigServices.Services.AluguelServices;
@@ -46,6 +44,10 @@ namespace WindowsApp.AluguelModule
             {
                 PopulaCliente(aluguel.Cliente);
             }
+            if (Aluguel?.Cupom != null)
+            {
+                tb_Cupom.Text = Aluguel.Cupom.Nome;
+            }
         }
 
         public override AluguelAppServices Services { get; }
@@ -59,7 +61,9 @@ namespace WindowsApp.AluguelModule
             Aluguel.Funcionario = TelaPrincipal.Instancia.FuncionarioLogado;
             Aluguel.DataAluguel = dataAluguel;
             Aluguel.DataDevolucao = dataDevolucao;
-            Aluguel.Cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text);
+
+            if (tb_Cupom.Text != string.Empty)
+                Aluguel.Cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text) ?? Cupom.Invalido;
 
             return Aluguel;
         }
@@ -74,6 +78,7 @@ namespace WindowsApp.AluguelModule
             tbPlaca.Text = entidade.Veiculo.Placa;
             tbTipoCnh.Text = entidade.Veiculo.Categoria.TipoDeCnh.ToString();
             cbPlano.SelectedItem = entidade.TipoPlano.ToString();
+            tb_Cupom.Text = entidade.Cupom?.Nome;
 
             SetCondutor();
 
@@ -261,34 +266,12 @@ namespace WindowsApp.AluguelModule
             else
                 bt_RemoveServico.Enabled = NaotemZero;
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void tb_Cupom_TextChanged(object sender, EventArgs e)
         {
-            GetNovaEntidade().CalcularTotal();
-            var resultado = Services.ValidarCupom(GetNovaEntidade());
-            var cupom = GetNovaEntidade().Cupom;
-
-            MessageBox.Show(resultado.Mensagem);
-            
-            if (resultado == new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso))
-            {
-                lb_informativoCupom.Visible = true;
-                lb_informativoDesconto.Visible = true;
-
-                lb_informativoCupom.Text = $"Cupom {cupom.Nome} aplicado.";
-
-                if (cupom.ValorFixo > 0)
-                {
-                    lb_informativoDesconto.Text = $"Desconto: R${cupom.ValorFixo}.";
-                }
-                else if (cupom.ValorPercentual > 0)
-                {
-                    lb_informativoDesconto.Text = $"Desconto: {cupom.ValorPercentual}%.";
-                }
-
-                //CalcularPrecoParcial() - cupom.CalcularDesconto(valorTotal);
-                _ = CalcularPrecoParcial() - cupom.CalcularDesconto(cupom.ValorFixo);
-            }
+            Aluguel.Cupom = Aluguel.Cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text) ?? Cupom.Invalido;
         }
+
         #endregion
+
     }
 }
