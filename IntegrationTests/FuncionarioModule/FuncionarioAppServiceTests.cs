@@ -43,7 +43,7 @@ namespace IntegrationTests.FuncionarioModule
             funcionario = funcionarioMock.Object;
 
             sut.Inserir(funcionario).Resultado.Should().Be(EnumResultado.Falha);
-            mockRepoFuncionario.VerifyNoOtherCalls();
+            mockRepoFuncionario.Verify(x => x.ExisteUsuario(funcionario.NomeUsuario));
         }
         [TestMethod]
         public void Deve_remover_funcionario()

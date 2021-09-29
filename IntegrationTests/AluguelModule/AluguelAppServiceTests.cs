@@ -83,8 +83,5 @@ namespace IntegrationTests.AluguelModule
             sut.Editar(aluguel.Id, aluguel);
             mockRepoAluguel.Verify(x => x.Editar(aluguel.Id, aluguel));
         }
-
-
-
     }
 }

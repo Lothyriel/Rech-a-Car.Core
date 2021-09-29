@@ -43,7 +43,7 @@ namespace Aplicacao.Shared
         }
         public virtual void Excluir(int id, Type tipo = null)
         {
-            var nTipo = tipo.Name;
+            var nTipo = typeof(T).Name;
             NLogger.Logger.Info($"Excluindo {{tipo}} | ID: {{id{char.ToUpper(nTipo[0]) + nTipo.Substring(1)}}}", nTipo, id);
             Repositorio.Excluir(id, tipo);
             NLogger.Logger.Info("Excluido com sucesso");

@@ -72,7 +72,7 @@ namespace Dominio.CupomModule
                 resultadoValidacao += "O campo Valor Minimo não pode ser menor que Zero.\n";
 
             if (ValorFixo > ValorMinimo)
-                resultadoValidacao += "O valor Minimo não pode ser menor que o valor de Desconto.";
+                resultadoValidacao += "O valor Minimo não pode ser menor que o valor de Desconto.\n";
 
             return resultadoValidacao;
 
