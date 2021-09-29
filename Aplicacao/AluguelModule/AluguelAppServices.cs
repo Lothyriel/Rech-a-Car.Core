@@ -34,7 +34,7 @@ namespace Aplicacao.AluguelModule
             {
                 try
                 {
-                    NLogger.Logger.Info("Serviço de Envio de Emails Iniciado");
+                    NLogger.Logger.Debug("Serviço de Envio de Emails Iniciado");
                     TentaEnviarRelatorioEmail();
                 }
                 catch (FilaEmailVazia)
@@ -78,7 +78,7 @@ namespace Aplicacao.AluguelModule
             ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
 
             var relatorio = Relatorio.GerarRelatorio(aluguel);
-            NLogger.Logger.Info("Gerando relatório de {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
+            NLogger.Logger.Debug("Gerando relatório de {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
             RelatorioRepositorio.SalvarRelatorio(new RelatorioAluguel(aluguel, relatorio));
             return insercao;
         }
