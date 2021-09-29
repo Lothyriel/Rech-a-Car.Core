@@ -12,6 +12,8 @@ namespace Infra.NLogger
             configuration.AddRule(LogLevel.Info, LogLevel.Fatal, seq);
 
             LogManager.Configuration = configuration;
-        }
+        }        
+
+
     }
 }
