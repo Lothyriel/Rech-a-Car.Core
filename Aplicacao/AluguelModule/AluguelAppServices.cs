@@ -77,11 +77,18 @@ namespace Aplicacao.AluguelModule
             CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
             ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
 
-            var relatorio = Relatorio.GerarRelatorio(aluguel);
-            NLogger.Logger.Info("Gerando relatório de {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
-            RelatorioRepositorio.SalvarRelatorio(new RelatorioAluguel(aluguel, relatorio));
+            GerarRelatorio(aluguel);
+
             return insercao;
         }
+
+        private void GerarRelatorio(Aluguel aluguel)
+        {
+            NLogger.Logger.Info("Gerando relatório de {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
+            var relatorio = Task.Run(() => Relatorio.GerarRelatorio(aluguel));
+            RelatorioRepositorio.SalvarRelatorio(new RelatorioAluguel(aluguel, relatorio.Result));
+        }
+
         public override ResultadoOperacao Editar(int id, Aluguel entidade)
         {
             var edicao = base.Editar(id, entidade);

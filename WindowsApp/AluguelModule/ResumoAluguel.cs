@@ -262,6 +262,7 @@ namespace WindowsApp.AluguelModule
             else
                 bt_RemoveServico.Enabled = NaotemZero;
         }
+
         #endregion
     }
 }
