@@ -10,7 +10,6 @@ namespace Aplicacao.Shared
         public abstract IRepository<T> Repositorio { get; }
         public virtual ResultadoOperacao Inserir(T entidade)
         {
-            NLogger.Logger.Aqui();
             NLogger.Logger.Info("Validando {tipo} {entidade}", entidade.GetType().Name, entidade);
             var validacao = entidade.Validar();
             NLogger.Logger.Info("Validação completa{resultado}", validacao != string.Empty ? $" , erros: {validacao}" : "");

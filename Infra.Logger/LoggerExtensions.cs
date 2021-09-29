@@ -1,6 +1,7 @@
 ﻿using NLog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -16,11 +17,9 @@ namespace Infra.NLogger
             [CallerFilePath] string sourceFilePath = "",
             [CallerLineNumber] int sourceLineNumber = 0)
         {
-
-            logger.Info("Funcionalidade Usada");
             return logger
                 .WithProperty("MemberName", memberName)
-                .WithProperty("ClassName", sourceFilePath)
+                .WithProperty("ClassName", Path.GetFileNameWithoutExtension(sourceFilePath))
                 .WithProperty("LineNumber", sourceLineNumber);
         }
     }
