@@ -284,8 +284,6 @@ namespace WindowsApp.AluguelModule
                 {
                     lb_informativoDesconto.Text = $"Desconto: {cupom.ValorPercentual}%.";
                 }
-
-                PrecoParcial - cupom.CalcularDesconto(PrecoParcial);
             }
         }
         #endregion

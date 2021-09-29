@@ -273,10 +273,100 @@ namespace WindowsApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap home {
+            get {
+                object obj = ResourceManager.GetObject("home", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap inserir_icone_de_imagem {
             get {
                 object obj = ResourceManager.GetObject("inserir-icone-de-imagem", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] LEMONMILK_Bold {
+            get {
+                object obj = ResourceManager.GetObject("LEMONMILK_Bold", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] LEMONMILK_BoldItalic {
+            get {
+                object obj = ResourceManager.GetObject("LEMONMILK_BoldItalic", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] LEMONMILK_Light {
+            get {
+                object obj = ResourceManager.GetObject("LEMONMILK_Light", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] LEMONMILK_LightItalic {
+            get {
+                object obj = ResourceManager.GetObject("LEMONMILK_LightItalic", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] LEMONMILK_Medium {
+            get {
+                object obj = ResourceManager.GetObject("LEMONMILK_Medium", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] LEMONMILK_MediumItalic {
+            get {
+                object obj = ResourceManager.GetObject("LEMONMILK_MediumItalic", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] LEMONMILK_Regular {
+            get {
+                object obj = ResourceManager.GetObject("LEMONMILK_Regular", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] LEMONMILK_RegularItalic {
+            get {
+                object obj = ResourceManager.GetObject("LEMONMILK_RegularItalic", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
