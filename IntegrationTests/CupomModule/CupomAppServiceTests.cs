@@ -53,10 +53,5 @@ namespace IntegrationTests.CupomModule
             sut.Editar(cupom.Id, cupom);
             mockCupomRepo.Verify(x => x.Editar(cupom.Id, cupom));
         }
-
-
-
-
-
     }
 }

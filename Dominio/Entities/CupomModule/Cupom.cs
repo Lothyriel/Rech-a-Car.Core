@@ -16,7 +16,7 @@ namespace Dominio.CupomModule
             ValorMinimo = valorMInimo;
             Usos = usos;
         }
-
+        public Cupom() { }
         public string Nome { get; }
         public int ValorPercentual { get; }
         public double ValorFixo { get; }
