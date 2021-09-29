@@ -29,11 +29,10 @@ namespace Aplicacao.ClienteModule
 
         public override ResultadoOperacao Inserir(ClientePF entidade)
         {
+            CnhRepository.Inserir(entidade.Cnh);
             var inserir = base.Inserir(entidade);
             if (inserir.Resultado == EnumResultado.Falha)
                 return inserir;
-
-            CnhRepository.Inserir(entidade.Cnh);
 
             return inserir;
         }
