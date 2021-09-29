@@ -71,10 +71,13 @@ namespace Aplicacao.AluguelModule
 
             var insercao = base.Inserir(aluguel);
             if (insercao.Resultado == EnumResultado.Falha)
-                return insercao.Append(base.Inserir(aluguel));
+                return insercao;
 
-            aluguel.Cupom.Usos++;
-            CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
+            if (aluguel.Cupom != null)
+            {
+                aluguel.Cupom.Usos++;
+                CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
+            }
             ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
 
             GerarRelatorio(aluguel);
@@ -102,6 +105,9 @@ namespace Aplicacao.AluguelModule
         public ResultadoOperacao ValidarCupom(Aluguel aluguel)
         {
             if (aluguel.Cupom == null)
+                return new ResultadoOperacao("", EnumResultado.Sucesso);
+
+            if (aluguel.Cupom == Cupom.Invalido)
                 return new ResultadoOperacao("Cupom não existe", EnumResultado.Falha);
 
             var validacao = aluguel.ValidarCupom();
