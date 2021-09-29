@@ -10,10 +10,11 @@ namespace Aplicacao.Shared
         public abstract IRepository<T> Repositorio { get; }
         public virtual ResultadoOperacao Inserir(T entidade)
         {
+            NLogger.Logger.Aqui();
             NLogger.Logger.Info("Validando {tipo} {entidade}", entidade.GetType().Name, entidade);
             var validacao = entidade.Validar();
             NLogger.Logger.Info("Validação completa{resultado}", validacao != string.Empty ? $" , erros: {validacao}" : "");
-
+            
             if (validacao != string.Empty)
             {
                 return new ResultadoOperacao(validacao, EnumResultado.Falha);
@@ -43,6 +44,7 @@ namespace Aplicacao.Shared
         }
         public virtual void Excluir(int id, Type tipo = null)
         {
+            NLogger.Logger.Aqui();
             var nTipo = tipo.Name;
             NLogger.Logger.Info($"Excluindo {{tipo}} | ID: {{id{char.ToUpper(nTipo[0]) + nTipo.Substring(1)}}}", nTipo, id);
             Repositorio.Excluir(id, tipo);
