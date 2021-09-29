@@ -29,8 +29,8 @@ namespace WindowsApp.AluguelModule
         }
         private void CalcularPrecoTotal()
         {
-            AluguelFechado aluguelFechado = GetNovaEntidade();
-            var configs = ConfiguracoesManager.Configs;
+            var aluguelFechado = GetNovaEntidade();
+            var configs = ConfigAluguel.Configs;
             lbValorFinal.Text = aluguelFechado.CalcularTotal(configs).ToString();
         }
         private int KmRodados()

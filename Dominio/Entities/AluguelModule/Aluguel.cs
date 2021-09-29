@@ -115,8 +115,6 @@ namespace Dominio.AluguelModule
             if (!DatasValidas())
                 validacao += "Data de devolução deve ser após data de aluguel";
 
-
-
             return validacao;
         }
 

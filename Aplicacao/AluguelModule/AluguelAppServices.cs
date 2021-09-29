@@ -1,5 +1,4 @@
 ﻿using Aplicacao.Shared;
-using ConfigurationManager;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.ServicoModule;
@@ -29,7 +28,6 @@ namespace Aplicacao.AluguelModule
             ServicoRepositorio = servicoRepositorio;
             CupomRepositorio = cupomRepositorio;
         }
-
         public async void IniciaLoopEnvioEmails()
         {
             while (true)
@@ -41,7 +39,7 @@ namespace Aplicacao.AluguelModule
                 }
                 catch (FilaEmailVazia)
                 {
-                    NLogger.Logger.Info("Sem emails para envio, esperando 5 minutos para tentar novamente");
+                    NLogger.Logger.Warn("Sem emails para envio, esperando 5 minutos para tentar novamente");
                     await Task.Delay(new TimeSpan(0, 5, 0));
                 }
             }
@@ -67,23 +65,16 @@ namespace Aplicacao.AluguelModule
         }
         public override ResultadoOperacao Inserir(Aluguel aluguel)
         {
+            var validacaoCupom = ValidarCupom(aluguel);
+            if (validacaoCupom.Resultado == EnumResultado.Falha)
+                return validacaoCupom;
+
             var insercao = base.Inserir(aluguel);
             if (insercao.Resultado == EnumResultado.Falha)
-                return insercao;
+                return insercao.Append(base.Inserir(aluguel));
 
-            if (aluguel.Cupom != null)
-            {
-                aluguel.Cupom.Usos++;
-                CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
-
-                if (aluguel.Cupom.ValorMinimo < aluguel.CalcularTotal(ConfigAluguel.Configs))
-                {
-                    insercao.AppendMensagem($"Cupom válido para aluguel acima de R${aluguel.Cupom.ValorMinimo}");
-                    return insercao;
-                }
-                    
-            }
-
+            aluguel.Cupom.Usos++;
+            CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
             ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
 
             var relatorio = Relatorio.GerarRelatorio(aluguel);
@@ -108,10 +99,10 @@ namespace Aplicacao.AluguelModule
 
             var validacao = aluguel.ValidarCupom();
 
-            if (validacao == string.Empty)
-                return new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso);
+            if (validacao != string.Empty)
+                return new ResultadoOperacao(validacao, EnumResultado.Falha);
 
-            return new ResultadoOperacao(validacao, EnumResultado.Falha);
+            return new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso);
         }
     }
     [Serializable]

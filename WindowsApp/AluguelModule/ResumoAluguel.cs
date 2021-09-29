@@ -1,5 +1,4 @@
 ﻿using Aplicacao.AluguelModule;
-using Aplicacao.Shared;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.PessoaModule;
@@ -16,10 +15,9 @@ using WindowsApp.VeiculoModule;
 
 namespace WindowsApp.AluguelModule
 {
-    public partial class ResumoAluguel : CadastroEntidade<Aluguel>// 
+    public partial class ResumoAluguel : CadastroEntidade<Aluguel>//Form //
     {
         private readonly Aluguel Aluguel;
-
         public ResumoAluguel(Aluguel aluguel = null)
         {
             Services = ConfigServices.Services.AluguelServices;
@@ -45,6 +43,10 @@ namespace WindowsApp.AluguelModule
             if (Aluguel?.Cliente != null)
             {
                 PopulaCliente(aluguel.Cliente);
+            }
+            if (Aluguel?.Cupom != null)
+            {
+                tb_Cupom.Text = Aluguel.Cupom.Nome;
             }
         }
 
@@ -260,33 +262,6 @@ namespace WindowsApp.AluguelModule
                 bt_AddServico.Enabled = NaotemZero;
             else
                 bt_RemoveServico.Enabled = NaotemZero;
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            GetNovaEntidade().CalcularTotal();
-            var resultado = Services.ValidarCupom(GetNovaEntidade());
-            var cupom = GetNovaEntidade().Cupom;
-
-            MessageBox.Show(resultado.Mensagem);
-            
-            if (resultado == new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso))
-            {
-                lb_informativoCupom.Visible = true;
-                lb_informativoDesconto.Visible = true;
-
-                lb_informativoCupom.Text = $"Cupom {cupom.Nome} aplicado.";
-
-                if (cupom.ValorFixo > 0)
-                {
-                    lb_informativoDesconto.Text = $"Desconto: R${cupom.ValorFixo}.";
-                }
-                else if (cupom.ValorPercentual > 0)
-                {
-                    lb_informativoDesconto.Text = $"Desconto: {cupom.ValorPercentual}%.";
-                }
-
-                PrecoParcial - cupom.CalcularDesconto(PrecoParcial);
-            }
         }
         #endregion
     }

@@ -64,9 +64,11 @@ namespace Aplicacao.Shared
     public enum EnumResultado { Sucesso, Falha }
     public class ResultadoOperacao
     {
-        public void AppendMensagem(string mensagem)
+        public ResultadoOperacao Append(ResultadoOperacao operacao)
         {
-            Mensagem += "\n" + mensagem;
+            Mensagem += "\n" + operacao.Mensagem;
+            Resultado = operacao.Resultado;
+            return this;
         }
 
         public string Mensagem;
