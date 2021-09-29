@@ -36,6 +36,10 @@ namespace Infra.DAO.PessoaModule
                     [NUMERO] = @NUMERO
                     WHERE [ID] = @ID";
 
+        private const string sqlExcluirCnh =
+            @" DELETE FROM [TBCNH]
+                            WHERE [ID] = @ID";
+
         #endregion
         public void Inserir(CNH cnh)
         {
@@ -46,9 +50,13 @@ namespace Infra.DAO.PessoaModule
             cnh.Id = id;
             Db.Update(sqlEditarCnh, ObterParametrosRegistro(cnh));
         }
-        public CNH GetByIdCondutor(int id_condutor)
+        public CNH GetById(int idCnh)
         {
-            return Db.Get(sqlSelecionarCnhPorIdCondutor, ConverterEmEntidade, new Dictionary<string, object> { { "ID", id_condutor } });
+            return Db.Get(sqlSelecionarCnhPorIdCondutor, ConverterEmEntidade, new Dictionary<string, object> { { "ID", idCnh } });
+        }
+        public void Excluir(int idCnh)
+        {
+            Db.Delete(sqlExcluirCnh, new Dictionary<string, object> { { "ID", idCnh } });
         }
         public Dictionary<string, object> ObterParametrosRegistro(CNH cnh)
         {

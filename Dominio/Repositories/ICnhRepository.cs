@@ -12,7 +12,7 @@ namespace Dominio.Repositories
     {
         void Inserir(CNH cnh);
         void Editar(int id, CNH cnh);
-        CNH GetByIdCondutor(int id_condutor);
-
+        CNH GetById(int idCnh);
+        void Excluir(int idCnh);
     }
 }
