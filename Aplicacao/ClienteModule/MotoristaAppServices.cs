@@ -17,13 +17,13 @@ namespace Aplicacao.ClienteModule
             Repositorio = repositorio;
         }
 
-        public override ResultadoOperacao Inserir(Motorista entidade)
+        public override ResultadoOperacao Inserir(Motorista motorista)
         {
-            var inserir = base.Inserir(entidade);
-            if (inserir.Resultado == EnumResultado.Falha)
-                return inserir;
+            CnhRepository.Inserir(motorista.Cnh);
+            var inserir = base.Inserir(motorista);
 
-            CnhRepository.Inserir(entidade.Cnh);
+            if (inserir.Resultado == EnumResultado.Falha)
+                CnhRepository.Excluir(motorista.Cnh.Id);
 
             return inserir;
         }

@@ -85,7 +85,7 @@ namespace Infra.DAO.PessoaModule
             var data_nascimento = Convert.ToDateTime(reader["DATA_NASCIMENTO"]);
 
             var id_cnh = Convert.ToInt32(reader["ID_CNH"]);
-            var cnh = new CnhDAO().GetByIdCondutor(id_cnh);
+            var cnh = new CnhDAO().GetById(id_cnh);
 
             return new ClientePF(nome, telefone, endereco, documento, cnh, data_nascimento, email)
             {

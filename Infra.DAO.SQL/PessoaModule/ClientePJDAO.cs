@@ -108,7 +108,7 @@ namespace Infra.DAO.PessoaModule
                 var documento_motorista = Convert.ToString(reader["DOCUMENTO_MOTORISTA"]);
 
                 var id_cnh = Convert.ToInt32(reader["ID_CNH"]);
-                var cnh = new CnhDAO().GetByIdCondutor(id_cnh);
+                var cnh = new CnhDAO().GetById(id_cnh);
 
                 motoristas.Add(new Motorista(nome_motorista, telefone_motorista, endereco_motorista, documento_motorista, cnh, empresa)
                 {

@@ -71,9 +71,11 @@ namespace WindowsApp.ClienteModule
         }
         private void bt_add_motorista_click(object sender, EventArgs e)
         {
-            if (entidade == null)
+            entidade = GetNovaEntidade();
+            var validacao = entidade.Validar();
+            if (validacao != string.Empty)
             {
-                MessageBox.Show("Primeiro cadastre a Empresa");
+                MessageBox.Show(validacao);
                 return;
             }
             TelaPrincipal.Instancia.FormAtivo = new CadastroMotorista(entidade);

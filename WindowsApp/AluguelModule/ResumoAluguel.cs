@@ -14,7 +14,7 @@ using WindowsApp.VeiculoModule;
 
 namespace WindowsApp.AluguelModule
 {
-    public partial class ResumoAluguel : CadastroEntidade<Aluguel>//Form //
+    public partial class ResumoAluguel : CadastroEntidade<Aluguel>//Form//
     {
         private readonly Aluguel Aluguel;
         public ResumoAluguel(Aluguel aluguel = null)
@@ -60,7 +60,9 @@ namespace WindowsApp.AluguelModule
             Aluguel.Funcionario = TelaPrincipal.Instancia.FuncionarioLogado;
             Aluguel.DataAluguel = dataAluguel;
             Aluguel.DataDevolucao = dataDevolucao;
-            Aluguel.Cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text);
+
+            if (tb_Cupom.Text != string.Empty)
+                Aluguel.Cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text) ?? Cupom.Invalido;
 
             return Aluguel;
         }
@@ -75,6 +77,7 @@ namespace WindowsApp.AluguelModule
             tbPlaca.Text = entidade.Veiculo.Placa;
             tbTipoCnh.Text = entidade.Veiculo.Categoria.TipoDeCnh.ToString();
             cbPlano.SelectedItem = entidade.TipoPlano.ToString();
+            tb_Cupom.Text = entidade.Cupom?.Nome;
 
             SetCondutor();
 
@@ -262,6 +265,12 @@ namespace WindowsApp.AluguelModule
             else
                 bt_RemoveServico.Enabled = NaotemZero;
         }
+        private void tb_Cupom_TextChanged(object sender, EventArgs e)
+        {
+            Aluguel.Cupom = Aluguel.Cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text) ?? Cupom.Invalido;
+        }
+
         #endregion
+
     }
 }

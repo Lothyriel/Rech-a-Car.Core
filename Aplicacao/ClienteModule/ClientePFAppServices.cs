@@ -27,13 +27,12 @@ namespace Aplicacao.ClienteModule
             return edicao;
         }
 
-        public override ResultadoOperacao Inserir(ClientePF entidade)
+        public override ResultadoOperacao Inserir(ClientePF clientePF)
         {
-            var inserir = base.Inserir(entidade);
+            CnhRepository.Inserir(clientePF.Cnh);
+            var inserir = base.Inserir(clientePF);
             if (inserir.Resultado == EnumResultado.Falha)
-                return inserir;
-
-            CnhRepository.Inserir(entidade.Cnh);
+                CnhRepository.Excluir(clientePF.Cnh.Id);
 
             return inserir;
         }
