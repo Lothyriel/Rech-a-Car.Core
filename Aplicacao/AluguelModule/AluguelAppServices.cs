@@ -34,7 +34,7 @@ namespace Aplicacao.AluguelModule
             {
                 try
                 {
-                    NLogger.Logger.Info("Serviço de Envio de Emails Iniciado");
+                    NLogger.Logger.Aqui().Info("Serviço de Envio de Emails Iniciado");
                     TentaEnviarRelatorioEmail();
                 }
                 catch (FilaEmailVazia)
