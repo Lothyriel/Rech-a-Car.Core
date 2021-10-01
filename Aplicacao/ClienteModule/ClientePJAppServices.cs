@@ -15,6 +15,5 @@ namespace Aplicacao.ClienteModule
 
         }
         public override IRepository<ClientePJ> Repositorio { get; }
-
     }
 }

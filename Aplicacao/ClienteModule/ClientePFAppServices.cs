@@ -2,6 +2,7 @@
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
 using Dominio.Shared;
+using System;
 
 namespace Aplicacao.ClienteModule
 {
@@ -16,6 +17,15 @@ namespace Aplicacao.ClienteModule
         }
         public override IRepository<ClientePF> Repositorio { get; }
 
+        public override ResultadoOperacao Inserir(ClientePF clientePF)
+        {
+            CnhRepository.Inserir(clientePF.Cnh);
+            var inserir = base.Inserir(clientePF);
+            if (inserir.Resultado == EnumResultado.Falha)
+                CnhRepository.Excluir(clientePF.Cnh.Id);
+
+            return inserir;
+        }
         public override ResultadoOperacao Editar(int id, ClientePF entidade)
         {
             var edicao = base.Editar(id, entidade);
@@ -26,15 +36,10 @@ namespace Aplicacao.ClienteModule
 
             return edicao;
         }
-
-        public override ResultadoOperacao Inserir(ClientePF clientePF)
+        public override void Excluir(int id, Type tipo = null)
         {
-            CnhRepository.Inserir(clientePF.Cnh);
-            var inserir = base.Inserir(clientePF);
-            if (inserir.Resultado == EnumResultado.Falha)
-                CnhRepository.Excluir(clientePF.Cnh.Id);
-
-            return inserir;
+            base.Excluir(id, tipo);
+            CnhRepository.Excluir(id);
         }
     }
 }

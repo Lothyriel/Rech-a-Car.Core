@@ -44,7 +44,7 @@ namespace WindowsApp.ClienteModule
             this.tbCPF = new System.Windows.Forms.MaskedTextBox();
             this.tbTelefone = new System.Windows.Forms.MaskedTextBox();
             this.tbCNH = new System.Windows.Forms.MaskedTextBox();
-            this.tb_email = new System.Windows.Forms.TextBox();
+            this.tbEmail = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -232,12 +232,12 @@ namespace WindowsApp.ClienteModule
             // 
             // tb_email
             // 
-            this.tb_email.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tb_email.Location = new System.Drawing.Point(125, 365);
-            this.tb_email.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tb_email.Name = "tb_email";
-            this.tb_email.Size = new System.Drawing.Size(237, 29);
-            this.tb_email.TabIndex = 4;
+            this.tbEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbEmail.Location = new System.Drawing.Point(125, 365);
+            this.tbEmail.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tbEmail.Name = "tb_email";
+            this.tbEmail.Size = new System.Drawing.Size(237, 29);
+            this.tbEmail.TabIndex = 4;
             // 
             // label2
             // 
@@ -257,7 +257,7 @@ namespace WindowsApp.ClienteModule
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(33)))), ((int)(((byte)(34)))));
             this.ClientSize = new System.Drawing.Size(779, 602);
-            this.Controls.Add(this.tb_email);
+            this.Controls.Add(this.tbEmail);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbCNH);
             this.Controls.Add(this.tbCPF);
@@ -299,7 +299,7 @@ namespace WindowsApp.ClienteModule
         private System.Windows.Forms.MaskedTextBox tbCPF;
         private System.Windows.Forms.MaskedTextBox tbTelefone;
         private System.Windows.Forms.MaskedTextBox tbCNH;
-        private System.Windows.Forms.TextBox tb_email;
+        private System.Windows.Forms.TextBox tbEmail;
         private System.Windows.Forms.Label label2;
     }
 }

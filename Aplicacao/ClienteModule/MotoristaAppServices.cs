@@ -42,6 +42,7 @@ namespace Aplicacao.ClienteModule
         public override void Excluir(int id, Type tipo = null)
         {
             base.Excluir(id, tipo);
+            CnhRepository.Excluir(id);
         }
     }
 }

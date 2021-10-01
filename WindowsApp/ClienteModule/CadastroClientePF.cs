@@ -28,6 +28,7 @@ namespace WindowsApp.ClienteModule
 
             tbCNH.Text = entidade.Cnh.NumeroCnh;
             cbTipoCNH.SelectedIndex = (int)entidade.Cnh.TipoCnh;
+            tbEmail.Text = entidade.Email;
 
             return this;
         }
@@ -38,7 +39,7 @@ namespace WindowsApp.ClienteModule
             var telefone = tbTelefone.Text;
             var endereco = tbEndereco.Text;
             var documento = tbCPF.Text;
-            var email = tb_email.Text;
+            var email = tbEmail.Text;
             var cnh = GetCNH();
             DateTime.TryParse(mtbNascimento.Text, out DateTime dataNascimento);
             return new ClientePF(nome, telefone, endereco, documento, cnh, dataNascimento, email);
