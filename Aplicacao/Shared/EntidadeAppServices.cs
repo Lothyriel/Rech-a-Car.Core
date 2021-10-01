@@ -20,7 +20,7 @@ namespace Aplicacao.Shared
             }
             NLogger.Logger.Aqui().Debug("Inserindo {tipo} {entidade}", entidade.GetType().Name, entidade);
             Repositorio.Inserir(entidade);
-            NLogger.Logger.Aqui().Info("Inserido com sucesso");
+            NLogger.Logger.Aqui().Info("Inserido com sucesso {tipo} {entidade}", entidade.GetType().Name, entidade);
 
             return new ResultadoOperacao("Inserido com sucesso!", EnumResultado.Sucesso);
         }
@@ -38,7 +38,7 @@ namespace Aplicacao.Shared
             }
             NLogger.Logger.Aqui().Debug($"Editando {{tipo}} {{entidade}} | ID: {{id{char.ToUpper(tipo[0]) + tipo.Substring(1)}}}", tipo, entidade, id);
             Repositorio.Editar(id, entidade);
-            NLogger.Logger.Aqui().Info("Editado com sucesso");
+            NLogger.Logger.Aqui().Info("Editado com sucesso {{tipo}} {{entidade}} | ID: {{id{char.ToUpper(tipo[0]) + tipo.Substring(1)}}}", tipo, entidade, id);
             return new ResultadoOperacao("Editado com sucesso!", EnumResultado.Sucesso);
         }
         public virtual void Excluir(int id, Type tipo = null)
@@ -46,7 +46,7 @@ namespace Aplicacao.Shared
             var nTipo = typeof(T).Name;
             NLogger.Logger.Aqui().Debug($"Excluindo {{tipo}} | ID: {{id{char.ToUpper(nTipo[0]) + nTipo.Substring(1)}}}", nTipo, id);
             Repositorio.Excluir(id, tipo);
-            NLogger.Logger.Aqui().Info("Excluido com sucesso");
+            NLogger.Logger.Aqui().Info("Excluido com sucesso {{tipo}} | ID: {{id{char.ToUpper(nTipo[0]) + nTipo.Substring(1)}}}", nTipo, id);
         }
         public bool Existe(int id)
         {

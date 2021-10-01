@@ -20,14 +20,14 @@ namespace Aplicacao.AluguelModule
         }
         public override ResultadoOperacao Editar(int id, AluguelFechado aluguel)
         {
+            NLogger.Logger.Aqui().Debug("Devolvendo {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
             var edicao = base.Editar(id, aluguel);
             if (edicao.Resultado == EnumResultado.Falha)
                 return edicao;
 
             ServicoRepository.DesalugarServicosAlugados(id);
             RepositorioVeiculo.AdicionarQuilometragem(aluguel.Veiculo, aluguel.KmRodados);
-
-            NLogger.Logger.Aqui().Info("Devolvendo {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
+            NLogger.Logger.Aqui().Info("Devolução completa {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
             return edicao;
         }
     }
