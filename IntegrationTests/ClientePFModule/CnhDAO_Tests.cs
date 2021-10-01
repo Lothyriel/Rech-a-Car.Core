@@ -32,7 +32,7 @@ namespace IntegrationTests.ClientePFModule
         public void Deve_Excluir_cnh_cliente()
         {
             var cnhAnterior = new CNH("1212120", TipoCNH.A);
-            CnhDAO.Excluir()
+            CnhDAO.Excluir(cnhAnterior.Id);
         }
     }
 }

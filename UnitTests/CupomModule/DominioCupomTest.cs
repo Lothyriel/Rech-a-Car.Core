@@ -13,7 +13,7 @@ namespace Tests.CupomModule
         public void Deve_retornar_clientePJ_valido()
         {
             Parceiro parceiro = new Parceiro("Deko");
-            Cupom cupomValido = new Cupom("DEKO-1563", 0, 120, (new DateTime(2021, 09, 30)), parceiro, 200, 0);
+            Cupom cupomValido = new Cupom("DEKO-1563", 0, 120,  DateTime.Today.AddDays(2), parceiro, 200, 0);
             cupomValido.Validar().Should().Be(string.Empty);
         }
 
