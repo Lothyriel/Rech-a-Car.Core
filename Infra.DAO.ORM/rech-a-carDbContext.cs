@@ -1,4 +1,5 @@
 ﻿using Dominio.AluguelModule;
+using Dominio.CupomModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
@@ -13,6 +14,7 @@ namespace Infra.DAO.ORM
     public class rech_a_carDbContext : DbContext
     {
         public DbSet<Veiculo> Veiculos { get; set; }
+        public DbSet<Cupom> Cupons { get; set; }
         public DbSet<ClientePF> ClientesPF { get; set; }
         public DbSet<ClientePJ> ClientesPJ { get; set; }
         public DbSet<Servico> Servicos { get; set; }
