@@ -25,7 +25,7 @@ namespace IntegrationTests.CupomModule
         public void Deve_Inserir_Novo_Cupom()
         {
             var parceiro = new Parceiro("Desconto do Deko");
-            var cupom = new Cupom("Deko", 50, 0, new DateTime(2021, 08, 26), parceiro, 230,0);
+            var cupom = new Cupom("Deko", 50, 0, new DateTime(2021, 08, 26), parceiro, 230, 0);
 
             //action
             ParceiroDAO.Inserir(parceiro);
@@ -40,8 +40,8 @@ namespace IntegrationTests.CupomModule
         {
             //arrange
             var parceiro = new Parceiro("Desconto do Deko");
-            var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26).Date, parceiro, 300,0);
-            var cupomAtualizado = new Cupom("Deko-5946", 10, 0, new DateTime(2021, 08, 26).Date, parceiro, 250,0);
+            var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26).Date, parceiro, 300, 0);
+            var cupomAtualizado = new Cupom("Deko-5946", 10, 0, new DateTime(2021, 08, 26).Date, parceiro, 250, 0);
 
             //action
             ParceiroDAO.Inserir(parceiro);
@@ -57,7 +57,7 @@ namespace IntegrationTests.CupomModule
         {
             //arrange
             var parceiro = new Parceiro("Desconto do Deko");
-            var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26), parceiro, 300,0);
+            var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26), parceiro, 300, 0);
 
             //action
             ParceiroDAO.Inserir(parceiro);
@@ -72,7 +72,7 @@ namespace IntegrationTests.CupomModule
         {
             //arrange
             var parceiro = new Parceiro("Desconto do Deko");
-            var cupom = new Cupom("Deko-1236", 0, 50, new DateTime(2021, 08, 26), parceiro, 300,0);
+            var cupom = new Cupom("Deko-1236", 0, 50, new DateTime(2021, 08, 26), parceiro, 300, 0);
 
             //action
             ParceiroDAO.Inserir(parceiro);
@@ -87,7 +87,7 @@ namespace IntegrationTests.CupomModule
         {
             //arrange
             var parceiro = new Parceiro("Desconto do Deko");
-            var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26), parceiro, 300,0);
+            var cupom = new Cupom("Deko-1236", 50, 0, new DateTime(2021, 08, 26), parceiro, 300, 0);
 
             //action
             ParceiroDAO.Inserir(parceiro);

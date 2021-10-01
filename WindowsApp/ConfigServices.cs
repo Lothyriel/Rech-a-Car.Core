@@ -100,11 +100,11 @@ namespace WindowsApp
             Services.CategoriaServices = new CategoriaAppServices(categoriaRepo);
             Services.FuncionarioServices = new FuncionarioAppServices(funcionarioRepo, senhaRepo);
             Services.VeiculoServices = new VeiculoAppServices(veiculoRepo, categoriaRepo);
-            Services.AluguelFechadoServices = new AluguelFechadoAppServices(aluguelFechadoRepo,servicoRepo, veiculoRepo);
+            Services.AluguelFechadoServices = new AluguelFechadoAppServices(aluguelFechadoRepo, servicoRepo, veiculoRepo);
             Services.AluguelServices = new AluguelAppServices(aluguelRepo, RelatorioAluguel, relatorioRepo, servicoRepo, cupomRepo);
         }
     }
     public enum ConfigRepositories { SQL, ORM }
 
-    public enum ConfigRelatorio { PDF, TXT, CSV}
+    public enum ConfigRelatorio { PDF, TXT, CSV }
 }

@@ -22,15 +22,15 @@ namespace Aplicacao.FuncionarioModule
 
             return base.Inserir(funcionario);
         }
-        public bool ExisteUsuario(string usuario) 
+        public bool ExisteUsuario(string usuario)
         {
             return Repositorio.ExisteUsuario(usuario);
         }
-        public bool SenhaCorreta(int id_funcionario, string senha) 
+        public bool SenhaCorreta(int id_funcionario, string senha)
         {
             return RepositorioSenha.SenhaCorreta(id_funcionario, senha);
         }
-        public Funcionario GetByUserName(string userName) 
+        public Funcionario GetByUserName(string userName)
         {
             return Repositorio.GetByUserName(userName);
         }

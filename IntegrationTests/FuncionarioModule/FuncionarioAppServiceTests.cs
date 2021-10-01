@@ -1,11 +1,10 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Aplicacao.ServicosModule;
+﻿using Aplicacao.FuncionarioModule;
 using Aplicacao.Shared;
 using Dominio.PessoaModule;
-using Aplicacao.FuncionarioModule;
 using Dominio.Repositories;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace IntegrationTests.FuncionarioModule
 {

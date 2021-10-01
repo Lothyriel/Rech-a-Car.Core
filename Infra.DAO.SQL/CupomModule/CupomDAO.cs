@@ -93,7 +93,7 @@ namespace Infra.DAO.CupomModule
         public override string sqlExists => sqlExisteCupom;
 
         public override List<Cupom> Registros => OrdenadoPorUsos();
-        public List<Cupom> OrdenadoPorUsos() 
+        public List<Cupom> OrdenadoPorUsos()
         {
             return Db.GetAll(sqlSelecionarTodosCuponsOrdenadosPorUso, ConverterEmEntidade);
         }

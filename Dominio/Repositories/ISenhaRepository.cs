@@ -1,8 +1,6 @@
 ﻿using Dominio.Entities.PessoaModule;
-using Dominio.Shared;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 
 namespace Dominio.Repositories

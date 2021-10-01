@@ -1,11 +1,9 @@
 ﻿using Dominio.Entities.PessoaModule;
 using Dominio.Repositories;
 using Infra.DAO.Shared;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Security.Cryptography;
 
 namespace Infra.DAO.PessoaModule
 {

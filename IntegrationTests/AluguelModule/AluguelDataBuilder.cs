@@ -40,7 +40,7 @@ namespace IntegrationTests.Shared
 
         public AluguelDataBuilder NaData(DateTime dataAluguel = default)
         {
-            dataAluguel = dataAluguel != DateTime.MinValue ? dataAluguel: DateTime.Today;
+            dataAluguel = dataAluguel != DateTime.MinValue ? dataAluguel : DateTime.Today;
             aluguel.DataAluguel = dataAluguel;
 
             return this;

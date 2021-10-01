@@ -1,9 +1,9 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using Aplicacao.CupomModule;
 using Aplicacao.Shared;
 using Dominio.CupomModule;
-using Aplicacao.CupomModule;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace IntegrationTests.CupomModule
 {

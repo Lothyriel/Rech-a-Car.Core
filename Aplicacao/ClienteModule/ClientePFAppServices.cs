@@ -21,6 +21,7 @@ namespace Aplicacao.ClienteModule
         {
             CnhRepository.Inserir(clientePF.Cnh);
             var inserir = base.Inserir(clientePF);
+
             if (inserir.Resultado == EnumResultado.Falha)
                 CnhRepository.Excluir(clientePF.Cnh.Id);
 

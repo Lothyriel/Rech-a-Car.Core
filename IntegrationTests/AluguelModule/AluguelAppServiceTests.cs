@@ -1,26 +1,14 @@
 ﻿using Aplicacao.AluguelModule;
-using Aplicacao.ClienteModule;
-using Aplicacao.FuncionarioModule;
 using Aplicacao.Shared;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
-using Dominio.ParceiroModule;
-using Dominio.PessoaModule;
-using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
-using Dominio.Shared;
-using Dominio.VeiculoModule;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationTests.AluguelModule
-{   
+{
     [TestClass]
     public class AluguelAppServiceTests
     {

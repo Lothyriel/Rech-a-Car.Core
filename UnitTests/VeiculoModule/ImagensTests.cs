@@ -2,12 +2,7 @@
 using Dominio.VeiculoModule;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnitTests.Properties;
 
 namespace UnitTests.ImagensModule
@@ -15,13 +10,12 @@ namespace UnitTests.ImagensModule
     [TestClass]
     public class ImagensTests
     {
-        Image imagemJPG = Resources.ford_ka_gay;
         Categoria categoria = new Categoria("Economico", 100, 10, 400, 800, TipoCNH.B);
-
 
         [TestMethod]
         public void Deve_retornar_carro_valido_Imagem_JPG()
         {
+            var imagemJPG = Resources.ford_ka_gay;
             var veiculo1 = new Veiculo("MODELO", "MARCA", 2001, "AAA1111", 50000, 4, 4, "ASDFGHJKLQWERTYUI", 0, 50, imagemJPG, true, categoria, TipoCombustivel.Gasolina);
             veiculo1.Validar().Should().Be(string.Empty);
         }
@@ -30,7 +24,7 @@ namespace UnitTests.ImagensModule
         public void Deve_retornar_carro_valido_Imagem_GIF()
         {
             Image imagemgif = Resources.homer;
-            var veiculo1 = new Veiculo("MODELO", "MARCA", 2001, "AAA1111", 50000, 4, 4, "ASDFGHJKLQWERTYUI", 0, 50, imagemJPG, true, categoria, TipoCombustivel.Gasolina);
+            var veiculo1 = new Veiculo("MODELO", "MARCA", 2001, "AAA1111", 50000, 4, 4, "ASDFGHJKLQWERTYUI", 0, 50, imagemgif, true, categoria, TipoCombustivel.Gasolina);
             veiculo1.Validar().Should().Be(string.Empty);
         }
 
@@ -38,7 +32,7 @@ namespace UnitTests.ImagensModule
         public void Deve_retornar_carro_valido_Imagem_PNG()
         {
             Image imagemPNG = Resources.among;
-            var veiculo1 = new Veiculo("MODELO", "MARCA", 2001, "AAA1111", 50000, 4, 4, "ASDFGHJKLQWERTYUI", 0, 50, imagemJPG, true, categoria, TipoCombustivel.Gasolina);
+            var veiculo1 = new Veiculo("MODELO", "MARCA", 2001, "AAA1111", 50000, 4, 4, "ASDFGHJKLQWERTYUI", 0, 50, imagemPNG, true, categoria, TipoCombustivel.Gasolina);
             veiculo1.Validar().Should().Be(string.Empty);
         }
     }

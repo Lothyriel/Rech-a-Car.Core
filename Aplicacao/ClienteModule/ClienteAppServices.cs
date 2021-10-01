@@ -1,8 +1,6 @@
 ﻿using Aplicacao.Shared;
-using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
-using Dominio.ServicoModule;
 
 namespace Aplicacao.ClienteModule
 {
