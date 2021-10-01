@@ -271,6 +271,8 @@ namespace WindowsApp.AluguelModule
             Aluguel.Cupom = Aluguel.Cupom = Services.CupomRepositorio.GetByName(tb_Cupom.Text) ?? Cupom.Invalido;
         }
 
+            }
+        }
         #endregion
 
     }

@@ -178,6 +178,9 @@
   <data name="ford_ka_login" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ford_ka_login.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="checked_mini" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\checked_mini.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="aluguel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\aluguel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -190,8 +193,8 @@
   <data name="logoextendida" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logoextendida.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="clientes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\clientes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="inserir-icone-de-imagem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inserir-icone-de-imagem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="add-01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add-01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -220,10 +223,34 @@
   <data name="socorro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\socorro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="inserir-icone-de-imagem" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\inserir-icone-de-imagem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="clientes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clientes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="checked_mini" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\checked_mini.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="home" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LEMONMILK_Bold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LEMONMILK-BOLD.OTF;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LEMONMILK_BoldItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LEMONMILK-BOLDITALIC.OTF;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LEMONMILK_Light" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LEMONMILK-LIGHT.OTF;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LEMONMILK_LightItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LEMONMILK-LIGHTITALIC.OTF;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LEMONMILK_Medium" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LEMONMILK-MEDIUM.OTF;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LEMONMILK_MediumItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LEMONMILK-MEDIUMITALIC.OTF;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LEMONMILK_Regular" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LEMONMILK-REGULAR.OTF;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LEMONMILK_RegularItalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LEMONMILK-REGULARITALIC.OTF;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

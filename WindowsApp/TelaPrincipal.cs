@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using WindowsApp.AluguelModule;
 using WindowsApp.ClienteModule;
 using WindowsApp.ConfiguracoesModule;
+using WindowsApp.DashboardModule;
 using WindowsApp.FuncionarioModule;
 using WindowsApp.ServicoModule;
 using WindowsApp.VeiculoModule;
@@ -32,7 +33,7 @@ namespace WindowsApp
                 bt_funcionarios.Visible = false;
         }
 
-        public Form FormAtivo { set { AbrirFormPanel(value); } }
+        public Form FormAtivo { get => this; set { AbrirFormPanel(value); } }
 
         private void EsconderSubMenu()
         {
@@ -60,7 +61,11 @@ namespace WindowsApp
         }
 
         #region Eventos
-
+        private void btHome_Click(object sender, EventArgs e)
+        {
+            EsconderSubMenu();
+            FormAtivo = new Dashboard();
+        }
         private void bt_Aluguel_Click(object sender, EventArgs e)
         {
             EsconderSubMenu();
@@ -81,11 +86,6 @@ namespace WindowsApp
         {
             EsconderSubMenu();
             FormAtivo = new GerenciamentoServico();
-        }
-        private void bt_funcionarios_Click(object sender, EventArgs e)
-        {
-            EsconderSubMenu();
-            FormAtivo = new GerenciamentoFuncionario();
         }
         private void bt_clientes_Click(object sender, EventArgs e)
         {
@@ -115,7 +115,11 @@ namespace WindowsApp
             EsconderSubMenu();
             FormAtivo = new GerenciamentoVeiculo();
         }
-
+        private void bt_funcionarios_Click(object sender, EventArgs e)
+        {
+            EsconderSubMenu();
+            FormAtivo = new GerenciamentoFuncionario();
+        }
         private void btGrupos_Click(object sender, EventArgs e)
         {
             EsconderSubMenu();
@@ -152,5 +156,6 @@ namespace WindowsApp
         }
 
         #endregion
+
     }
 }
