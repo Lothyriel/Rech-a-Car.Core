@@ -7,7 +7,7 @@ namespace Aplicacao.Shared
 {
     public abstract class EntidadeAppServices<T> where T : IEntidade
     {
-        public abstract IRepository<T> Repositorio { get; }
+        protected abstract IRepository<T> Repositorio { get; }
         public virtual ResultadoOperacao Inserir(T entidade)
         {
             NLogger.Logger.Debug("Validando {tipo} {entidade}", entidade.GetType().Name, entidade);
@@ -60,6 +60,8 @@ namespace Aplicacao.Shared
         {
             return Repositorio.GetById(id, tipo);
         }
+        public List<T> Registros => Repositorio.Registros;
+
     }
     public enum EnumResultado { Sucesso, Falha }
     public class ResultadoOperacao

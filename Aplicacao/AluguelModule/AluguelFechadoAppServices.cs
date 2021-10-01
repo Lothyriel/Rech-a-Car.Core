@@ -9,7 +9,7 @@ namespace Aplicacao.AluguelModule
 {
     public class AluguelFechadoAppServices : EntidadeAppServices<AluguelFechado>
     {
-        public override IRepository<AluguelFechado> Repositorio { get; }
+        protected override IRepository<AluguelFechado> Repositorio { get; }
         public IServicoRepository ServicoRepository { get; }
         public IVeiculoRepository RepositorioVeiculo { get; }
         public AluguelFechadoAppServices(IRepository<AluguelFechado> repositorio, IServicoRepository servicoRepository, IVeiculoRepository repositorioVeiculo)

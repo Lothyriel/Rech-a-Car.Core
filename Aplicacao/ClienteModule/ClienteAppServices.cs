@@ -8,7 +8,7 @@ namespace Aplicacao.ClienteModule
 {
     public class ClienteAppServices : EntidadeAppServices<ICliente>
     {
-        public override IClienteRepository Repositorio { get; }
+        protected override IClienteRepository Repositorio { get; }
 
         public ClienteAppServices(IClienteRepository repositorio, ICnhRepository cnhRepository)
         {

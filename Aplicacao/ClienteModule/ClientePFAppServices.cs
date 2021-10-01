@@ -15,7 +15,7 @@ namespace Aplicacao.ClienteModule
             Repositorio = repositorio;
             CnhRepository = cnhRepositorio;
         }
-        public override IRepository<ClientePF> Repositorio { get; }
+        protected override IRepository<ClientePF> Repositorio { get; }
 
         public override ResultadoOperacao Inserir(ClientePF clientePF)
         {

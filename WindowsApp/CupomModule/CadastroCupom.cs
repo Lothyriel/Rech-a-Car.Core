@@ -14,7 +14,7 @@ namespace WindowsApp.WindowsApp.CupomModule
         {
             InitializeComponent();
             Services = ConfigServices.Services.CupomServices;
-            cbParceiro.DataSource = ConfigServices.Services.ParceiroServices.Repositorio.Registros;
+            cbParceiro.DataSource = ConfigServices.Services.ParceiroServices.Registros;
         }
 
         protected override IEditavel Editar()

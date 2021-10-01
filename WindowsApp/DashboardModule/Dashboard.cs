@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsApp.DashboardModule
@@ -15,7 +9,21 @@ namespace WindowsApp.DashboardModule
         public Dashboard()
         {
             InitializeComponent();
+            PopularCampos();
             timer.Start();
+        }
+
+        private void PopularCampos()
+        {
+            var services = ConfigServices.Services;
+            lbAlugueisAbertos.Text = $"{services.AluguelServices.Registros.Count}";
+
+            lbClientesCadastrados.Text = $"{services.ClienteServices.Registros.Count}";
+            lbVeiculosCadastrados.Text = $"{services.VeiculoServices.Registros.Count}";
+
+            var cupom = services.CupomServices.Registros.First();
+            lbCupom.Text = $"{cupom.Nome}";
+            lbUsos.Text = $"{cupom.Usos}";
         }
 
         private void timer_Tick(object sender, EventArgs e)

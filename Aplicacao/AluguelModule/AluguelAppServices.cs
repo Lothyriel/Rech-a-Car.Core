@@ -14,7 +14,7 @@ namespace Aplicacao.AluguelModule
 {
     public class AluguelAppServices : EntidadeAppServices<Aluguel>
     {
-        public override IAluguelRepository Repositorio { get; }
+        protected override IAluguelRepository Repositorio { get; }
         public IRelatorioRepository RelatorioRepositorio { get; }
         public IRelatorioAluguel Relatorio { get; }
         public IServicoRepository ServicoRepositorio { get; }

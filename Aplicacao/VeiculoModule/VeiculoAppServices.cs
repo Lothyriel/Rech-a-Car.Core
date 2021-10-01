@@ -1,6 +1,7 @@
 ﻿using Aplicacao.Shared;
 using Dominio.Shared;
 using Dominio.VeiculoModule;
+using System.Collections.Generic;
 
 namespace Aplicacao.VeiculoModule
 {
@@ -12,7 +13,8 @@ namespace Aplicacao.VeiculoModule
             RepositorioCategoria = repositorioCategoria;
         }
 
-        public override IVeiculoRepository Repositorio { get; }
+        protected override IVeiculoRepository Repositorio { get; }
         public IRepository<Categoria> RepositorioCategoria { get; }
+        public List<Veiculo> GetDisponiveis() { return Repositorio.GetDisponiveis(); }
     }
 }

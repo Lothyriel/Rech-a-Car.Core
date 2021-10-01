@@ -1,6 +1,6 @@
-﻿using ConfigurationManager;
+﻿using Aplicacao.FuncionarioModule;
+using ConfigurationManager;
 using Dominio.PessoaModule;
-using Dominio.Repositories;
 using Infra.NLogger;
 using System;
 using System.Windows.Forms;
@@ -9,8 +9,7 @@ namespace WindowsApp
 {
     public partial class Login : Form
     {
-        private IFuncionarioRepository FuncionarioDAO = ConfigServices.Services.FuncionarioServices.Repositorio;
-        private ISenhaRepository SenhaRepo = ConfigServices.Services.FuncionarioServices.RepositorioSenha;
+        private FuncionarioAppServices FuncionarioAppServices = ConfigServices.Services.FuncionarioServices;
         private Funcionario funcionario;
 
         public Login()
@@ -27,12 +26,12 @@ namespace WindowsApp
             if (EhSuperAdm(usuario, senha))
                 return ResultadoLogin.Sucesso;
 
-            if (!FuncionarioDAO.ExisteUsuario(usuario))
+            if (!FuncionarioAppServices.ExisteUsuario(usuario))
                 return ResultadoLogin.UsuarioNaoCadastrado;
 
-            funcionario = FuncionarioDAO.GetByUserName(tbUsuario.Text);
+            funcionario = FuncionarioAppServices.GetByUserName(tbUsuario.Text);
 
-            if (!SenhaRepo.SenhaCorreta(funcionario.Id, senha))
+            if (!FuncionarioAppServices.SenhaCorreta(funcionario.Id, senha))
                 return ResultadoLogin.SenhaErrada;
 
             return ResultadoLogin.Sucesso;
@@ -53,9 +52,9 @@ namespace WindowsApp
         }
         private void SetSuperAdm(string userAdmin, string senhaAdmin)
         {
-            if (!FuncionarioDAO.ExisteUsuario("admin"))
-                FuncionarioDAO.Inserir(new Funcionario("Alexandre Rech", "99999999999", "Rua do Flamengo", "999999", Cargo.SysAdmin, Properties.Resources.rech, userAdmin, senhaAdmin));
-            funcionario = FuncionarioDAO.GetByUserName(userAdmin);
+            if (!FuncionarioAppServices.ExisteUsuario("admin"))
+                FuncionarioAppServices.Inserir(new Funcionario("Alexandre Rech", "99999999999", "Rua do Flamengo", "999999", Cargo.SysAdmin, Properties.Resources.rech, userAdmin, senhaAdmin));
+            funcionario = FuncionarioAppServices.GetByUserName(userAdmin);
         }
         private string mostraResultado(ResultadoLogin resultado)
         {

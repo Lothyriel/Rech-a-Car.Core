@@ -8,7 +8,7 @@ namespace Aplicacao.ClienteModule
 {
     public class MotoristaAppServices : EntidadeAppServices<Motorista>
     {
-        public override IRepository<Motorista> Repositorio { get; }
+        protected override IRepository<Motorista> Repositorio { get; }
 
         public ICnhRepository CnhRepository { get; }
 

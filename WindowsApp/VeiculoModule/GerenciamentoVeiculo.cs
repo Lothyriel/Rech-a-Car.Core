@@ -14,7 +14,7 @@ namespace WindowsApp.VeiculoModule
         {
             Aluguel = aluguel;
             if (tipo == TipoTela.ApenasConfirma)
-                AtualizarRegistros(Cadastro.Services.Repositorio.GetDisponiveis());
+                AtualizarRegistros(Cadastro.Services.GetDisponiveis());
         }
         protected override CadastroVeiculo Cadastro => new CadastroVeiculo();
         protected override void SalvarAluguel()

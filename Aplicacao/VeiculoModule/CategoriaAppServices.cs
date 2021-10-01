@@ -10,6 +10,6 @@ namespace Aplicacao.VeiculoModule
         {
             Repositorio = repositorio;
         }
-        public override IRepository<Categoria> Repositorio { get; }
+        protected override IRepository<Categoria> Repositorio { get; }
     }
 }
