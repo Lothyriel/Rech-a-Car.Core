@@ -7,7 +7,7 @@ using WindowsApp.Shared;
 
 namespace WindowsApp.ClienteModule
 {
-    public partial class CadastroClientePF : Form//CadastroEntidade<ClientePF> //Form //
+    public partial class CadastroClientePF : CadastroEntidade<ClientePF> //Form //
     {
         public override ClientePFAppServices Services { get; }
 
