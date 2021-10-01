@@ -9,11 +9,9 @@ namespace Infra.NLogger
         {
             var configuration = new NLog.Config.LoggingConfiguration();
             var seq = new NLog.Targets.Seq.SeqTarget() { ServerUrl= "http://rechacar.brazilsouth.cloudapp.azure.com:5341" };
-            configuration.AddRule(LogLevel.Info, LogLevel.Fatal, seq);
+            configuration.AddRule(NLog.LogLevel.Debug, NLog.LogLevel.Fatal, seq);
 
             LogManager.Configuration = configuration;
         }        
-
-
     }
 }

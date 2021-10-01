@@ -6,8 +6,6 @@ using Infra.DAO.VeiculoModule;
 using IntegrationTests.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
-using IntegrationTests.Shared;
-using Moq;
 
 namespace IntegrationTests.VeiculoModule
 {
