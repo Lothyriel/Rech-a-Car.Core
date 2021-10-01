@@ -28,7 +28,11 @@ namespace WindowsApp
 
             RelatorioAluguel = GetRelatorio(configRelatorio);
 
+            ConfigurarServicos(configRepos);
+        }
 
+        private void ConfigurarServicos(ConfigRepositories configRepos)
+        {
             switch (configRepos)
             {
                 case ConfigRepositories.SQL: GerarRepositoriosSQL(); break;
@@ -36,7 +40,7 @@ namespace WindowsApp
                 default: GerarRepositoriosSQL(); break;
             }
 
-            NLogger.Logger.Info($"Repositórios Configurados como {configRepos}");
+            NLogger.Logger.Aqui().Debug($"Repositórios Configurados como {configRepos}");
         }
 
         private IRelatorioAluguel GetRelatorio(ConfigRelatorio configRelatorio)

@@ -16,7 +16,7 @@ namespace WindowsApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            NLogger.Logger.Info("Programa Iniciado");
+            NLogger.Logger.Aqui().Info("Programa Iniciado");
 
             new ConfigServices(ConfigRepositories.SQL, ConfigRelatorio.PDF);
 
@@ -30,7 +30,7 @@ namespace WindowsApp
             }
             catch (Exception e)
             {
-                NLogger.Logger.Fatal(e, "Erro muito fatal e catastrófico meu deus do céu");
+                NLogger.Logger.Aqui().Fatal(e, "Erro muito fatal e catastrófico meu deus do céu");
                 Main();
             }
         }

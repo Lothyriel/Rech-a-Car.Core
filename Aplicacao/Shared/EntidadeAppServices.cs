@@ -10,17 +10,17 @@ namespace Aplicacao.Shared
         protected abstract IRepository<T> Repositorio { get; }
         public virtual ResultadoOperacao Inserir(T entidade)
         {
-            NLogger.Logger.Debug("Validando {tipo} {entidade}", entidade.GetType().Name, entidade);
+            NLogger.Logger.Aqui().Debug("Validando {tipo} {entidade}", entidade.GetType().Name, entidade);
             var validacao = entidade.Validar();
-            NLogger.Logger.Info("Validação completa{resultado}", validacao != string.Empty ? $" , erros: {validacao}" : "");
+            NLogger.Logger.Aqui().Info("Validação completa{resultado}", validacao != string.Empty ? $" , erros: {validacao}" : "");
             
             if (validacao != string.Empty)
             {
                 return new ResultadoOperacao(validacao, EnumResultado.Falha);
             }
-            NLogger.Logger.Debug("Inserindo {tipo} {entidade}", entidade.GetType().Name, entidade);
+            NLogger.Logger.Aqui().Debug("Inserindo {tipo} {entidade}", entidade.GetType().Name, entidade);
             Repositorio.Inserir(entidade);
-            NLogger.Logger.Info("Inserido com sucesso");
+            NLogger.Logger.Aqui().Info("Inserido com sucesso");
 
             return new ResultadoOperacao("Inserido com sucesso!", EnumResultado.Sucesso);
         }
@@ -28,25 +28,25 @@ namespace Aplicacao.Shared
         {
             var tipo = entidade.GetType().Name;
 
-            NLogger.Logger.Debug("Validando {tipo} {entidade}", tipo, entidade);
+            NLogger.Logger.Aqui().Debug("Validando {tipo} {entidade}", tipo, entidade);
             var validacao = entidade.Validar();
-            NLogger.Logger.Info("Validação completa{resultado}", validacao != string.Empty ? $" , erros: {validacao}" : "");
+            NLogger.Logger.Aqui().Info("Validação completa{resultado}", validacao != string.Empty ? $" , erros: {validacao}" : "");
 
             if (validacao != string.Empty)
             {
                 return new ResultadoOperacao(validacao, EnumResultado.Falha);
             }
-            NLogger.Logger.Debug($"Editando {{tipo}} {{entidade}} | ID: {{id{char.ToUpper(tipo[0]) + tipo.Substring(1)}}}", tipo, entidade, id);
+            NLogger.Logger.Aqui().Debug($"Editando {{tipo}} {{entidade}} | ID: {{id{char.ToUpper(tipo[0]) + tipo.Substring(1)}}}", tipo, entidade, id);
             Repositorio.Editar(id, entidade);
-            NLogger.Logger.Info("Editado com sucesso");
+            NLogger.Logger.Aqui().Info("Editado com sucesso");
             return new ResultadoOperacao("Editado com sucesso!", EnumResultado.Sucesso);
         }
         public virtual void Excluir(int id, Type tipo = null)
         {
             var nTipo = typeof(T).Name;
-            NLogger.Logger.Info($"Excluindo {{tipo}} | ID: {{id{char.ToUpper(nTipo[0]) + nTipo.Substring(1)}}}", nTipo, id);
+            NLogger.Logger.Aqui().Debug($"Excluindo {{tipo}} | ID: {{id{char.ToUpper(nTipo[0]) + nTipo.Substring(1)}}}", nTipo, id);
             Repositorio.Excluir(id, tipo);
-            NLogger.Logger.Info("Excluido com sucesso");
+            NLogger.Logger.Aqui().Info("Excluido com sucesso");
         }
         public bool Existe(int id)
         {

@@ -93,7 +93,7 @@ namespace WindowsApp
                 return;
             }
             new TelaPrincipal(funcionario).Show();
-            NLogger.Logger.Info("Funcionário: {nomeFuncionario} | ID: {idFuncionario} logado", funcionario.Nome, funcionario.Id);
+            NLogger.Logger.Aqui().Info("Funcionário: {nomeFuncionario} | ID: {idFuncionario} logado", funcionario.Nome, funcionario.Id);
             Close();
         }
         private enum ResultadoLogin { Sucesso, SenhaErrada, UsuarioNaoCadastrado }

@@ -11,8 +11,7 @@ namespace Infra.DAO.PessoaModule
 {
     public class SenhaDAO : ISenhaRepository
     {
-
-        
+        #region Queries
 
         private const string sqlInsereSenha =
             @"INSERT INTO [TBSenha]
@@ -43,6 +42,7 @@ namespace Infra.DAO.PessoaModule
             WHERE 
                 [ID_FUNCIONARIO] = @ID_FUNCIONARIO";
 
+        #endregion
         public Senha GetDadosSenha(int id_funcionario)
         {
             return Db.Get(sqlRecuperarSenha, ConverterEmSenha, new Dictionary<string, object>() { { "ID_FUNCIONARIO", id_funcionario } });
@@ -73,6 +73,5 @@ namespace Infra.DAO.PessoaModule
 
             return new Senha(salt, hash);
         }
-
     }
 }

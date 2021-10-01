@@ -34,12 +34,12 @@ namespace Aplicacao.AluguelModule
             {
                 try
                 {
-                    NLogger.Logger.Aqui().Info("Serviço de Envio de Emails Iniciado");
+                    NLogger.Logger.Aqui().Debug("Serviço de Envio de Emails Iniciado");
                     TentaEnviarRelatorioEmail();
                 }
                 catch (FilaEmailVazia)
                 {
-                    NLogger.Logger.Warn("Sem emails para envio, esperando 5 minutos para tentar novamente");
+                    NLogger.Logger.Aqui().Warn("Sem emails para envio, esperando 5 minutos para tentar novamente");
                     await Task.Delay(new TimeSpan(0, 5, 0));
                 }
             }
@@ -61,7 +61,7 @@ namespace Aplicacao.AluguelModule
             Email.Envia(emailUsuario, titulo, corpoEmail, new List<Attachment>() { attachment });
             RelatorioRepositorio.MarcarEnviado(proxEnvio.Id);
 
-            NLogger.Logger.Info("Email {email.id} Enviado", proxEnvio.Id);
+            NLogger.Logger.Aqui().Info("Email {email.id} Enviado", proxEnvio.Id);
         }
         public override ResultadoOperacao Inserir(Aluguel aluguel)
         {
@@ -87,7 +87,7 @@ namespace Aplicacao.AluguelModule
 
         private void GerarRelatorio(Aluguel aluguel)
         {
-            NLogger.Logger.Info("Gerando relatório de {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
+            NLogger.Logger.Aqui().Debug("Gerando relatório de {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
             var relatorio = Task.Run(() => Relatorio.GerarRelatorio(aluguel));
             RelatorioRepositorio.SalvarRelatorio(new RelatorioAluguel(aluguel, relatorio.Result));
         }

@@ -27,7 +27,7 @@ namespace Aplicacao.AluguelModule
             ServicoRepository.DesalugarServicosAlugados(id);
             RepositorioVeiculo.AdicionarQuilometragem(aluguel.Veiculo, aluguel.KmRodados);
 
-            NLogger.Logger.Info("Devolvendo {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
+            NLogger.Logger.Aqui().Info("Devolvendo {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
             return edicao;
         }
     }
