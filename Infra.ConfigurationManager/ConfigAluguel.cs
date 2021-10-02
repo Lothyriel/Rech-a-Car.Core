@@ -7,10 +7,8 @@ using System.Linq;
 
 namespace ConfigurationManager
 {
-    public class ConfigAluguel
+    public class ConfigsAluguel : AppConfigManager
     {
-        private const string pathAppConfig = @"..\..\..\appsettings.json";
-
         public static Configuracoes Configs
         {
             get
@@ -41,14 +39,14 @@ namespace ConfigurationManager
         }
         private static void SalvaConfiguracoes(Configuracoes config)
         {
-            JObject o1 = JObject.Parse(File.ReadAllText(pathAppConfig));
-            o1["Gasolina"] = new JValue(config.ValorGasolina);
-            o1["Diesel"] = new JValue(config.ValorDiesel);
-            o1["Etanol"] = new JValue(config.ValorEtanol);
+            var appConfig = AppConfig;
+            appConfig["Gasolina"] = new JValue(config.ValorGasolina);
+            appConfig["Diesel"] = new JValue(config.ValorDiesel);
+            appConfig["Etanol"] = new JValue(config.ValorEtanol);
 
-            o1["Caucao"] = new JValue(config.ValorCaucao);
+            appConfig["Caucao"] = new JValue(config.ValorCaucao);
 
-            File.WriteAllText(pathAppConfig, JsonConvert.SerializeObject(o1));
+            Save(appConfig);
         }
     }
 }

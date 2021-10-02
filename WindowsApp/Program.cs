@@ -1,4 +1,5 @@
-﻿using Infra.NLogger;
+﻿using ConfigurationManager;
+using Infra.NLogger;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,22 +17,27 @@ namespace WindowsApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            NLogger.Logger.Aqui().Info("Programa Iniciado");
+            RunProgram();
+        }
 
-            new ConfigServices(ConfigRepositories.SQL, ConfigRelatorio.PDF);
-
-            new Login().Show();
-
-            Task.Run(() => ConfigServices.Services.AluguelServices.IniciaLoopEnvioEmails());
-
+        private static void RunProgram()
+        {
             try
             {
+                NLogger.Logger.Aqui().Info("Programa Iniciado");
+
+                new ConfigServices(ConfigRepositories.SQL, ConfigRelatorio.PDF);
+
+                new Login().Show();
+
+                Task.Run(() => ConfigServices.Services.AluguelServices.IniciaLoopEnvioEmails());
+
                 Application.Run();
             }
             catch (Exception e)
             {
                 NLogger.Logger.Aqui().Fatal(e, "Erro muito fatal e catastrófico meu deus do céu");
-                Main();
+                RunProgram();
             }
         }
     }

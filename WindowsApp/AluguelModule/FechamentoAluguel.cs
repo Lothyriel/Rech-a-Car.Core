@@ -30,7 +30,7 @@ namespace WindowsApp.AluguelModule
         private void CalcularPrecoTotal()
         {
             var aluguelFechado = GetNovaEntidade();
-            var configs = ConfigAluguel.Configs;
+            var configs = ConfigsAluguel.Configs;
             lbValorFinal.Text = aluguelFechado.CalcularTotal(configs).ToString();
         }
         private int KmRodados()

@@ -76,7 +76,7 @@ namespace Infra.DAO.AluguelModule
                 { "DATA_DEVOLVIDA", aluguel.DataDevolvida },
                 { "TANQUE_UTILIZADO", aluguel.TanqueUtilizado },
                 { "KM_RODADOS", aluguel.KmRodados },
-                { "TOTAL", aluguel.CalcularTotal(ConfigAluguel.Configs) },
+                { "TOTAL", aluguel.CalcularTotal(ConfigsAluguel.Configs) },
             };
         }
     }

@@ -38,9 +38,9 @@ namespace WindowsApp
         }
         private bool EhSuperAdm(string usuario, string senha)
         {
-            var config = Config.AppConfig;
-            var userAdmin = config["userAdmin"];
-            var senhaAdmin = config["senhaAdmin"];
+            var dados = AppConfigManager.AppConfig["DadosSuperAdmin"];
+            var userAdmin = dados["userAdmin"].ToString();
+            var senhaAdmin = dados["senhaAdmin"].ToString();
 
             if (userAdmin != usuario)
                 return false;
