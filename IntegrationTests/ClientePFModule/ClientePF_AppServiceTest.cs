@@ -17,7 +17,7 @@ namespace IntegrationTests.ClientePF_Module
         Mock<CNH> cnh_Mock;
         ClientePF clientePF;
         CNH cnh;
-        Mock<IRepository<ClientePF>> mockClientePF_Repo;
+        Mock<IClientePFRepository> mockClientePF_Repo;
         Mock<ICnhRepository> mockCnh_Repo;
         ClientePFAppServices sut;
 

@@ -1,4 +1,5 @@
 ﻿using Dominio.PessoaModule.ClienteModule;
+using Dominio.Repositories;
 using Dominio.Shared;
 using Infra.DAO.Shared;
 using System;
@@ -8,7 +9,7 @@ namespace Infra.DAO.PessoaModule
 {
     public class ClienteDAO : DAO<ICliente>, IClienteRepository
     {
-        public IRepository<ClientePF> RepositorioClientePF => new ClientePFDAO();
+        public IClientePFRepository RepositorioClientePF => new ClientePFDAO();
         public IClientePJRepository RepositorioClientePJ => new ClientePJDAO();
 
         public override void Inserir(ICliente cliente)
@@ -62,6 +63,16 @@ namespace Infra.DAO.PessoaModule
                 return RepositorioClientePF.Existe(id);
             else if (tipo.IsAssignableFrom(typeof(ClientePJ)))
                 return RepositorioClientePJ.Existe(id);
+            else
+                throw new ArgumentException();
+        }
+
+        public bool ExisteDocumento(string documento, Type tipo)
+        {
+            if (tipo.IsAssignableFrom(typeof(ClientePF)))
+                return RepositorioClientePF.ExisteDocumento(documento, tipo);
+            else if (tipo.IsAssignableFrom(typeof(ClientePJ)))
+                return RepositorioClientePJ.ExisteDocumento(documento, tipo);
             else
                 throw new ArgumentException();
         }

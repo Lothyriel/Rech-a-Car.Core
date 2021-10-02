@@ -9,11 +9,21 @@ namespace Aplicacao.ClienteModule
     {
         public ICnhRepository CnhRepository { get; }
 
-        public ClientePJAppServices(IRepository<ClientePJ> repositorio)
+        public ClientePJAppServices(IClientePJRepository repositorio)
         {
             Repositorio = repositorio;
 
         }
-        protected override IRepository<ClientePJ> Repositorio { get; }
+        protected override IClientePJRepository Repositorio { get; }
+
+        public override ResultadoOperacao Inserir(ClientePJ clientePJ)
+        {
+            var inserir = base.Inserir(clientePJ);
+
+            if (Repositorio.ExisteDocumento(clientePJ.Documento, clientePJ.GetType()))
+                return new ResultadoOperacao("Já existe um cliente com este Documento", EnumResultado.Falha);
+
+            return inserir;
+        }
     }
 }

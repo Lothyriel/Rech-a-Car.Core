@@ -69,6 +69,14 @@ namespace Infra.DAO.PessoaModule
             WHERE 
                 [ID] = @ID";
 
+        private const string sqlExisteDocumento =
+            @"SELECT 
+                COUNT(*) 
+            FROM 
+                [TBCLIENTEPJ]
+            WHERE 
+                [DOCUMENTO] = @DOCUMENTO";
+
         #endregion
         public override string sqlSelecionarPorId => sqlSelecionarClientePJPorId;
         public override string sqlSelecionarTodos => sqlSelecionarTodosClientePJ;
@@ -101,18 +109,18 @@ namespace Infra.DAO.PessoaModule
                 if (reader.IsDBNull(reader.GetOrdinal("ID_MOTORISTA")))
                     break;
 
-                var id_motorista = Convert.ToInt32(reader["ID_MOTORISTA"]);
-                var nome_motorista = Convert.ToString(reader["NOME_MOTORISTA"]);
-                var telefone_motorista = Convert.ToString(reader["TELEFONE_MOTORISTA"]);
-                var endereco_motorista = Convert.ToString(reader["ENDERECO_MOTORISTA"]);
-                var documento_motorista = Convert.ToString(reader["DOCUMENTO_MOTORISTA"]);
+                var idMotorista = Convert.ToInt32(reader["ID_MOTORISTA"]);
+                var nomeMotorista = Convert.ToString(reader["NOME_MOTORISTA"]);
+                var telefoneMotorista = Convert.ToString(reader["TELEFONE_MOTORISTA"]);
+                var enderecoMotorista = Convert.ToString(reader["ENDERECO_MOTORISTA"]);
+                var documentoMotorista = Convert.ToString(reader["DOCUMENTO_MOTORISTA"]);
 
                 var id_cnh = Convert.ToInt32(reader["ID_CNH"]);
                 var cnh = new CnhDAO().GetById(id_cnh);
 
-                motoristas.Add(new Motorista(nome_motorista, telefone_motorista, endereco_motorista, documento_motorista, cnh, empresa)
+                motoristas.Add(new Motorista(nomeMotorista, telefoneMotorista, enderecoMotorista, documentoMotorista, cnh, empresa)
                 {
-                    Id = id_motorista
+                    Id = idMotorista
                 });
 
             } while (reader.Read());
@@ -120,6 +128,12 @@ namespace Infra.DAO.PessoaModule
 
             return empresa;
         }
+
+        public bool ExisteDocumento(string documento, Type type)
+        {
+            return Db.Exists(sqlExisteDocumento, Db.AdicionarParametro("DOCUMENTO", documento));
+        }
+
         public override Dictionary<string, object> ObterParametrosRegistro(ClientePJ cliente)
         {
             var parametros = new Dictionary<string, object>

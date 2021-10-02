@@ -1,6 +1,5 @@
 ﻿using Aplicacao.Shared;
 using Dominio.PessoaModule.ClienteModule;
-using Dominio.Repositories;
 
 namespace Aplicacao.ClienteModule
 {
@@ -8,10 +7,9 @@ namespace Aplicacao.ClienteModule
     {
         protected override IClienteRepository Repositorio { get; }
 
-        public ClienteAppServices(IClienteRepository repositorio, ICnhRepository cnhRepository)
+        public ClienteAppServices(IClienteRepository repositorio)
         {
             Repositorio = repositorio;
-
         }
     }
 }

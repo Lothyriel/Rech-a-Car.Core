@@ -1,5 +1,4 @@
-﻿using ConfigurationManager;
-using Infra.NLogger;
+﻿using Infra.NLogger;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;

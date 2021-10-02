@@ -135,7 +135,6 @@ namespace Infra.DAO.VeiculoModule
             var tipoCombustivel = Convert.ToInt32(reader["TIPO_COMBUSTIVEL"]);
             var quilometragem = Convert.ToInt32(reader["QUILOMETRAGEM"]);
             var capacidadeTanque = Convert.ToInt32(reader["CAPACIDADE_TANQUE"]);
-
             var foto = ((byte[])reader["FOTO"]).ToImage();
 
             var categoria = new CategoriaDAO().GetById(id_categoria);

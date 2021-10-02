@@ -10,17 +10,20 @@ namespace Aplicacao.ClienteModule
     {
         public ICnhRepository CnhRepository { get; }
 
-        public ClientePFAppServices(IRepository<ClientePF> repositorio, ICnhRepository cnhRepositorio)
+        public ClientePFAppServices(IClientePFRepository repositorio, ICnhRepository cnhRepositorio)
         {
             Repositorio = repositorio;
             CnhRepository = cnhRepositorio;
         }
-        protected override IRepository<ClientePF> Repositorio { get; }
+        protected override IClientePFRepository Repositorio { get; }
 
         public override ResultadoOperacao Inserir(ClientePF clientePF)
         {
             CnhRepository.Inserir(clientePF.Cnh);
             var inserir = base.Inserir(clientePF);
+
+            if (Repositorio.ExisteDocumento(clientePF.Documento, clientePF.GetType()))
+                return new ResultadoOperacao("Já existe um cliente com este Documento", EnumResultado.Falha);
 
             if (inserir.Resultado == EnumResultado.Falha)
                 CnhRepository.Excluir(clientePF.Cnh.Id);

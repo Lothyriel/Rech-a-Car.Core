@@ -42,20 +42,6 @@ namespace Infra.DAO.ORM
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(rech_a_carDbContext).Assembly);
-
-            //foreach (var entity in modelBuilder.Model.GetEntityTypes())
-            //{
-            //    var properties = entity.GetProperties().Where(p => p.ClrType == typeof(decimal));
-
-            //    foreach (var property in properties)
-            //    {
-            //        if (string.IsNullOrEmpty(property.GetColumnType())
-            //            && !property.GetMaxLength().HasValue)
-            //        {
-            //            property.SetColumnType("decimal(18,2)");
-            //        }
-            //    }
-            //}
         }
     }
 }
