@@ -38,14 +38,14 @@ namespace WindowsApp.DashboardModule
             this.label3 = new System.Windows.Forms.Label();
             this.lbVeiculosCadastrados = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lbUsos = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lbCupom = new System.Windows.Forms.Label();
             this.panelDashboard1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.lbAlugueisAbertos = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.lbUsos = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -147,6 +147,30 @@ namespace WindowsApp.DashboardModule
             this.panel4.Size = new System.Drawing.Size(322, 307);
             this.panel4.TabIndex = 9;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(49, 34);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 35);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Usos:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbUsos
+            // 
+            this.lbUsos.AutoSize = true;
+            this.lbUsos.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbUsos.ForeColor = System.Drawing.Color.White;
+            this.lbUsos.Location = new System.Drawing.Point(130, 34);
+            this.lbUsos.Name = "lbUsos";
+            this.lbUsos.Size = new System.Drawing.Size(29, 35);
+            this.lbUsos.TabIndex = 3;
+            this.lbUsos.Text = "0";
+            this.lbUsos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -208,33 +232,8 @@ namespace WindowsApp.DashboardModule
             // 
             // timer
             // 
-            this.timer.Enabled = true;
             this.timer.Interval = 10000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // lbUsos
-            // 
-            this.lbUsos.AutoSize = true;
-            this.lbUsos.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbUsos.ForeColor = System.Drawing.Color.White;
-            this.lbUsos.Location = new System.Drawing.Point(130, 34);
-            this.lbUsos.Name = "lbUsos";
-            this.lbUsos.Size = new System.Drawing.Size(29, 35);
-            this.lbUsos.TabIndex = 3;
-            this.lbUsos.Text = "0";
-            this.lbUsos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(49, 34);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 35);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Usos:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Dashboard
             // 

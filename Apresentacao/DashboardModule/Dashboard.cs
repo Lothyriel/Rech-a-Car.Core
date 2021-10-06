@@ -11,6 +11,7 @@ namespace WindowsApp.DashboardModule
             InitializeComponent();
             PopularCampos();
             timer.Start();
+            lbDateTime.Text = DateTime.Now.ToString("dd/MM/yyyy   HH:mm");
         }
 
         private void PopularCampos()

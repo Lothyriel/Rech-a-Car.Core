@@ -13,11 +13,11 @@ namespace ConfigurationManager
             get
             {
                 JObject o1 = JObject.Parse(File.ReadAllText(pathAppConfig));
-
-                var gasolina = o1["Gasolina"].ToObject<double>();
-                var diesel = o1["Diesel"].ToObject<double>();
-                var etanol = o1["Etanol"].ToObject<double>();
-                var caucao = o1["Caucao"].ToObject<double>();
+                var configsAluguel = o1["AluguelConfigs"];
+                var gasolina = configsAluguel["Gasolina"].ToObject<double>();
+                var diesel = configsAluguel["Diesel"].ToObject<double>();
+                var etanol = configsAluguel["Etanol"].ToObject<double>();
+                var caucao = configsAluguel["Caucao"].ToObject<double>();
 
                 return new Configuracoes(etanol, diesel, gasolina, caucao);
             }
@@ -39,11 +39,12 @@ namespace ConfigurationManager
         private static void SalvaConfiguracoes(Configuracoes config)
         {
             var appConfig = AppConfig;
-            appConfig["Gasolina"] = new JValue(config.ValorGasolina);
-            appConfig["Diesel"] = new JValue(config.ValorDiesel);
-            appConfig["Etanol"] = new JValue(config.ValorEtanol);
+            var aluguelConfigAppConfig = appConfig["AluguelConfigs"];
+            aluguelConfigAppConfig["Gasolina"] = new JValue(config.ValorGasolina);
+            aluguelConfigAppConfig["Diesel"] = new JValue(config.ValorDiesel);
+            aluguelConfigAppConfig["Etanol"] = new JValue(config.ValorEtanol);
 
-            appConfig["Caucao"] = new JValue(config.ValorCaucao);
+            aluguelConfigAppConfig["Caucao"] = new JValue(config.ValorCaucao);
 
             Save(appConfig);
         }
