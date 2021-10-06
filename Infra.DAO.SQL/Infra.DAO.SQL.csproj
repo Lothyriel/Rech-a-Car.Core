@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Infra.Extensions.Methods\Infra.Extensions.Methods.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CupomModule\" />
+  </ItemGroup>
+
 </Project>
