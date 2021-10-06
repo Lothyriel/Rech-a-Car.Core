@@ -6,8 +6,16 @@ using Aplicacao.FuncionarioModule;
 using Aplicacao.ServicosModule;
 using Aplicacao.VeiculoModule;
 using Dominio.AluguelModule;
+using Dominio.CupomModule;
+using Dominio.Entities.PessoaModule;
+using Dominio.ParceiroModule;
+using Dominio.PessoaModule;
+using Dominio.PessoaModule.ClienteModule;
+using Dominio.ServicoModule;
+using Dominio.VeiculoModule;
 using Infra.DAO.AluguelModule;
 using Infra.DAO.CupomModule;
+using Infra.DAO.ORM;
 using Infra.DAO.ParceiroModule;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.SQL.AluguelModule;
@@ -36,21 +44,22 @@ namespace WindowsApp
             switch (configRepos)
             {
                 case ConfigRepositories.SQL: GerarRepositoriosSQL(); break;
-                case ConfigRepositories.ORM: throw new NotImplementedException();
-                default: GerarRepositoriosSQL(); break;
+                case ConfigRepositories.ORM: GerarRepositoriosORM(); break;
+                default: throw new NotSupportedException();
             }
 
-            NLogger.Logger.Aqui().Debug($"Repositórios Configurados como {configRepos}");
+            NLogger.Logger.Aqui().Debug($"Repositórios configurados como {configRepos}");
         }
 
         private IRelatorioAluguel GetRelatorio(ConfigRelatorio configRelatorio)
         {
+            NLogger.Logger.Aqui().Debug($"Relatório Aluguel configurado como {configRelatorio}");
             switch (configRelatorio)
             {
                 case ConfigRelatorio.PDF: return new PDFAluguel();
                 case ConfigRelatorio.TXT: throw new NotImplementedException();
                 case ConfigRelatorio.CSV: throw new NotImplementedException();
-                default: return new PDFAluguel();
+                default: throw new NotSupportedException();
             }
         }
 
@@ -80,7 +89,6 @@ namespace WindowsApp
             var pjRepo = new ClientePJDAO();
             var pfRepo = new ClientePFDAO();
 
-
             var aluguelFechadoRepo = new AluguelFechadoDAO();
 
             var aluguelRepo = new AluguelDAO();
@@ -103,6 +111,43 @@ namespace WindowsApp
             Services.AluguelFechadoServices = new AluguelFechadoAppServices(aluguelFechadoRepo, servicoRepo, veiculoRepo);
             Services.AluguelServices = new AluguelAppServices(aluguelRepo, RelatorioAluguel, relatorioRepo, servicoRepo, cupomRepo);
         }
+        private void GerarRepositoriosORM()
+        {
+            var categoriaRepo = new BaseRepository<Categoria>();
+            var veiculoRepo = new BaseRepository<Veiculo>();
+
+            var funcionarioRepo = new BaseRepository<Funcionario>();
+            var parceiro = new BaseRepository<Parceiro>();
+            var motoristaRepo = new BaseRepository<Motorista>();
+
+            var cliente = new BaseRepository<ICliente>();
+            var pjRepo = new BaseRepository<ClientePJ>();
+            var pfRepo = new BaseRepository<ClientePF>();
+
+
+            var aluguelFechadoRepo = new BaseRepository<AluguelFechado>();
+
+            var aluguelRepo = new BaseRepository<Aluguel>();
+            var servicoRepo = new BaseRepository<Servico>();
+            var cupomRepo = new BaseRepository<Cupom>();
+            var relatorioRepo = new BaseRepository<RelatorioAluguel>();
+            var cnhRepo = new BaseRepository<CNH>();
+            var senhaRepo = new BaseRepository<Senha>();
+
+            Services.CupomServices = new CupomAppServices(cupomRepo);
+            Services.ParceiroServices = new ParceiroAppServices(parceiro);
+            Services.ServicosServices = new ServicosAppServices(servicoRepo);
+            Services.ClienteServices = new ClienteAppServices(cliente);
+            Services.ClientePJServices = new ClientePJAppServices(pjRepo);
+            Services.ClientePFServices = new ClientePFAppServices(pfRepo, cnhRepo);
+            Services.MotoristaServices = new MotoristaAppServices(motoristaRepo);
+            Services.CategoriaServices = new CategoriaAppServices(categoriaRepo);
+            Services.FuncionarioServices = new FuncionarioAppServices(funcionarioRepo, senhaRepo);
+            Services.VeiculoServices = new VeiculoAppServices(veiculoRepo, categoriaRepo);
+            Services.AluguelFechadoServices = new AluguelFechadoAppServices(aluguelFechadoRepo, servicoRepo, veiculoRepo);
+            Services.AluguelServices = new AluguelAppServices(aluguelRepo, RelatorioAluguel, relatorioRepo, servicoRepo, cupomRepo);
+        }
+
     }
     public enum ConfigRepositories { SQL, ORM }
 

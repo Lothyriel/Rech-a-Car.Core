@@ -10,5 +10,10 @@ namespace Dominio.AluguelModule
             Aluguel = aluguel;
         }
         public Aluguel Aluguel { get; }
+
+        public override string Validar()
+        {
+            return "";
+        }
     }
 }

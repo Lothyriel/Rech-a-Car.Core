@@ -2,13 +2,12 @@
 
 namespace Dominio.Shared
 {
-    public abstract class EnvioEmail
+    public abstract class EnvioEmail : Entidade
     {
         public EnvioEmail(MemoryStream streamAttachment)
         {
             StreamAttachment = streamAttachment;
         }
         public MemoryStream StreamAttachment { get; }
-        public int Id { get; set; }
     }
 }
