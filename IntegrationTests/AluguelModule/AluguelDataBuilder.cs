@@ -17,6 +17,9 @@ namespace IntegrationTests.Shared
 
         public AluguelDataBuilder DeVeiculo(Veiculo veiculo = null)
         {
+            var imagem = Resources.focus_gay;
+            var categoria = new Categoria("Economico", 100, 10, 400, 800, TipoCNH.B);
+            veiculo = veiculo ?? new Veiculo("Ka", "Ford", 2001, "ABC1024", 50000, 4, 4, "ASDFGHJKLQWERTYUI", 0, 50, imagem, false, categoria, TipoCombustivel.Gasolina);
             aluguel.Veiculo = veiculo;
 
             return this;
