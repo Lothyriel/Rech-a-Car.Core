@@ -1,13 +1,15 @@
-﻿using Dominio.Shared;
+﻿using Dominio.AluguelModule;
+using Dominio.Shared;
 
 namespace Dominio.ServicoModule
 {
     public class Servico : Entidade
     {
-        public Servico(string nome, double taxa)
+        public Servico(string nome, double taxa, Aluguel aluguel)
         {
             Nome = nome;
             Taxa = taxa;
+            Aluguel  = aluguel;
         }
         public Servico()
         {
@@ -15,6 +17,8 @@ namespace Dominio.ServicoModule
 
         public string Nome { get; set; }
         public double Taxa { get; set; }
+        public Aluguel Aluguel { get; set; }
+
         public override string Validar()
         {
             string resultadoValidacao = "";
