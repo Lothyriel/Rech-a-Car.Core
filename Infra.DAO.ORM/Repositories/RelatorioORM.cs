@@ -12,20 +12,25 @@ namespace Infra.DAO.ORM.Repositories
     {
         public RelatorioAluguel GetProxEnvio()
         {
-                if (Set<EnvioEmail>().Where(x => x.DataEnvio == null).Count() != 0)
-                    return Db.Get(sqlGetProxEnvio, ConverterEmEntidade);
+                if (Context.Set<RelatorioAluguel>().Where(x => x.DataEnvio == null).Count() != 0)
+                    return Context.Set<RelatorioAluguel>().Where(x => x.DataEnvio == null).FirstOrDefault();
                 else
                     return null;
         }
 
         public void MarcarEnviado(int id)
         {
-            throw new NotImplementedException();
+            var relatorioEnviado = GetById(id);
+            relatorioEnviado.DataEnvio = DateTime.Now;
+
+            Context.Set<RelatorioAluguel>().Update(relatorioEnviado);
+            Context.SaveChanges();
         }
 
         public void SalvarRelatorio(RelatorioAluguel envio)
         {
-            throw new NotImplementedException();
+            Context.Set<RelatorioAluguel>().Add(envio);
+            Context.SaveChanges();
         }
     }
 }

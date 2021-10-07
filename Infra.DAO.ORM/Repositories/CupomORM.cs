@@ -11,7 +11,7 @@ namespace Infra.DAO.ORM.Repositories
     {
         public Cupom GetByName(string nomeCupom)
         {
-            return Set<Cupom>().Where(x=> x.Nome == nomeCupom).FirstOrDefault<Cupom>();
+            return Context.Set<Cupom>().Where(x=> x.Nome == nomeCupom).FirstOrDefault<Cupom>();
         }
     }
 }

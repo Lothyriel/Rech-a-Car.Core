@@ -1,5 +1,6 @@
 ﻿using Dominio.PessoaModule;
 using Dominio.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,13 @@ namespace Infra.DAO.ORM.Repositories
     {
         public void Excluir(int idCnh)
         {
-            Remove(GetById(idCnh));
+            Context.Remove(GetById(idCnh));
+            Context.SaveChanges();
         }
 
         public CNH GetById(int idCnh)
         {
-            return Set<CNH>().Find(idCnh);
+            return Context.Set<CNH>().Find(idCnh);
         }
     }
 }
