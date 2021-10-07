@@ -12,7 +12,7 @@ namespace Infra.DAO.ORM.Repositories
 
         public bool ExisteDocumento(string documento, Type type)
         {
-            return Set<ICliente>().Where(x=>x.Documento==documento).Count() != 0;
+            return Context.Set<ICliente>().Where(x => x.Documento == documento).Any();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    class CupomORM : BaseRepository<Cupom>, ICupomRepository
+    public class CupomORM : BaseRepository<Cupom>, ICupomRepository
     {
         public Cupom GetByName(string nomeCupom)
         {

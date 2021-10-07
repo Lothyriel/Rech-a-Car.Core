@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    class RelatorioORM : BaseRepository<RelatorioAluguel>, IRelatorioRepository
+    public class RelatorioORM : BaseRepository<RelatorioAluguel>, IRelatorioRepository
     {
         public RelatorioAluguel GetProxEnvio()
         {
-                if (Context.Set<RelatorioAluguel>().Where(x => x.DataEnvio == null).Count() != 0)
-                    return Context.Set<RelatorioAluguel>().Where(x => x.DataEnvio == null).FirstOrDefault();
-                else
-                    return null;
+            rech_a_carDbContext context = Context;
+            if (context.Set<RelatorioAluguel>().Where(x => x.DataEnvio == null).Any())
+                return Context.Set<RelatorioAluguel>().Where(x => x.DataEnvio == null).FirstOrDefault();
+            else
+                return null;
         }
 
         public void MarcarEnviado(int id)

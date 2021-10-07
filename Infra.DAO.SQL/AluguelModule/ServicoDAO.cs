@@ -1,4 +1,6 @@
-﻿using Dominio.ServicoModule;
+﻿using Dominio.AluguelModule;
+using Dominio.ServicoModule;
+using Infra.DAO.AluguelModule;
 using Infra.DAO.Shared;
 using System;
 using System.Collections.Generic;
@@ -93,10 +95,17 @@ namespace Infra.DAO.SQL.AluguelModule
         public override Servico ConverterEmEntidade(IDataReader reader)
         {
             var id = Convert.ToInt32(reader["ID"]);
+            var idAluguel = Convert.ToInt32(reader["IDALUGUEL"]);
+
+            Aluguel aluguel = null;
+
+            if (idAluguel != 0)
+                aluguel = new AluguelDAO().GetById(idAluguel);
+
             string nome = Convert.ToString(reader["NOME"]);
             double taxa = Convert.ToDouble(reader["TAXA"]);
 
-            return new Servico(nome, taxa)
+            return new Servico(nome, taxa, aluguel)
             {
                 Id = id
             };

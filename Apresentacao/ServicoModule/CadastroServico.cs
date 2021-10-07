@@ -27,14 +27,14 @@ namespace WindowsApp.ServicoModule
         public override Servico GetNovaEntidade()
         {
             var nome = tbNome.Text;
-            Double.TryParse(tbTaxa.Text, out double taxa);
+            _ = double.TryParse(tbTaxa.Text, out double taxa);
 
-            return new Servico(nome, taxa);
+            return new Servico(nome, taxa,null);
         }
 
         private void btAdicionar_Click(object sender, EventArgs e)
         {
-            Int32.TryParse(tbQuantidade.Text, out int quantidade);
+            _ = int.TryParse(tbQuantidade.Text, out int quantidade);
 
             for (int i = 0; i < quantidade; i++)
                 if (!Salva(mostraSucesso: false))
