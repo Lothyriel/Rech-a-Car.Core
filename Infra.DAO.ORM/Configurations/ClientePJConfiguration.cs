@@ -8,7 +8,7 @@ namespace Infra.DAO.ORM.Configurations
     {
         public void Configure(EntityTypeBuilder<ClientePJ> builder)
         {
-            builder.ToTable("TBClientePF");
+            builder.ToTable("TBClientePJ");
 
             builder.HasKey(p => p.Id);
 
