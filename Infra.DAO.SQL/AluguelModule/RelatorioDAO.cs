@@ -31,7 +31,7 @@ namespace Infra.DAO.AluguelModule
         private const string sqlGetProxEnvio =
             @"SELECT TOP 1 *
                 FROM [TBEMAIL] 
-			  WHERE [DATA_ENVIADO] IS NULL
+              WHERE [DATA_ENVIADO] IS NULL
                 ORDER BY [DATA_ENVIADO] DESC";
 
         private const string sqlExisteEmailPendente =
