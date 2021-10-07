@@ -15,7 +15,7 @@ using Dominio.ServicoModule;
 using Dominio.VeiculoModule;
 using Infra.DAO.AluguelModule;
 using Infra.DAO.CupomModule;
-using Infra.DAO.ORM;
+using Infra.DAO.ORM.Repositories;
 using Infra.DAO.ParceiroModule;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.SQL.AluguelModule;
@@ -54,13 +54,13 @@ namespace WindowsApp
         private IRelatorioAluguel GetRelatorio(ConfigRelatorio configRelatorio)
         {
             NLogger.Logger.Aqui().Debug($"Relatório Aluguel configurado como {configRelatorio}");
-            switch (configRelatorio)
+            return configRelatorio switch
             {
-                case ConfigRelatorio.PDF: return new PDFAluguel();
-                case ConfigRelatorio.TXT: throw new NotImplementedException();
-                case ConfigRelatorio.CSV: throw new NotImplementedException();
-                default: throw new NotSupportedException();
-            }
+                ConfigRelatorio.PDF => new PDFAluguel(),
+                ConfigRelatorio.TXT => throw new NotImplementedException(),
+                ConfigRelatorio.CSV => throw new NotImplementedException(),
+                _ => throw new NotSupportedException(),
+            };
         }
 
         public CategoriaAppServices CategoriaServices { get; private set; }
@@ -113,38 +113,37 @@ namespace WindowsApp
         }
         private void GerarRepositoriosORM()
         {
-            var categoriaRepo = new BaseRepository<Categoria>();
-            var veiculoRepo = new BaseRepository<Veiculo>();
+            //var categoriaRepo = new CategoriaORM();
+            var veiculoRepo = new VeiculoORM();
 
-            var funcionarioRepo = new BaseRepository<Funcionario>();
-            var parceiro = new BaseRepository<Parceiro>();
-            var motoristaRepo = new BaseRepository<Motorista>();
+            var funcionarioRepo = new FuncionarioORM();
+            //var parceiro = new ParceiroORM();
+            //var motoristaRepo = new MotoristaORM();
 
-            var cliente = new BaseRepository<ICliente>();
-            var pjRepo = new BaseRepository<ClientePJ>();
-            var pfRepo = new BaseRepository<ClientePF>();
+            var cliente = new ClienteORM();
+            var pjRepo = new ClientePJORM();
+            var pfRepo = new ClientePFORM();
 
 
-            var aluguelFechadoRepo = new BaseRepository<AluguelFechado>();
-
-            var aluguelRepo = new BaseRepository<Aluguel>();
-            var servicoRepo = new BaseRepository<Servico>();
-            var cupomRepo = new BaseRepository<Cupom>();
-            var relatorioRepo = new BaseRepository<RelatorioAluguel>();
-            var cnhRepo = new BaseRepository<CNH>();
-            var senhaRepo = new BaseRepository<Senha>();
+            //var aluguelFechadoRepo = new AluguelFechadoORM();
+            var aluguelRepo = new AluguelORM();
+            var servicoRepo = new ServicosORM();
+            var cupomRepo = new CupomORM();
+            var relatorioRepo = new RelatorioORM();
+            var cnhRepo = new CnhORM();
+            var senhaRepo = new SenhaORM();
 
             Services.CupomServices = new CupomAppServices(cupomRepo);
-            Services.ParceiroServices = new ParceiroAppServices(parceiro);
+            Services.ParceiroServices = new ParceiroAppServices(null);
             Services.ServicosServices = new ServicosAppServices(servicoRepo);
             Services.ClienteServices = new ClienteAppServices(cliente);
             Services.ClientePJServices = new ClientePJAppServices(pjRepo);
             Services.ClientePFServices = new ClientePFAppServices(pfRepo, cnhRepo);
-            Services.MotoristaServices = new MotoristaAppServices(motoristaRepo);
-            Services.CategoriaServices = new CategoriaAppServices(categoriaRepo);
+            Services.MotoristaServices = new MotoristaAppServices(null);
+            Services.CategoriaServices = new CategoriaAppServices(null);
             Services.FuncionarioServices = new FuncionarioAppServices(funcionarioRepo, senhaRepo);
-            Services.VeiculoServices = new VeiculoAppServices(veiculoRepo, categoriaRepo);
-            Services.AluguelFechadoServices = new AluguelFechadoAppServices(aluguelFechadoRepo, servicoRepo, veiculoRepo);
+            Services.VeiculoServices = new VeiculoAppServices(veiculoRepo, null);
+            Services.AluguelFechadoServices = new AluguelFechadoAppServices(null, servicoRepo, veiculoRepo);
             Services.AluguelServices = new AluguelAppServices(aluguelRepo, RelatorioAluguel, relatorioRepo, servicoRepo, cupomRepo);
         }
 

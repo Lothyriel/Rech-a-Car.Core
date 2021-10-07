@@ -27,12 +27,12 @@ namespace Infra.DAO.ORM
 
         public bool Existe(int id, Type tipo = null)
         {
-            return Context.Set<T>().Where(x => x.Id == id).Count() != 0;
+            return Context.Set<T>().Where(x => x.Id == id).Any();
         }
         public List<T> FiltroGenerico(string filtro)
         {
             var palavras = filtro.Split(' ');
-            return Context.Set<T>().AsNoTracking().Where(i => palavras.Any(p => i.ToString().IndexOf(p, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
+            return Context.Set<T>().AsNoTracking().Where(i => palavras.Any(p => i.ToString().Contains(p, StringComparison.OrdinalIgnoreCase))).ToList();
         }
         public T GetById(int id, Type tipo = null)
         {

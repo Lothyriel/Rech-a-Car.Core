@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CupomModule\**" />
+    <EmbeddedResource Remove="CupomModule\**" />
+    <None Remove="CupomModule\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="5.0.10" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
@@ -14,10 +20,6 @@
     <ProjectReference Include="..\Infra.ConfigurationManager\Infra.ConfigurationManager.csproj" />
     <ProjectReference Include="..\Infra.ES.GeraPDF\Infra.GeraPDF.csproj" />
     <ProjectReference Include="..\Infra.Extensions.Methods\Infra.Extensions.Methods.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CupomModule\" />
   </ItemGroup>
 
 </Project>

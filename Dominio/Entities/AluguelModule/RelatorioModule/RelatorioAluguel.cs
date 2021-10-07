@@ -6,7 +6,6 @@ namespace Dominio.AluguelModule
 {
     public class RelatorioAluguel : EnvioEmail
     {
-        public DateTime? DataEnvio { get; set; }
 
         public RelatorioAluguel(Aluguel aluguel, MemoryStream relatorioStream) : base(relatorioStream)
         {

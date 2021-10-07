@@ -73,7 +73,7 @@ namespace WindowsApp.AluguelModule
         private void bt_AddDespesa_Click(object sender, EventArgs e)
         {
             if (tb_NomeDespesa.Text != "" && mtb_PrecoDespesa.Text != "" && double.TryParse(mtb_PrecoDespesa.Text, out double precoDespesa))
-                listDespesas.Items.Add(new Servico(tb_NomeDespesa.Text, precoDespesa));
+                listDespesas.Items.Add(new Servico(tb_NomeDespesa.Text, precoDespesa, aluguel));
 
             CalcularPrecoTotal();
         }

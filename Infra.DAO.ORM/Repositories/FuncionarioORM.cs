@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    class FuncionarioORM : BaseRepository<Funcionario>, IFuncionarioRepository
+    public class FuncionarioORM : BaseRepository<Funcionario>, IFuncionarioRepository
     {
         public bool ExisteUsuario(string usuario)
         {
-            return Context.Set<Funcionario>().Where(x => x.Nome == usuario).Count() != 0; 
+            return Context.Set<Funcionario>().Where(x => x.Nome == usuario).Any(); 
         }
 
         public Funcionario GetByUserName(string usuario)
