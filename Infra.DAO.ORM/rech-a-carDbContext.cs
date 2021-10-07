@@ -13,15 +13,15 @@ namespace Infra.DAO.ORM
 {
     public class rech_a_carDbContext : DbContext
     {
-        public DbSet<Veiculo> Veiculos { get; set; }
-        public DbSet<Cupom> Cupons { get; set; }
-        public DbSet<ClientePF> ClientesPF { get; set; }
-        public DbSet<ClientePJ> ClientesPJ { get; set; }
-        public DbSet<Servico> Servicos { get; set; }
-        public DbSet<Aluguel> Alugueis { get; set; }
-        public DbSet<Categoria> Categorias { get; set; }
-        public DbSet<Funcionario> Funcionarios { get; set; }
-        public DbSet<EnvioEmail> EnvioEmails { get; set; }
+        //public DbSet<Veiculo> Veiculos { get; set; }
+        //public DbSet<Cupom> Cupons { get; set; }
+        //public DbSet<ClientePF> ClientesPF { get; set; }
+        //public DbSet<ClientePJ> ClientesPJ { get; set; }
+        //public DbSet<Servico> Servicos { get; set; }
+        //public DbSet<Aluguel> Alugueis { get; set; }
+        //public DbSet<Categoria> Categorias { get; set; }
+        //public DbSet<Funcionario> Funcionarios { get; set; }
+        //public DbSet<EnvioEmail> EnvioEmails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

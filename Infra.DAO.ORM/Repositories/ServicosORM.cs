@@ -1,4 +1,6 @@
-﻿using Dominio.ServicoModule;
+﻿using Dominio.AluguelModule;
+using Dominio.ServicoModule;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +13,30 @@ namespace Infra.DAO.ORM.Repositories
     {
         public void AlugarServicos(int id, List<Servico> servicos)
         {
-            throw new NotImplementedException();
-        }
+            //ISSO AQUI PROVAVELMENTE ESTA ERRADO
+            //var addServico = Context.Set<Servico>().Where(x => x.Aluguel != null);
 
+            var addServico = Context.Set<Servico>().Find(id);
+
+            Context.Add(addServico);
+
+            Context.SaveChanges();
+          
+        }
         public void DesalugarServicosAlugados(int id)
         {
-            throw new NotImplementedException();
+            var alugueis = Context.Set<Servico>().Where(x => x.Aluguel != null);
+
+            Task.Run(async() => await alugueis.ForEachAsync(x => x.Aluguel = null));
+
+            Context.UpdateRange(alugueis);
+
+            Context.SaveChanges();
         }
 
-        public List<Servico> ServicosDisponiveis(int id)
+        public List<Servico> ServicosDisponiveis()
         {
-            //return Set<Servico>().Find(id != 0);
-            return Set<Servico>().Find(Id) != null;
+            return Context.Set<Servico>().AsNoTracking().Where(x => x.Aluguel == null).ToList();
         }
     }
 }
