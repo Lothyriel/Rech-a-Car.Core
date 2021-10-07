@@ -6,42 +6,42 @@ using System.Linq;
 
 namespace Infra.DAO.ORM
 {
-    public class BaseRepository<T> : rech_a_carDbContext, IRepository<T> where T : Entidade
+    public class BaseRepository<T> : IRepository<T> where T : Entidade
     {
-        public List<T> Registros => Set<T>().ToList();
+        protected rech_a_carDbContext Context;
+
+        public List<T> Registros => Context.Set<T>().ToList();
 
         public void Editar(int id, T entidade)
         {
-            Entry(entidade).State = EntityState.Modified;
-            SaveChanges();
+            Context.Update(entidade);
+            Context.SaveChanges();
         }
 
         public void Excluir(int id, Type tipo = null)
         {
             var entidade = GetById(id);
-            Set<T>().Remove(entidade);
-            SaveChanges();
+            Context.Remove(entidade);
+            Context.SaveChanges();
         }
 
         public bool Existe(int id, Type tipo = null)
         {
-            return Set<T>().Find(id) != null;
+            return Context.Set<T>().Where(x => x.Id == id).Count() != 0;
         }
-
         public List<T> FiltroGenerico(string filtro)
         {
-            throw new NotImplementedException();
+            var palavras = filtro.Split(' ');
+            return Context.Set<T>().AsNoTracking().Where(i => palavras.Any(p => i.ToString().IndexOf(p, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
         }
-
         public T GetById(int id, Type tipo = null)
         {
-            return Set<T>().Find(id);
+            return Context.Set<T>().Find(id);
         }
-
         public void Inserir(T entidade)
         {
-            Set<T>().Add(entidade);
-            SaveChanges();
+            Context.Set<T>().Add(entidade);
+            Context.SaveChanges();
         }
     }
 }
