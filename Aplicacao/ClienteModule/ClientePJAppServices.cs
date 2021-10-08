@@ -1,7 +1,6 @@
 ﻿using Aplicacao.Shared;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
-using Dominio.Shared;
 
 namespace Aplicacao.ClienteModule
 {
@@ -12,10 +11,8 @@ namespace Aplicacao.ClienteModule
         public ClientePJAppServices(IClientePJRepository repositorio)
         {
             Repositorio = repositorio;
-
         }
         protected override IClientePJRepository Repositorio { get; }
-
         public override ResultadoOperacao Inserir(ClientePJ clientePJ)
         {
             var inserir = base.Inserir(clientePJ);

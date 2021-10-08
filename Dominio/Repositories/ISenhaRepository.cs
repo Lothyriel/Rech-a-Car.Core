@@ -12,7 +12,7 @@ namespace Dominio.Repositories
         void Inserir(int id_funcionario, string senha);
         void Editar(int id_funcionario, string senha);
 
-        static byte[] GerarSalt()
+        public static byte[] GerarSalt()
         {
             byte[] salt = new byte[128 / 8];
             using (var rngCsp = new RNGCryptoServiceProvider())
@@ -22,7 +22,7 @@ namespace Dominio.Repositories
 
             return salt;
         }
-        static string GerarHash(string senha, byte[] salt)
+        public static string GerarHash(string senha, byte[] salt)
         {
             return Convert.ToBase64String(KeyDerivation.Pbkdf2(
                                         password: senha,

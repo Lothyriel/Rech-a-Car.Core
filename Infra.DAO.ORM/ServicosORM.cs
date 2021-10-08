@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    public class ServicosORM : BaseRepository<Servico>, IServicoRepository
+    public class ServicosORM : BaseORM<Servico>, IServicoRepository
     {
         public void AlugarServicos(int id, List<Servico> servicos)
         {

@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    public class RelatorioORM : BaseRepository<RelatorioAluguel>, IRelatorioRepository
+    public class RelatorioORM : BaseORM<RelatorioAluguel>, IRelatorioRepository
     {
         public RelatorioAluguel GetProxEnvio()
         {
-            rech_a_carDbContext context = Context;
-            if (context.Set<RelatorioAluguel>().Where(x => x.DataEnvio == null).Any())
+            if (Context.Set<RelatorioAluguel>().Where(x => x.DataEnvio == null).Any())
                 return Context.Set<RelatorioAluguel>().Where(x => x.DataEnvio == null).FirstOrDefault();
             else
                 return null;

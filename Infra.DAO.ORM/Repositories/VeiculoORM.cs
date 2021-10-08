@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    public class VeiculoORM : BaseRepository<Veiculo>, IVeiculoRepository
+    public class VeiculoORM : BaseORM<Veiculo>, IVeiculoRepository
     {
         public void AdicionarQuilometragem(Veiculo veiculo, int kmRodados)
         {

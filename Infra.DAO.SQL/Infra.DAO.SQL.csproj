@@ -20,6 +20,7 @@
     <ProjectReference Include="..\Infra.ConfigurationManager\Infra.ConfigurationManager.csproj" />
     <ProjectReference Include="..\Infra.ES.GeraPDF\Infra.GeraPDF.csproj" />
     <ProjectReference Include="..\Infra.Extensions.Methods\Infra.Extensions.Methods.csproj" />
+    <ProjectReference Include="..\Infra.JoinRepository\Infra.JoinRepository.csproj" />
   </ItemGroup>
 
 </Project>

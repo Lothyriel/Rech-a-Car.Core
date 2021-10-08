@@ -6,19 +6,13 @@ using Aplicacao.FuncionarioModule;
 using Aplicacao.ServicosModule;
 using Aplicacao.VeiculoModule;
 using Dominio.AluguelModule;
-using Dominio.CupomModule;
-using Dominio.Entities.PessoaModule;
-using Dominio.ParceiroModule;
-using Dominio.PessoaModule;
-using Dominio.PessoaModule.ClienteModule;
-using Dominio.ServicoModule;
-using Dominio.VeiculoModule;
 using Infra.DAO.AluguelModule;
 using Infra.DAO.CupomModule;
 using Infra.DAO.ORM.Repositories;
 using Infra.DAO.ParceiroModule;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.SQL.AluguelModule;
+using Infra.DAO.SQL.PessoaModule;
 using Infra.DAO.VeiculoModule;
 using Infra.NLogger;
 using System;
@@ -34,13 +28,19 @@ namespace WindowsApp
         {
             Services = this;
 
+            NLogger.Logger.Aqui().Debug($"Configurando Relatório Aluguel configurado como {configRelatorio}");
+
             RelatorioAluguel = GetRelatorio(configRelatorio);
+
+            NLogger.Logger.Aqui().Debug($"Relatório Aluguel configurado como {configRelatorio}");
 
             ConfigurarServicos(configRepos);
         }
 
         private void ConfigurarServicos(ConfigRepositories configRepos)
         {
+            NLogger.Logger.Aqui().Debug($"Configurando Repositórios configurados como {configRepos}");
+
             switch (configRepos)
             {
                 case ConfigRepositories.SQL: GerarRepositoriosSQL(); break;
@@ -53,7 +53,6 @@ namespace WindowsApp
 
         private IRelatorioAluguel GetRelatorio(ConfigRelatorio configRelatorio)
         {
-            NLogger.Logger.Aqui().Debug($"Relatório Aluguel configurado como {configRelatorio}");
             return configRelatorio switch
             {
                 ConfigRelatorio.PDF => new PDFAluguel(),
@@ -85,7 +84,7 @@ namespace WindowsApp
             var parceiro = new ParceiroDAO();
             var motoristaRepo = new MotoristaDAO();
 
-            var cliente = new ClienteDAO();
+            var cliente = new ClienteJoinDAO();
             var pjRepo = new ClientePJDAO();
             var pfRepo = new ClientePFDAO();
 
@@ -120,7 +119,7 @@ namespace WindowsApp
             //var parceiro = new ParceiroORM();
             //var motoristaRepo = new MotoristaORM();
 
-            var cliente = new ClienteORM();
+            var cliente = new ClienteJoinORM();
             var pjRepo = new ClientePJORM();
             var pfRepo = new ClientePFORM();
 
@@ -149,6 +148,5 @@ namespace WindowsApp
 
     }
     public enum ConfigRepositories { SQL, ORM }
-
     public enum ConfigRelatorio { PDF, TXT, CSV }
 }
