@@ -1,18 +1,17 @@
 ﻿using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
-using Dominio.Shared;
-using Infra.DAO.Shared;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Infra.DAO.PessoaModule
+namespace Aplicacao.ClienteModule
 {
-    public class ClienteDAO : DAO<ICliente>, IClienteRepository
+    public abstract class ClienteJoinRepository : IClienteRepository
     {
-        public IClientePFRepository RepositorioClientePF => new ClientePFDAO();
-        public IClientePJRepository RepositorioClientePJ => new ClientePJDAO();
+        public abstract IClientePFRepository RepositorioClientePF { get; }
+        public abstract IClientePJRepository RepositorioClientePJ { get; }
 
-        public override void Inserir(ICliente cliente)
+        public void Inserir(ICliente cliente)
         {
             if (cliente is ClientePF pF)
                 RepositorioClientePF.Inserir(pF);
@@ -21,7 +20,7 @@ namespace Infra.DAO.PessoaModule
             else
                 throw new ArgumentException();
         }
-        public override void Editar(int id, ICliente cliente)
+        public void Editar(int id, ICliente cliente)
         {
             if (cliente is ClientePF pF)
                 RepositorioClientePF.Editar(cliente.Id, pF);
@@ -30,8 +29,7 @@ namespace Infra.DAO.PessoaModule
             else
                 throw new ArgumentException();
         }
-        public override List<ICliente> Registros => TodosRegistros();
-
+        public List<ICliente> Registros => TodosRegistros();
         private List<ICliente> TodosRegistros()
         {
             List<ICliente> Clientes = new();
@@ -39,7 +37,7 @@ namespace Infra.DAO.PessoaModule
             Clientes.AddRange(RepositorioClientePJ.Registros);
             return Clientes;
         }
-        public override void Excluir(int id, Type tipo = null)
+        public void Excluir(int id, Type tipo = null)
         {
             if (tipo.IsAssignableFrom(typeof(ClientePF)))
                 RepositorioClientePF.Excluir(id);
@@ -48,7 +46,7 @@ namespace Infra.DAO.PessoaModule
             else
                 throw new ArgumentException();
         }
-        public override ICliente GetById(int id, Type tipo)
+        public ICliente GetById(int id, Type tipo)
         {
             if (tipo.IsAssignableFrom(typeof(ClientePF)))
                 return RepositorioClientePF.GetById(id);
@@ -57,7 +55,7 @@ namespace Infra.DAO.PessoaModule
             else
                 throw new ArgumentException();
         }
-        public override bool Existe(int id, Type tipo)
+        public bool Existe(int id, Type tipo)
         {
             if (tipo.IsAssignableFrom(typeof(ClientePF)))
                 return RepositorioClientePF.Existe(id);
@@ -66,7 +64,6 @@ namespace Infra.DAO.PessoaModule
             else
                 throw new ArgumentException();
         }
-
         public bool ExisteDocumento(string documento, Type tipo)
         {
             if (tipo.IsAssignableFrom(typeof(ClientePF)))
@@ -75,6 +72,12 @@ namespace Infra.DAO.PessoaModule
                 return RepositorioClientePJ.ExisteDocumento(documento, tipo);
             else
                 throw new ArgumentException();
+        }
+        public List<ICliente> FiltroGenerico(string filtro)
+        {
+            var palavras = filtro.Split(' ');
+
+            return Registros.Where(i => palavras.Any(p => i.ToString().IndexOf(p, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
         }
     }
 }

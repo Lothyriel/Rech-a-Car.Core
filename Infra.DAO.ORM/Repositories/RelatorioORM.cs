@@ -12,8 +12,7 @@ namespace Infra.DAO.ORM.Repositories
     {
         public RelatorioAluguel GetProxEnvio()
         {
-            rech_a_carDbContext context = Context;
-            if (context.Set<RelatorioAluguel>().Where(x => x.DataEnvio == null).Any())
+            if (Context.Set<RelatorioAluguel>().Where(x => x.DataEnvio == null).Any())
                 return Context.Set<RelatorioAluguel>().Where(x => x.DataEnvio == null).FirstOrDefault();
             else
                 return null;

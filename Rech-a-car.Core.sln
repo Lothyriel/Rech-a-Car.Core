@@ -53,6 +53,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Logger", "Infra.Logge
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsApp", "Apresentacao\WindowsApp.csproj", "{47EF40CB-9BB2-4F7E-8010-E1BDD171B483}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.JoinRepository", "Infra.JoinRepository\Infra.JoinRepository.csproj", "{4647A27A-7C34-4C07-9D51-84975BA4E407}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,10 @@ Global
 		{47EF40CB-9BB2-4F7E-8010-E1BDD171B483}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47EF40CB-9BB2-4F7E-8010-E1BDD171B483}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47EF40CB-9BB2-4F7E-8010-E1BDD171B483}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4647A27A-7C34-4C07-9D51-84975BA4E407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4647A27A-7C34-4C07-9D51-84975BA4E407}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4647A27A-7C34-4C07-9D51-84975BA4E407}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4647A27A-7C34-4C07-9D51-84975BA4E407}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +146,7 @@ Global
 		{CB606625-637A-4E46-A05D-B76BF32830C5} = {1F1E710C-06BC-499A-AABB-FE3B70B8E1A2}
 		{532AA329-3027-4AC5-83B9-201318ACCB47} = {CB606625-637A-4E46-A05D-B76BF32830C5}
 		{47EF40CB-9BB2-4F7E-8010-E1BDD171B483} = {0574B971-26E1-4880-9FC5-48B9131E09E0}
+		{4647A27A-7C34-4C07-9D51-84975BA4E407} = {B89053E0-9331-4884-B638-750E0A1F1565}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {588C9984-282F-4230-84B2-CF78AFC64778}
