@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    public class RelatorioORM : BaseRepository<RelatorioAluguel>, IRelatorioRepository
+    public class RelatorioORM : BaseORM<RelatorioAluguel>, IRelatorioRepository
     {
         public RelatorioAluguel GetProxEnvio()
         {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    public class CnhORM : BaseRepository<CNH>, ICnhRepository
+    public class CnhORM : BaseORM<CNH>, ICnhRepository
 
     {
         public void Excluir(int idCnh)

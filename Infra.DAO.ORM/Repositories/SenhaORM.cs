@@ -3,7 +3,7 @@ using Dominio.Repositories;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    public class SenhaORM : BaseRepository<Senha>, ISenhaRepository
+    public class SenhaORM : BaseORM<Senha>, ISenhaRepository
     {
         public void Editar(int id_funcionario, string senha)
         {

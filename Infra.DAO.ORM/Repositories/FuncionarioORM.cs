@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    public class FuncionarioORM : BaseRepository<Funcionario>, IFuncionarioRepository
+    public class FuncionarioORM : BaseORM<Funcionario>, IFuncionarioRepository
     {
         public bool ExisteUsuario(string usuario)
         {

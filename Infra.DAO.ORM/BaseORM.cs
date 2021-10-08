@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Infra.DAO.ORM
 {
-    public class BaseRepository<T> : IRepository<T> where T : Entidade
+    public class BaseORM<T> : IRepository<T> where T : Entidade
     {
         protected rech_a_carDbContext Context;
 
