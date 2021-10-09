@@ -13,6 +13,10 @@ namespace Dominio.PessoaModule
             Cnh = cnh;
             Empresa = empresa;
         }
+        public Motorista()
+        {
+
+        }
         public ClientePJ Empresa { get; set; }
 
         public override string ToString()

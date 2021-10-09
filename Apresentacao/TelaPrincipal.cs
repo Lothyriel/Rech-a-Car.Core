@@ -107,7 +107,7 @@ namespace WindowsApp
         }
         private void bt_sair_Click(object sender, EventArgs e)
         {
-            Close();
+            Dispose();
             new Login().Show();
         }
         private void btVeiculosSubMenu_Click(object sender, EventArgs e)
@@ -149,7 +149,7 @@ namespace WindowsApp
 
         private void TelaPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!(sender as Form).ActiveControl.Text.Contains("Sair"))
+            if ((sender as Form).ActiveControl.Text.Contains("Sair"))
                 Application.Exit();
             else
                 Instancia = null;

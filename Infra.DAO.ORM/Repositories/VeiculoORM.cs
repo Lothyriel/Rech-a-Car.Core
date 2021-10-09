@@ -1,6 +1,8 @@
-﻿using Dominio.VeiculoModule;
+﻿using Dominio.AluguelModule;
+using Dominio.VeiculoModule;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Infra.DAO.ORM.Repositories
 {
@@ -13,7 +15,7 @@ namespace Infra.DAO.ORM.Repositories
 
         public List<Veiculo> GetDisponiveis()
         {
-            throw new NotImplementedException();
+            return Context.Set<Aluguel>().Where(a => a.DataDevolucao < DateTime.Today).Select(a => a.Veiculo).ToList();
         }
     }
 }
