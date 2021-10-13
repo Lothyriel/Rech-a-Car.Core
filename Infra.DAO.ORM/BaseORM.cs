@@ -8,7 +8,7 @@ namespace Infra.DAO.ORM
 {
     public class BaseORM<T> : IRepository<T> where T : Entidade
     {
-        protected rech_a_carDbContext Context => new rech_a_carDbContext();
+        protected rech_a_carDbContext Context  { get; init; } = new rech_a_carDbContext();
 
         public List<T> Registros => Context.Set<T>().ToList();
 
