@@ -16,7 +16,7 @@ namespace IntegrationTests.FuncionarioModule
     [TestClass]
     public class FuncionarioORMTests
     {
-        FuncionarioORM ORM = new FuncionarioORM();
+        FuncionarioORM ORM = new();
         Image imagem = Image.FromFile(@"..\..\..\Resources\user.png");
         Funcionario funcionario;
 
