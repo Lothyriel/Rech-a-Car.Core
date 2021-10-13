@@ -31,7 +31,6 @@ namespace Infra.DAO.ORM
             {
                 builder.AddFilter((category, logLevel) => category == DbLoggerCategory.Database.Command.Name && logLevel == LogLevel.Information);
                 builder.AddNLog();
-                builder.AddDebug();
             });
         }
 
