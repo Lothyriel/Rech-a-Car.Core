@@ -53,7 +53,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Logger", "Infra.Logge
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsApp", "Apresentacao\WindowsApp.csproj", "{47EF40CB-9BB2-4F7E-8010-E1BDD171B483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.JoinRepository", "Infra.JoinRepository\Infra.JoinRepository.csproj", "{4647A27A-7C34-4C07-9D51-84975BA4E407}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.JoinRepository", "Infra.JoinRepository\Infra.JoinRepository.csproj", "{4647A27A-7C34-4C07-9D51-84975BA4E407}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

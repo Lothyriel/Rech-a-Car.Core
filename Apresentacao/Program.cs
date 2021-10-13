@@ -25,7 +25,7 @@ namespace WindowsApp
             {
                 NLogger.Logger.Aqui().Info("Programa Iniciado");
 
-                new ConfigServices(ConfigRepositories.SQL, ConfigRelatorio.PDF);
+                new ConfigServices(ConfigRepositories.ORM, ConfigRelatorio.PDF);
 
                 new Login().Show();
 

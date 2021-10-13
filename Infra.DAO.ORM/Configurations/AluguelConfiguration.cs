@@ -22,7 +22,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasMany(p => p.Servicos);
 
-            builder.Property(p => p.Cliente).HasColumnType("VARCHAR(80)").IsRequired(); //columntype...
+            builder.HasOne(p => p.Cliente);
 
             builder.Property(p => p.DataAluguel).HasColumnType("DATE").IsRequired();
 
