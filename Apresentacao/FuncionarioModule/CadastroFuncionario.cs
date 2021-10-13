@@ -27,7 +27,7 @@ namespace WindowsApp.FuncionarioModule
             tbEndereco.Text = entidade.Endereco;
             tbCPF.Text = entidade.Documento;
             cb_cargo.SelectedIndex = (int)entidade.Cargo;
-            tbUsuario.Text = entidade.NomeUsuario;
+            tbUsuario.Text = entidade.Usuario;
             bt_foto.Image = entidade.Foto;
 
             return this;

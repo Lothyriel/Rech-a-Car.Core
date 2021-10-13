@@ -25,7 +25,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.Cargo);
 
-            builder.Property(p => p.NomeUsuario).HasColumnType("VARCHAR(30)").IsRequired();
+            builder.Property(p => p.Usuario).HasColumnType("VARCHAR(30)").IsRequired();
 
             builder.Property(p => p.Senha).HasColumnType("VARCHAR(40)").IsRequired();
 

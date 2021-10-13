@@ -12,7 +12,7 @@ namespace Dominio.PessoaModule
             Documento = documento;
             Cargo = cargo;
             Foto = foto;
-            NomeUsuario = usuario;
+            Usuario = usuario;
             Senha = senha;
         }
         public Funcionario()
@@ -20,7 +20,7 @@ namespace Dominio.PessoaModule
 
         }
         public Image Foto { get; set; }
-        public string NomeUsuario { get; set; }
+        public string Usuario { get; set; }
         public string Senha { get; set; }
         public Cargo Cargo { get; set; }
 
@@ -28,7 +28,7 @@ namespace Dominio.PessoaModule
         {
             var validacao = base.Validar();
 
-            if (NomeUsuario.Length < 5)
+            if (Usuario.Length < 5)
                 validacao += "Nome de usuário inválido\n";
             if (Senha?.Length < 8)
                 validacao += "Senha precisa ter no mínimo 8 caracteres";

@@ -17,7 +17,7 @@ namespace Aplicacao.FuncionarioModule
 
         public override ResultadoOperacao Inserir(Funcionario funcionario)
         {
-            if (Repositorio.ExisteUsuario(funcionario.NomeUsuario))
+            if (Repositorio.ExisteUsuario(funcionario.Usuario))
                 return new ResultadoOperacao("Nome de usuário já está cadastrado", EnumResultado.Falha);
 
             return base.Inserir(funcionario);
