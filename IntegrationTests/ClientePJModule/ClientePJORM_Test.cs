@@ -1,6 +1,7 @@
 ﻿using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using FluentAssertions;
+using Infra.DAO.ORM.Repositories;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;
 using IntegrationTests.Shared;
@@ -16,7 +17,8 @@ namespace IntegrationTests.ClientePJModule
     [TestClass]
     public class ClientePJORM_Test
     {
-        ClientePJDAO ClientePJORM = new();
+        ClientePJORM ClientePJORM = new();
+        MotoristaORM MotoristaORM = new();
         ClientePJ cliente;
         Motorista motorista;
 
@@ -26,7 +28,7 @@ namespace IntegrationTests.ClientePJModule
             cliente = new ClientePJ("nome", "99999999999", "endereco", "99999999999999", "email@teste.com");
             ClientePJORM.Inserir(cliente);
             motorista = new Motorista("nomeMotorista", "99999999999", "endereco", "99999999999999", new CNH("59778304921", TipoCNH.A), cliente);
-            ClientePJORM.MotoristaRepository.Inserir(motorista);
+            MotoristaORM.Inserir(motorista);
             cliente = ClientePJORM.GetById(cliente.Id);
         }
         [TestMethod]
@@ -42,7 +44,7 @@ namespace IntegrationTests.ClientePJModule
         [TestMethod]
         public void Deve_remover_motorista()
         {
-            ClientePJORM.MotoristaRepository.Excluir(cliente.Motoristas[0].Id);
+            MotoristaORM.Excluir(cliente.Motoristas[0].Id);
             cliente = ClientePJORM.GetById(cliente.Id);
             cliente.Motoristas.Count.Should().Be(0);
         }
@@ -54,7 +56,7 @@ namespace IntegrationTests.ClientePJModule
             string nomeAntigo = motoristaEmpresa.Nome;
             motoristaEmpresa.Nome = "NOME EDITADO";
 
-            ClientePJORM.MotoristaRepository.Editar(motoristaEmpresa.Id, motoristaEmpresa);
+            MotoristaORM.Editar(motoristaEmpresa.Id, motoristaEmpresa);
             cliente = ClientePJORM.GetById(cliente.Id);
             nomeAntigo.Should().NotBe(motoristaEmpresa.Nome);
         }
