@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio.CupomModule;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -22,7 +23,7 @@ namespace WindowsApp.DashboardModule
             lbClientesCadastrados.Text = $"{services.ClienteServices.Registros.Count}";
             lbVeiculosCadastrados.Text = $"{services.VeiculoServices.Registros.Count}";
 
-            var cupom = services.CupomServices.Registros.First();
+            var cupom = services.CupomServices.Registros.FirstOrDefault() ?? Cupom.Invalido;
             lbCupom.Text = $"{cupom.Nome}";
             lbUsos.Text = $"{cupom.Usos}";
         }
