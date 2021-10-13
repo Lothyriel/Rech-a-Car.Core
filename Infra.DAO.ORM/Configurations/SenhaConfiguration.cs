@@ -15,9 +15,9 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasKey(p => p.Id);
 
-            builder.Property(p => p.Salt).HasColumnType("BINARY(16)").IsRequired();
+            builder.Property(p => p.Salt).HasColumnType("VARCHAR(MAX)").IsRequired();
 
-            builder.Property(p => p.Hash).HasColumnType("STRING").IsRequired();
+            builder.Property(p => p.Hash).HasColumnType("VARCHAR(MAX)").IsRequired();
         }
     }
 }

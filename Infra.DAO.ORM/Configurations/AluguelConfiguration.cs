@@ -28,7 +28,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.DataDevolucao).HasColumnType("DATE").IsRequired();
 
-            builder.Property(p => p.TipoPlano).HasColumnType("VARCHAR(20)").IsRequired();
+            builder.Property(p => p.TipoPlano);
         }
     }
 }

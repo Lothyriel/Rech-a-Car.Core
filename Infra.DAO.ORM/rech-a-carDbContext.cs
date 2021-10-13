@@ -22,7 +22,7 @@ namespace Infra.DAO.ORM
         {
             optionsBuilder
                 .UseLoggerFactory(ConfigureLog())
-                .UseSqlServer(@"Data Source=(LocalDB)\\MSSqlLocalDB;Initial Catalog=DBRech-a-Car;Integrated Security=True;Pooling=False");
+                .UseSqlServer(@"Data Source=(LocalDB)\MSSqlLocalDB;Initial Catalog=DBRech-a-CarORM;Integrated Security=True;Pooling=False");
         }
 
         private ILoggerFactory ConfigureLog()
@@ -31,6 +31,7 @@ namespace Infra.DAO.ORM
             {
                 builder.AddFilter((category, logLevel) => category == DbLoggerCategory.Database.Command.Name && logLevel == LogLevel.Information);
                 builder.AddNLog();
+                builder.AddDebug();
             });
         }
 

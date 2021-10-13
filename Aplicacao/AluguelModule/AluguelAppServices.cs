@@ -89,7 +89,7 @@ namespace Aplicacao.AluguelModule
         {
             NLogger.Logger.Aqui().Debug("Gerando relatório de {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
             var relatorio = Task.Run(() => Relatorio.GerarRelatorio(aluguel));
-            RelatorioRepositorio.SalvarRelatorio(new RelatorioAluguel(aluguel, relatorio.Result));
+            RelatorioRepositorio.SalvarRelatorio(relatorio.Result);
             NLogger.Logger.Aqui().Info("Relatório gerado {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
         }
 

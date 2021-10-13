@@ -8,7 +8,7 @@ namespace Infra.DAO.ORM.Configurations
     {
         public void Configure(EntityTypeBuilder<Motorista> builder)
         {
-            builder.ToTable("TBMotortista");
+            builder.ToTable("TBMotorista");
 
             builder.Property(p => p.Nome).HasColumnType("VARCHAR(80)").IsRequired();
 
