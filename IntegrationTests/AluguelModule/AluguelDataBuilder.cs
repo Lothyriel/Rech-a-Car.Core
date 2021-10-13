@@ -68,7 +68,7 @@ namespace IntegrationTests.Shared
 
         public AluguelDataBuilder ParaCondutor(Condutor condutor = null)
         {
-            condutor ??= (aluguel.Cliente is ClientePF pF ? pF : new Motorista("Motorista 1", "99999999", "endereço", "999999", new CNH("7546456", TipoCNH.AB), (ClientePJ)aluguel.Cliente));
+            condutor ??= (aluguel.Cliente._Cliente is ClientePF pF ? pF : new Motorista("Motorista 1", "99999999", "endereço", "999999", new CNH("7546456", TipoCNH.AB), (ClientePJ)aluguel.Cliente._Cliente));
             aluguel.Condutor = condutor;
 
             return this;
