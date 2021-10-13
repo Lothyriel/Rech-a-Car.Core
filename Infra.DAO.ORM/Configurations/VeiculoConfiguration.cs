@@ -36,7 +36,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.Quilometragem).HasColumnType("INT").IsRequired();
 
-            builder.HasOne(p => p.Foto);
+            builder.Property(p => p.Foto);
         }
     }
 }

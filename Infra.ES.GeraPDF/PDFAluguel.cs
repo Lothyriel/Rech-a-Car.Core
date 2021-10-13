@@ -14,7 +14,7 @@ namespace AluguelPDF
 {
     public class PDFAluguel : IRelatorioAluguel
     {
-        public MemoryStream GerarRelatorio(Aluguel aluguel)
+        public RelatorioAluguel GerarRelatorio(Aluguel aluguel)
         {
             var ms = new MemoryStream();
             var writer = new PdfWriter(ms);
@@ -53,7 +53,7 @@ namespace AluguelPDF
             header.Add(new Text($"\nAqui está o resumo do seu mais novo aluguel na Rech-a-car!"));
 
             Paragraph body_imagem = new Paragraph().SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica14r);
-            body_imagem.Add(aluguel.Veiculo.Foto.ToItextImage());
+            body_imagem.Add(aluguel.Veiculo.Foto.ToImage().ToItextImage());
 
             Paragraph body_aluguel = new Paragraph().SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica14r);
             body_aluguel.Add(new Text($"\nVeículo: {aluguel.Veiculo}"));
@@ -83,7 +83,7 @@ namespace AluguelPDF
 
             pdf.Close();
 
-            return ms;
+            return new RelatorioAluguel(aluguel,ms);
         }
     }
 }

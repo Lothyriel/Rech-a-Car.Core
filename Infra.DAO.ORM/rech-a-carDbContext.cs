@@ -5,24 +5,19 @@ using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
 using Dominio.Shared;
 using Dominio.VeiculoModule;
+using Infra.Extensions.Methods;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
+using System;
+using System.Drawing;
+using System.IO;
 
 namespace Infra.DAO.ORM
 {
     public class rech_a_carDbContext : DbContext
     {
-        //public DbSet<Veiculo> Veiculos { get; set; }
-        //public DbSet<Cupom> Cupons { get; set; }
-        //public DbSet<ClientePF> ClientesPF { get; set; }
-        //public DbSet<ClientePJ> ClientesPJ { get; set; }
-        //public DbSet<Servico> Servicos { get; set; }
-        //public DbSet<Aluguel> Alugueis { get; set; }
-        //public DbSet<Categoria> Categorias { get; set; }
-        //public DbSet<Funcionario> Funcionarios { get; set; }
-        //public DbSet<EnvioEmail> EnvioEmails { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
@@ -42,6 +37,25 @@ namespace Infra.DAO.ORM
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(rech_a_carDbContext).Assembly);
+            var imageConverter = new ValueConverter<Image, byte[]>(
+                p => p.ToByteArray(null),
+                p => p.ToImage());
+
+            var memoryStreamConverter = new ValueConverter<MemoryStream, byte[]>(
+                p => p.ToArray(),
+                p => p.ToMemoryStream());
+
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach (var property in entityType.GetProperties())
+                {
+                    if (property.ClrType == typeof(Image))
+                        property.SetValueConverter(imageConverter);
+
+                    if (property.ClrType == typeof(MemoryStream))
+                        property.SetValueConverter(memoryStreamConverter);
+                }
+            }
         }
     }
 }

@@ -4,6 +4,6 @@ namespace Dominio.AluguelModule
 {
     public interface IRelatorioAluguel
     {
-        MemoryStream GerarRelatorio(Aluguel aluguel);
+        RelatorioAluguel GerarRelatorio(Aluguel aluguel);
     }
 }

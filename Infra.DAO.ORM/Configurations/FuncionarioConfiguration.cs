@@ -1,6 +1,9 @@
 ﻿using Dominio.PessoaModule;
+using Infra.Extensions.Methods;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System.Drawing;
 
 namespace Infra.DAO.ORM.Configurations
 {
@@ -26,7 +29,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.Senha).HasColumnType("VARCHAR(40)").IsRequired();
 
-            builder.HasOne(p => p.Foto);
+            builder.Property(p => p.Foto);
         }
     }
 }
