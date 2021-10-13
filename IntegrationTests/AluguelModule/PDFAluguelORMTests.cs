@@ -57,15 +57,13 @@ namespace Infra.ORM.AluguelModule
         [TestMethod]
         public void DeveCriarPdf()
         {
-            var ms = pa.GerarRelatorio(aluguel);
-            ro.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
+            ro.SalvarRelatorio(pa.GerarRelatorio(aluguel));
             ro.GetProxEnvio().Should().NotBeNull();
         }
         [TestMethod]
         public void DeveEnviarPdf()
         {
-            var ms = pa.GerarRelatorio(aluguel);
-            ro.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
+            ro.SalvarRelatorio(pa.GerarRelatorio(aluguel));
             AluguelAppServices.TentaEnviarRelatorioEmail();
 
             ro.GetProxEnvio().Should().BeNull();
