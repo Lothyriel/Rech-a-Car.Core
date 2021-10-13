@@ -4,14 +4,16 @@ using Infra.DAO.ORM;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infra.DAO.ORM.Migrations
 {
     [DbContext(typeof(rech_a_carDbContext))]
-    partial class rech_a_carDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211013073425_trocando_user_name")]
+    partial class trocando_user_name
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

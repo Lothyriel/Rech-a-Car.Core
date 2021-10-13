@@ -130,7 +130,7 @@ namespace Infra.DAO.PessoaModule
                 { "TELEFONE", funcionario.Telefone },
                 { "CARGO", funcionario.Cargo },
                 { "DOCUMENTO", funcionario.Documento },
-                { "USER", funcionario.NomeUsuario },
+                { "USER", funcionario.Usuario },
                 { "SENHA", funcionario.Senha},
                 { "FOTO", funcionario.Foto.ToByteArray() }
             };
