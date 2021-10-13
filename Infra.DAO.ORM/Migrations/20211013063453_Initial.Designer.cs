@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.DAO.ORM.Migrations
 {
     [DbContext(typeof(rech_a_carDbContext))]
-    [Migration("20211013062553_CORRIGINDO")]
-    partial class CORRIGINDO
+    [Migration("20211013063453_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

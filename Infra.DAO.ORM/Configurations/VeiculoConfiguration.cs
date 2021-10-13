@@ -38,7 +38,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.Foto);
 
-            builder.Property(p => p.TipoDeCombustivel);
+            builder.Property(p => p.TipoDeCombustivel).IsRequired();
         }
     }
 }

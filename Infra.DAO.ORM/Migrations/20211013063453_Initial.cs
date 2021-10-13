@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infra.DAO.ORM.Migrations
 {
-    public partial class foi : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,7 +66,7 @@ namespace Infra.DAO.ORM.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NumeroCnh = table.Column<string>(type: "CHAR(11)", nullable: false),
-                    TipoCnh = table.Column<string>(type: "VARCHAR(2)", nullable: false)
+                    TipoCnh = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -82,7 +82,7 @@ namespace Infra.DAO.ORM.Migrations
                     Foto = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     NomeUsuario = table.Column<string>(type: "VARCHAR(30)", nullable: false),
                     Senha = table.Column<string>(type: "VARCHAR(40)", nullable: false),
-                    Cargo = table.Column<string>(type: "VARCHAR(40)", nullable: false),
+                    Cargo = table.Column<int>(type: "int", nullable: false),
                     Nome = table.Column<string>(type: "VARCHAR(80)", nullable: false),
                     Telefone = table.Column<string>(type: "CHAR(11)", nullable: false),
                     Endereco = table.Column<string>(type: "VARCHAR(80)", nullable: false),
@@ -112,8 +112,8 @@ namespace Infra.DAO.ORM.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Salt = table.Column<byte[]>(type: "BINARY(16)", nullable: false),
-                    Hash = table.Column<string>(type: "STRING", nullable: false)
+                    Salt = table.Column<string>(type: "VARCHAR(MAX)", nullable: false),
+                    Hash = table.Column<string>(type: "VARCHAR(MAX)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -253,7 +253,7 @@ namespace Infra.DAO.ORM.Migrations
                     VeiculoId = table.Column<int>(type: "int", nullable: true),
                     ClienteId = table.Column<int>(type: "int", nullable: true),
                     CondutorId = table.Column<int>(type: "int", nullable: true),
-                    TipoPlano = table.Column<string>(type: "VARCHAR(20)", nullable: false),
+                    TipoPlano = table.Column<int>(type: "int", nullable: false),
                     DataAluguel = table.Column<DateTime>(type: "DATE", nullable: false),
                     DataDevolucao = table.Column<DateTime>(type: "DATE", nullable: false),
                     CupomId = table.Column<int>(type: "int", nullable: true)

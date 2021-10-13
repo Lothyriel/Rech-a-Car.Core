@@ -28,7 +28,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.DataDevolucao).HasColumnType("DATE").IsRequired();
 
-            builder.Property(p => p.TipoPlano);
+            builder.Property(p => p.TipoPlano).IsRequired();
         }
     }
 }
