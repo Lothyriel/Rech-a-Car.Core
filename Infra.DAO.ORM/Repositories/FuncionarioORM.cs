@@ -11,12 +11,12 @@ namespace Infra.DAO.ORM.Repositories
     {
         public bool ExisteUsuario(string usuario)
         {
-            return Context.Set<Funcionario>().Where(x => x.Nome == usuario).Any(); 
+            return Context.Set<Funcionario>().Where(x => x.Usuario == usuario).Any(); 
         }
 
         public Funcionario GetByUserName(string usuario)
         {
-            return Context.Set<Funcionario>().Where(x => x.Nome == usuario).FirstOrDefault();
+            return Context.Set<Funcionario>().Where(x => x.Usuario == usuario).FirstOrDefault();
         }
     }
 }
