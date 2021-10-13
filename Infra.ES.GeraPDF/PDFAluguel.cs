@@ -53,7 +53,7 @@ namespace AluguelPDF
             header.Add(new Text($"\nAqui está o resumo do seu mais novo aluguel na Rech-a-car!"));
 
             Paragraph body_imagem = new Paragraph().SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica14r);
-            body_imagem.Add(aluguel.Veiculo.Foto.ToImage().ToItextImage());
+            body_imagem.Add(aluguel.Veiculo.Foto.ToItextImage());
 
             Paragraph body_aluguel = new Paragraph().SetTextAlignment(TextAlignment.CENTER).AddStyle(helvetica14r);
             body_aluguel.Add(new Text($"\nVeículo: {aluguel.Veiculo}"));

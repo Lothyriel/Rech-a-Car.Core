@@ -1,4 +1,5 @@
 ﻿using Dominio.AluguelModule;
+using Dominio.Entities.PessoaModule.ClienteModule;
 using Dominio.PessoaModule.ClienteModule;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace WindowsApp.ClienteModule
 
         protected override void SalvarAluguel()
         {
-            Aluguel.Cliente = GetEntidadeSelecionado();
+            Aluguel.Cliente = (Cliente)GetEntidadeSelecionado();
             TelaPrincipal.Instancia.FormAtivo = new ResumoAluguel(Aluguel);
         }
         public override DataGridViewColumn[] ConfigurarColunas()

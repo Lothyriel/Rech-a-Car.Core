@@ -1,6 +1,7 @@
 ﻿using Aplicacao.AluguelModule;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
+using Dominio.Entities.PessoaModule.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
@@ -56,7 +57,7 @@ namespace WindowsApp.AluguelModule
             DateTime.TryParse(tbDt_Emprestimo.Text, out DateTime dataAluguel);
             DateTime.TryParse(tbDt_Devolucao.Text, out DateTime dataDevolucao);
 
-            Aluguel.Condutor = cb_motoristas.SelectedItem is null ? (Condutor)Aluguel.Cliente : (Condutor)cb_motoristas.SelectedItem;
+            Aluguel.Condutor = cb_motoristas.SelectedItem is null ? (Condutor)Aluguel.Cliente._Cliente : (Condutor)cb_motoristas.SelectedItem;
             Aluguel.TipoPlano = (Plano)cbPlano.SelectedIndex;
             Aluguel.Funcionario = TelaPrincipal.Instancia.FuncionarioLogado;
             Aluguel.DataAluguel = dataAluguel;
@@ -97,7 +98,7 @@ namespace WindowsApp.AluguelModule
                 validacao += "O aluguel precisa de um veículo\n";
             if (Aluguel.Cliente == null)
                 validacao += "O aluguel precisa de um cliente";
-            if (Aluguel.Cliente is ClientePJ && cb_motoristas.SelectedItem == null)
+            if (Aluguel.Cliente._Cliente is ClientePJ && cb_motoristas.SelectedItem == null)
                 validacao += "Selecione um motorista para o aluguel";
 
             return validacao;
@@ -113,7 +114,7 @@ namespace WindowsApp.AluguelModule
         }
         private void SetCondutor()
         {
-            if (Aluguel.Cliente is ClientePJ)
+            if (Aluguel.Cliente._Cliente is ClientePJ)
                 PopulaMotoristas();
             else
                 cb_motoristas.Enabled = false;
@@ -130,7 +131,7 @@ namespace WindowsApp.AluguelModule
         private void PopulaCliente(ICliente cliente)
         {
             EsconderPanel(panelEsconderCliente);
-            Aluguel.Cliente = cliente;
+            Aluguel.Cliente = (Cliente)cliente;
             tbCliente.Text = Aluguel.Cliente.Nome;
             tbDocumento.Text = Aluguel.Cliente.Documento;
             tbEndereço.Text = Aluguel.Cliente.Endereco;
@@ -140,7 +141,7 @@ namespace WindowsApp.AluguelModule
         }
         private void PopulaMotoristas()
         {
-            cb_motoristas.Items.AddRange(((ClientePJ)Aluguel.Cliente).Motoristas.ToArray());
+            cb_motoristas.Items.AddRange(((ClientePJ)Aluguel.Cliente._Cliente).Motoristas.ToArray());
         }
         private void PopulaServicos(List<Servico> servicos)
         {
