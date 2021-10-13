@@ -21,23 +21,15 @@ namespace WindowsApp
 
         private static void RunProgram()
         {
-            try
-            {
-                NLogger.Logger.Aqui().Info("Programa Iniciado");
+            NLogger.Logger.Aqui().Info("Programa Iniciado");
 
-                new ConfigServices(ConfigRepositories.ORM, ConfigRelatorio.PDF);
+            new ConfigServices(ConfigRepositories.ORM, ConfigRelatorio.PDF);
 
-                new Login().Show();
+            new Login().Show();
 
-                Task.Run(() => ConfigServices.Services.AluguelServices.IniciaLoopEnvioEmails());
+            Task.Run(() => ConfigServices.Services.AluguelServices.IniciaLoopEnvioEmails());
 
-                Application.Run();
-            }
-            catch (Exception e)
-            {
-                NLogger.Logger.Aqui().Fatal(e, "Erro muito fatal e catastrófico meu deus do céu");
-                RunProgram();
-            }
+            Application.Run();
         }
     }
 }
