@@ -6,7 +6,7 @@ namespace Dominio.Entities.PessoaModule.ClienteModule
     {
         public ICliente _Cliente;
 
-        protected Cliente(ICliente cliente)
+        public Cliente(ICliente cliente)
         {
             _Cliente = cliente;
         }

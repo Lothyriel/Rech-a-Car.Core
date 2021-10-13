@@ -1,4 +1,5 @@
 ﻿using Dominio.AluguelModule;
+using Dominio.Entities.PessoaModule.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
@@ -46,7 +47,7 @@ namespace Tests.Tests.AlguelModule
         public void Deve_retornar_aluguel_clientePF_valido()
         {
             clientepf = new ClientePF("nome", "49999155922", "endereço", "013108478983", cnh, new DateTime(2001, 09, 10), "email@teste.com");
-            aluguel.Cliente = clientepf;
+            aluguel.Cliente = new Cliente(clientepf);
 
             aluguel.Validar().Should().Be(string.Empty);
         }

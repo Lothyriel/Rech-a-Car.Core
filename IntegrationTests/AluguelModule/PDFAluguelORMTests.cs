@@ -1,6 +1,7 @@
 ﻿using AluguelPDF;
 using Aplicacao.AluguelModule;
 using Dominio.AluguelModule;
+using Dominio.Entities.PessoaModule.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
@@ -50,24 +51,24 @@ namespace Infra.ORM.AluguelModule
 
             new FuncionarioORM().Inserir(funcionario);
 
-            aluguel = new Aluguel() { Veiculo = veiculo, Funcionario = funcionario, Condutor = cliente, Cliente = cliente, Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
-            ad.Inserir(aluguel);
+            aluguel = new Aluguel() { Veiculo = veiculo, Funcionario = funcionario, Condutor = cliente, Cliente = new Cliente(cliente), Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
+            ao.Inserir(aluguel);
         }
         [TestMethod]
         public void DeveCriarPdf()
         {
             var ms = pa.GerarRelatorio(aluguel);
-            rd.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
-            rd.GetProxEnvio().Should().NotBeNull();
+            ro.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
+            ro.GetProxEnvio().Should().NotBeNull();
         }
         [TestMethod]
         public void DeveEnviarPdf()
         {
             var ms = pa.GerarRelatorio(aluguel);
-            rd.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
+            ro.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
             AluguelAppServices.TentaEnviarRelatorioEmail();
 
-            rd.GetProxEnvio().Should().BeNull();
+            ro.GetProxEnvio().Should().BeNull();
         }
         [TestCleanup]
         public void LimparArquivo()

@@ -1,6 +1,7 @@
 ﻿using AluguelPDF;
 using Aplicacao.AluguelModule;
 using Dominio.AluguelModule;
+using Dominio.Entities.PessoaModule.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
@@ -53,7 +54,7 @@ namespace Infra.DAO.AluguelModule
 
             new FuncionarioDAO().Inserir(funcionario);
 
-            aluguel = new Aluguel() { Veiculo = veiculo, Funcionario = funcionario, Condutor = cliente, Cliente = cliente, Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
+            aluguel = new Aluguel() { Veiculo = veiculo, Funcionario = funcionario, Condutor = cliente, Cliente = new Cliente(cliente), Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
             ad.Inserir(aluguel);
         }
         [TestMethod]

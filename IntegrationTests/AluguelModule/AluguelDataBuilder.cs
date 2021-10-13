@@ -1,5 +1,6 @@
 ﻿using Dominio.AluguelModule;
 using Dominio.CupomModule;
+using Dominio.Entities.PessoaModule.ClienteModule;
 using Dominio.ParceiroModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
@@ -28,7 +29,7 @@ namespace IntegrationTests.Shared
         public AluguelDataBuilder ParaCliente(ICliente cliente = null)
         {
             cliente ??= new ClientePF("Cliente 1", "999999", "endereco", "9999990", new CNH("99999", TipoCNH.AB), new DateTime(2001, 10, 10), "aaaaaa@aaa.com");
-            aluguel.Cliente = cliente;
+            aluguel.Cliente = new Cliente(cliente);
 
             return this;
         }
