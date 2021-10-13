@@ -51,23 +51,21 @@ namespace Infra.ORM.AluguelModule
             new FuncionarioORM().Inserir(funcionario);
 
             aluguel = new Aluguel() { Veiculo = veiculo, Funcionario = funcionario, Condutor = cliente, Cliente = cliente, Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
-            ad.Inserir(aluguel);
+            ao.Inserir(aluguel);
         }
         [TestMethod]
         public void DeveCriarPdf()
         {
-            var ms = pa.GerarRelatorio(aluguel);
-            rd.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
-            rd.GetProxEnvio().Should().NotBeNull();
+            ro.SalvarRelatorio(pa.GerarRelatorio(aluguel));
+            ro.GetProxEnvio().Should().NotBeNull();
         }
         [TestMethod]
         public void DeveEnviarPdf()
         {
-            var ms = pa.GerarRelatorio(aluguel);
-            rd.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
+            ro.SalvarRelatorio(pa.GerarRelatorio(aluguel));
             AluguelAppServices.TentaEnviarRelatorioEmail();
 
-            rd.GetProxEnvio().Should().BeNull();
+            ro.GetProxEnvio().Should().BeNull();
         }
         [TestCleanup]
         public void LimparArquivo()

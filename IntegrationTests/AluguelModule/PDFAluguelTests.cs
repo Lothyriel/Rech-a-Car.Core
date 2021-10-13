@@ -59,15 +59,13 @@ namespace Infra.DAO.AluguelModule
         [TestMethod]
         public void DeveCriarPdf()
         {
-            var ms = pa.GerarRelatorio(aluguel);
-            rd.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
+            rd.SalvarRelatorio(pa.GerarRelatorio(aluguel));
             rd.GetProxEnvio().Should().NotBeNull();
         }
         [TestMethod]
         public void DeveEnviarPdf()
         {
-            var ms = pa.GerarRelatorio(aluguel);
-            rd.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
+            rd.SalvarRelatorio(pa.GerarRelatorio(aluguel));
             AluguelAppServices.TentaEnviarRelatorioEmail();
 
             rd.GetProxEnvio().Should().BeNull();
