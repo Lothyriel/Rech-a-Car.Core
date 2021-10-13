@@ -1,4 +1,5 @@
 ﻿using Dominio.CupomModule;
+using Dominio.Entities.PessoaModule.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
@@ -18,7 +19,7 @@ namespace Dominio.AluguelModule
             Servicos = servicos;
             TipoPlano = tipoPlano;
             DataAluguel = dataAluguel;
-            Cliente = cliente;
+            Cliente = (Cliente)cliente;
             Condutor = condutor;
             DataDevolucao = dataDevolucao;
             Cupom = cupom;
@@ -35,12 +36,12 @@ namespace Dominio.AluguelModule
             Cliente = aluguel.Cliente;
             Condutor = aluguel.Condutor;
             if (aluguel.Condutor == null)
-                Condutor = (Condutor)aluguel.Cliente;
+                Condutor = (Condutor)aluguel.Cliente._Cliente;
         }
         public Aluguel() { }
         public Funcionario Funcionario { get; set; }
         public Veiculo Veiculo { get; set; }
-        public ICliente Cliente { get; set; }
+        public Cliente Cliente { get; set; }
         public List<Servico> Servicos { get; set; } = new List<Servico>();
         public Condutor Condutor { get; set; }
         public Plano TipoPlano { get; set; }
