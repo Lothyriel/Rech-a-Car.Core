@@ -112,19 +112,19 @@ namespace WindowsApp
         }
         private void GerarRepositoriosORM()
         {
-            //var categoriaRepo = new CategoriaORM();
+            var categoriaRepo = new CategoriaORM();
             var veiculoRepo = new VeiculoORM();
 
             var funcionarioRepo = new FuncionarioORM();
-            //var parceiro = new ParceiroORM();
-            //var motoristaRepo = new MotoristaORM();
+            var parceiro = new ParceiroORM();
+            var motoristaRepo = new MotoristaORM();
 
             var cliente = new ClienteJoinORM();
             var pjRepo = new ClientePJORM();
             var pfRepo = new ClientePFORM();
 
 
-            //var aluguelFechadoRepo = new AluguelFechadoORM();
+            var aluguelFechadoRepo = new AluguelFechadoORM();
             var aluguelRepo = new AluguelORM();
             var servicoRepo = new ServicosORM();
             var cupomRepo = new CupomORM();

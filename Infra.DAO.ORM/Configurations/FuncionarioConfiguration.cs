@@ -1,13 +1,10 @@
 ﻿using Dominio.PessoaModule;
-using Infra.Extensions.Methods;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System.Drawing;
 
 namespace Infra.DAO.ORM.Configurations
 {
-    class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
+    public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
     {
         public void Configure(EntityTypeBuilder<Funcionario> builder)
         {
@@ -26,8 +23,6 @@ namespace Infra.DAO.ORM.Configurations
             builder.Property(p => p.Cargo);
 
             builder.Property(p => p.Usuario).HasColumnType("VARCHAR(30)").IsRequired();
-
-            builder.Property(p => p.Senha).HasColumnType("VARCHAR(40)").IsRequired();
 
             builder.Property(p => p.Foto);
         }
