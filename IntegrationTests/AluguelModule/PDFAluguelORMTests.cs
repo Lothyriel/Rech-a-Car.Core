@@ -20,15 +20,15 @@ namespace Infra.ORM.AluguelModule
     public class PDFAluguelTests
     {
         Aluguel aluguel;
-        static AluguelORM ad = new();
+        static AluguelORM ao = new();
         static PDFAluguel pa = new();
-        static RelatorioORM rd = new();
-        static ServicosORM sd = new();
-        static CupomORM cd = new();
+        static RelatorioORM ro = new();
+        static ServicosORM so = new();
+        static CupomORM co = new();
         static CnhORM cn = new();
         static ClientePFORM cf = new();
 
-        AluguelAppServices AluguelAppServices = new(ad, pa, rd, sd, cd);
+        AluguelAppServices AluguelAppServices = new(ao, pa, ro, so, co);
 
         [TestInitialize]
         public void InicializarDados()
