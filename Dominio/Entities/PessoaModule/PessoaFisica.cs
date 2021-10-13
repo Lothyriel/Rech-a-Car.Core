@@ -4,7 +4,7 @@
     {
         protected override string ValidaDocumento()
         {
-            string validador = string.Empty;
+            string validador = base.Validar();
             if (Documento.Length != 11)
                 validador += "O cliente necessita de um CPF válido.\n";
 

@@ -133,16 +133,16 @@ namespace WindowsApp
             var senhaRepo = new SenhaORM();
 
             Services.CupomServices = new CupomAppServices(cupomRepo);
-            Services.ParceiroServices = new ParceiroAppServices(null);
+            Services.ParceiroServices = new ParceiroAppServices(parceiro);
             Services.ServicosServices = new ServicosAppServices(servicoRepo);
             Services.ClienteServices = new ClienteAppServices(cliente);
             Services.ClientePJServices = new ClientePJAppServices(pjRepo);
             Services.ClientePFServices = new ClientePFAppServices(pfRepo, cnhRepo);
-            Services.MotoristaServices = new MotoristaAppServices(null);
-            Services.CategoriaServices = new CategoriaAppServices(null);
+            Services.MotoristaServices = new MotoristaAppServices(motoristaRepo);
+            Services.CategoriaServices = new CategoriaAppServices(categoriaRepo);
             Services.FuncionarioServices = new FuncionarioAppServices(funcionarioRepo, senhaRepo);
-            Services.VeiculoServices = new VeiculoAppServices(veiculoRepo, null);
-            Services.AluguelFechadoServices = new AluguelFechadoAppServices(null, servicoRepo, veiculoRepo);
+            Services.VeiculoServices = new VeiculoAppServices(veiculoRepo, categoriaRepo);
+            Services.AluguelFechadoServices = new AluguelFechadoAppServices(aluguelFechadoRepo, servicoRepo, veiculoRepo);
             Services.AluguelServices = new AluguelAppServices(aluguelRepo, RelatorioAluguel, relatorioRepo, servicoRepo, cupomRepo);
         }
 

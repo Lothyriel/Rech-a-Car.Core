@@ -22,7 +22,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.QuilometragemFranquia).HasColumnType("INT").IsRequired();
 
-            builder.Property(p => p.TipoDeCnh).HasColumnType("VARCHAR(80)").IsRequired();
+            builder.Property(p => p.TipoDeCnh);
         }
     }
 }

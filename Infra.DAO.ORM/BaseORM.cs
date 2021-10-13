@@ -39,7 +39,7 @@ namespace Infra.DAO.ORM
         public List<T> FiltroGenerico(string filtro)
         {
             var palavras = filtro.Split(' ');
-            return Context.Set<T>().AsNoTracking().Where(i => palavras.Any(p => i.ToString().Contains(p, StringComparison.OrdinalIgnoreCase))).ToList();
+            return Context.Set<T>().AsNoTracking().ToList().Where(i => palavras.Any(p => i.ToString().Contains(p, StringComparison.OrdinalIgnoreCase))).ToList();
         }
     }
 }
