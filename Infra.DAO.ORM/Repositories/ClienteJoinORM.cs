@@ -4,9 +4,9 @@ using Dominio.Repositories;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    public class ClienteJoinORM : ClienteJoinRepository
+    public class ClienteJoinORM : IClienteRepository
     {
-        public override IClientePFRepository RepositorioClientePF => new ClientePFORM();
-        public override IClientePJRepository RepositorioClientePJ => new ClientePJORM();
+        public IClientePFRepository RepositorioClientePF => new ClientePFORM();
+        public IClientePJRepository RepositorioClientePJ => new ClientePJORM();
     }
 }

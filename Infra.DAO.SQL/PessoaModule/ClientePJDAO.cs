@@ -1,5 +1,6 @@
 ﻿using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.Repositories;
 using Dominio.Shared;
 using Infra.DAO.Shared;
 using System;
@@ -149,7 +150,7 @@ namespace Infra.DAO.PessoaModule
             return parametros;
         }
     }
-    public class MotoristaDAO : DAO<Motorista>, IRepository<Motorista>
+    public class MotoristaDAO : DAO<Motorista>, IMotoristaRepository
     {
 
         #region Queries

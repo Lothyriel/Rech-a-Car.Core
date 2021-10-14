@@ -1,4 +1,5 @@
 ﻿using Dominio.ParceiroModule;
+using Dominio.Repositories;
 using Infra.DAO.Shared;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Data;
 
 namespace Infra.DAO.ParceiroModule
 {
-    public class ParceiroDAO : EntidadeDAO<Parceiro>
+    public class ParceiroDAO : EntidadeDAO<Parceiro>, IParceiroRepository
     {
         #region
 

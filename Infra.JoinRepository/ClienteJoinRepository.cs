@@ -11,6 +11,11 @@ namespace Aplicacao.ClienteModule
         public abstract IClientePFRepository RepositorioClientePF { get; }
         public abstract IClientePJRepository RepositorioClientePJ { get; }
 
+        public ClienteJoinRepository()
+        {
+            IClienteRepository desenvolvedor = DependencyInjector.Container.Resolve()
+
+        }
         public void Inserir(ICliente cliente)
         {
             if (cliente is ClientePF pF)

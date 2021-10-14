@@ -8,11 +8,15 @@ namespace Infra.DAO.ORM.Repositories
 {
     public class ClientePJORM : BaseORM<ClientePJ>, IClientePJRepository
     {
-        public IRepository<Motorista> MotoristaRepository => new BaseORM<Motorista>();
+        public IRepository<Motorista> MotoristaRepository => new MotoristaORM(Context);
+
+        public ClientePJORM(rech_a_carDbContext context) : base(context)
+        {
+        }
 
         public bool ExisteDocumento(string documento, Type type)
         {
-            return Context.Set<ClientePJ>().Where(c=>c.Documento== documento).Count() != 0;
+            return Context.Set<ClientePJ>().Where(c => c.Documento == documento).Count() != 0;
         }
     }
 }
