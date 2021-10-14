@@ -2,7 +2,7 @@
 
 namespace Dominio.AluguelModule
 {
-    public interface IRelatorioAluguel
+    public interface IRelatorioAluguelRepository
     {
         RelatorioAluguel GerarRelatorio(Aluguel aluguel);
     }

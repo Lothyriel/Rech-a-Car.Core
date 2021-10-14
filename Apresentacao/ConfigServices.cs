@@ -23,7 +23,7 @@ namespace WindowsApp
     {
         public static ConfigServices Services;
 
-        private IRelatorioAluguel RelatorioAluguel;
+        private IRelatorioAluguelRepository RelatorioAluguel;
         public ConfigServices(ConfigRepositories configRepos, ConfigRelatorio configRelatorio)
         {
             Services = this;
@@ -51,7 +51,7 @@ namespace WindowsApp
             NLogger.Logger.Aqui().Debug($"Repositórios configurados como {configRepos}");
         }
 
-        private IRelatorioAluguel GetRelatorio(ConfigRelatorio configRelatorio)
+        private IRelatorioAluguelRepository GetRelatorio(ConfigRelatorio configRelatorio)
         {
             return configRelatorio switch
             {

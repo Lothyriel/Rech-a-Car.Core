@@ -6,6 +6,9 @@ namespace Dominio.AluguelModule
 {
     public class RelatorioAluguel : EnvioEmail
     {
+        public RelatorioAluguel()
+        {
+        }
 
         public RelatorioAluguel(Aluguel aluguel, MemoryStream relatorioStream)
         {

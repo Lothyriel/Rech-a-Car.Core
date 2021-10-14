@@ -16,11 +16,11 @@ namespace Aplicacao.AluguelModule
     {
         protected override IAluguelRepository Repositorio { get; }
         public IRelatorioRepository RelatorioRepositorio { get; }
-        public IRelatorioAluguel Relatorio { get; }
+        public IRelatorioAluguelRepository Relatorio { get; }
         public IServicoRepository ServicoRepositorio { get; }
         public ICupomRepository CupomRepositorio { get; }
 
-        public AluguelAppServices(IAluguelRepository repositorio, IRelatorioAluguel relatorio, IRelatorioRepository relatorioRepositorio, IServicoRepository servicoRepositorio, ICupomRepository cupomRepositorio)
+        public AluguelAppServices(IAluguelRepository repositorio, IRelatorioAluguelRepository relatorio, IRelatorioRepository relatorioRepositorio, IServicoRepository servicoRepositorio, ICupomRepository cupomRepositorio)
         {
             Repositorio = repositorio;
             Relatorio = relatorio;
