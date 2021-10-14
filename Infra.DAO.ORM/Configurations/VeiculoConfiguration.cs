@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.DAO.ORM.Configurations
 {
-    class VeiculoConfiguration : IEntityTypeConfiguration<Veiculo>
+    public class VeiculoConfiguration : IEntityTypeConfiguration<Veiculo>
     {
         public void Configure(EntityTypeBuilder<Veiculo> builder)
         {
@@ -15,8 +15,6 @@ namespace Infra.DAO.ORM.Configurations
             builder.Property(p => p.Modelo).HasColumnType("VARCHAR(30)").IsRequired();
 
             builder.Property(p => p.Marca).HasColumnType("VARCHAR(30)").IsRequired();
-
-            builder.HasOne(p => p.Categoria);
 
             builder.Property(p => p.Placa).HasColumnType("CHAR(8)").IsRequired();
 
