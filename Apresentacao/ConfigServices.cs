@@ -103,7 +103,7 @@ namespace WindowsApp
             Services.ClienteServices = new ClienteAppServices(cliente);
             Services.ClientePJServices = new ClientePJAppServices(pjRepo);
             Services.ClientePFServices = new ClientePFAppServices(pfRepo, cnhRepo);
-            Services.MotoristaServices = new MotoristaAppServices(motoristaRepo);
+            Services.MotoristaServices = new MotoristaAppServices(motoristaRepo, cnhRepo);
             Services.CategoriaServices = new CategoriaAppServices(categoriaRepo);
             Services.FuncionarioServices = new FuncionarioAppServices(funcionarioRepo, senhaRepo);
             Services.VeiculoServices = new VeiculoAppServices(veiculoRepo, categoriaRepo);
@@ -138,7 +138,7 @@ namespace WindowsApp
             Services.ClienteServices = new ClienteAppServices(cliente);
             Services.ClientePJServices = new ClientePJAppServices(pjRepo);
             Services.ClientePFServices = new ClientePFAppServices(pfRepo, cnhRepo);
-            Services.MotoristaServices = new MotoristaAppServices(motoristaRepo);
+            Services.MotoristaServices = new MotoristaAppServices(motoristaRepo, cnhRepo);
             Services.CategoriaServices = new CategoriaAppServices(categoriaRepo);
             Services.FuncionarioServices = new FuncionarioAppServices(funcionarioRepo, senhaRepo);
             Services.VeiculoServices = new VeiculoAppServices(veiculoRepo, categoriaRepo);

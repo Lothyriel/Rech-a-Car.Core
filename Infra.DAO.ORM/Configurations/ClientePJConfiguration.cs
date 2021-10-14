@@ -16,7 +16,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.Telefone).HasColumnType("CHAR(11)").IsRequired();
 
-            builder.Property(p => p.Documento).HasColumnType("CHAR(11)").IsRequired();
+            builder.Property(p => p.Documento).HasColumnType("CHAR(14)").IsRequired();
 
             builder.Property(p => p.Email).HasColumnType("VARCHAR(80)").IsRequired();
 
