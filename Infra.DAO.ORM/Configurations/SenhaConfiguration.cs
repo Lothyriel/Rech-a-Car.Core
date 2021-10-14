@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.DAO.ORM.Configurations
 {
-    class SenhaConfiguration : IEntityTypeConfiguration<SenhaHashed>
+    public class SenhaConfiguration : IEntityTypeConfiguration<SenhaHashed>
     {
         public void Configure(EntityTypeBuilder<SenhaHashed> builder)
         {
