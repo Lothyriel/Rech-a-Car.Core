@@ -217,7 +217,7 @@ namespace Infra.DAO.ORM.Migrations
 
                     b.Property<string>("Documento")
                         .IsRequired()
-                        .HasColumnType("CHAR(11)");
+                        .HasColumnType("CHAR(14)");
 
                     b.Property<string>("Email")
                         .IsRequired()

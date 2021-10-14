@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.DAO.ORM.Migrations
 {
     [DbContext(typeof(rech_a_carDbContext))]
-    [Migration("20211014073516_1")]
-    partial class _1
+    [Migration("20211014180318_sexolandia")]
+    partial class sexolandia
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -219,7 +219,7 @@ namespace Infra.DAO.ORM.Migrations
 
                     b.Property<string>("Documento")
                         .IsRequired()
-                        .HasColumnType("CHAR(11)");
+                        .HasColumnType("CHAR(14)");
 
                     b.Property<string>("Email")
                         .IsRequired()

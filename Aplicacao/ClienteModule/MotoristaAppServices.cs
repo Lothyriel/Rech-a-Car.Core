@@ -12,9 +12,10 @@ namespace Aplicacao.ClienteModule
 
         public ICnhRepository CnhRepository { get; }
 
-        public MotoristaAppServices(IRepository<Motorista> repositorio)
+        public MotoristaAppServices(IRepository<Motorista> repositorio, ICnhRepository cnhRepository)
         {
             Repositorio = repositorio;
+            CnhRepository = cnhRepository;
         }
 
         public override ResultadoOperacao Inserir(Motorista motorista)
