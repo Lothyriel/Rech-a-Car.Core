@@ -13,12 +13,12 @@ namespace Infra.DAO.ORM.Repositories
     {
         public void AlugarServicos(int id, List<Servico> servicos)
         {
-            //ISSO AQUI PROVAVELMENTE ESTA ERRADO
-            //var addServico = Context.Set<Servico>().Where(x => x.Aluguel != null);
+            var aluguel = Context.Set<Aluguel>().Find(id);
+            var nServicos = Context.Set<Servico>().Where(s => servicos.Contains(s));
 
-            var addServico = Context.Set<Servico>().Find(id);
+            nServicos.ToList().ForEach(s => s.Aluguel = aluguel);
 
-            Context.Add(addServico);
+            Context.UpdateRange(nServicos);
 
             Context.SaveChanges();
           

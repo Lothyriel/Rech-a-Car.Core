@@ -8,13 +8,13 @@ namespace Aplicacao.ClienteModule
 {
     public abstract class ClienteJoinRepository : IClienteRepository
     {
-        public abstract IClientePFRepository RepositorioClientePF { get; }
-        public abstract IClientePJRepository RepositorioClientePJ { get; }
+        public IClientePFRepository RepositorioClientePF { get; }
+        public IClientePJRepository RepositorioClientePJ { get; }
 
-        public ClienteJoinRepository()
+        public ClienteJoinRepository(IClientePFRepository repositorioClientePF, IClientePJRepository repositorioClientePJ)
         {
-            IClienteRepository desenvolvedor = DependencyInjector.Container.Resolve()
-
+            RepositorioClientePF = repositorioClientePF;
+            RepositorioClientePJ = repositorioClientePJ;
         }
         public void Inserir(ICliente cliente)
         {
