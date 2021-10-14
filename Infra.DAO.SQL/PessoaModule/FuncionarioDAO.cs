@@ -91,19 +91,6 @@ namespace Infra.DAO.PessoaModule
         public override string sqlExcluir => sqlExcluirFuncionario;
         public override string sqlExists => sqlExisteFuncionario;
 
-
-        SenhaDAO SenhaDAO = new SenhaDAO();
-
-        public override void Inserir(Funcionario entidade)
-        {
-            base.Inserir(entidade);
-            SenhaDAO.Inserir(entidade.Id, entidade.Senha);
-        }
-        public override void Editar(int id, Funcionario entidade)
-        {
-            base.Editar(id, entidade);
-            SenhaDAO.Editar(entidade.Id, entidade.Senha);
-        }
         public override Funcionario ConverterEmEntidade(IDataReader reader)
         {
             var id = Convert.ToInt32(reader["ID"]);
@@ -131,7 +118,6 @@ namespace Infra.DAO.PessoaModule
                 { "CARGO", funcionario.Cargo },
                 { "DOCUMENTO", funcionario.Documento },
                 { "USER", funcionario.Usuario },
-                { "SENHA", funcionario.Senha},
                 { "FOTO", funcionario.Foto.ToByteArray() }
             };
 

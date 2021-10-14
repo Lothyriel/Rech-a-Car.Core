@@ -25,6 +25,8 @@ namespace Infra.DAO.ORM.Configurations
             builder.Property(p => p.Usuario).HasColumnType("VARCHAR(30)").IsRequired();
 
             builder.Property(p => p.Foto);
+
+            builder.Ignore(p => p.Senha);
         }
     }
 }
