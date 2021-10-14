@@ -1,6 +1,7 @@
 ﻿using Aplicacao.Shared;
 using Dominio.PessoaModule;
 using Dominio.Repositories;
+using System;
 
 namespace Aplicacao.FuncionarioModule
 {
@@ -20,7 +21,15 @@ namespace Aplicacao.FuncionarioModule
             if (Repositorio.ExisteUsuario(funcionario.Usuario))
                 return new ResultadoOperacao("Nome de usuário já está cadastrado", EnumResultado.Falha);
 
+            RepositorioSenha.Inserir(funcionario.Id, funcionario.Senha);
+
             return base.Inserir(funcionario);
+        }
+
+        public override void Excluir(int id, Type tipo = null)
+        {
+            base.Excluir(id, tipo);
+            //RepositorioSenha.Excluir(id); ATUALMENTE ISSO TA SENDO GARANTIDO PELAS CHAVES ESTRANGEIRAS NO BANCO, MAS PROVAVELMENTE TEM QUE MUDAR PQ NEM TODAS AS FORMAS DE PERMANCENCIA TEM CASCADE E FKs
         }
         public bool ExisteUsuario(string usuario)
         {
