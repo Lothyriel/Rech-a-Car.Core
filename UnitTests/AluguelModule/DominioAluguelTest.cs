@@ -28,10 +28,12 @@ namespace Tests.Tests.AlguelModule
         Categoria categoria;
         List<Servico> servicos;
         Funcionario funcionario;
+        Condutor condutor;
 
         [TestInitialize]
         public void InicializaAluguel()
         {
+     
             categoria = new Categoria("nome", 2, 2, 2, 2, TipoCNH.A);
             veiculo = new Veiculo("modelo", "marca", 1, "ASD1234", 1, 1, 1, "123456789123", 2, 50, imagemVeiculo, true, categoria, TipoCombustivel.Diesel);
             aluguel = new Aluguel(veiculo, null, Plano.Diário, DateTime.Today.AddDays(10), clientepj, funcionario, DateTime.Today.AddDays(15), motoristaEmpresa);
@@ -41,15 +43,18 @@ namespace Tests.Tests.AlguelModule
             motoristaEmpresa = new Motorista("nome", "123123123", "endereço", "d12398127", cnh, clientepj);
             funcionario = new Funcionario("nome", "49999155922", "endereco", "01308174983", Cargo.SysAdmin, imagemFuncionario, "usuario");
             aluguel.Servicos = servicos;
+            aluguel.Condutor = condutor;
+            
         }
 
         [TestMethod]
         public void Deve_retornar_aluguel_clientePF_valido()
         {
             clientepf = new ClientePF("nome", "49999155922", "endereço", "013108478983", cnh, new DateTime(2001, 09, 10), "email@teste.com");
-            aluguel.Cliente = new Cliente(clientepf);
-
+            aluguel.Condutor = clientepf;
+                
             aluguel.Validar().Should().Be(string.Empty);
+
         }
         [TestMethod]
         public void Deve_retornar_aluguel_clientePJ_valido()
