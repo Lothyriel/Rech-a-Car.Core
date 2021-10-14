@@ -12,7 +12,7 @@ using System.IO;
 
 namespace AluguelPDF
 {
-    public class PDFAluguel : IRelatorioAluguel
+    public class PDFAluguel : IRelatorioAluguelRepository
     {
         public RelatorioAluguel GerarRelatorio(Aluguel aluguel)
         {
