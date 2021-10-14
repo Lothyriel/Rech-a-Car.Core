@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.DAO.ORM.Migrations
 {
     [DbContext(typeof(rech_a_carDbContext))]
-    [Migration("20211013063453_Initial")]
-    partial class Initial
+    [Migration("20211014073516_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -155,7 +155,7 @@ namespace Infra.DAO.ORM.Migrations
                     b.ToTable("Cliente");
                 });
 
-            modelBuilder.Entity("Dominio.Entities.PessoaModule.Senha", b =>
+            modelBuilder.Entity("Dominio.Entities.PessoaModule.SenhaHashed", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -166,9 +166,9 @@ namespace Infra.DAO.ORM.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(MAX)");
 
-                    b.Property<string>("Salt")
+                    b.Property<byte[]>("Salt")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(MAX)");
+                        .HasColumnType("VARBINARY(MAX)");
 
                     b.HasKey("Id");
 
@@ -300,17 +300,13 @@ namespace Infra.DAO.ORM.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(80)");
 
-                    b.Property<string>("NomeUsuario")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(30)");
-
-                    b.Property<string>("Senha")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(40)");
-
                     b.Property<string>("Telefone")
                         .IsRequired()
                         .HasColumnType("CHAR(11)");
+
+                    b.Property<string>("Usuario")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(30)");
 
                     b.HasKey("Id");
 
@@ -364,9 +360,8 @@ namespace Infra.DAO.ORM.Migrations
                     b.Property<int>("QuilometragemFranquia")
                         .HasColumnType("INT");
 
-                    b.Property<string>("TipoDeCnh")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(80)");
+                    b.Property<int>("TipoDeCnh")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -400,6 +395,7 @@ namespace Infra.DAO.ORM.Migrations
                         .HasColumnType("CHAR(17)");
 
                     b.Property<byte[]>("Foto")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Marca")

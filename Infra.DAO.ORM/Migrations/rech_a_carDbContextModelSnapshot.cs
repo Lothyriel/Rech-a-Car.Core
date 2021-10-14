@@ -164,9 +164,9 @@ namespace Infra.DAO.ORM.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(MAX)");
 
-                    b.Property<string>("Salt")
+                    b.Property<byte[]>("Salt")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(MAX)");
+                        .HasColumnType("VARBINARY(MAX)");
 
                     b.HasKey("Id");
 
@@ -297,9 +297,6 @@ namespace Infra.DAO.ORM.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("VARCHAR(80)");
-
-                    b.Property<string>("Senha")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
