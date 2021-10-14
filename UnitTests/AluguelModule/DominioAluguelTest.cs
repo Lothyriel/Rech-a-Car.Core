@@ -28,7 +28,6 @@ namespace Tests.Tests.AlguelModule
         Categoria categoria;
         List<Servico> servicos;
         Funcionario funcionario;
-        Condutor condutor;
 
         [TestInitialize]
         public void InicializaAluguel()
@@ -43,7 +42,6 @@ namespace Tests.Tests.AlguelModule
             motoristaEmpresa = new Motorista("nome", "123123123", "endereço", "d12398127", cnh, clientepj);
             funcionario = new Funcionario("nome", "49999155922", "endereco", "01308174983", Cargo.SysAdmin, imagemFuncionario, "usuario");
             aluguel.Servicos = servicos;
-            aluguel.Condutor = condutor;
             
         }
 
