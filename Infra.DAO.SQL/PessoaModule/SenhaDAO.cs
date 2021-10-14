@@ -41,35 +41,33 @@ namespace Infra.DAO.PessoaModule
                 [ID_FUNCIONARIO] = @ID_FUNCIONARIO";
 
         #endregion
-        public Senha GetDadosSenha(int id_funcionario)
+        public SenhaHashed GetSenhaHashed(int id_funcionario)
         {
             return Db.Get(sqlRecuperarSenha, ConverterEmSenha, new Dictionary<string, object>() { { "ID_FUNCIONARIO", id_funcionario } });
         }
         public bool SenhaCorreta(int id_funcionario, string senha)
         {
-            var dadosSenha = GetDadosSenha(id_funcionario);
-            var hash = ISenhaRepository.GerarHash(senha, dadosSenha.Salt);
+            var hashed = GetSenhaHashed(id_funcionario);
 
-            return hash == dadosSenha.Hash;
+            return SenhaHashed.SenhaCorreta(senha, hashed);
         }
         public void Inserir(int id_funcionario, string senha)
         {
-            var salt = ISenhaRepository.GerarSalt();
-            var hash = ISenhaRepository.GerarHash(senha, salt);
-            Db.Insert(sqlInsereSenha, new Dictionary<string, object>() { { "HASH_SENHA", hash }, { "SALT", salt }, { "ID_FUNCIONARIO", id_funcionario } });
+            var hashed = SenhaHashed.GerarNovaSenhaHashed(senha);
+
+            Db.Insert(sqlInsereSenha, new Dictionary<string, object>() { { "HASH_SENHA", hashed.Hash }, { "SALT", hashed.Salt }, { "ID_FUNCIONARIO", id_funcionario } });
         }
         public void Editar(int id_funcionario, string senha)
         {
-            var salt = ISenhaRepository.GerarSalt();
-            var hash = ISenhaRepository.GerarHash(senha, salt);
-            Db.Update(sqlEditarSenha, new Dictionary<string, object>() { { "HASH_SENHA", hash }, { "SALT", salt }, { "ID_FUNCIONARIO", id_funcionario } });
+            var hashed = SenhaHashed.GerarNovaSenhaHashed(senha);
+            Db.Update(sqlEditarSenha, new Dictionary<string, object>() { { "HASH_SENHA", hashed.Hash }, { "SALT", hashed.Salt }, { "ID_FUNCIONARIO", id_funcionario } });
         }
-        public Senha ConverterEmSenha(IDataReader reader)
+        public SenhaHashed ConverterEmSenha(IDataReader reader)
         {
             var salt = (byte[])reader["SALT"];
             var hash = Convert.ToString(reader["HASH_SENHA"]);
 
-            return new Senha(salt, hash);
+            return new SenhaHashed(salt, hash);
         }
     }
 }

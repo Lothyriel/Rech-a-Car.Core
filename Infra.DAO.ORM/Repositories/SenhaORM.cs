@@ -3,7 +3,7 @@ using Dominio.Repositories;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    public class SenhaORM : BaseORM<Senha>, ISenhaRepository
+    public class SenhaORM : BaseORM<SenhaHashed>, ISenhaRepository
     {
         public void Editar(int id_funcionario, string senha)
         {
@@ -11,21 +11,21 @@ namespace Infra.DAO.ORM.Repositories
             Context.SaveChanges();
         }
 
-        public Senha GetDadosSenha(int id_funcionario)
+        public SenhaHashed GetSenhaHashed(int id_funcionario)
         {
-            return Context.Set<Senha>().Find(id_funcionario);
+            return Context.Set<SenhaHashed>().Find(id_funcionario);
         }
 
         public void Inserir(int id_funcionario, string senha)
         {
-            var aa = Context.Set<Senha>(senha);
-            Context.Add(aa);
+            Context.Set<SenhaHashed>().Add(SenhaHashed.GerarNovaSenhaHashed(senha));
             Context.SaveChanges();
         }
 
         public bool SenhaCorreta(int id_funcionario, string senha)
         {
-            throw new System.NotImplementedException();
+            var hashed = GetSenhaHashed(id_funcionario);
+            return SenhaHashed.SenhaCorreta(senha, hashed);enha
         }
     }
 }
