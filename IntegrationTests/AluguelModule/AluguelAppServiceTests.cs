@@ -16,7 +16,7 @@ namespace IntegrationTests.AluguelModule
         Aluguel aluguel;
 
         Mock<IAluguelRepository> mockRepoAluguel;
-        Mock<IRelatorioAluguel> mock_Relatorio;
+        Mock<IRelatorio> mock_Relatorio;
         Mock<IRelatorioRepository> mock_Relatorio_Repo;
         Mock<IServicoRepository> mock_Servico_Repo;
         Mock<ICupomRepository> mock_Cupom_Repo;
