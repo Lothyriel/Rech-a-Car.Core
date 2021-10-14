@@ -163,7 +163,7 @@ namespace WindowsApp
             this.btCupons.Text = "Cupons";
             this.btCupons.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btCupons.UseVisualStyleBackColor = true;
-            this.btCupons.Click += new System.EventHandler(this.btCupom_Click);
+            this.btCupons.Click += new System.EventHandler(this.btCupons_Click);
             // 
             // btCupom
             // 
@@ -184,7 +184,7 @@ namespace WindowsApp
             this.btCupom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btCupom.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btCupom.UseVisualStyleBackColor = true;
-            this.btCupom.Click += new System.EventHandler(this.btCupons_Click);
+            this.btCupom.Click += new System.EventHandler(this.btCupom_Click);
             // 
             // bt_servicos
             // 
