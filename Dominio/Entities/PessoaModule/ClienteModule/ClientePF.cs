@@ -30,7 +30,7 @@ namespace Dominio.PessoaModule.ClienteModule
         {
             string validacao = base.Validar();
 
-            validacao += ICliente.ValidarEmail(validacao);
+            validacao += ICliente.ValidarEmail(Email);
 
             if (GetIdade() < 18)
                 validacao += "Idade mínima para dirigir é de 18 anos.\n";

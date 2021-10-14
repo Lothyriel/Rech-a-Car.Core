@@ -1,6 +1,5 @@
 ﻿using Dominio.AluguelModule;
 using Dominio.VeiculoModule;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

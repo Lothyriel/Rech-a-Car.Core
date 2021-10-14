@@ -19,11 +19,11 @@ namespace Aplicacao.ClienteModule
 
         public override ResultadoOperacao Inserir(ClientePF clientePF)
         {
-            CnhRepository.Inserir(clientePF.Cnh);
-            var inserir = base.Inserir(clientePF);
-
+            //CnhRepository.Inserir(clientePF.Cnh);
             if (Repositorio.ExisteDocumento(clientePF.Documento, clientePF.GetType()))
                 return new ResultadoOperacao("Já existe um cliente com este Documento", EnumResultado.Falha);
+
+            var inserir = base.Inserir(clientePF);
 
             if (inserir.Resultado == EnumResultado.Falha)
                 CnhRepository.Excluir(clientePF.Cnh.Id);

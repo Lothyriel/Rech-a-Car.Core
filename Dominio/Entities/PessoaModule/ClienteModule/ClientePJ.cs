@@ -23,7 +23,7 @@ namespace Dominio.PessoaModule.ClienteModule
         {
             string validacao = base.Validar();
 
-            validacao += ICliente.ValidarEmail(validacao);
+            validacao += ICliente.ValidarEmail(Email);
 
             return validacao;
         }

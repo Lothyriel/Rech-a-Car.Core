@@ -21,6 +21,8 @@ namespace Infra.DAO.ORM.Configurations
             builder.Property(p => p.Email).HasColumnType("VARCHAR(80)").IsRequired();
 
             builder.Property(p => p.Endereco).HasColumnType("VARCHAR(80)").IsRequired();
+
+            builder.HasOne(p => p.Cnh);
         }
     }
 }
