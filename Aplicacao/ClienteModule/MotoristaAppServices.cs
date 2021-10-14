@@ -20,7 +20,6 @@ namespace Aplicacao.ClienteModule
 
         public override ResultadoOperacao Inserir(Motorista motorista)
         {
-            CnhRepository.Inserir(motorista.Cnh);
             var inserir = base.Inserir(motorista);
 
             if (inserir.Resultado == EnumResultado.Falha)

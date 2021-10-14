@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.DAO.ORM.Migrations
 {
     [DbContext(typeof(rech_a_carDbContext))]
-    [Migration("20211014175826_aa")]
-    partial class aa
+    [Migration("20211014182600_oi")]
+    partial class oi
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -219,7 +219,7 @@ namespace Infra.DAO.ORM.Migrations
 
                     b.Property<string>("Documento")
                         .IsRequired()
-                        .HasColumnType("CHAR(11)");
+                        .HasColumnType("CHAR(14)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -371,9 +371,7 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.VeiculoModule.Veiculo", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("Ano")
                         .HasColumnType("INT");
@@ -386,9 +384,6 @@ namespace Infra.DAO.ORM.Migrations
 
                     b.Property<int>("CapacidadeTanque")
                         .HasColumnType("INT");
-
-                    b.Property<int?>("CategoriaId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Chassi")
                         .IsRequired()
@@ -423,8 +418,6 @@ namespace Infra.DAO.ORM.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoriaId");
 
                     b.ToTable("TBVeiculo");
                 });
@@ -527,8 +520,10 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.VeiculoModule.Veiculo", b =>
                 {
                     b.HasOne("Dominio.VeiculoModule.Categoria", "Categoria")
-                        .WithMany()
-                        .HasForeignKey("CategoriaId");
+                        .WithOne()
+                        .HasForeignKey("Dominio.VeiculoModule.Veiculo", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Categoria");
                 });

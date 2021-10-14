@@ -9,8 +9,6 @@ namespace Infra.DAO.ORM.Configurations
         public void Configure(EntityTypeBuilder<Condutor> builder)
         {
             builder.HasKey(p => p.Id);
-
-            builder.HasOne(p => p.Cnh);
         }
     }
 }

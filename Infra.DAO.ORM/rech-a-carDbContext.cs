@@ -36,6 +36,11 @@ namespace Infra.DAO.ORM
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Veiculo>()
+            .HasOne(b => b.Categoria)
+            .WithOne().HasForeignKey<Veiculo>(b => b.Id);
+
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(rech_a_carDbContext).Assembly);
             var imageConverter = new ValueConverter<Image, byte[]>(
                 p => p.ToByteArray(null),
