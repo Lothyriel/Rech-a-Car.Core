@@ -25,7 +25,7 @@ namespace Infra.DAO.ORM.Repositories
         public bool SenhaCorreta(int id_funcionario, string senha)
         {
             var hashed = GetSenhaHashed(id_funcionario);
-            return SenhaHashed.SenhaCorreta(senha, hashed);enha
+            return SenhaHashed.SenhaCorreta(senha, hashed);
         }
     }
 }
