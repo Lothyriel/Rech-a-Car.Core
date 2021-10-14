@@ -36,7 +36,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.Quilometragem).HasColumnType("INT").IsRequired();
 
-            builder.Property(p => p.Foto);
+            builder.Property(p => p.Foto).IsRequired();
 
             builder.Property(p => p.TipoDeCombustivel).IsRequired();
         }

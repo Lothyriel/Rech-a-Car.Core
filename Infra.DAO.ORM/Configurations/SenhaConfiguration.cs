@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.DAO.ORM.Configurations
 {
-    class SenhaConfiguration : IEntityTypeConfiguration<Senha>
+    class SenhaConfiguration : IEntityTypeConfiguration<SenhaHashed>
     {
-        public void Configure(EntityTypeBuilder<Senha> builder)
+        public void Configure(EntityTypeBuilder<SenhaHashed> builder)
         {
             builder.ToTable("TBSenha");
 
