@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using DependencyInjector;
 using Dominio.PessoaModule;
 using Dominio.VeiculoModule;
 using FluentAssertions;
@@ -13,86 +14,79 @@ namespace IntegrationTests.CategoriaModule
     [TestClass]
     public class CategoriaORMTests
     {
-        CategoriaORM CategoriaORM;
         Categoria categoria;
+        ILifetimeScope lsp;
+        rech_a_carDbContext ctx;
 
         [TestInitialize]
         public void Inserir_categoria()
         {
-            using (var lsp = DependencyInjector.DependencyInjection.Container.BeginLifetimeScope())
-            {
-                var ctx = lsp.Resolve <rech_a_carDbContext>();
-                categoria = new Categoria("nome", 1, 1, 1, 1, TipoCNH.A);
-                new CategoriaORM(ctx).Inserir(categoria);
-            }
+            ctx = lsp.Resolve<rech_a_carDbContext>();
+            categoria = new Categoria("nome", 1, 1, 1, 1, TipoCNH.A);
+            new CategoriaORM(ctx).Inserir(categoria);
+
 
         }
         [TestMethod]
         public void Deve_inserir_categoria()
         {
+
+            ctx = lsp.Resolve<rech_a_carDbContext>();
             categoria.Id.Should().NotBe(0);
+
         }
         [TestMethod]
         public void Deve_editar_nome_categoria()
         {
+            ctx = lsp.Resolve<rech_a_carDbContext>();
             var nomeAnterior = categoria.Nome;
-
             categoria.Nome = "Nome editado";
-
-            CategoriaORM.Editar(categoria.Id, categoria);
-
-            CategoriaORM.GetById(categoria.Id).Nome.Should().NotBe(nomeAnterior);
+            new CategoriaORM(ctx).Editar(categoria.Id, categoria);
+            new CategoriaORM(ctx).GetById(categoria.Id).Nome.Should().NotBe(nomeAnterior);
         }
         [TestMethod]
         public void Deve_editar_diaria_categoria()
         {
+            ctx = lsp.Resolve<rech_a_carDbContext>();
             var diariaAnterior = categoria.PrecoDiaria;
-
             categoria.PrecoDiaria = 3;
-
-            CategoriaORM.Editar(categoria.Id, categoria);
-
-            CategoriaORM.GetById(categoria.Id).PrecoDiaria.Should().NotBe(diariaAnterior);
+            new CategoriaORM(ctx).Editar(categoria.Id, categoria);
+            new CategoriaORM(ctx).GetById(categoria.Id).PrecoDiaria.Should().NotBe(diariaAnterior);
         }
         [TestMethod]
         public void Deve_editar_precokm_categoria()
         {
+            ctx = lsp.Resolve<rech_a_carDbContext>();
             var precoKmAnterior = categoria.PrecoKm;
-
             categoria.PrecoKm = 10;
-
-            CategoriaORM.Editar(categoria.Id, categoria);
-
-            CategoriaORM.GetById(categoria.Id).PrecoKm.Should().NotBe(precoKmAnterior);
+            new CategoriaORM(ctx).Editar(categoria.Id, categoria);
+            new CategoriaORM(ctx).GetById(categoria.Id).PrecoKm.Should().NotBe(precoKmAnterior);
         }
         [TestMethod]
         public void Deve_editar_franquia_categoria()
         {
+            ctx = lsp.Resolve<rech_a_carDbContext>();
             var franquiaAnterior = categoria.QuilometragemFranquia;
-
             categoria.QuilometragemFranquia = 3;
-
-            CategoriaORM.Editar(categoria.Id, categoria);
-
-            CategoriaORM.GetById(categoria.Id).QuilometragemFranquia.Should().NotBe(franquiaAnterior);
+            new CategoriaORM(ctx).Editar(categoria.Id, categoria);
+            new CategoriaORM(ctx).GetById(categoria.Id).QuilometragemFranquia.Should().NotBe(franquiaAnterior);
         }
 
         [TestMethod]
         public void Deve_editar_precoLivre_categoria()
         {
+            ctx = lsp.Resolve<rech_a_carDbContext>();
             var precoLivreAnterior = categoria.PrecoLivre;
-
             categoria.PrecoLivre = 5;
-
-            CategoriaORM.Editar(categoria.Id, categoria);
-
-            CategoriaORM.GetById(categoria.Id).PrecoLivre.Should().NotBe(precoLivreAnterior);
+            new CategoriaORM(ctx).Editar(categoria.Id, categoria);
+            new CategoriaORM(ctx).GetById(categoria.Id).PrecoLivre.Should().NotBe(precoLivreAnterior);
         }
 
         [TestMethod]
         public void Deve_retornar_todos_as_categorias()
         {
-            CategoriaORM.Registros.Count.Should().Be(1);
+            ctx = lsp.Resolve<rech_a_carDbContext>();
+            new CategoriaORM(ctx).Registros.Count.Should().Be(1);
         }
 
         [TestCleanup]
