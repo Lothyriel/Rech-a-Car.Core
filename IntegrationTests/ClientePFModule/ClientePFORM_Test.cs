@@ -31,7 +31,7 @@ namespace IntegrationTests.ClientePFModule
             ctx = lsp.Resolve<rech_a_carDbContext>();
 
             cnh1 = new CNH("1212120", TipoCNH.A);
-            cliente1 = new ClientePF("nome", "999999999", "endereco", "99999999999", cnh, new DateTime(2001, 04, 27), "email@teste.com");
+            cliente1 = new ClientePF("nome", "999999999", "endereco", "99999999999", cnh1, new DateTime(2001, 04, 27), "email@teste.com");
             new CnhORM(ctx).Inserir(cnh1);
             new ClientePFORM(ctx).Inserir(cliente1);
 
