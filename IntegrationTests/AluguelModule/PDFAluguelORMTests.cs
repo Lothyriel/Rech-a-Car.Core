@@ -26,8 +26,7 @@ namespace Infra.ORM.AluguelModule
         Aluguel aluguel;
         ILifetimeScope lsp;
         rech_a_carDbContext ctx;
-
-        AluguelAppServices AluguelAppServices = new();
+        readonly AluguelAppServices AluguelAppServices = new();
 
         [TestInitialize]
         public void InicializarDados()

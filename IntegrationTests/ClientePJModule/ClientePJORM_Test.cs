@@ -32,7 +32,7 @@ namespace IntegrationTests.ClientePJModule
             ctx = lsp.Resolve<rech_a_carDbContext>();
 
             cliente1 = new ClientePJ("nome", "99999999999", "endereco", "99999999999999", "email@teste.com");
-            motorista1 = new Motorista("nomeMotorista", "99999999999", "endereco", "99999999999999", new CNH("59778304921", TipoCNH.A), cliente);
+            motorista1 = new Motorista("nomeMotorista", "99999999999", "endereco", "99999999999999", new CNH("59778304921", TipoCNH.A), cliente1);
             new ClientePJORM(ctx).Inserir(cliente1);
             new MotoristaORM(ctx).Inserir(motorista1);
             cliente1 = new ClientePJORM(ctx).GetById(cliente1.Id);

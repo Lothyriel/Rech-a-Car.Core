@@ -18,22 +18,18 @@ namespace IntegrationTests.CupomModule
     [TestClass]
     public class ParceiroORMTest
     {
+        Parceiro  parceiro;
         ILifetimeScope lsp;
         rech_a_carDbContext ctx;
 
-        
-        Parceiro parceiro;
-
-        
         [TestInitialize]
         public void Inserindo()
         {
             lsp = DependencyInjection.Container.BeginLifetimeScope();
             ctx = lsp.Resolve<rech_a_carDbContext>();
-            ParceiroORM ParceiroORM = new(ctx);
 
             parceiro = new Parceiro("Desconto do Deko");
-            ParceiroORM.Inserir(parceiro);
+            new ParceiroORM(ctx).Inserir(parceiro);
         }
 
         [TestMethod]
@@ -63,6 +59,7 @@ namespace IntegrationTests.CupomModule
         public void LimparTestes()
         {
             Db.Delete(TestExtensions.ResetId("TBParceiro"));
+            lsp.Dispose();
         }
     }
 }
