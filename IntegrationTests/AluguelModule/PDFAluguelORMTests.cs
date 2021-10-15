@@ -29,7 +29,7 @@ namespace Infra.ORM.AluguelModule
         static CnhORM cn = new();
         static ClientePFORM cf = new();
 
-        AluguelAppServices AluguelAppServices = new(ao, pa, ro, so, co);
+        AluguelAppServices AluguelAppServices = new();
 
         [TestInitialize]
         public void InicializarDados()

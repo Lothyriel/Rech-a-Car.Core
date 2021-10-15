@@ -24,7 +24,7 @@ namespace IntegrationTests.CupomModule
             cupom = cupomMock.Object;
 
             mockCupomRepo = new();
-            sut = new CupomAppServices(mockCupomRepo.Object);
+            sut = new CupomAppServices();
         }
         [TestMethod]
         public void Deve_inserir_cupom()

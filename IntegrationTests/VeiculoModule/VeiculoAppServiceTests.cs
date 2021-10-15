@@ -28,7 +28,7 @@ namespace IntegrationTests.VeiculoModule
 
             mockrepoVeiculo = new();
             mockrepoCategoria = new();
-            sut = new VeiculoAppServices(mockrepoVeiculo.Object, mockrepoCategoria.Object);
+            sut = new VeiculoAppServices();
         }
         [TestMethod]
         public void Deve_inserir_veiculo()

@@ -24,7 +24,7 @@ namespace IntegrationTests.ClientePJ_Module
             clientePJ = clientePJ_Mock.Object;
 
             mockClientePJ_Repo = new();
-            sut = new ClientePJAppServices(mockClientePJ_Repo.Object);
+            sut = new ClientePJAppServices();
         }
         [TestMethod]
         public void Deve_inserir_cupom()

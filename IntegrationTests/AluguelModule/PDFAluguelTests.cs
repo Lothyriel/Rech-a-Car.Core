@@ -32,7 +32,7 @@ namespace Infra.DAO.AluguelModule
         static CnhDAO cn = new();
         static ClientePFDAO cf = new();
 
-        AluguelAppServices AluguelAppServices = new(ad, pa, rd, sd, cd);
+        AluguelAppServices AluguelAppServices = new();
 
         [TestInitialize]
         public void InicializarDados()

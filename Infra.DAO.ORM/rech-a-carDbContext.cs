@@ -1,4 +1,5 @@
-﻿using Dominio.VeiculoModule;
+﻿using ConfigurationManager;
+using Dominio.VeiculoModule;
 using Infra.Extensions.Methods;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -16,7 +17,7 @@ namespace Infra.DAO.ORM
             optionsBuilder
                 .UseLazyLoadingProxies()
                 .UseLoggerFactory(ConfigureLog())
-                .UseSqlServer(@"Data Source=(LocalDB)\MSSqlLocalDB;Initial Catalog=DBRech-a-CarORM;Integrated Security=True;Pooling=False");
+                .UseSqlServer(AppConfigManager.AppConfig["BancoDeDados"]["ConnectionString"].ToString());
         }
 
         private ILoggerFactory ConfigureLog()

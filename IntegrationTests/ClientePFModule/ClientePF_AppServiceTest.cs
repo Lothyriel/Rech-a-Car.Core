@@ -36,7 +36,7 @@ namespace IntegrationTests.ClientePF_Module
             mockClientePF_Repo = new();
             mockCnh_Repo = new();
 
-            sut = new ClientePFAppServices(mockClientePF_Repo.Object, mockCnh_Repo.Object);
+            sut = new ClientePFAppServices();
         }
         [TestMethod]
         public void Deve_inserir_ClientePF()

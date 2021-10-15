@@ -27,7 +27,7 @@ namespace IntegrationTests.FuncionarioModule
             funcionario = funcionarioMock.Object;
 
             mockRepoFuncionario = new();
-            sut = new FuncionarioAppServices(mockRepoFuncionario.Object, mockRepoSenha.Object);
+            sut = new FuncionarioAppServices();
         }
         [TestMethod]
         public void Deve_inserir_funcionario()
