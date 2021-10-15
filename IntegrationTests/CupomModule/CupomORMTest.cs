@@ -1,6 +1,10 @@
-﻿using Dominio.CupomModule;
+﻿using Autofac;
+using DependencyInjector;
+using Dominio.CupomModule;
 using Dominio.ParceiroModule;
+using Dominio.PessoaModule;
 using FluentAssertions;
+using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
 using Infra.DAO.Shared;
 using IntegrationTests.Shared;
@@ -16,15 +20,26 @@ namespace IntegrationTests.CupomModule
     [TestClass]
     public class CupomORMTest
     {
-        ParceiroORM parceiroORM = new();
-        CupomORM cupomORM = new();
+        ParceiroORM parceiroORM;
+        CupomORM cupomORM;
+
+        Cupom cupom1;
+        ILifetimeScope lsp;
+        rech_a_carDbContext ctx;
 
 
-        [TestCleanup]
-        public void Limpar()
+        [TestInitialize]
+        public void Inserir_Cupom()
         {
-            Db.Delete(TestExtensions.ResetId("TBCupons"));
+            lsp = DependencyInjection.Container.BeginLifetimeScope();
+            ctx = lsp.Resolve<rech_a_carDbContext>();
+
+            var parceiro = new Parceiro("Nome Cupom");
+            cupom1 = new Cupom("Deko", 50, 0, new DateTime(2021, 08, 26), parceiro, 230, 0);
+            new ParceiroORM(ctx).Inserir(parceiro);
+            new CupomORM(ctx).Inserir(cupom1);
         }
+
         public void Deve_Inserir_Novo_Cupom()
         {
             var parceiro = new Parceiro("Desconto do Deko");
@@ -107,6 +122,13 @@ namespace IntegrationTests.CupomModule
         {
 
 
+        }
+
+
+        [TestCleanup]
+        public void Limpar()
+        {
+            Db.Delete(TestExtensions.ResetId("TBCupons"));
         }
     }
 }
