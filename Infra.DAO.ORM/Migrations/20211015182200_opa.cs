@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infra.DAO.ORM.Migrations
 {
-    public partial class teste : Migration
+    public partial class opa : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -152,12 +152,10 @@ namespace Infra.DAO.ORM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Condutor",
+                name: "TBCondutor",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CnhId = table.Column<int>(type: "int", nullable: true),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     Nome = table.Column<string>(type: "VARCHAR(80)", nullable: false),
                     Telefone = table.Column<string>(type: "CHAR(11)", nullable: false),
                     Endereco = table.Column<string>(type: "VARCHAR(80)", nullable: false),
@@ -165,13 +163,13 @@ namespace Infra.DAO.ORM.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Condutor", x => x.Id);
+                    table.PrimaryKey("PK_TBCondutor", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Condutor_TBCnh_CnhId",
-                        column: x => x.CnhId,
+                        name: "FK_TBCondutor_TBCnh_Id",
+                        column: x => x.Id,
                         principalTable: "TBCnh",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -211,9 +209,9 @@ namespace Infra.DAO.ORM.Migrations
                 {
                     table.PrimaryKey("PK_TBClientePF", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TBClientePF_Condutor_Id",
+                        name: "FK_TBClientePF_TBCondutor_Id",
                         column: x => x.Id,
-                        principalTable: "Condutor",
+                        principalTable: "TBCondutor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -223,21 +221,28 @@ namespace Infra.DAO.ORM.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    EmpresaId = table.Column<int>(type: "int", nullable: true)
+                    EmpresaId = table.Column<int>(type: "int", nullable: true),
+                    ClientePJId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TBMotorista", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TBMotorista_Condutor_Id",
-                        column: x => x.Id,
-                        principalTable: "Condutor",
+                        name: "FK_TBMotorista_TBClientePJ_ClientePJId",
+                        column: x => x.ClientePJId,
+                        principalTable: "TBClientePJ",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TBMotorista_TBClientePJ_EmpresaId",
                         column: x => x.EmpresaId,
                         principalTable: "TBClientePJ",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TBMotorista_TBCondutor_Id",
+                        column: x => x.Id,
+                        principalTable: "TBCondutor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -267,9 +272,9 @@ namespace Infra.DAO.ORM.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_TBAluguel_Condutor_CondutorId",
+                        name: "FK_TBAluguel_TBCondutor_CondutorId",
                         column: x => x.CondutorId,
-                        principalTable: "Condutor",
+                        principalTable: "TBCondutor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -296,9 +301,7 @@ namespace Infra.DAO.ORM.Migrations
                 name: "TBEmail",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AluguelId = table.Column<int>(type: "int", nullable: true),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     StreamAttachment = table.Column<byte[]>(type: "VARBINARY(MAX)", nullable: false),
                     DataEnvio = table.Column<DateTime>(type: "DATE", nullable: false)
                 },
@@ -306,11 +309,11 @@ namespace Infra.DAO.ORM.Migrations
                 {
                     table.PrimaryKey("PK_TBEmail", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TBEmail_TBAluguel_AluguelId",
-                        column: x => x.AluguelId,
+                        name: "FK_TBEmail_TBAluguel_Id",
+                        column: x => x.Id,
                         principalTable: "TBAluguel",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -321,6 +324,7 @@ namespace Infra.DAO.ORM.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "VARCHAR(80)", nullable: false),
                     Taxa = table.Column<double>(type: "FLOAT", nullable: false),
+                    AluguelId1 = table.Column<int>(type: "int", nullable: true),
                     AluguelId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -332,12 +336,13 @@ namespace Infra.DAO.ORM.Migrations
                         principalTable: "TBAluguel",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TBServico_TBAluguel_AluguelId1",
+                        column: x => x.AluguelId1,
+                        principalTable: "TBAluguel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Condutor_CnhId",
-                table: "Condutor",
-                column: "CnhId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TBAluguel_ClienteId",
@@ -370,9 +375,9 @@ namespace Infra.DAO.ORM.Migrations
                 column: "ParceiroId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TBEmail_AluguelId",
-                table: "TBEmail",
-                column: "AluguelId");
+                name: "IX_TBMotorista_ClientePJId",
+                table: "TBMotorista",
+                column: "ClientePJId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TBMotorista_EmpresaId",
@@ -383,6 +388,11 @@ namespace Infra.DAO.ORM.Migrations
                 name: "IX_TBServico_AluguelId",
                 table: "TBServico",
                 column: "AluguelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TBServico_AluguelId1",
+                table: "TBServico",
+                column: "AluguelId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TBVeiculo_CategoriaId",
@@ -417,7 +427,7 @@ namespace Infra.DAO.ORM.Migrations
                 name: "Cliente");
 
             migrationBuilder.DropTable(
-                name: "Condutor");
+                name: "TBCondutor");
 
             migrationBuilder.DropTable(
                 name: "TBCupom");

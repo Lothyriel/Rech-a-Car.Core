@@ -33,8 +33,16 @@ namespace Infra.DAO.ORM
         public void Excluir(int id, Type tipo = null)
         {
             var entidade = GetById(id);
-            Context.Remove(entidade);
-            Context.SaveChanges();
+            try
+            {
+                Context.Remove(entidade);
+                Context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         public bool Existe(int id, Type tipo = null)
         {

@@ -37,7 +37,6 @@ namespace DependencyInjector
 
             Container = Builder.Build();
         }
-        private static void mamar(string mendigo) { }
         private static void ConfigurarRepositorios(ConfigRepositories configRepos)
         {
             NLogger.Logger.Aqui().Debug($"Configurando Repositórios como {configRepos}");
