@@ -14,7 +14,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.NumeroCnh).HasColumnType("CHAR(11)").IsRequired();
 
-            builder.Property(p => p.TipoCnh);
+            builder.Property(p => p.TipoCnh).IsRequired();
         }
     }
 }

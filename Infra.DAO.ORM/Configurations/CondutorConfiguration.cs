@@ -8,7 +8,11 @@ namespace Infra.DAO.ORM.Configurations
     {
         public void Configure(EntityTypeBuilder<Condutor> builder)
         {
+            builder.ToTable("TBCondutor");
+
             builder.HasKey(p => p.Id);
+
+            builder.HasOne(p => p.Cnh).WithOne().HasForeignKey<CNH>(p => p.Id);
         }
     }
 }

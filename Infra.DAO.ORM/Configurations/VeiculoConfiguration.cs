@@ -12,6 +12,8 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasKey(p => p.Id);
 
+            builder.HasOne(p => p.Categoria).WithMany();
+
             builder.Property(p => p.Modelo).HasColumnType("VARCHAR(30)").IsRequired();
 
             builder.Property(p => p.Marca).HasColumnType("VARCHAR(30)").IsRequired();

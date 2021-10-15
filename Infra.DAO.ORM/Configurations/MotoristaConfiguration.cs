@@ -16,7 +16,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.Documento).HasColumnType("CHAR(11)").IsRequired();
 
-            builder.HasOne(p => p.Empresa);
+            builder.HasOne(p => p.Empresa).WithMany();
         }
     }
 }

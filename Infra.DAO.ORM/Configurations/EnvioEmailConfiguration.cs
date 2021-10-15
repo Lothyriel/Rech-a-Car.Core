@@ -1,5 +1,4 @@
 ﻿using Dominio.AluguelModule;
-using Dominio.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,9 +12,9 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasKey(p => p.Id);
 
-            builder.HasOne(p => p.Aluguel);
+            builder.HasOne(p => p.Aluguel).WithOne().HasForeignKey<RelatorioAluguel>(p=>p.Id);
 
-            builder.Property(p => p.DataEnvio).HasColumnType("DATE").IsRequired();
+            builder.Property(p => p.DataEnvio).HasColumnType("DATE");
 
             builder.Property(p => p.StreamAttachment).HasColumnType("VARBINARY(MAX)").IsRequired();
         }

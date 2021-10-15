@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.DAO.ORM.Configurations
 {
-    class ServicoConfiguration : IEntityTypeConfiguration<Servico>
+    public class ServicoConfiguration : IEntityTypeConfiguration<Servico>
     {
         public void Configure(EntityTypeBuilder<Servico> builder)
         {
@@ -15,8 +15,6 @@ namespace Infra.DAO.ORM.Configurations
             builder.Property(p => p.Nome).HasColumnType("VARCHAR(80)").IsRequired();
 
             builder.Property(p => p.Taxa).HasColumnType("FLOAT").IsRequired();
-
-            builder.HasOne(p => p.Aluguel);
         }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.DAO.ORM.Migrations
 {
     [DbContext(typeof(rech_a_carDbContext))]
-    [Migration("20211015182200_opa")]
-    partial class opa
+    [Migration("20211015193023_sebaa")]
+    partial class sebaa
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,7 +73,6 @@ namespace Infra.DAO.ORM.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataEnvio")
-                        .IsRequired()
                         .HasColumnType("DATE");
 
                     b.Property<byte[]>("StreamAttachment")
@@ -187,9 +186,7 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.PessoaModule.CNH", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("NumeroCnh")
                         .IsRequired()
@@ -238,7 +235,9 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.PessoaModule.Condutor", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Documento")
                         .IsRequired()
@@ -504,15 +503,13 @@ namespace Infra.DAO.ORM.Migrations
                     b.Navigation("Parceiro");
                 });
 
-            modelBuilder.Entity("Dominio.PessoaModule.Condutor", b =>
+            modelBuilder.Entity("Dominio.PessoaModule.CNH", b =>
                 {
-                    b.HasOne("Dominio.PessoaModule.CNH", "Cnh")
-                        .WithOne()
-                        .HasForeignKey("Dominio.PessoaModule.Condutor", "Id")
+                    b.HasOne("Dominio.PessoaModule.Condutor", null)
+                        .WithOne("Cnh")
+                        .HasForeignKey("Dominio.PessoaModule.CNH", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Cnh");
                 });
 
             modelBuilder.Entity("Dominio.ServicoModule.Servico", b =>
@@ -573,6 +570,11 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePJ", b =>
                 {
                     b.Navigation("Motoristas");
+                });
+
+            modelBuilder.Entity("Dominio.PessoaModule.Condutor", b =>
+                {
+                    b.Navigation("Cnh");
                 });
 #pragma warning restore 612, 618
         }

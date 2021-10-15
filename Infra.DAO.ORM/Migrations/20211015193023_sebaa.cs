@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infra.DAO.ORM.Migrations
 {
-    public partial class opa : Migration
+    public partial class sebaa : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,17 +60,19 @@ namespace Infra.DAO.ORM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TBCnh",
+                name: "TBCondutor",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NumeroCnh = table.Column<string>(type: "CHAR(11)", nullable: false),
-                    TipoCnh = table.Column<int>(type: "int", nullable: false)
+                    Nome = table.Column<string>(type: "VARCHAR(80)", nullable: false),
+                    Telefone = table.Column<string>(type: "CHAR(11)", nullable: false),
+                    Endereco = table.Column<string>(type: "VARCHAR(80)", nullable: false),
+                    Documento = table.Column<string>(type: "CHAR(11)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TBCnh", x => x.Id);
+                    table.PrimaryKey("PK_TBCondutor", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,52 +154,6 @@ namespace Infra.DAO.ORM.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TBCondutor",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "VARCHAR(80)", nullable: false),
-                    Telefone = table.Column<string>(type: "CHAR(11)", nullable: false),
-                    Endereco = table.Column<string>(type: "VARCHAR(80)", nullable: false),
-                    Documento = table.Column<string>(type: "CHAR(11)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TBCondutor", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TBCondutor_TBCnh_Id",
-                        column: x => x.Id,
-                        principalTable: "TBCnh",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TBCupom",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "VARCHAR(30)", nullable: false),
-                    ValorPercentual = table.Column<int>(type: "INT", nullable: false),
-                    ValorFixo = table.Column<double>(type: "FLOAT", nullable: false),
-                    DataValidade = table.Column<DateTime>(type: "DATE", nullable: false),
-                    ParceiroId = table.Column<int>(type: "int", nullable: true),
-                    ValorMinimo = table.Column<double>(type: "FLOAT", nullable: false),
-                    Usos = table.Column<int>(type: "INT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TBCupom", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TBCupom_TBParceiro_ParceiroId",
-                        column: x => x.ParceiroId,
-                        principalTable: "TBParceiro",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TBClientePF",
                 columns: table => new
                 {
@@ -214,6 +170,25 @@ namespace Infra.DAO.ORM.Migrations
                         principalTable: "TBCondutor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TBCnh",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    NumeroCnh = table.Column<string>(type: "CHAR(11)", nullable: false),
+                    TipoCnh = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TBCnh", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TBCnh_TBCondutor_Id",
+                        column: x => x.Id,
+                        principalTable: "TBCondutor",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -243,6 +218,31 @@ namespace Infra.DAO.ORM.Migrations
                         name: "FK_TBMotorista_TBCondutor_Id",
                         column: x => x.Id,
                         principalTable: "TBCondutor",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TBCupom",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "VARCHAR(30)", nullable: false),
+                    ValorPercentual = table.Column<int>(type: "INT", nullable: false),
+                    ValorFixo = table.Column<double>(type: "FLOAT", nullable: false),
+                    DataValidade = table.Column<DateTime>(type: "DATE", nullable: false),
+                    ParceiroId = table.Column<int>(type: "int", nullable: true),
+                    ValorMinimo = table.Column<double>(type: "FLOAT", nullable: false),
+                    Usos = table.Column<int>(type: "INT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TBCupom", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TBCupom_TBParceiro_ParceiroId",
+                        column: x => x.ParceiroId,
+                        principalTable: "TBParceiro",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -303,7 +303,7 @@ namespace Infra.DAO.ORM.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
                     StreamAttachment = table.Column<byte[]>(type: "VARBINARY(MAX)", nullable: false),
-                    DataEnvio = table.Column<DateTime>(type: "DATE", nullable: false)
+                    DataEnvio = table.Column<DateTime>(type: "DATE", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -406,6 +406,9 @@ namespace Infra.DAO.ORM.Migrations
                 name: "TBClientePF");
 
             migrationBuilder.DropTable(
+                name: "TBCnh");
+
+            migrationBuilder.DropTable(
                 name: "TBEmail");
 
             migrationBuilder.DropTable(
@@ -437,9 +440,6 @@ namespace Infra.DAO.ORM.Migrations
 
             migrationBuilder.DropTable(
                 name: "TBVeiculo");
-
-            migrationBuilder.DropTable(
-                name: "TBCnh");
 
             migrationBuilder.DropTable(
                 name: "TBParceiro");

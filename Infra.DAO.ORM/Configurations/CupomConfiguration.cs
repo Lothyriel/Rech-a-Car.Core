@@ -20,7 +20,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.DataValidade).HasColumnType("DATE");
 
-            builder.HasOne(p => p.Parceiro);
+            builder.HasOne(p => p.Parceiro).WithMany();
 
             builder.Property(p => p.ValorMinimo).HasColumnType("FLOAT").IsRequired();
 

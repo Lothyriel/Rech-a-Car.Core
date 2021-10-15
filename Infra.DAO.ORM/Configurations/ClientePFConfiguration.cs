@@ -1,4 +1,5 @@
-﻿using Dominio.PessoaModule.ClienteModule;
+﻿using Dominio.Entities.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.ClienteModule;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

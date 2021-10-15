@@ -1,4 +1,5 @@
-﻿using Dominio.PessoaModule.ClienteModule;
+﻿using Dominio.Entities.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.ClienteModule;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,7 +10,6 @@ namespace Infra.DAO.ORM.Configurations
         public void Configure(EntityTypeBuilder<ClientePJ> builder)
         {
             builder.ToTable("TBClientePJ");
-
             builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Nome).HasColumnType("VARCHAR(80)").IsRequired();
@@ -22,7 +22,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.Endereco).HasColumnType("VARCHAR(80)").IsRequired();
 
-            builder.HasMany(p => p.Motoristas);
+            builder.HasMany(p => p.Motoristas).WithOne();
         }
     }
 }

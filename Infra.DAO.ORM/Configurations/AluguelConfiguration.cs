@@ -12,17 +12,17 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasKey(p => p.Id);
 
-            builder.HasOne(p => p.Funcionario);
+            builder.HasOne(p => p.Funcionario).WithMany();
 
-            builder.HasOne(p => p.Veiculo);
+            builder.HasOne(p => p.Veiculo).WithMany();
 
-            builder.HasOne(p => p.Condutor);
+            builder.HasOne(p => p.Condutor).WithMany();
 
-            builder.HasOne(p => p.Cupom);
+            builder.HasOne(p => p.Cupom).WithMany();
 
-            builder.HasMany(p => p.Servicos);
+            builder.HasMany(p => p.Servicos).WithOne();
 
-            builder.HasOne(p => p.Cliente);
+            builder.HasOne(p => p.Cliente).WithMany();
 
             builder.Property(p => p.DataAluguel).HasColumnType("DATE").IsRequired();
 
