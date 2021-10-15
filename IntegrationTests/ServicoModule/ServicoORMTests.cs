@@ -38,7 +38,7 @@ namespace IntegrationTests.ServicoModule
             lsp = DependencyInjection.Container.BeginLifetimeScope();
             ctx = lsp.Resolve<rech_a_carDbContext>();
 
-            ORM.Registros.Count.Should().NotBe(0);
+            servico1.Id.Should().NotBe(0);
         }
 
         [TestMethod]
