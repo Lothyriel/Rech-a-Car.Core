@@ -1,4 +1,4 @@
-﻿using Applicacao.Shared;
+﻿using Aplicacao.Shared;
 using Autofac;
 using DependencyInjector;
 using Dominio.PessoaModule;
@@ -7,7 +7,7 @@ using Dominio.Repositories;
 using Dominio.Shared;
 using System;
 
-namespace Applicacao.ClienteModule
+namespace Aplicacao.ClienteModule
 {
     public class MotoristaAppServices : EntidadeAppServices<Motorista>
     {

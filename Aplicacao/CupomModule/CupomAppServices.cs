@@ -1,9 +1,9 @@
-﻿using Applicacao.Shared;
+﻿using Aplicacao.Shared;
 using Autofac;
 using DependencyInjector;
 using Dominio.CupomModule;
 
-namespace Applicacao.CupomModule
+namespace Aplicacao.CupomModule
 {
     public class CupomAppServices : EntidadeAppServices<Cupom>
     {

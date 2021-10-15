@@ -1,7 +1,7 @@
-﻿using Applicacao.AluguelModule;
-using Applicacao.ClienteModule;
-using Applicacao.CupomModule;
-using Applicacao.VeiculoModule;
+﻿using Aplicacao.AluguelModule;
+using Aplicacao.ClienteModule;
+using Aplicacao.CupomModule;
+using Aplicacao.VeiculoModule;
 using Dominio.CupomModule;
 using System;
 using System.Linq;

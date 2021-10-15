@@ -13,7 +13,7 @@ namespace IntegrationTests.ServicoModule
         Mock<Servico> servicoMock;
         Servico servico;
         Mock<IServicoRepository> mockRepoServico;
-        ServicosAppServices sut;
+        ServicoAppServices sut;
 
         [TestInitialize]
         public void InicializarClasse()
@@ -24,7 +24,7 @@ namespace IntegrationTests.ServicoModule
             servico = servicoMock.Object;
 
             mockRepoServico = new();
-            sut = new ServicosAppServices(mockRepoServico.Object);
+            sut = new ServicoAppServices(mockRepoServico.Object);
         }
         [TestMethod]
         public void Deve_inserir_servico()

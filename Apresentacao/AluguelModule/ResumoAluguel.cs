@@ -1,4 +1,4 @@
-﻿using Applicacao.AluguelModule;
+﻿using Aplicacao.AluguelModule;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.Entities.PessoaModule.ClienteModule;

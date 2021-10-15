@@ -1,4 +1,4 @@
-﻿using Applicacao.ServicosModule;
+﻿using Aplicacao.ServicosModule;
 using Dominio.ServicoModule;
 using System;
 using WindowsApp.Shared;

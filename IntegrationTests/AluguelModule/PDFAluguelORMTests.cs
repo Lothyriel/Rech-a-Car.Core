@@ -24,7 +24,7 @@ namespace Infra.ORM.AluguelModule
         static AluguelORM ao = new();
         static PDFAluguel pa = new();
         static RelatorioORM ro = new();
-        static ServicosORM so = new();
+        static ServicoORM so = new();
         static CupomORM co = new();
         static CnhORM cn = new();
         static ClientePFORM cf = new();

@@ -1,9 +1,9 @@
-﻿using Applicacao.Shared;
+﻿using Aplicacao.Shared;
 using Autofac;
 using DependencyInjector;
 using Dominio.ServicoModule;
 
-namespace Applicacao.ServicosModule
+namespace Aplicacao.ServicosModule
 {
     public class ServicoAppServices : EntidadeAppServices<Servico>
     {

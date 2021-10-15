@@ -1,11 +1,11 @@
-﻿using Applicacao.Shared;
+﻿using Aplicacao.Shared;
 using Autofac;
 using DependencyInjector;
 using Dominio.PessoaModule;
 using Dominio.Repositories;
 using System;
 
-namespace Applicacao.FuncionarioModule
+namespace Aplicacao.FuncionarioModule
 {
     public class FuncionarioAppServices : EntidadeAppServices<Funcionario>
     {

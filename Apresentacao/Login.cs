@@ -1,4 +1,4 @@
-﻿using Applicacao.FuncionarioModule;
+﻿using Aplicacao.FuncionarioModule;
 using ConfigurationManager;
 using Dominio.PessoaModule;
 using Infra.NLogger;

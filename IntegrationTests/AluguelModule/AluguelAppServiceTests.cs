@@ -1,6 +1,5 @@
 ﻿using Aplicacao.AluguelModule;
 using Aplicacao.Shared;
-using Applicacao.Shared;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.ServicoModule;

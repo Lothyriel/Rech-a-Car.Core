@@ -1,4 +1,4 @@
-﻿using Applicacao.Shared;
+﻿using Aplicacao.Shared;
 using Autofac;
 using DependencyInjector;
 using Dominio.AluguelModule;
@@ -12,7 +12,7 @@ using System.IO;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
-namespace Applicacao.AluguelModule
+namespace Aplicacao.AluguelModule
 {
     public class AluguelAppServices : EntidadeAppServices<Aluguel>
     {

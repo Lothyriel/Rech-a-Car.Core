@@ -16,7 +16,7 @@ namespace IntegrationTests.ServicoModule
     public class ServicoORMTests
     {
         Servico servico = new("nomeServico", 10, new AluguelDataBuilder().Padrao);
-        ServicosORM ORM = new();
+        ServicoORM ORM = new();
 
         [TestInitialize]
         public void Inserindo_no_banco()
