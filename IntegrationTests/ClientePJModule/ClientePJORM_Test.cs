@@ -1,6 +1,9 @@
-﻿using Dominio.PessoaModule;
+﻿using Autofac;
+using DependencyInjector;
+using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using FluentAssertions;
+using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;
@@ -17,103 +20,107 @@ namespace IntegrationTests.ClientePJModule
     [TestClass]
     public class ClientePJORM_Test
     {
-        ClientePJORM ClientePJORM = new();
-        MotoristaORM MotoristaORM = new();
-        ClientePJ cliente;
-        Motorista motorista;
+        ClientePJ cliente1;
+        Motorista motorista1;
+        ILifetimeScope lsp;
+        rech_a_carDbContext ctx;
 
         [TestInitialize]
         public void Inserir_clientePJ()
         {
-            cliente = new ClientePJ("nome", "99999999999", "endereco", "99999999999999", "email@teste.com");
-            ClientePJORM.Inserir(cliente);
-            motorista = new Motorista("nomeMotorista", "99999999999", "endereco", "99999999999999", new CNH("59778304921", TipoCNH.A), cliente);
-            MotoristaORM.Inserir(motorista);
-            cliente = ClientePJORM.GetById(cliente.Id);
+            lsp = DependencyInjection.Container.BeginLifetimeScope();
+            ctx = lsp.Resolve<rech_a_carDbContext>();
+
+            cliente1 = new ClientePJ("nome", "99999999999", "endereco", "99999999999999", "email@teste.com");
+            motorista1 = new Motorista("nomeMotorista", "99999999999", "endereco", "99999999999999", new CNH("59778304921", TipoCNH.A), cliente);
+            new ClientePJORM(ctx).Inserir(cliente1);
+            new MotoristaORM(ctx).Inserir(motorista1);
+            cliente1 = new ClientePJORM(ctx).GetById(cliente1.Id);
         }
         [TestMethod]
         public void Deve_inserir_cliente()
         {
-            cliente.Id.Should().NotBe(0);
+            cliente1.Id.Should().NotBe(0);
         }
         [TestMethod]
         public void Deve_inserir_motorista()
         {
-            cliente.Motoristas.Count.Should().NotBe(0);
+            cliente1.Motoristas.Count.Should().NotBe(0);
         }
         [TestMethod]
         public void Deve_remover_motorista()
         {
-            MotoristaORM.Excluir(cliente.Motoristas[0].Id);
-            cliente = ClientePJORM.GetById(cliente.Id);
-            cliente.Motoristas.Count.Should().Be(0);
+            new MotoristaORM(ctx).Excluir(cliente1.Motoristas[0].Id);
+            cliente1 = new ClientePJORM(ctx).GetById(cliente1.Id);
+            cliente1.Motoristas.Count.Should().Be(0);
         }
         [TestMethod]
         public void Deve_editar_motorista()
         {
-            var motoristaEmpresa = cliente.Motoristas[0];
+            var motoristaEmpresa = cliente1.Motoristas[0];
 
             string nomeAntigo = motoristaEmpresa.Nome;
             motoristaEmpresa.Nome = "NOME EDITADO";
 
-            MotoristaORM.Editar(motoristaEmpresa.Id, motoristaEmpresa);
-            cliente = ClientePJORM.GetById(cliente.Id);
+            new MotoristaORM(ctx).Editar(motoristaEmpresa.Id, motoristaEmpresa);
+            cliente1 = new ClientePJORM(ctx).GetById(cliente1.Id);
             nomeAntigo.Should().NotBe(motoristaEmpresa.Nome);
         }
         [TestMethod]
         public void Deve_editar_nome_cliente()
         {
-            string nomeAnterior = cliente.Nome;
+            string nomeAnterior = cliente1.Nome;
 
-            cliente.Nome = "Nome editado";
+            cliente1.Nome = "Nome editado";
 
-            ClientePJORM.Editar(cliente.Id, cliente);
+            new ClientePJORM(ctx).Editar(cliente1.Id, cliente1);
 
-            ClientePJORM.GetById(cliente.Id).Nome.Should().NotBe(nomeAnterior);
+            new ClientePJORM(ctx).GetById(cliente1.Id).Nome.Should().NotBe(nomeAnterior);
         }
         [TestMethod]
         public void Deve_editar_telefone_cliente()
         {
-            string telefoneAnterior = cliente.Telefone;
+            string telefoneAnterior = cliente1.Telefone;
 
-            cliente.Telefone = "000000000";
+            cliente1.Telefone = "000000000";
 
-            ClientePJORM.Editar(cliente.Id, cliente);
+            new ClientePJORM(ctx).Editar(cliente1.Id, cliente1);
 
-            ClientePJORM.GetById(cliente.Id).Telefone.Should().NotBe(telefoneAnterior);
+            new ClientePJORM(ctx).GetById(cliente1.Id).Telefone.Should().NotBe(telefoneAnterior);
         }
         [TestMethod]
         public void Deve_editar_endereco_cliente()
         {
-            string enderecoAnterior = cliente.Endereco;
+            string enderecoAnterior = cliente1.Endereco;
 
-            cliente.Endereco = "Endereco editado";
+            cliente1.Endereco = "Endereco editado";
 
-            ClientePJORM.Editar(cliente.Id, cliente);
+            new ClientePJORM(ctx).Editar(cliente1.Id, cliente1);
 
-            ClientePJORM.GetById(cliente.Id).Endereco.Should().NotBe(enderecoAnterior);
+            new ClientePJORM(ctx).GetById(cliente1.Id).Endereco.Should().NotBe(enderecoAnterior);
         }
         [TestMethod]
         public void Deve_editar_documento_cliente()
         {
-            string documentoAnterior = cliente.Documento;
+            string documentoAnterior = cliente1.Documento;
 
-            cliente.Documento = "00000000000000";
+            cliente1.Documento = "00000000000000";
 
-            ClientePJORM.Editar(cliente.Id, cliente);
+            new ClientePJORM(ctx).Editar(cliente1.Id, cliente1);
 
-            ClientePJORM.GetById(cliente.Id).Documento.Should().NotBe(documentoAnterior);
+            new ClientePJORM(ctx).GetById(cliente1.Id).Documento.Should().NotBe(documentoAnterior);
         }
         [TestMethod]
         public void Deve_retornar_todos_os_clientesPJ()
         {
-            ClientePJORM.Registros.Count.Should().Be(1);
+            new ClientePJORM(ctx).Registros.Count.Should().Be(1);
         }
 
         [TestCleanup]
         public void LimparTestes()
         {
             Db.Delete(TestExtensions.ResetId("TBClientePJ"));
+            lsp.Dispose();
         }
     }
 }
