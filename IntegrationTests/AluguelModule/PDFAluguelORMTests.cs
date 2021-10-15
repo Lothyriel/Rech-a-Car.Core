@@ -26,21 +26,14 @@ namespace Infra.ORM.AluguelModule
         Aluguel aluguel;
         ILifetimeScope lsp;
         rech_a_carDbContext ctx;
-        static AluguelORM ao = new();
-        static PDFAluguel pa = new();
-        static RelatorioORM ro = new();
-        static ServicoORM so = new();
-        static CupomORM co = new();
-        static CnhORM cn = new();
-        static ClientePFORM cf = new();
 
         AluguelAppServices AluguelAppServices = new();
 
         [TestInitialize]
         public void InicializarDados()
         {
-                lsp = DependencyInjection.Container.BeginLifetimeScope();
-                ctx = lsp.Resolve<rech_a_carDbContext>();
+            lsp = DependencyInjection.Container.BeginLifetimeScope();
+            ctx = lsp.Resolve<rech_a_carDbContext>();
 
             var categoria = new Categoria("Joaninha", 100, 5, 300, 500, TipoCNH.B);
             var imagem = Resources.ford_ka_gay;
@@ -51,30 +44,30 @@ namespace Infra.ORM.AluguelModule
 
             var servicos = new List<Servico>() { new Servico("Servico 1", 100, aluguel), new Servico("Servico 2", 200, aluguel), new Servico("Servico 3", 300, aluguel) };
 
-            cn.Inserir(cliente.Cnh);
-            cf.Inserir(cliente);
+            new CnhORM(ctx).Inserir(cliente.Cnh);
+            new ClientePFORM(ctx).Inserir(cliente);
 
-            new CategoriaORM().Inserir(categoria);
-            new VeiculoORM().Inserir(veiculo);
+            new CategoriaORM(ctx).Inserir(categoria);
+            new VeiculoORM(ctx).Inserir(veiculo);
 
-            new FuncionarioORM().Inserir(funcionario);
+            new FuncionarioORM(ctx).Inserir(funcionario);
 
             aluguel = new Aluguel() { Veiculo = veiculo, Funcionario = funcionario, Condutor = cliente, Cliente = new Cliente(cliente), Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
-            ao.Inserir(aluguel);
+            new AluguelORM(ctx).Inserir(aluguel);
         }
         [TestMethod]
         public void DeveCriarPdf()
         {
-            ro.SalvarRelatorio(pa.GerarRelatorio(aluguel));
-            ro.GetProxEnvio().Should().NotBeNull();
+            new RelatorioORM(ctx).SalvarRelatorio(new PDFAluguel().GerarRelatorio(aluguel));
+            new RelatorioORM(ctx).GetProxEnvio().Should().NotBeNull();
         }
         [TestMethod]
         public void DeveEnviarPdf()
         {
-            ro.SalvarRelatorio(pa.GerarRelatorio(aluguel));
+            new RelatorioORM(ctx).SalvarRelatorio(new PDFAluguel().GerarRelatorio(aluguel));
             AluguelAppServices.TentaEnviarRelatorioEmail();
 
-            ro.GetProxEnvio().Should().BeNull();
+            new RelatorioORM(ctx).GetProxEnvio().Should().BeNull();
         }
         [TestCleanup]
         public void LimparArquivo()
