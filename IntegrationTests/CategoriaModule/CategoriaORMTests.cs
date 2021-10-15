@@ -21,6 +21,7 @@ namespace IntegrationTests.CategoriaModule
         [TestInitialize]
         public void Inserir_categoria()
         {
+            lsp = DependencyInjection.Container.BeginLifetimeScope();
             ctx = lsp.Resolve<rech_a_carDbContext>();
             categoria = new Categoria("nome", 1, 1, 1, 1, TipoCNH.A);
             new CategoriaORM(ctx).Inserir(categoria);
@@ -30,15 +31,17 @@ namespace IntegrationTests.CategoriaModule
         [TestMethod]
         public void Deve_inserir_categoria()
         {
-
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            using var lsp = DependencyInjection.Container.BeginLifetimeScope();
+            var ctx = lsp.Resolve<rech_a_carDbContext>();
             categoria.Id.Should().NotBe(0);
 
         }
         [TestMethod]
         public void Deve_editar_nome_categoria()
         {
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            using var lsp = DependencyInjection.Container.BeginLifetimeScope();
+            var ctx = lsp.Resolve<rech_a_carDbContext>();
+
             var nomeAnterior = categoria.Nome;
             categoria.Nome = "Nome editado";
             new CategoriaORM(ctx).Editar(categoria.Id, categoria);
@@ -47,7 +50,9 @@ namespace IntegrationTests.CategoriaModule
         [TestMethod]
         public void Deve_editar_diaria_categoria()
         {
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            using var lsp = DependencyInjection.Container.BeginLifetimeScope();
+            var ctx = lsp.Resolve<rech_a_carDbContext>();
+
             var diariaAnterior = categoria.PrecoDiaria;
             categoria.PrecoDiaria = 3;
             new CategoriaORM(ctx).Editar(categoria.Id, categoria);
@@ -56,7 +61,9 @@ namespace IntegrationTests.CategoriaModule
         [TestMethod]
         public void Deve_editar_precokm_categoria()
         {
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            using var lsp = DependencyInjection.Container.BeginLifetimeScope();
+            var ctx = lsp.Resolve<rech_a_carDbContext>();
+
             var precoKmAnterior = categoria.PrecoKm;
             categoria.PrecoKm = 10;
             new CategoriaORM(ctx).Editar(categoria.Id, categoria);
@@ -65,7 +72,9 @@ namespace IntegrationTests.CategoriaModule
         [TestMethod]
         public void Deve_editar_franquia_categoria()
         {
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            using var lsp = DependencyInjection.Container.BeginLifetimeScope();
+            var ctx = lsp.Resolve<rech_a_carDbContext>();
+
             var franquiaAnterior = categoria.QuilometragemFranquia;
             categoria.QuilometragemFranquia = 3;
             new CategoriaORM(ctx).Editar(categoria.Id, categoria);
@@ -75,7 +84,9 @@ namespace IntegrationTests.CategoriaModule
         [TestMethod]
         public void Deve_editar_precoLivre_categoria()
         {
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            using var lsp = DependencyInjection.Container.BeginLifetimeScope();
+            var ctx = lsp.Resolve<rech_a_carDbContext>();
+
             var precoLivreAnterior = categoria.PrecoLivre;
             categoria.PrecoLivre = 5;
             new CategoriaORM(ctx).Editar(categoria.Id, categoria);
@@ -85,7 +96,9 @@ namespace IntegrationTests.CategoriaModule
         [TestMethod]
         public void Deve_retornar_todos_as_categorias()
         {
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            using var lsp = DependencyInjection.Container.BeginLifetimeScope();
+            var ctx = lsp.Resolve<rech_a_carDbContext>();
+
             new CategoriaORM(ctx).Registros.Count.Should().Be(1);
         }
 
