@@ -18,7 +18,7 @@ namespace IntegrationTests.CupomModule
     [TestClass]
     public class ParceiroORMTest
     {
-        Parceiro  parceiro;
+        Parceiro parceiro;
         ILifetimeScope lsp;
         rech_a_carDbContext ctx;
 

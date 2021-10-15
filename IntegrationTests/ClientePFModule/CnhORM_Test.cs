@@ -1,6 +1,11 @@
-﻿using Dominio.PessoaModule;
+﻿using Autofac;
+using DependencyInjector;
+using Dominio.PessoaModule;
 using FluentAssertions;
+using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
+using Infra.DAO.Shared;
+using IntegrationTests.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -13,31 +18,50 @@ namespace IntegrationTests.ClientePFModule
     [TestClass]
     public class CnhORM_Test
     {
-        CnhORM CnhORM = new();
+        CNH cnh;
+        ILifetimeScope lsp;
+        rech_a_carDbContext ctx;
+
+        [TestInitialize]
+        public void Inserir_Cnh()
+        {
+            lsp = DependencyInjection.Container.BeginLifetimeScope();
+            ctx = lsp.Resolve<rech_a_carDbContext>();
+
+            cnh = new CNH("1212120", TipoCNH.A);
+            new CnhORM(ctx).Inserir(cnh);
+        }
 
         [TestMethod]
         public void Deve_editar_cnh_cliente()
         {
             var cnhAnterior = new CNH("1212120", TipoCNH.A);
-            CnhORM.Inserir(cnhAnterior);
             var cnhnova = new CNH("1212120", TipoCNH.C);
-            CnhORM.Editar(cnhAnterior.Id, cnhnova);
+            new CnhORM(ctx).Inserir(cnhAnterior);
+            new CnhORM(ctx).Editar(cnhAnterior.Id, cnhnova);
 
-            CnhORM.GetById(cnhAnterior.Id).TipoCnh.Should().Be(cnhnova.TipoCnh);
+            new CnhORM(ctx).GetById(cnhAnterior.Id).TipoCnh.Should().Be(cnhnova.TipoCnh);
         }
 
         [TestMethod]
         public void Deve_Inserir_cnh_cliente()
         {
             var cnhAnterior = new CNH("1212120", TipoCNH.A);
-            CnhORM.Inserir(cnhAnterior);
+            new CnhORM(ctx).Inserir(cnhAnterior);
         }
 
         [TestMethod]
         public void Deve_Excluir_cnh_cliente()
         {
             var cnhAnterior = new CNH("1212120", TipoCNH.A);
-            CnhORM.Excluir(cnhAnterior.Id);
+            new CnhORM(ctx).Excluir(cnhAnterior.Id);
+        }
+
+        [TestCleanup]
+        public void LimparTestes()
+        {
+            Db.Delete(TestExtensions.ResetId("TBCNH"));
+            lsp.Dispose();
         }
     }
 }
