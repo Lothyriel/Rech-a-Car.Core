@@ -1,5 +1,8 @@
-﻿using Dominio.ParceiroModule;
+﻿using Autofac;
+using DependencyInjector;
+using Dominio.ParceiroModule;
 using FluentAssertions;
+using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
 using Infra.DAO.Shared;
 using IntegrationTests.Shared;
@@ -15,19 +18,21 @@ namespace IntegrationTests.CupomModule
     [TestClass]
     public class ParceiroORMTest
     {
-        ParceiroORM ParceiroORM = new();
+        Parceiro parceiro1;
+        ILifetimeScope lsp;
+        rech_a_carDbContext ctx;
+
+        
         Parceiro parceiro;
 
-
-        [TestCleanup]
-        public void LimparTestes()
-        {
-            Db.Delete(TestExtensions.ResetId("TBParceiro"));
-        }
-
+        
         [TestInitialize]
         public void Inserindo()
         {
+            lsp = DependencyInjection.Container.BeginLifetimeScope();
+            ctx = lsp.Resolve<rech_a_carDbContext>();
+            ParceiroORM ParceiroORM = new(ctx);
+
             parceiro = new Parceiro("Desconto do Deko");
             ParceiroORM.Inserir(parceiro);
         }
@@ -35,26 +40,39 @@ namespace IntegrationTests.CupomModule
         [TestMethod]
         public void Deve_inserir_Parceiro()
         {
-            ParceiroORM.Registros.Count.Should().Be(1);
+            using var lsp = DependencyInjection.Container.BeginLifetimeScope();
+            var ctx = lsp.Resolve<rech_a_carDbContext>();
+
+            new ParceiroORM(ctx).Registros.Count.Should().Be(1);
         }
 
         [TestMethod]
         public void Deve_editar_Parceiro()
         {
+            using var lsp = DependencyInjection.Container.BeginLifetimeScope();
+            var ctx = lsp.Resolve<rech_a_carDbContext>();
+
             var parceiroAnterior = parceiro.nome;
-
             parceiro.nome = "Nome editado";
-
-            ParceiroORM.Editar(parceiro.Id, parceiro);
-
-            ParceiroORM.GetById(parceiro.Id).nome.Should().NotBe(parceiroAnterior);
+            new ParceiroORM(ctx).Editar(parceiro.Id, parceiro);
+            new ParceiroORM(ctx).GetById(parceiro.Id).nome.Should().NotBe(parceiroAnterior);
         }
 
         [TestMethod]
         public void Deve_excluir_Parceiro()
         {
-            ParceiroORM.Excluir(parceiro.Id);
-            ParceiroORM.Registros.Count.Should().Be(0);
+            using var lsp = DependencyInjection.Container.BeginLifetimeScope();
+            var ctx = lsp.Resolve<rech_a_carDbContext>();
+
+            new ParceiroORM(ctx).Excluir(parceiro.Id);
+            new ParceiroORM(ctx).Registros.Count.Should().Be(0);
+        }
+
+
+        [TestCleanup]
+        public void LimparTestes()
+        {
+            Db.Delete(TestExtensions.ResetId("TBParceiro"));
         }
     }
 }
