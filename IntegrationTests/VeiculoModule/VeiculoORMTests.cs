@@ -21,7 +21,8 @@ namespace IntegrationTests.VeiculoModule
         [TestInitialize]
         public void Inserir_Veiculo()
         {
-            
+            lsp = DependencyInjection.Container.BeginLifetimeScope();
+            ctx = lsp.Resolve<rech_a_carDbContext>();
 
             var imagem = Properties.Resources.focus_gay;
             var categoria = new Categoria("Economico", 100, 10, 400, 800, TipoCNH.B);
