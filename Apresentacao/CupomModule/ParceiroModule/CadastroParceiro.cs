@@ -1,4 +1,4 @@
-﻿using Applicacao.CupomModule;
+﻿using Aplicacao.CupomModule;
 using Dominio.ParceiroModule;
 using System;
 using WindowsApp.Shared;

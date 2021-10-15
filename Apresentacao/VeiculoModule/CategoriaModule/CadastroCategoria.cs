@@ -1,10 +1,10 @@
-﻿using Applicacao.VeiculoModule;
+﻿using Aplicacao.VeiculoModule;
 using Dominio.PessoaModule;
 using Dominio.VeiculoModule;
 using System;
 using System.Linq;
 using WindowsApp.Shared;
-using Applicacao.ServicosModule;
+using Aplicacao.ServicosModule;
 
 namespace WindowsApp.VeiculoModule.CategoriaModule
 {

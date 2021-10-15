@@ -1,4 +1,4 @@
-﻿using Applicacao.AluguelModule;
+﻿using Aplicacao.AluguelModule;
 using ConfigurationManager;
 using Dominio.AluguelModule;
 using Dominio.ServicoModule;

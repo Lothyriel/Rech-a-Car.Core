@@ -1,4 +1,4 @@
-﻿using Applicacao.AluguelModule;
+﻿using Aplicacao.AluguelModule;
 using Infra.NLogger;
 using System;
 using System.Threading.Tasks;

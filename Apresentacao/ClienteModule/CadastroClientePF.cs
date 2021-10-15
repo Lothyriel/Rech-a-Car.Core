@@ -1,4 +1,4 @@
-﻿using Applicacao.ClienteModule;
+﻿using Aplicacao.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using System;
