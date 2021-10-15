@@ -1,22 +1,29 @@
-﻿using Aplicacao.Shared;
+﻿using Applicacao.Shared;
+using Autofac;
+using DependencyInjector;
 using Dominio.AluguelModule;
+using Dominio.Repositories;
 using Dominio.ServicoModule;
 using Dominio.Shared;
 using Dominio.VeiculoModule;
 using Infra.NLogger;
 
-namespace Aplicacao.AluguelModule
+namespace Applicacao.AluguelModule
 {
     public class AluguelFechadoAppServices : EntidadeAppServices<AluguelFechado>
     {
         protected override IRepository<AluguelFechado> Repositorio { get; }
         public IServicoRepository ServicoRepository { get; }
         public IVeiculoRepository RepositorioVeiculo { get; }
-        public AluguelFechadoAppServices(IRepository<AluguelFechado> repositorio, IServicoRepository servicoRepository, IVeiculoRepository repositorioVeiculo)
+        public AluguelFechadoAppServices()
         {
-            RepositorioVeiculo = repositorioVeiculo;
-            Repositorio = repositorio;
-            ServicoRepository = servicoRepository;
+            var dependencyResolver = DependencyInjection.Container;
+
+            Repositorio = dependencyResolver.Resolve<IAluguelFechadoRepository>();
+            ServicoRepository = dependencyResolver.Resolve<IServicoRepository>();
+
+            RepositorioVeiculo = dependencyResolver.Resolve<IVeiculoRepository>();
+
         }
         public override ResultadoOperacao Editar(int id, AluguelFechado aluguel)
         {

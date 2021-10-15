@@ -21,7 +21,7 @@ namespace WindowsApp.ClienteModule
 
         protected override void SalvarAluguel()
         {
-            Aluguel.Cliente = (Cliente)GetEntidadeSelecionado();
+            Aluguel.Cliente = new Cliente(GetEntidadeSelecionado());
             TelaPrincipal.Instancia.FormAtivo = new ResumoAluguel(Aluguel);
         }
         public override DataGridViewColumn[] ConfigurarColunas()

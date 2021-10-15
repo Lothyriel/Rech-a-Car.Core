@@ -1,19 +1,22 @@
-﻿using Aplicacao.Shared;
+﻿using Applicacao.Shared;
+using Autofac;
+using DependencyInjector;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
 using Dominio.Shared;
 using System;
 
-namespace Aplicacao.ClienteModule
+namespace Applicacao.ClienteModule
 {
     public class ClientePFAppServices : EntidadeAppServices<ClientePF>
     {
         public ICnhRepository CnhRepository { get; }
 
-        public ClientePFAppServices(IClientePFRepository repositorio, ICnhRepository cnhRepositorio)
+        public ClientePFAppServices()
         {
-            Repositorio = repositorio;
-            CnhRepository = cnhRepositorio;
+            var dependencyResolver = DependencyInjection.Container;
+            Repositorio = dependencyResolver.Resolve<IClientePFRepository>();
+            CnhRepository = dependencyResolver.Resolve<ICnhRepository>();
         }
         protected override IClientePFRepository Repositorio { get; }
 

@@ -1,4 +1,4 @@
-﻿using Aplicacao.ClienteModule;
+﻿using Applicacao.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using System;
@@ -13,7 +13,7 @@ namespace WindowsApp.ClienteModule
 
         public CadastroClientePJ()
         {
-            Services = ConfigServices.Services.ClientePJServices;
+            Services = new ClientePJAppServices();
             InitializeComponent();
             dgvMotoristas.ConfigurarGrid(ConfigurarColunas());
         }
@@ -88,7 +88,7 @@ namespace WindowsApp.ClienteModule
         }
         private void bt_remover_motorista_Click(object sender, EventArgs e)
         {
-            ConfigServices.Services.MotoristaServices.Excluir(GetMotoristaSelecionado().Id);
+            Services.MotoristaRepository.Excluir(GetMotoristaSelecionado().Id);
             HabilitarBotoes(false);
             AtualizarListMotoristas();
         }

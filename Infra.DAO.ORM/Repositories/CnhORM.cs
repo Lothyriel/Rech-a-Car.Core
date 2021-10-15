@@ -12,6 +12,10 @@ namespace Infra.DAO.ORM.Repositories
     public class CnhORM : BaseORM<CNH>, ICnhRepository
 
     {
+        public CnhORM(rech_a_carDbContext context) : base(context)
+        {
+        }
+
         public void Excluir(int idCnh)
         {
             Context.Remove(GetById(idCnh));

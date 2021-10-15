@@ -6,6 +6,10 @@ namespace Infra.DAO.ORM.Repositories
 {
     public class RelatorioORM : BaseORM<RelatorioAluguel>, IRelatorioRepository
     {
+        public RelatorioORM(rech_a_carDbContext context) : base(context)
+        {
+        }
+
         public RelatorioAluguel GetProxEnvio()
         {
             if (Context.Set<RelatorioAluguel>().Where(x => x.DataEnvio == null).Any())

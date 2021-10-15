@@ -15,7 +15,7 @@ namespace Dominio.AluguelModule
             Aluguel = aluguel;
             StreamAttachment = relatorioStream;
         }
-        public Aluguel Aluguel { get; }
+        public virtual Aluguel Aluguel { get; }
 
         public override MemoryStream StreamAttachment { get; }
 

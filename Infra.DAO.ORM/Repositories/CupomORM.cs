@@ -9,6 +9,10 @@ namespace Infra.DAO.ORM.Repositories
 {
     public class CupomORM : BaseORM<Cupom>, ICupomRepository
     {
+        public CupomORM(rech_a_carDbContext context) : base(context)
+        {
+        }
+
         public Cupom GetByName(string nomeCupom)
         {
             return Context.Set<Cupom>().Where(x=> x.Nome == nomeCupom).FirstOrDefault<Cupom>();

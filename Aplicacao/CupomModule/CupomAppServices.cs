@@ -1,15 +1,18 @@
-﻿using Aplicacao.Shared;
+﻿using Applicacao.Shared;
+using Autofac;
+using DependencyInjector;
 using Dominio.CupomModule;
 
-namespace Aplicacao.CupomModule
+namespace Applicacao.CupomModule
 {
     public class CupomAppServices : EntidadeAppServices<Cupom>
     {
         protected override ICupomRepository Repositorio { get; }
 
-        public CupomAppServices(ICupomRepository repositorio)
+        public CupomAppServices()
         {
-            Repositorio = repositorio;
+            var dependencyResolver = DependencyInjection.Container;
+            Repositorio = dependencyResolver.Resolve<ICupomRepository>();
         }
     }
 }

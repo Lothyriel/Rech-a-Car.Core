@@ -1,4 +1,4 @@
-﻿using Aplicacao.FuncionarioModule;
+﻿using Applicacao.FuncionarioModule;
 using ConfigurationManager;
 using Dominio.PessoaModule;
 using Infra.NLogger;
@@ -9,7 +9,7 @@ namespace WindowsApp
 {
     public partial class Login : Form
     {
-        private FuncionarioAppServices FuncionarioAppServices = ConfigServices.Services.FuncionarioServices;
+        private FuncionarioAppServices FuncionarioAppServices = new FuncionarioAppServices();
         private Funcionario funcionario;
 
         public Login()

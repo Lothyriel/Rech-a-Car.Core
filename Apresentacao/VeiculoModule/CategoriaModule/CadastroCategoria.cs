@@ -1,9 +1,10 @@
-﻿using Aplicacao.VeiculoModule;
+﻿using Applicacao.VeiculoModule;
 using Dominio.PessoaModule;
 using Dominio.VeiculoModule;
 using System;
 using System.Linq;
 using WindowsApp.Shared;
+using Applicacao.ServicosModule;
 
 namespace WindowsApp.VeiculoModule.CategoriaModule
 {
@@ -13,7 +14,7 @@ namespace WindowsApp.VeiculoModule.CategoriaModule
 
         public CadastroCategoria()
         {
-            Services = ConfigServices.Services.CategoriaServices;
+            Services = new CategoriaAppServices();
             InitializeComponent();
             PreencherCbCnh();
             cbCNH.SelectedIndex = 1;

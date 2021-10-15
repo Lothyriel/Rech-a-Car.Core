@@ -1,4 +1,6 @@
-﻿using Aplicacao.Shared;
+﻿using Applicacao.Shared;
+using Autofac;
+using DependencyInjector;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.ServicoModule;
@@ -10,7 +12,7 @@ using System.IO;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
-namespace Aplicacao.AluguelModule
+namespace Applicacao.AluguelModule
 {
     public class AluguelAppServices : EntidadeAppServices<Aluguel>
     {
@@ -20,13 +22,15 @@ namespace Aplicacao.AluguelModule
         public IServicoRepository ServicoRepositorio { get; }
         public ICupomRepository CupomRepositorio { get; }
 
-        public AluguelAppServices(IAluguelRepository repositorio, IRelatorio relatorio, IRelatorioRepository relatorioRepositorio, IServicoRepository servicoRepositorio, ICupomRepository cupomRepositorio)
+        public AluguelAppServices()
         {
-            Repositorio = repositorio;
-            Relatorio = relatorio;
-            RelatorioRepositorio = relatorioRepositorio;
-            ServicoRepositorio = servicoRepositorio;
-            CupomRepositorio = cupomRepositorio;
+            var dependencyResolver = DependencyInjection.Container;
+
+            Repositorio = dependencyResolver.Resolve<IAluguelRepository>();
+            Relatorio = dependencyResolver.Resolve<IRelatorio>();
+            RelatorioRepositorio = dependencyResolver.Resolve<IRelatorioRepository>();
+            ServicoRepositorio = dependencyResolver.Resolve<IServicoRepository>();
+            CupomRepositorio = dependencyResolver.Resolve<ICupomRepository>();
         }
         public async void IniciaLoopEnvioEmails()
         {
@@ -65,24 +69,27 @@ namespace Aplicacao.AluguelModule
         }
         public override ResultadoOperacao Inserir(Aluguel aluguel)
         {
-            var validacaoCupom = ValidarCupom(aluguel);
-            if (validacaoCupom.Resultado == EnumResultado.Falha)
-                return validacaoCupom;
-
-            var insercao = base.Inserir(aluguel);
-            if (insercao.Resultado == EnumResultado.Falha)
-                return insercao;
-
-            if (aluguel.Cupom != null)
+            using (var ctx = DependencyInjection.Container.BeginLifetimeScope())
             {
-                aluguel.Cupom.Usos++;
-                CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
+                var validacaoCupom = ValidarCupom(aluguel);
+                if (validacaoCupom.Resultado == EnumResultado.Falha)
+                    return validacaoCupom;
+
+                var insercao = base.Inserir(aluguel);
+                if (insercao.Resultado == EnumResultado.Falha)
+                    return insercao;
+
+                if (aluguel.Cupom != null)
+                {
+                    aluguel.Cupom.Usos++;
+                    CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
+                }
+                ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
+
+                GerarRelatorio(aluguel);
+
+                return insercao;
             }
-            ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
-
-            GerarRelatorio(aluguel);
-
-            return insercao;
         }
 
         private void GerarRelatorio(Aluguel aluguel)

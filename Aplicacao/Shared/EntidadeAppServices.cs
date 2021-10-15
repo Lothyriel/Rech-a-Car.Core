@@ -1,45 +1,52 @@
-﻿using Dominio.Shared;
+﻿using DependencyInjector;
+using Dominio.Shared;
 using Infra.NLogger;
 using System;
 using System.Collections.Generic;
 
-namespace Aplicacao.Shared
+namespace Applicacao.Shared
 {
     public abstract class EntidadeAppServices<T> where T : IEntidade
     {
         protected abstract IRepository<T> Repositorio { get; }
         public virtual ResultadoOperacao Inserir(T entidade)
         {
-            NLogger.Logger.Aqui().Debug("Validando {tipo} {entidade}", entidade.GetType().Name, entidade);
-            var validacao = entidade.Validar();
-            NLogger.Logger.Aqui().Info("Validação completa{resultado}", validacao != string.Empty ? $" , erros: {validacao}" : "");
-
-            if (validacao != string.Empty)
+            using (var ctx = DependencyInjection.Container.BeginLifetimeScope())
             {
-                return new ResultadoOperacao(validacao, EnumResultado.Falha);
-            }
-            NLogger.Logger.Aqui().Debug("Inserindo {tipo} {entidade}", entidade.GetType().Name, entidade);
-            Repositorio.Inserir(entidade);
-            NLogger.Logger.Aqui().Info("Inserido com sucesso {tipo} {entidade}", entidade.GetType().Name, entidade);
+                NLogger.Logger.Aqui().Debug("Validando {tipo} {entidade}", entidade.GetType().Name, entidade);
+                var validacao = entidade.Validar();
+                NLogger.Logger.Aqui().Info("Validação completa{resultado}", validacao != string.Empty ? $" , erros: {validacao}" : "");
 
-            return new ResultadoOperacao("Inserido com sucesso!", EnumResultado.Sucesso);
+                if (validacao != string.Empty)
+                {
+                    return new ResultadoOperacao(validacao, EnumResultado.Falha);
+                }
+                NLogger.Logger.Aqui().Debug("Inserindo {tipo} {entidade}", entidade.GetType().Name, entidade);
+                Repositorio.Inserir(entidade);
+                NLogger.Logger.Aqui().Info("Inserido com sucesso {tipo} {entidade}", entidade.GetType().Name, entidade);
+
+                return new ResultadoOperacao("Inserido com sucesso!", EnumResultado.Sucesso);
+            }
         }
         public virtual ResultadoOperacao Editar(int id, T entidade)
         {
-            var tipo = entidade.GetType().Name;
-
-            NLogger.Logger.Aqui().Debug("Validando {tipo} {entidade}", tipo, entidade);
-            var validacao = entidade.Validar();
-            NLogger.Logger.Aqui().Info("Validação completa{resultado}", validacao != string.Empty ? $" , erros: {validacao}" : "");
-
-            if (validacao != string.Empty)
+            using (var ctx = DependencyInjection.Container.BeginLifetimeScope())
             {
-                return new ResultadoOperacao(validacao, EnumResultado.Falha);
+                var tipo = entidade.GetType().Name;
+
+                NLogger.Logger.Aqui().Debug("Validando {tipo} {entidade}", tipo, entidade);
+                var validacao = entidade.Validar();
+                NLogger.Logger.Aqui().Info("Validação completa{resultado}", validacao != string.Empty ? $" , erros: {validacao}" : "");
+
+                if (validacao != string.Empty)
+                {
+                    return new ResultadoOperacao(validacao, EnumResultado.Falha);
+                }
+                NLogger.Logger.Aqui().Debug($"Editando {{tipo}} {{entidade}} | ID: {{id{char.ToUpper(tipo[0]) + tipo.Substring(1)}}}", tipo, entidade, id);
+                Repositorio.Editar(id, entidade);
+                NLogger.Logger.Aqui().Info($"Editado com sucesso {{tipo}} {{entidade}} | ID: {{id{char.ToUpper(tipo[0]) + tipo.Substring(1)}}}", tipo, entidade, id);
+                return new ResultadoOperacao("Editado com sucesso!", EnumResultado.Sucesso);
             }
-            NLogger.Logger.Aqui().Debug($"Editando {{tipo}} {{entidade}} | ID: {{id{char.ToUpper(tipo[0]) + tipo.Substring(1)}}}", tipo, entidade, id);
-            Repositorio.Editar(id, entidade);
-            NLogger.Logger.Aqui().Info($"Editado com sucesso {{tipo}} {{entidade}} | ID: {{id{char.ToUpper(tipo[0]) + tipo.Substring(1)}}}", tipo, entidade, id);
-            return new ResultadoOperacao("Editado com sucesso!", EnumResultado.Sucesso);
         }
         public virtual void Excluir(int id, Type tipo = null)
         {
@@ -56,7 +63,7 @@ namespace Aplicacao.Shared
         {
             return Repositorio.FiltroGenerico(filtro);
         }
-        public T GetById(int id, Type tipo = null)
+        public virtual T GetById(int id, Type tipo = null)
         {
             return Repositorio.GetById(id, tipo);
         }

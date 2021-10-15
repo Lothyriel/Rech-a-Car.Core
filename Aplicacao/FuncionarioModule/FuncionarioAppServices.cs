@@ -1,19 +1,23 @@
-﻿using Aplicacao.Shared;
+﻿using Applicacao.Shared;
+using Autofac;
+using DependencyInjector;
 using Dominio.PessoaModule;
 using Dominio.Repositories;
 using System;
 
-namespace Aplicacao.FuncionarioModule
+namespace Applicacao.FuncionarioModule
 {
     public class FuncionarioAppServices : EntidadeAppServices<Funcionario>
     {
         protected override IFuncionarioRepository Repositorio { get; }
         public ISenhaRepository RepositorioSenha { get; set; }
 
-        public FuncionarioAppServices(IFuncionarioRepository repositorio, ISenhaRepository senhaRepository)
+        public FuncionarioAppServices()
         {
-            Repositorio = repositorio;
-            RepositorioSenha = senhaRepository;
+            var dependencyResolver = DependencyInjection.Container;
+            Repositorio = dependencyResolver.Resolve<IFuncionarioRepository>();
+
+            RepositorioSenha = dependencyResolver.Resolve<ISenhaRepository>();
         }
 
         public override ResultadoOperacao Inserir(Funcionario funcionario)

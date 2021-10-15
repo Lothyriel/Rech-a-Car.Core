@@ -14,6 +14,7 @@ namespace Infra.DAO.ORM
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
+                .UseLazyLoadingProxies()
                 .UseLoggerFactory(ConfigureLog())
                 .UseSqlServer(@"Data Source=(LocalDB)\MSSqlLocalDB;Initial Catalog=DBRech-a-CarORM;Integrated Security=True;Pooling=False");
         }
@@ -30,25 +31,25 @@ namespace Infra.DAO.ORM
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(rech_a_carDbContext).Assembly);
-            //var imageConverter = new ValueConverter<Image, byte[]>(
-            //    p => p.ToByteArray(null),
-            //    p => p.ToImage());
+            var imageConverter = new ValueConverter<Image, byte[]>(
+                p => p.ToByteArray(null),
+                p => p.ToImage());
 
-            //var memoryStreamConverter = new ValueConverter<MemoryStream, byte[]>(
-            //    p => p.ToArray(),
-            //    p => p.ToMemoryStream());
+            var memoryStreamConverter = new ValueConverter<MemoryStream, byte[]>(
+                p => p.ToArray(),
+                p => p.ToMemoryStream());
 
-            //foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-            //{
-            //    foreach (var property in entityType.GetProperties())
-            //    {
-            //        if (property.ClrType == typeof(Image))
-            //            property.SetValueConverter(imageConverter);
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach (var property in entityType.GetProperties())
+                {
+                    if (property.ClrType == typeof(Image))
+                        property.SetValueConverter(imageConverter);
 
-            //        if (property.ClrType == typeof(MemoryStream))
-            //            property.SetValueConverter(memoryStreamConverter);
-            //    }
-            //}
+                    if (property.ClrType == typeof(MemoryStream))
+                        property.SetValueConverter(memoryStreamConverter);
+                }
+            }
         }
     }
 }

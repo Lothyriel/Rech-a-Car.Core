@@ -1,4 +1,4 @@
-﻿using Aplicacao.ServicosModule;
+﻿using Applicacao.ServicosModule;
 using Dominio.ServicoModule;
 using System;
 using WindowsApp.Shared;
@@ -7,13 +7,13 @@ namespace WindowsApp.ServicoModule
 {
     public partial class CadastroServico : CadastroEntidade<Servico>
     {
-        public override ServicosAppServices Services { get; }
+        public override ServicoAppServices Services { get; }
 
         public CadastroServico()
         {
             InitializeComponent();
             tbQuantidade.Text = "1";
-            Services = ConfigServices.Services.ServicosServices;
+            Services = new ServicoAppServices();
         }
 
         protected override IEditavel Editar()

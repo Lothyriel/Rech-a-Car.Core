@@ -1,4 +1,4 @@
-﻿using Aplicacao.ClienteModule;
+﻿using Applicacao.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using System;
@@ -12,7 +12,7 @@ namespace WindowsApp.ClienteModule
 
         public CadastroClientePF()
         {
-            Services = ConfigServices.Services.ClientePFServices;
+            Services = new ClientePFAppServices();
             InitializeComponent();
             cbTipoCNH.SelectedIndex = 2;
         }

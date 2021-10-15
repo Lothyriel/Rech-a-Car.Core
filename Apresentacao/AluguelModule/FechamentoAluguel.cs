@@ -1,4 +1,4 @@
-﻿using Aplicacao.AluguelModule;
+﻿using Applicacao.AluguelModule;
 using ConfigurationManager;
 using Dominio.AluguelModule;
 using Dominio.ServicoModule;
@@ -17,7 +17,7 @@ namespace WindowsApp.AluguelModule
 
         public FechamentoAluguel(Aluguel aluguel)
         {
-            Services = ConfigServices.Services.AluguelFechadoServices;
+            Services = new AluguelFechadoAppServices();
             this.aluguel = aluguel;
             InitializeComponent();
             tb_OdometroInicial.Text = aluguel.Veiculo.Quilometragem.ToString();

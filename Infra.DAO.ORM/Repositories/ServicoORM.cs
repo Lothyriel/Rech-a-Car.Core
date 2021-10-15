@@ -9,8 +9,12 @@ using System.Threading.Tasks;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    public class ServicosORM : BaseORM<Servico>, IServicoRepository
+    public class ServicoORM : BaseORM<Servico>, IServicoRepository
     {
+        public ServicoORM(rech_a_carDbContext context) : base(context)
+        {
+        }
+
         public void AlugarServicos(int id, List<Servico> servicos)
         {
             var aluguel = Context.Set<Aluguel>().Find(id);

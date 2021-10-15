@@ -39,15 +39,15 @@ namespace Dominio.AluguelModule
                 Condutor = (Condutor)aluguel.Cliente._Cliente;
         }
         public Aluguel() { }
-        public Funcionario Funcionario { get; set; }
-        public Veiculo Veiculo { get; set; }
-        public Cliente Cliente { get; set; }
-        public List<Servico> Servicos { get; set; } = new List<Servico>();
-        public Condutor Condutor { get; set; }
+        public virtual Funcionario Funcionario { get; set; }
+        public virtual Veiculo Veiculo { get; set; }
+        public virtual Cliente Cliente { get; set; }
+        public virtual List<Servico> Servicos { get; set; } = new List<Servico>();
+        public virtual Condutor Condutor { get; set; }
         public Plano TipoPlano { get; set; }
         public DateTime DataAluguel { get; set; }
         public DateTime DataDevolucao { get; set; }
-        public Cupom Cupom { get; set; }
+        public virtual Cupom Cupom { get; set; }
 
         public virtual double CalcularTotal(Configuracoes configs = null)
         {

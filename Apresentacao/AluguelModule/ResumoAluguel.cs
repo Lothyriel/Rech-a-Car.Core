@@ -1,4 +1,4 @@
-﻿using Aplicacao.AluguelModule;
+﻿using Applicacao.AluguelModule;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.Entities.PessoaModule.ClienteModule;
@@ -21,7 +21,7 @@ namespace WindowsApp.AluguelModule
         private readonly Aluguel Aluguel;
         public ResumoAluguel(Aluguel aluguel = null)
         {
-            Services = ConfigServices.Services.AluguelServices;
+            Services = new AluguelAppServices();
             Aluguel = aluguel ?? new Aluguel();
 
             InitializeComponent();

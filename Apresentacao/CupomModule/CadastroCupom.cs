@@ -1,4 +1,4 @@
-﻿using Aplicacao.CupomModule;
+﻿using Applicacao.CupomModule;
 using Dominio.CupomModule;
 using Dominio.ParceiroModule;
 using System;
@@ -13,8 +13,8 @@ namespace WindowsApp.WindowsApp.CupomModule
         public CadastroCupom()
         {
             InitializeComponent();
-            Services = ConfigServices.Services.CupomServices;
-            cbParceiro.DataSource = ConfigServices.Services.ParceiroServices.Registros;
+            Services = new CupomAppServices();
+            cbParceiro.DataSource = new ParceiroAppServices().Registros;
         }
 
         protected override IEditavel Editar()

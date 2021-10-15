@@ -1,4 +1,4 @@
-﻿using Aplicacao.VeiculoModule;
+﻿using Applicacao.VeiculoModule;
 using Dominio.VeiculoModule;
 using System;
 using System.Drawing;
@@ -15,7 +15,7 @@ namespace WindowsApp.VeiculoModule
 
         public CadastroVeiculo()
         {
-            Services = ConfigServices.Services.VeiculoServices;
+            Services = new VeiculoAppServices();
             InitializeComponent();
             cb_cambio.SelectedIndex = 0;
             cb_capacidade.SelectedIndex = 1;
@@ -50,11 +50,13 @@ namespace WindowsApp.VeiculoModule
             var portaMalas = cb_portaMalas.SelectedIndex;
             var chassi = tb_chassi.Text;
             var capacidade = cb_capacidade.SelectedIndex;
-            Int32.TryParse(tb_ano.Text, out int ano);
-            Int32.TryParse(cb_portas.SelectedItem.ToString(), out int portas);
-            Int32.TryParse(cb_tipoCombustivel?.ToString(), out int tipoCombustivel);
-            Int32.TryParse(tb_tanque.Text, out int capacidadeTanque);
-            Int32.TryParse(tb_quilometragem.Text, out int quilometragem);
+
+            int.TryParse(tb_ano.Text, out int ano);
+            int.TryParse(cb_portas.SelectedItem.ToString(), out int portas);
+            int.TryParse(cb_tipoCombustivel?.ToString(), out int tipoCombustivel);
+            int.TryParse(tb_tanque.Text, out int capacidadeTanque);
+            int.TryParse(tb_quilometragem.Text, out int quilometragem);
+
             var cambio = cb_cambio.SelectedItem.ToString() == "Automático";
             imagem = (Bitmap)bt_foto.Image;
 

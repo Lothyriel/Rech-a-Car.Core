@@ -1,4 +1,5 @@
-﻿using Infra.NLogger;
+﻿using Applicacao.AluguelModule;
+using Infra.NLogger;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,11 +24,9 @@ namespace WindowsApp
         {
             NLogger.Logger.Aqui().Info("Programa Iniciado");
 
-            new ConfigServices(ConfigRepositories.ORM, ConfigRelatorio.PDF);
-
             new Login().Show();
 
-            Task.Run(() => ConfigServices.Services.AluguelServices.IniciaLoopEnvioEmails());
+            Task.Run(() => new AluguelAppServices().IniciaLoopEnvioEmails());
 
             Application.Run();
         }

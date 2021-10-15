@@ -1,4 +1,4 @@
-﻿using Aplicacao.CupomModule;
+﻿using Applicacao.CupomModule;
 using Dominio.ParceiroModule;
 using System;
 using WindowsApp.Shared;
@@ -13,7 +13,7 @@ namespace WindowsApp.WindowsApp.CupomModule.ParceiroModule
         public CadastroParceiro()
         {
             InitializeComponent();
-            Services = ConfigServices.Services.ParceiroServices;
+            Services = new ParceiroAppServices();
         }
 
         protected override IEditavel Editar()

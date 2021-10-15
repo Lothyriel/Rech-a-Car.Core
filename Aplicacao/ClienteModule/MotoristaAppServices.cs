@@ -1,21 +1,28 @@
-﻿using Aplicacao.Shared;
+﻿using Applicacao.Shared;
+using Autofac;
+using DependencyInjector;
 using Dominio.PessoaModule;
+using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
 using Dominio.Shared;
 using System;
 
-namespace Aplicacao.ClienteModule
+namespace Applicacao.ClienteModule
 {
     public class MotoristaAppServices : EntidadeAppServices<Motorista>
     {
-        protected override IRepository<Motorista> Repositorio { get; }
+        protected override IMotoristaRepository Repositorio { get; }
 
         public ICnhRepository CnhRepository { get; }
+        public IClientePJRepository ClientePJRepository { get; }
 
-        public MotoristaAppServices(IRepository<Motorista> repositorio, ICnhRepository cnhRepository)
+
+        public MotoristaAppServices()
         {
-            Repositorio = repositorio;
-            CnhRepository = cnhRepository;
+            var dependencyResolver = DependencyInjection.Container;
+            Repositorio = dependencyResolver.Resolve<IMotoristaRepository>();
+            CnhRepository = dependencyResolver.Resolve<ICnhRepository>();
+            ClientePJRepository = dependencyResolver.Resolve<IClientePJRepository>();
         }
 
         public override ResultadoOperacao Inserir(Motorista motorista)

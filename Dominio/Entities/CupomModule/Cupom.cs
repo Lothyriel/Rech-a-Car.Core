@@ -22,7 +22,7 @@ namespace Dominio.CupomModule
         public int ValorPercentual { get; }
         public double ValorFixo { get; }
         public DateTime DataValidade { get; }
-        public Parceiro Parceiro { get; }
+        public virtual Parceiro Parceiro { get; }
         public double ValorMinimo { get; }
         public int Usos { get; set; }
 

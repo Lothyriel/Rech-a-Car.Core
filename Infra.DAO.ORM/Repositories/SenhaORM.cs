@@ -5,6 +5,10 @@ namespace Infra.DAO.ORM.Repositories
 {
     public class SenhaORM : BaseORM<SenhaHashed>, ISenhaRepository
     {
+        public SenhaORM(rech_a_carDbContext context) : base(context)
+        {
+        }
+
         public void Editar(int id_funcionario, string senha)
         {
             Context.Update(senha);

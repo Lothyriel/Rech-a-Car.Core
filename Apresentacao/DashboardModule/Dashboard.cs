@@ -1,4 +1,8 @@
-﻿using Dominio.CupomModule;
+﻿using Applicacao.AluguelModule;
+using Applicacao.ClienteModule;
+using Applicacao.CupomModule;
+using Applicacao.VeiculoModule;
+using Dominio.CupomModule;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -17,13 +21,12 @@ namespace WindowsApp.DashboardModule
 
         private void PopularCampos()
         {
-            var services = ConfigServices.Services;
-            lbAlugueisAbertos.Text = $"{services.AluguelServices.Registros.Count}";
+            lbAlugueisAbertos.Text = $"{new AluguelAppServices().Registros.Count}";
 
-            lbClientesCadastrados.Text = $"{services.ClienteServices.Registros.Count}";
-            lbVeiculosCadastrados.Text = $"{services.VeiculoServices.Registros.Count}";
+            lbClientesCadastrados.Text = $"{new ClienteAppServices().Registros.Count}";
+            lbVeiculosCadastrados.Text = $"{new VeiculoAppServices().Registros.Count}";
 
-            var cupom = services.CupomServices.Registros.FirstOrDefault() ?? Cupom.Invalido;
+            var cupom = new CupomAppServices().Registros.FirstOrDefault() ?? Cupom.Invalido;
             lbCupom.Text = $"{cupom.Nome}";
             lbUsos.Text = $"{cupom.Usos}";
         }

@@ -2,7 +2,7 @@
 {
     public abstract class Condutor : PessoaFisica
     {
-        public CNH Cnh { get; set; }
+        public virtual CNH Cnh { get; set; }
 
         public override string Validar()
         {

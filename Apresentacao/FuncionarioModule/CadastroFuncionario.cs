@@ -1,4 +1,4 @@
-﻿using Aplicacao.FuncionarioModule;
+﻿using Applicacao.FuncionarioModule;
 using Dominio.PessoaModule;
 using System;
 using System.Drawing;
@@ -18,7 +18,7 @@ namespace WindowsApp.FuncionarioModule
             InitializeComponent();
             bt_foto.Image = new Bitmap(Resources.user);
             cb_cargo.SelectedIndex = 1;
-            Services = ConfigServices.Services.FuncionarioServices;
+            Services = new FuncionarioAppServices();
         }
         protected override IEditavel Editar()
         {

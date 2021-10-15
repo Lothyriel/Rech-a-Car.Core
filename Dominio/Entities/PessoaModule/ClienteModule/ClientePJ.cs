@@ -4,7 +4,7 @@ namespace Dominio.PessoaModule.ClienteModule
 {
     public class ClientePJ : PessoaJuridica, ICliente
     {
-        public List<Motorista> Motoristas { get; set; } = new List<Motorista>();
+        public virtual List<Motorista> Motoristas { get; set; } = new List<Motorista>();
         public string Email { get; set; }
 
         public ClientePJ(string nome, string telefone, string endereco, string documento, string email)

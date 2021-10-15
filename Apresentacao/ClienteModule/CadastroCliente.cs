@@ -1,4 +1,4 @@
-﻿using Aplicacao.ClienteModule;
+﻿using Applicacao.ClienteModule;
 using Dominio.PessoaModule.ClienteModule;
 using System;
 using WindowsApp.Shared;
@@ -10,7 +10,7 @@ namespace WindowsApp.ClienteModule
         public override ClienteAppServices Services { get; }
         public CadastroCliente()
         {
-            Services = ConfigServices.Services.ClienteServices;
+            Services = new ClienteAppServices();
             InitializeComponent();
         }
 

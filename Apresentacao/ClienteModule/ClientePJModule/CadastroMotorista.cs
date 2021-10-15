@@ -1,4 +1,4 @@
-﻿using Aplicacao.ClienteModule;
+﻿using Applicacao.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using System;
@@ -17,7 +17,7 @@ namespace WindowsApp.ClienteModule
             Empresa = empresa;
             InitializeComponent();
             cbTipoCNH.SelectedIndex = 2;
-            Services = ConfigServices.Services.MotoristaServices;
+            Services = new MotoristaAppServices();
         }
 
         protected override IEditavel Editar()
@@ -54,7 +54,7 @@ namespace WindowsApp.ClienteModule
             if (!Salva())
                 return;
 
-            var pjRepo = ConfigServices.Services.ClientePJServices;
+            var pjRepo = Services.ClientePJRepository;
             TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroClientePJ().ConfigurarEditar(pjRepo.GetById(Empresa.Id));
         }
     }

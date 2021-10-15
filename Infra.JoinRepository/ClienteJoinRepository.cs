@@ -1,12 +1,13 @@
 ﻿using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
+using Dominio.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Aplicacao.ClienteModule
+namespace Join.ClienteModule
 {
-    public abstract class ClienteJoinRepository : IClienteRepository
+    public class ClienteJoinRepository : IRepository<ICliente>
     {
         public IClientePFRepository RepositorioClientePF { get; }
         public IClientePJRepository RepositorioClientePJ { get; }

@@ -17,7 +17,7 @@ namespace Dominio.ServicoModule
 
         public string Nome { get; set; }
         public double Taxa { get; set; }
-        public Aluguel Aluguel { get; set; }
+        public virtual Aluguel Aluguel { get; set; }
 
         public override string Validar()
         {

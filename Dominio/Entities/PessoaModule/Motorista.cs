@@ -17,7 +17,7 @@ namespace Dominio.PessoaModule
         {
 
         }
-        public ClientePJ Empresa { get; set; }
+        public virtual ClientePJ Empresa { get; set; }
 
         public override string ToString()
         {
