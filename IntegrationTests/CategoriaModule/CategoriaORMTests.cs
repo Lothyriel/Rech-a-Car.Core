@@ -106,6 +106,7 @@ namespace IntegrationTests.CategoriaModule
         public void LimparTestes()
         {
             Db.Delete(TestExtensions.ResetId("TBCategoria"));
+            lsp.Dispose();
         }
     }
 }
