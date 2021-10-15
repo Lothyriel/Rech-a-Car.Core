@@ -1,11 +1,11 @@
-﻿using Applicacao.Shared;
+﻿using Aplicacao.Shared;
 using Autofac;
 using DependencyInjector;
 using Dominio.ParceiroModule;
 using Dominio.Repositories;
 using Dominio.Shared;
 
-namespace Applicacao.CupomModule
+namespace Aplicacao.CupomModule
 {
     public class ParceiroAppServices : EntidadeAppServices<Parceiro>
     {

@@ -1,4 +1,4 @@
-﻿using Applicacao.Shared;
+﻿using Aplicacao.Shared;
 using Autofac;
 using DependencyInjector;
 using Dominio.AluguelModule;
@@ -8,7 +8,7 @@ using Dominio.Shared;
 using Dominio.VeiculoModule;
 using Infra.NLogger;
 
-namespace Applicacao.AluguelModule
+namespace Aplicacao.AluguelModule
 {
     public class AluguelFechadoAppServices : EntidadeAppServices<AluguelFechado>
     {

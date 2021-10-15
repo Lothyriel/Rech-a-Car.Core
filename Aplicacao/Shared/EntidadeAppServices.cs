@@ -4,7 +4,7 @@ using Infra.NLogger;
 using System;
 using System.Collections.Generic;
 
-namespace Applicacao.Shared
+namespace Aplicacao.Shared
 {
     public abstract class EntidadeAppServices<T> where T : IEntidade
     {

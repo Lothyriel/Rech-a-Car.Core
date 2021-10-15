@@ -1,10 +1,10 @@
-﻿using Applicacao.Shared;
+﻿using Aplicacao.Shared;
 using Autofac;
 using DependencyInjector;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
 
-namespace Applicacao.ClienteModule
+namespace Aplicacao.ClienteModule
 {
     public class ClientePJAppServices : EntidadeAppServices<ClientePJ>
     {
