@@ -30,8 +30,6 @@ namespace IntegrationTests.ServicoModule
         [TestMethod]
         public void Deve_inserir_um_servico()
         {
-            lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
 
             servico1.Id.Should().NotBe(0);
         }
@@ -39,8 +37,6 @@ namespace IntegrationTests.ServicoModule
         [TestMethod]
         public void Deve_editar_nome_servico()
         {
-            lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
 
             string nomeAnterior = servico1.Nome;
 
@@ -53,8 +49,6 @@ namespace IntegrationTests.ServicoModule
         [TestMethod]
         public void Deve_remover_servico()
         {
-            lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
 
             new ServicoORM(ctx).Excluir(servico1.Id);
             new ServicoORM(ctx).Registros.Count.Should().Be(0);

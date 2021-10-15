@@ -34,18 +34,12 @@ namespace IntegrationTests.VeiculoModule
         [TestMethod]
         public void Deve_inserir_veiculo()
         {
-            lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
-
             veiculo1.Id.Should().NotBe(0);
         }
 
         [TestMethod]
         public void Deve_editar_marca_veiculo()
         {
-            lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
-
             string marcaOriginal = veiculo1.Marca;
             veiculo1.Marca = "Marca diferente";
             new VeiculoORM(ctx).Editar(veiculo1.Id, veiculo1);
@@ -55,9 +49,6 @@ namespace IntegrationTests.VeiculoModule
         [TestMethod]
         public void Deve_editar_ano_veiculo()
         {
-            lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
-
             int anoOriginal = veiculo1.Ano;
             veiculo1.Ano = 2017;
             new VeiculoORM(ctx).Editar(veiculo1.Id, veiculo1);
@@ -67,9 +58,6 @@ namespace IntegrationTests.VeiculoModule
         [TestMethod]
         public void Deve_remover_veiculo()
         {
-            lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
-
             new VeiculoORM(ctx).Excluir(veiculo1.Id);
             new VeiculoORM(ctx).Existe(veiculo1.Id).Should().BeFalse();
         }
@@ -77,9 +65,6 @@ namespace IntegrationTests.VeiculoModule
         [TestMethod]
         public void Deve_retornar_todos_os_veiculos()
         {
-            lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
-
             new VeiculoORM(ctx).Registros.Count.Should().Be(1);
         }
 

@@ -18,7 +18,6 @@ namespace IntegrationTests.CupomModule
     [TestClass]
     public class ParceiroORMTest
     {
-        Parceiro parceiro1;
         ILifetimeScope lsp;
         rech_a_carDbContext ctx;
 
@@ -40,18 +39,12 @@ namespace IntegrationTests.CupomModule
         [TestMethod]
         public void Deve_inserir_Parceiro()
         {
-            using var lsp = DependencyInjection.Container.BeginLifetimeScope();
-            var ctx = lsp.Resolve<rech_a_carDbContext>();
-
             new ParceiroORM(ctx).Registros.Count.Should().Be(1);
         }
 
         [TestMethod]
         public void Deve_editar_Parceiro()
         {
-            using var lsp = DependencyInjection.Container.BeginLifetimeScope();
-            var ctx = lsp.Resolve<rech_a_carDbContext>();
-
             var parceiroAnterior = parceiro.nome;
             parceiro.nome = "Nome editado";
             new ParceiroORM(ctx).Editar(parceiro.Id, parceiro);
@@ -61,9 +54,6 @@ namespace IntegrationTests.CupomModule
         [TestMethod]
         public void Deve_excluir_Parceiro()
         {
-            using var lsp = DependencyInjection.Container.BeginLifetimeScope();
-            var ctx = lsp.Resolve<rech_a_carDbContext>();
-
             new ParceiroORM(ctx).Excluir(parceiro.Id);
             new ParceiroORM(ctx).Registros.Count.Should().Be(0);
         }

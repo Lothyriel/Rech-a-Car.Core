@@ -1,4 +1,6 @@
 ﻿using AluguelPDF;
+using Autofac;
+using DependencyInjector;
 using Aplicacao.AluguelModule;
 using Dominio.AluguelModule;
 using Dominio.Entities.PessoaModule.ClienteModule;
@@ -7,6 +9,7 @@ using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
 using Dominio.VeiculoModule;
 using FluentAssertions;
+using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
 using Infra.DAO.Shared;
 using IntegrationTests.Properties;
@@ -21,6 +24,8 @@ namespace Infra.ORM.AluguelModule
     public class PDFAluguelTests
     {
         Aluguel aluguel;
+        ILifetimeScope lsp;
+        rech_a_carDbContext ctx;
         static AluguelORM ao = new();
         static PDFAluguel pa = new();
         static RelatorioORM ro = new();
@@ -34,6 +39,9 @@ namespace Infra.ORM.AluguelModule
         [TestInitialize]
         public void InicializarDados()
         {
+                lsp = DependencyInjection.Container.BeginLifetimeScope();
+                ctx = lsp.Resolve<rech_a_carDbContext>();
+
             var categoria = new Categoria("Joaninha", 100, 5, 300, 500, TipoCNH.B);
             var imagem = Resources.ford_ka_gay;
             var veiculo = new Veiculo("Ka", "Ford", 1997, "ABC1234", 50000, 4, 2, "LDSAPLDPLADAS", 0, 50, imagem, false, categoria, TipoCombustivel.Gasolina);
