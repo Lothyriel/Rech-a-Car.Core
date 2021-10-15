@@ -18,12 +18,12 @@ namespace Dominio.CupomModule
             Usos = usos;
         }
         public Cupom() { }
-        public string Nome { get; }
-        public int ValorPercentual { get; }
-        public double ValorFixo { get; }
-        public DateTime DataValidade { get; }
-        public virtual Parceiro Parceiro { get; }
-        public double ValorMinimo { get; }
+        public string Nome { get; set; }
+        public int ValorPercentual { get; set; }
+        public double ValorFixo { get; set; }
+        public DateTime DataValidade { get; set; }
+        public virtual Parceiro Parceiro { get; set; }
+        public double ValorMinimo { get; set; }
         public int Usos { get; set; }
 
         public double CalcularDesconto(double valorTotal)
