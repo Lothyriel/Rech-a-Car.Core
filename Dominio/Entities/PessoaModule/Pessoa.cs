@@ -7,7 +7,7 @@ namespace Dominio.PessoaModule
         public string Nome { get; set; }
         public string Telefone { get; set; }
         public string Endereco { get; set; }
-        public string Documento { get; set; }
+        public abstract TipoPessoa TipoPessoa { get; }
 
         public override string Validar()
         {
@@ -20,11 +20,10 @@ namespace Dominio.PessoaModule
             if (Endereco == string.Empty)
                 validador += "Insira um endereço.\n";
 
-            validador += ValidaDocumento();
+            validador += TipoPessoa.Validar();
 
             return validador;
         }
-        protected abstract string ValidaDocumento();
 
         public override string ToString()
         {

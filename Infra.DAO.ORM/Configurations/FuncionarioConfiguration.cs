@@ -18,7 +18,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.Endereco).HasColumnType("VARCHAR(80)").IsRequired();
 
-            builder.Property(p => p.Documento).HasColumnType("CHAR(11)").IsRequired();
+            builder.HasOne(p => p.TipoPessoa);
 
             builder.Property(p => p.Cargo);
 
@@ -26,7 +26,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.Foto);
 
-            builder.Ignore(p => p.Senha);
+            builder.Ignore(p=>p.Senha);
         }
     }
 }

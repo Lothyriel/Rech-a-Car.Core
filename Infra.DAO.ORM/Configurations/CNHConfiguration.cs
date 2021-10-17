@@ -1,4 +1,5 @@
 ﻿using Dominio.PessoaModule;
+using Dominio.PessoaModule.Condutor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

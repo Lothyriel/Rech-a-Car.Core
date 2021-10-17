@@ -11,7 +11,7 @@ namespace Dominio.AluguelModule
             Veiculo = aluguel.Veiculo;
             Servicos = aluguel.Servicos;
             Cliente = aluguel.Cliente;
-            Condutor = aluguel.Condutor;
+            DadosCondutor = aluguel.DadosCondutor;
             TipoPlano = aluguel.TipoPlano;
             DataAluguel = aluguel.DataAluguel;
             Cupom = aluguel.Cupom;

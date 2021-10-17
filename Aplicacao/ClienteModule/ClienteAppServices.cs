@@ -7,7 +7,7 @@ using Join.ClienteModule;
 
 namespace Aplicacao.ClienteModule
 {
-    public class ClienteAppServices : EntidadeAppServices<ICliente>
+    public class ClienteAppServices : EntidadeAppServices<Cliente>
     {
         protected override ClienteJoinRepository Repositorio { get; }
 

@@ -1,5 +1,4 @@
-﻿using Dominio.Entities.PessoaModule.ClienteModule;
-using Dominio.PessoaModule.ClienteModule;
+﻿using Dominio.PessoaModule.ClienteModule;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,7 +16,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.DataNascimento).HasColumnType("DATETIME").IsRequired();
 
-            builder.Property(p => p.Documento).HasColumnType("CHAR(11)").IsRequired();
+            builder.HasOne(p => p.DadosCondutor);
 
             builder.Property(p => p.Email).HasColumnType("VARCHAR(80)").IsRequired();
 

@@ -2,7 +2,7 @@
 
 namespace Dominio.PessoaModule
 {
-    internal interface Usuario
+    internal interface IUser
     {
         string Usuario { get; set; }
         Image Foto { get; set; }

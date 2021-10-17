@@ -7,9 +7,7 @@ using Dominio.Repositories;
 namespace Aplicacao.ClienteModule
 {
     public class ClientePJAppServices : EntidadeAppServices<ClientePJ>
-    {
-        public ICnhRepository CnhRepository { get; }
-        public IMotoristaRepository MotoristaRepository { get; }
+    {        public IMotoristaRepository MotoristaRepository { get; }
 
         public ClientePJAppServices()
         {
@@ -20,7 +18,7 @@ namespace Aplicacao.ClienteModule
         protected override IClientePJRepository Repositorio { get; }
         public override ResultadoOperacao Inserir(ClientePJ clientePJ)
         {
-            if (Repositorio.ExisteDocumento(clientePJ.Documento, clientePJ.GetType()))
+            if (Repositorio.ExisteDocumento(clientePJ.TipoPessoa.Documento, clientePJ.GetType()))
                 return new ResultadoOperacao("Já existe um cliente com este Documento", EnumResultado.Falha);
 
             return base.Inserir(clientePJ);

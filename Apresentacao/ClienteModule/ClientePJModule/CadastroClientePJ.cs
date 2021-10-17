@@ -23,7 +23,7 @@ namespace WindowsApp.ClienteModule
             tbNome.Text = entidade.Nome;
             tbTelefone.Text = entidade.Telefone;
             tbEndereco.Text = entidade.Endereco;
-            tbCNPJ.Text = entidade.Documento;
+            tbCNPJ.Text = entidade.TipoPessoa.Documento;
             tb_email.Text = entidade.Email;
             AtualizarListMotoristas();
             return this;

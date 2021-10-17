@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using WindowsApp.Shared;
 using Aplicacao.ServicosModule;
+using Dominio.PessoaModule.Condutor;
 
 namespace WindowsApp.VeiculoModule.CategoriaModule
 {

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 
 namespace Infra.DAO.ORM
 {
@@ -51,5 +52,14 @@ namespace Infra.DAO.ORM
                 }
             }
         }
+    }
+    public static class Extensions
+    {
+        public static void DeleteTale<T>(this rech_a_carDbContext ctx) where T : class
+        {
+            var entidades = ctx.Set<T>();
+            entidades.RemoveRange(entidades.ToList());
+        }
+
     }
 }

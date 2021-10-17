@@ -1,5 +1,4 @@
 ﻿using Dominio.AluguelModule;
-using Dominio.Entities.PessoaModule.ClienteModule;
 using Dominio.PessoaModule.ClienteModule;
 using System;
 using System.Collections.Generic;
@@ -9,19 +8,19 @@ using WindowsApp.Shared;
 
 namespace WindowsApp.ClienteModule
 {
-    public partial class GerenciamentoCliente : GerenciamentoEntidade<ICliente>
+    public partial class GerenciamentoCliente : GerenciamentoEntidade<Cliente>
     {
         public GerenciamentoCliente(string titulo = "Gerenciamento de Cliente", TipoTela tipo = TipoTela.SemCadastrar, Aluguel aluguel = null) : base(titulo, tipo)
         {
             Aluguel = aluguel;
         }
 
-        protected override CadastroEntidade<ICliente> Cadastro => new CadastroCliente();
+        protected override CadastroEntidade<Cliente> Cadastro => new CadastroCliente();
         public Aluguel Aluguel { get; }
 
         protected override void SalvarAluguel()
         {
-            Aluguel.Cliente = new Cliente(GetEntidadeSelecionado());
+            Aluguel.Cliente = GetEntidadeSelecionado();
             TelaPrincipal.Instancia.FormAtivo = new ResumoAluguel(Aluguel);
         }
         public override DataGridViewColumn[] ConfigurarColunas()
@@ -35,7 +34,7 @@ namespace WindowsApp.ClienteModule
             new DataGridViewTextBoxColumn { DataPropertyName = "Documento", HeaderText = "Documento"}
             };
         }
-        public override object[] ObterCamposLinha(ICliente cliente)
+        public override object[] ObterCamposLinha(Cliente cliente)
         {
             List<object> linha = new()
             {
@@ -43,7 +42,7 @@ namespace WindowsApp.ClienteModule
                 cliente.Nome,
                 cliente.Endereco,
                 cliente.Telefone,
-                cliente.Documento,
+                cliente.TipoPessoa.Documento,
             };
             return linha.ToArray();
         }
@@ -62,7 +61,7 @@ namespace WindowsApp.ClienteModule
                 throw new ArgumentException();
         }
 
-        protected override IVisualizavel Visualizar(ICliente entidade)
+        protected override IVisualizavel Visualizar(Cliente entidade)
         {
             return new VisualizarCliente();
         }

@@ -16,7 +16,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasOne(p => p.Veiculo).WithMany();
 
-            builder.HasOne(p => p.Condutor).WithMany();
+            builder.HasOne(p => p.DadosCondutor);
 
             builder.HasOne(p => p.Cupom).WithMany();
 

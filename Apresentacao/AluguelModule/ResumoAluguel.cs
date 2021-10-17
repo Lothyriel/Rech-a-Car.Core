@@ -1,7 +1,6 @@
 ﻿using Aplicacao.AluguelModule;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
-using Dominio.Entities.PessoaModule.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
@@ -57,7 +56,7 @@ namespace WindowsApp.AluguelModule
             DateTime.TryParse(tbDt_Emprestimo.Text, out DateTime dataAluguel);
             DateTime.TryParse(tbDt_Devolucao.Text, out DateTime dataDevolucao);
 
-            Aluguel.Condutor = cb_motoristas.SelectedItem is null ? (Condutor)Aluguel.Cliente._Cliente : (Condutor)cb_motoristas.SelectedItem;
+            Aluguel.DadosCondutor = cb_motoristas.SelectedItem is null ? ((ClientePF)Aluguel.Cliente).DadosCondutor : ((Motorista)cb_motoristas.SelectedItem).DadosCondutor;
             Aluguel.TipoPlano = (Plano)cbPlano.SelectedIndex;
             Aluguel.Funcionario = TelaPrincipal.Instancia.FuncionarioLogado;
             Aluguel.DataAluguel = dataAluguel;
@@ -71,7 +70,7 @@ namespace WindowsApp.AluguelModule
         protected override IEditavel Editar()
         {
             tbCliente.Text = entidade.Cliente.Nome;
-            tbDocumento.Text = entidade.Cliente.Documento;
+            tbDocumento.Text = entidade.Cliente.TipoPessoa.Documento;
             tbEndereço.Text = entidade.Cliente.Endereco;
             tbTelefone.Text = entidade.Cliente.Telefone;
             tbMarca.Text = entidade.Veiculo.Marca;
@@ -98,7 +97,7 @@ namespace WindowsApp.AluguelModule
                 validacao += "O aluguel precisa de um veículo\n";
             if (Aluguel.Cliente == null)
                 validacao += "O aluguel precisa de um cliente";
-            if (Aluguel.Cliente._Cliente is ClientePJ && cb_motoristas.SelectedItem == null)
+            if (Aluguel.Cliente is ClientePJ && cb_motoristas.SelectedItem == null)
                 validacao += "Selecione um motorista para o aluguel";
 
             return validacao;
@@ -114,7 +113,7 @@ namespace WindowsApp.AluguelModule
         }
         private void SetCondutor()
         {
-            if (Aluguel.Cliente._Cliente is ClientePJ)
+            if (Aluguel.Cliente is ClientePJ)
                 PopulaMotoristas();
             else
                 cb_motoristas.Enabled = false;
@@ -128,12 +127,12 @@ namespace WindowsApp.AluguelModule
             tbPlaca.Text = Aluguel.Veiculo.Placa;
             tbTipoCnh.Text = Aluguel.Veiculo.Categoria.TipoDeCnh.ToString();
         }
-        private void PopulaCliente(ICliente cliente)
+        private void PopulaCliente(Cliente cliente)
         {
             EsconderPanel(panelEsconderCliente);
-            Aluguel.Cliente = (Cliente)cliente;
+            Aluguel.Cliente = cliente;
             tbCliente.Text = Aluguel.Cliente.Nome;
-            tbDocumento.Text = Aluguel.Cliente.Documento;
+            tbDocumento.Text = Aluguel.Cliente.TipoPessoa.Documento;
             tbEndereço.Text = Aluguel.Cliente.Endereco;
             tbTelefone.Text = Aluguel.Cliente.Telefone;
 
@@ -141,7 +140,7 @@ namespace WindowsApp.AluguelModule
         }
         private void PopulaMotoristas()
         {
-            cb_motoristas.Items.AddRange(((ClientePJ)Aluguel.Cliente._Cliente).Motoristas.ToArray());
+            cb_motoristas.Items.AddRange(((ClientePJ)Aluguel.Cliente).Motoristas.ToArray());
         }
         private void PopulaServicos(List<Servico> servicos)
         {
