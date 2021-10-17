@@ -6,7 +6,7 @@ namespace Infra.DAO.ORM.Repositories
 {
     public class RelatorioORM : BaseORM<RelatorioAluguel>, IRelatorioRepository
     {
-        public RelatorioORM(rech_a_carDbContext context) : base(context)
+        public RelatorioORM(Rech_a_carDbContext context) : base(context)
         {
         }
 

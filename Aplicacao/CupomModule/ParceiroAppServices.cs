@@ -3,7 +3,6 @@ using Autofac;
 using DependencyInjector;
 using Dominio.ParceiroModule;
 using Dominio.Repositories;
-using Dominio.Shared;
 
 namespace Aplicacao.CupomModule
 {

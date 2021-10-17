@@ -9,7 +9,7 @@ namespace Dominio.ServicoModule
         {
             Nome = nome;
             Taxa = taxa;
-            Aluguel  = aluguel;
+            Aluguel = aluguel;
         }
         public Servico()
         {

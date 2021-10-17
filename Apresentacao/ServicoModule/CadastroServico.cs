@@ -29,7 +29,7 @@ namespace WindowsApp.ServicoModule
             var nome = tbNome.Text;
             _ = double.TryParse(tbTaxa.Text, out double taxa);
 
-            return new Servico(nome, taxa,null);
+            return new Servico(nome, taxa, null);
         }
 
         private void btAdicionar_Click(object sender, EventArgs e)

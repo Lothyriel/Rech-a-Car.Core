@@ -43,12 +43,12 @@ namespace Join.ClienteModule
             Clientes.AddRange(RepositorioClientePJ.Registros);
             return Clientes;
         }
-        public void Excluir(int id, Type tipo = null)
+        public bool Excluir(int id, Type tipo = null)
         {
             if (tipo.IsAssignableFrom(typeof(ClientePF)))
-                RepositorioClientePF.Excluir(id);
+                return RepositorioClientePF.Excluir(id);
             else if (tipo.IsAssignableFrom(typeof(ClientePJ)))
-                RepositorioClientePJ.Excluir(id);
+                return RepositorioClientePJ.Excluir(id);
             else
                 throw new ArgumentException();
         }
@@ -73,9 +73,9 @@ namespace Join.ClienteModule
         public bool ExisteDocumento(string documento, Type tipo)
         {
             if (tipo.IsAssignableFrom(typeof(ClientePF)))
-                return RepositorioClientePF.ExisteDocumento(documento, tipo);
+                return RepositorioClientePF.ExisteDocumento(documento);
             else if (tipo.IsAssignableFrom(typeof(ClientePJ)))
-                return RepositorioClientePJ.ExisteDocumento(documento, tipo);
+                return RepositorioClientePJ.ExisteDocumento(documento);
             else
                 throw new ArgumentException();
         }

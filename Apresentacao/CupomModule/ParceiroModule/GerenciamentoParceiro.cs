@@ -25,7 +25,7 @@ namespace WindowsApp.WindowsApp.CupomModule.ParceiroModule
         {
             return new List<object>()
             {
-                parceiro.nome
+                parceiro.Nome
             }.ToArray();
         }
 

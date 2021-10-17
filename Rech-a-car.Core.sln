@@ -57,6 +57,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.5 Autofac", "4.5 Autofac"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInjector", "DependencyInjector\DependencyInjector.csproj", "{153E10F5-2784-49BD-9E2A-475A37DAB0A7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.DAO.SQL", "Infra.DAO.SQL\Infra.DAO.SQL.csproj", "{5BBBA6EC-E835-4849-9A76-B961975FD88D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,10 @@ Global
 		{153E10F5-2784-49BD-9E2A-475A37DAB0A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{153E10F5-2784-49BD-9E2A-475A37DAB0A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{153E10F5-2784-49BD-9E2A-475A37DAB0A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BBBA6EC-E835-4849-9A76-B961975FD88D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BBBA6EC-E835-4849-9A76-B961975FD88D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BBBA6EC-E835-4849-9A76-B961975FD88D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BBBA6EC-E835-4849-9A76-B961975FD88D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -150,6 +156,7 @@ Global
 		{4647A27A-7C34-4C07-9D51-84975BA4E407} = {B89053E0-9331-4884-B638-750E0A1F1565}
 		{6E901C22-3579-4EFE-AD3E-9EE396EB4C86} = {1F1E710C-06BC-499A-AABB-FE3B70B8E1A2}
 		{153E10F5-2784-49BD-9E2A-475A37DAB0A7} = {6E901C22-3579-4EFE-AD3E-9EE396EB4C86}
+		{5BBBA6EC-E835-4849-9A76-B961975FD88D} = {B89053E0-9331-4884-B638-750E0A1F1565}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {588C9984-282F-4230-84B2-CF78AFC64778}

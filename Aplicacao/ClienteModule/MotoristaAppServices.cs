@@ -2,10 +2,7 @@
 using Autofac;
 using DependencyInjector;
 using Dominio.PessoaModule;
-using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
-using Dominio.Shared;
-using System;
 
 namespace Aplicacao.ClienteModule
 {

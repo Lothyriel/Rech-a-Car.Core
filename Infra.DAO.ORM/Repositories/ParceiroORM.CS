@@ -5,7 +5,7 @@ namespace Infra.DAO.ORM.Repositories
 {
     public class ParceiroORM : BaseORM<Parceiro>, IParceiroRepository
     {
-        public ParceiroORM(rech_a_carDbContext context) : base(context)
+        public ParceiroORM(Rech_a_carDbContext context) : base(context)
         {
         }
     }

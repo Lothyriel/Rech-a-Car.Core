@@ -10,17 +10,9 @@ namespace Infra.DAO.ORM.Configurations
         {
             builder.ToTable("TBClientePF");
 
-            builder.Property(p => p.Nome).HasColumnType("VARCHAR(80)").IsRequired();
-
-            builder.Property(p => p.Telefone).HasColumnType("CHAR(11)").IsRequired();
-
-            builder.Property(p => p.DataNascimento).HasColumnType("DATETIME").IsRequired();
+            builder.Property(p => p.DataNascimento).IsRequired();
 
             builder.HasOne(p => p.DadosCondutor);
-
-            builder.Property(p => p.Email).HasColumnType("VARCHAR(80)").IsRequired();
-
-            builder.Property(p => p.Endereco).HasColumnType("VARCHAR(80)").IsRequired();
         }
     }
 }

@@ -3,8 +3,6 @@ using Autofac;
 using DependencyInjector;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
-using Dominio.Shared;
-using System;
 
 namespace Aplicacao.ClienteModule
 {
@@ -19,7 +17,7 @@ namespace Aplicacao.ClienteModule
 
         public override ResultadoOperacao Inserir(ClientePF clientePF)
         {
-            if (Repositorio.ExisteDocumento(clientePF.TipoPessoa.Documento, clientePF.GetType()))
+            if (Repositorio.ExisteDocumento(clientePF.Documento))
                 return new ResultadoOperacao("Já existe um cliente com este Documento", EnumResultado.Falha);
 
             return base.Inserir(clientePF);

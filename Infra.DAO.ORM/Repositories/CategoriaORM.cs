@@ -5,7 +5,7 @@ namespace Infra.DAO.ORM.Repositories
 {
     public class CategoriaORM : BaseORM<Categoria>, ICategoriaRepository
     {
-        public CategoriaORM(rech_a_carDbContext context) : base(context)
+        public CategoriaORM(Rech_a_carDbContext context) : base(context)
         {
         }
     }

@@ -70,7 +70,7 @@ namespace WindowsApp.AluguelModule
         protected override IEditavel Editar()
         {
             tbCliente.Text = entidade.Cliente.Nome;
-            tbDocumento.Text = entidade.Cliente.TipoPessoa.Documento;
+            tbDocumento.Text = entidade.Cliente.Documento;
             tbEndereço.Text = entidade.Cliente.Endereco;
             tbTelefone.Text = entidade.Cliente.Telefone;
             tbMarca.Text = entidade.Veiculo.Marca;
@@ -132,7 +132,7 @@ namespace WindowsApp.AluguelModule
             EsconderPanel(panelEsconderCliente);
             Aluguel.Cliente = cliente;
             tbCliente.Text = Aluguel.Cliente.Nome;
-            tbDocumento.Text = Aluguel.Cliente.TipoPessoa.Documento;
+            tbDocumento.Text = Aluguel.Cliente.Documento;
             tbEndereço.Text = Aluguel.Cliente.Endereco;
             tbTelefone.Text = Aluguel.Cliente.Telefone;
 

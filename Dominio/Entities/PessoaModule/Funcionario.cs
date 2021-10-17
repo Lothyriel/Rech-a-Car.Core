@@ -9,11 +9,12 @@ namespace Dominio.PessoaModule
             Nome = nome;
             Telefone = telefone;
             Endereco = endereco;
-            TipoPessoa.Documento = documento;
+            Documento = documento;
             Cargo = cargo;
             Foto = foto;
             Usuario = usuario;
             Senha = senha;
+            TipoPessoa = new CPF(documento);
         }
         public Funcionario()
         {
@@ -23,7 +24,7 @@ namespace Dominio.PessoaModule
         public string Usuario { get; set; }
         public string Senha { get; set; }
         public Cargo Cargo { get; set; }
-        public override TipoPessoa TipoPessoa { get; } = TipoPessoa.PessoaFisica;
+        public override TipoPessoa TipoPessoa { get; init; }
 
         public override string Validar()
         {

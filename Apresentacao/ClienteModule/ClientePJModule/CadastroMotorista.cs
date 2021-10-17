@@ -27,7 +27,7 @@ namespace WindowsApp.ClienteModule
             tbNome.Text = entidade.Nome;
             tbTelefone.Text = entidade.Telefone;
             tbEndereco.Text = entidade.Endereco;
-            tbCPF.Text = entidade.TipoPessoa.Documento;
+            tbCPF.Text = entidade.Documento;
             tbCNH.Text = entidade.DadosCondutor.Cnh.NumeroCnh;
             cbTipoCNH.SelectedIndex = (int)entidade.DadosCondutor.Cnh.TipoCnh;
             return this;
@@ -56,7 +56,7 @@ namespace WindowsApp.ClienteModule
             if (!Salva())
                 return;
 
-            TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroClientePJ().ConfigurarEditar(entidade.Empresa);
+            TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroClientePJ().ConfigurarEditar(Empresa);
         }
     }
 }

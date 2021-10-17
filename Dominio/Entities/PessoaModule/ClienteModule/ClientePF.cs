@@ -1,5 +1,4 @@
 ﻿using Dominio.Entities.PessoaModule.Condutor;
-using Dominio.PessoaModule.Condutor;
 using System;
 
 namespace Dominio.PessoaModule.ClienteModule
@@ -7,7 +6,7 @@ namespace Dominio.PessoaModule.ClienteModule
     public class ClientePF : Cliente, ICondutor
     {
         public DateTime DataNascimento { get; set; }
-        public override TipoPessoa TipoPessoa { get; } = TipoPessoa.PessoaFisica;
+        public override TipoPessoa TipoPessoa { get; init; }
         public virtual DadosCondutor DadosCondutor { get; init; }
 
         public ClientePF(string nome, string telefone, string endereco, string documento, DadosCondutor dadosCondutor, DateTime dataNascimento, string email)
@@ -15,7 +14,8 @@ namespace Dominio.PessoaModule.ClienteModule
             Nome = nome;
             Telefone = telefone;
             Endereco = endereco;
-            TipoPessoa.Documento = documento;
+            TipoPessoa = new CPF(documento);
+            Documento = documento;
             DadosCondutor = dadosCondutor;
             DataNascimento = dataNascimento;
             Email = email;

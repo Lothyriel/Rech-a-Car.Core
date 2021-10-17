@@ -10,9 +10,10 @@ namespace Dominio.PessoaModule
             Nome = nome;
             Telefone = telefone;
             Endereco = endereco;
-            TipoPessoa.Documento = documento;
+            Documento = documento;
             DadosCondutor = dadosCondutor;
             Empresa = empresa;
+            TipoPessoa = new CPF(documento);
         }
         public Motorista()
         {
@@ -20,7 +21,7 @@ namespace Dominio.PessoaModule
         }
         public virtual ClientePJ Empresa { get; set; }
 
-        public override TipoPessoa TipoPessoa { get; } = TipoPessoa.PessoaFisica;
+        public override TipoPessoa TipoPessoa { get; init; }
         public virtual DadosCondutor DadosCondutor { get; init; }
 
         public override string Validar()

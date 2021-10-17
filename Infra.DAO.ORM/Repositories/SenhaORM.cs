@@ -1,35 +1,47 @@
 ﻿using Dominio.Entities.PessoaModule;
 using Dominio.Repositories;
+using Microsoft.Data.SqlClient;
 
 namespace Infra.DAO.ORM.Repositories
 {
-    public class SenhaORM : BaseORM<SenhaHashed>, ISenhaRepository
+    public class SenhaORM : ISenhaRepository
     {
-        public SenhaORM(rech_a_carDbContext context) : base(context)
+        private Rech_a_carDbContext Context { get; }
+
+        public SenhaORM(Rech_a_carDbContext context)
         {
+            Context = context;
         }
 
-        public void Editar(int id_funcionario, string senha)
+        public SenhaHashed GetSenhaHashed(int idFuncionario)
         {
-            Context.Update(senha);
-            Context.SaveChanges();
+            return Context.Set<SenhaHashed>().Find(idFuncionario);
         }
 
-        public SenhaHashed GetSenhaHashed(int id_funcionario)
-        {
-            return Context.Set<SenhaHashed>().Find(id_funcionario);
-        }
-
-        public void Inserir(int id_funcionario, string senha)
+        public void Inserir(int idFuncionario, string senha)
         {
             Context.Set<SenhaHashed>().Add(SenhaHashed.GerarNovaSenhaHashed(senha));
             Context.SaveChanges();
         }
 
-        public bool SenhaCorreta(int id_funcionario, string senha)
+        public bool SenhaCorreta(int idFuncionario, string senha)
         {
-            var hashed = GetSenhaHashed(id_funcionario);
+            var hashed = GetSenhaHashed(idFuncionario);
             return SenhaHashed.SenhaCorreta(senha, hashed);
+        }
+        public bool Excluir(int idFuncionario)
+        {
+            var entidade = GetSenhaHashed(idFuncionario);
+            try
+            {
+                Context.Remove(entidade);
+                Context.SaveChanges();
+                return true;
+            }
+            catch (SqlException)
+            {
+                return false;
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasKey(p => p.Id);
 
-            builder.Property(p => p.nome).HasColumnType("VARCHAR(80)").IsRequired();
+            builder.Property(p => p.Nome).HasColumnType("VARCHAR(80)").IsRequired();
         }
     }
 }

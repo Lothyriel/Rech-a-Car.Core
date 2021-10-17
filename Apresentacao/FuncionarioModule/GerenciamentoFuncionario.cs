@@ -29,7 +29,7 @@ namespace WindowsApp.FuncionarioModule
                 funcionario.Nome,
                 funcionario.Telefone,
                 funcionario.Endereco,
-                funcionario.TipoPessoa.Documento,
+                funcionario.Documento,
             }.ToArray();
         }
 

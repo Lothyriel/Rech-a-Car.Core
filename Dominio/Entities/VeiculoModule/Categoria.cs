@@ -1,5 +1,4 @@
-﻿using Dominio.PessoaModule;
-using Dominio.PessoaModule.Condutor;
+﻿using Dominio.PessoaModule.Condutor;
 using Dominio.Shared;
 using System;
 

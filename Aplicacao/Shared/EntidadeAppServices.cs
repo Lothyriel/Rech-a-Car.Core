@@ -48,12 +48,17 @@ namespace Aplicacao.Shared
                 return new ResultadoOperacao("Editado com sucesso!", EnumResultado.Sucesso);
             }
         }
-        public virtual void Excluir(int id, Type tipo = null)
+        public virtual bool Excluir(int id, Type tipo = null)
         {
             var nTipo = typeof(T).Name;
             NLogger.Logger.Aqui().Debug($"Excluindo {{tipo}} | ID: {{id{char.ToUpper(nTipo[0]) + nTipo.Substring(1)}}}", nTipo, id);
-            Repositorio.Excluir(id, tipo);
-            NLogger.Logger.Aqui().Info($"Excluido com sucesso {{tipo}} | ID: {{id{char.ToUpper(nTipo[0]) + nTipo.Substring(1)}}}", nTipo, id);
+            var sucesso = Repositorio.Excluir(id, tipo);
+            if (sucesso)
+                NLogger.Logger.Aqui().Info($"Excluido com sucesso {{tipo}} | ID: {{id{char.ToUpper(nTipo[0]) + nTipo.Substring(1)}}}", nTipo, id);
+            else
+                NLogger.Logger.Aqui().Info($"Falha na exclusão {{tipo}} | ID: {{id{char.ToUpper(nTipo[0]) + nTipo.Substring(1)}}}", nTipo, id);
+
+            return sucesso;
         }
         public bool Existe(int id)
         {

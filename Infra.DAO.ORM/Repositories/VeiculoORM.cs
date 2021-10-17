@@ -8,7 +8,7 @@ namespace Infra.DAO.ORM.Repositories
 {
     public class VeiculoORM : BaseORM<Veiculo>, IVeiculoRepository
     {
-        public VeiculoORM(rech_a_carDbContext context) : base(context)
+        public VeiculoORM(Rech_a_carDbContext context) : base(context)
         {
         }
 

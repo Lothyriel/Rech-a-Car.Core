@@ -25,7 +25,7 @@ namespace WindowsApp.FuncionarioModule
             tbNome.Text = entidade.Nome;
             tbTelefone.Text = entidade.Telefone;
             tbEndereco.Text = entidade.Endereco;
-            tbCPF.Text = entidade.TipoPessoa.Documento;
+            tbCPF.Text = entidade.Documento;
             cb_cargo.SelectedIndex = (int)entidade.Cargo;
             tbUsuario.Text = entidade.Usuario;
             bt_foto.Image = entidade.Foto;

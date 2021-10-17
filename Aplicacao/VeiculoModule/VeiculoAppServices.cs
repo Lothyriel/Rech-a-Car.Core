@@ -2,7 +2,6 @@
 using Autofac;
 using DependencyInjector;
 using Dominio.Repositories;
-using Dominio.Shared;
 using Dominio.VeiculoModule;
 using System.Collections.Generic;
 

@@ -14,7 +14,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.Nome).HasColumnType("VARCHAR(80)").IsRequired();
 
-            builder.Property(p => p.Taxa).HasColumnType("FLOAT").IsRequired();
+            builder.Property(p => p.Taxa).IsRequired();
         }
     }
 }

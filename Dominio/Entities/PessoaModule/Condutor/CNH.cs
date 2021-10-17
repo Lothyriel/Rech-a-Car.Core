@@ -1,5 +1,4 @@
 ﻿using Dominio.Shared;
-using System;
 using System.Text.RegularExpressions;
 
 namespace Dominio.PessoaModule.Condutor

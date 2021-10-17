@@ -21,7 +21,7 @@ namespace DependencyInjector
         private static ContainerBuilder Builder = new ContainerBuilder();
         static DependencyInjection()
         {
-            Builder.RegisterType<rech_a_carDbContext>().InstancePerLifetimeScope();
+            Builder.RegisterType<Rech_a_carDbContext>().InstancePerLifetimeScope();
 
             var configRepositorios = (ConfigRepositories)AppConfigManager.AppConfig["RepositorySettings"].ToObject<int>();
             var configRelatorio = (ConfigRelatorio)AppConfigManager.AppConfig["RelatorioSettings"].ToObject<int>();

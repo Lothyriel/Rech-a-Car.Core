@@ -1,26 +1,23 @@
-﻿using Dominio.Shared;
-
-namespace Dominio.PessoaModule
+﻿namespace Dominio.PessoaModule
 {
-    public abstract class TipoPessoa : Entidade
+    public abstract class TipoPessoa
     {
-        public TipoPessoa()
+        public TipoPessoa(string documento)
         {
-
+            Documento = documento;
         }
 
-        public static CPF PessoaFisica = new CPF();
-        public static CNPJ PessoaJuridica = new CNPJ();
-
         public string Documento { get; set; }
+
+        public abstract string ValidarDocumento();
     }
     public class CPF : TipoPessoa
     {
-        public CPF()
+        public CPF(string documento) : base(documento)
         {
-
         }
-        public override string Validar()
+
+        public override string ValidarDocumento()
         {
             string validador = string.Empty;
             if (Documento.Length != 11)
@@ -31,11 +28,11 @@ namespace Dominio.PessoaModule
     }
     public class CNPJ : TipoPessoa
     {
-        public CNPJ()
+        public CNPJ(string documento) : base(documento)
         {
-
         }
-        public override string Validar()
+
+        public override string ValidarDocumento()
         {
             string validador = string.Empty;
             if (Documento.Length != 14)

@@ -42,7 +42,7 @@ namespace WindowsApp.ClienteModule
                 cliente.Nome,
                 cliente.Endereco,
                 cliente.Telefone,
-                cliente.TipoPessoa.Documento,
+                cliente.Documento,
             };
             return linha.ToArray();
         }

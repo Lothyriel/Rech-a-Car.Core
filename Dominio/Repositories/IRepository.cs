@@ -7,7 +7,7 @@ namespace Dominio.Shared
     {
         void Inserir(T entidade);
         void Editar(int id, T entidade);
-        void Excluir(int id, Type tipo = null);
+        bool Excluir(int id, Type tipo = null);
         bool Existe(int id, Type tipo = null);
         T GetById(int id, Type tipo = null);
         List<T> Registros { get; }

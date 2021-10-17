@@ -8,15 +8,15 @@ namespace Infra.DAO.ORM.Configurations
     {
         public void Configure(EntityTypeBuilder<RelatorioAluguel> builder)
         {
-            builder.ToTable("TBEmail");
+            builder.ToTable("TBEnvioRelatorio");
 
             builder.HasKey(p => p.Id);
 
-            builder.HasOne(p => p.Aluguel).WithOne().HasForeignKey<RelatorioAluguel>(p=>p.Id);
+            builder.HasOne(p => p.Aluguel);
 
-            builder.Property(p => p.DataEnvio).HasColumnType("DATE");
+            builder.Property(p => p.DataEnvio);
 
-            builder.Property(p => p.StreamAttachment).HasColumnType("VARBINARY(MAX)").IsRequired();
+            builder.Property(p => p.StreamAttachment);
         }
     }
 }

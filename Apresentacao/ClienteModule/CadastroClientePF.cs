@@ -1,6 +1,5 @@
 ﻿using Aplicacao.ClienteModule;
 using Dominio.Entities.PessoaModule.Condutor;
-using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.PessoaModule.Condutor;
 using System;
@@ -21,7 +20,7 @@ namespace WindowsApp.ClienteModule
 
         protected override IEditavel Editar()
         {
-            tbCPF.Text = entidade.TipoPessoa.Documento;
+            tbCPF.Text = entidade.Documento;
             tbNome.Text = entidade.Nome;
             tbTelefone.Text = entidade.Telefone;
             tbEndereco.Text = entidade.Endereco;
