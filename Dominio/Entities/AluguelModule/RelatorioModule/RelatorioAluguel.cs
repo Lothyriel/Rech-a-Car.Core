@@ -1,5 +1,4 @@
 ﻿using Dominio.Shared;
-using System;
 using System.IO;
 
 namespace Dominio.AluguelModule

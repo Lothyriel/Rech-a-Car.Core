@@ -126,7 +126,6 @@ namespace Aplicacao.AluguelModule
             return new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso);
         }
     }
-    [Serializable]
     public class FilaEmailVazia : Exception
     {
         public FilaEmailVazia()

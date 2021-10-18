@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infra.DAO.ORM.Migrations
 {
-    [DbContext(typeof(rech_a_carDbContext))]
-    [Migration("20211014233423_teste")]
-    partial class teste
+    [DbContext(typeof(Rech_a_carDbContext))]
+    [Migration("20211017053435_agora_ta_pica")]
+    partial class agora_ta_pica
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,17 +31,17 @@ namespace Infra.DAO.ORM.Migrations
                     b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CondutorId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("CupomId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("DadosCondutorId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DataAluguel")
-                        .HasColumnType("DATE");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataDevolucao")
-                        .HasColumnType("DATE");
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("FuncionarioId")
                         .HasColumnType("int");
@@ -56,9 +56,9 @@ namespace Infra.DAO.ORM.Migrations
 
                     b.HasIndex("ClienteId");
 
-                    b.HasIndex("CondutorId");
-
                     b.HasIndex("CupomId");
+
+                    b.HasIndex("DadosCondutorId");
 
                     b.HasIndex("FuncionarioId");
 
@@ -78,18 +78,16 @@ namespace Infra.DAO.ORM.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataEnvio")
-                        .IsRequired()
-                        .HasColumnType("DATE");
+                        .HasColumnType("datetime2");
 
                     b.Property<byte[]>("StreamAttachment")
-                        .IsRequired()
-                        .HasColumnType("VARBINARY(MAX)");
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AluguelId");
 
-                    b.ToTable("TBEmail");
+                    b.ToTable("TBEnvioRelatorio");
                 });
 
             modelBuilder.Entity("Dominio.CupomModule.Cupom", b =>
@@ -100,7 +98,7 @@ namespace Infra.DAO.ORM.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DataValidade")
-                        .HasColumnType("DATE");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -110,16 +108,16 @@ namespace Infra.DAO.ORM.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Usos")
-                        .HasColumnType("INT");
+                        .HasColumnType("int");
 
                     b.Property<double>("ValorFixo")
-                        .HasColumnType("FLOAT");
+                        .HasColumnType("float");
 
                     b.Property<double>("ValorMinimo")
-                        .HasColumnType("FLOAT");
+                        .HasColumnType("float");
 
                     b.Property<int>("ValorPercentual")
-                        .HasColumnType("INT");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -128,31 +126,36 @@ namespace Infra.DAO.ORM.Migrations
                     b.ToTable("TBCupom");
                 });
 
-            modelBuilder.Entity("Dominio.Entities.PessoaModule.ClienteModule.Cliente", b =>
+            modelBuilder.Entity("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Documento")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("Id");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                    b.ToTable("TBDadosCondutor");
+                });
 
-                    b.Property<string>("Endereco")
-                        .HasColumnType("nvarchar(max)");
+            modelBuilder.Entity("Dominio.Entities.PessoaModule.Condutor.Multa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("DadosCondutorId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Telefone")
+                    b.Property<string>("Resumo")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cliente");
+                    b.HasIndex("DadosCondutorId");
+
+                    b.ToTable("TBMulta");
                 });
 
             modelBuilder.Entity("Dominio.Entities.PessoaModule.SenhaHashed", b =>
@@ -182,7 +185,7 @@ namespace Infra.DAO.ORM.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("nome")
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("VARCHAR(80)");
 
@@ -191,26 +194,7 @@ namespace Infra.DAO.ORM.Migrations
                     b.ToTable("TBParceiro");
                 });
 
-            modelBuilder.Entity("Dominio.PessoaModule.CNH", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("NumeroCnh")
-                        .IsRequired()
-                        .HasColumnType("CHAR(11)");
-
-                    b.Property<int>("TipoCnh")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TBCnh");
-                });
-
-            modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePJ", b =>
+            modelBuilder.Entity("Dominio.PessoaModule.Pessoa", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -218,16 +202,10 @@ namespace Infra.DAO.ORM.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Documento")
-                        .IsRequired()
-                        .HasColumnType("CHAR(14)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(80)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Endereco")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(80)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -237,80 +215,12 @@ namespace Infra.DAO.ORM.Migrations
                         .IsRequired()
                         .HasColumnType("CHAR(11)");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("TBClientePJ");
-                });
-
-            modelBuilder.Entity("Dominio.PessoaModule.Condutor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CnhId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Documento")
-                        .IsRequired()
-                        .HasColumnType("CHAR(11)");
-
-                    b.Property<string>("Endereco")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(80)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(80)");
-
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("CHAR(11)");
+                    b.Property<string>("TipoPessoa")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CnhId");
-
-                    b.ToTable("Condutor");
-                });
-
-            modelBuilder.Entity("Dominio.PessoaModule.Funcionario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Cargo")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Documento")
-                        .IsRequired()
-                        .HasColumnType("CHAR(11)");
-
-                    b.Property<string>("Endereco")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(80)");
-
-                    b.Property<byte[]>("Foto")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(80)");
-
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("CHAR(11)");
-
-                    b.Property<string>("Usuario")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TBFuncionario");
+                    b.ToTable("TBPessoa");
                 });
 
             modelBuilder.Entity("Dominio.ServicoModule.Servico", b =>
@@ -328,7 +238,7 @@ namespace Infra.DAO.ORM.Migrations
                         .HasColumnType("VARCHAR(80)");
 
                     b.Property<double>("Taxa")
-                        .HasColumnType("FLOAT");
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -376,16 +286,16 @@ namespace Infra.DAO.ORM.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Ano")
-                        .HasColumnType("INT");
+                        .HasColumnType("int");
 
                     b.Property<bool>("Automatico")
-                        .HasColumnType("BIT");
+                        .HasColumnType("bit");
 
                     b.Property<int>("Capacidade")
-                        .HasColumnType("INT");
+                        .HasColumnType("int");
 
                     b.Property<int>("CapacidadeTanque")
-                        .HasColumnType("INT");
+                        .HasColumnType("int");
 
                     b.Property<int?>("CategoriaId")
                         .HasColumnType("int");
@@ -408,16 +318,16 @@ namespace Infra.DAO.ORM.Migrations
 
                     b.Property<string>("Placa")
                         .IsRequired()
-                        .HasColumnType("CHAR(8)");
+                        .HasColumnType("CHAR(7)");
 
                     b.Property<int>("Porta_malas")
-                        .HasColumnType("INT");
+                        .HasColumnType("int");
 
                     b.Property<int>("Portas")
-                        .HasColumnType("INT");
+                        .HasColumnType("int");
 
                     b.Property<int>("Quilometragem")
-                        .HasColumnType("INT");
+                        .HasColumnType("int");
 
                     b.Property<int>("TipoDeCombustivel")
                         .HasColumnType("int");
@@ -429,45 +339,86 @@ namespace Infra.DAO.ORM.Migrations
                     b.ToTable("TBVeiculo");
                 });
 
-            modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePF", b =>
+            modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.Cliente", b =>
                 {
-                    b.HasBaseType("Dominio.PessoaModule.Condutor");
-
-                    b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("DATETIME");
+                    b.HasBaseType("Dominio.PessoaModule.Pessoa");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("VARCHAR(80)");
 
-                    b.ToTable("TBClientePF");
+                    b.ToTable("TBCliente");
+                });
+
+            modelBuilder.Entity("Dominio.PessoaModule.Funcionario", b =>
+                {
+                    b.HasBaseType("Dominio.PessoaModule.Pessoa");
+
+                    b.Property<int>("Cargo")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("Foto")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Usuario")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(30)");
+
+                    b.ToTable("TBFuncionario");
                 });
 
             modelBuilder.Entity("Dominio.PessoaModule.Motorista", b =>
                 {
-                    b.HasBaseType("Dominio.PessoaModule.Condutor");
+                    b.HasBaseType("Dominio.PessoaModule.Pessoa");
+
+                    b.Property<int?>("DadosCondutorId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("EmpresaId")
                         .HasColumnType("int");
+
+                    b.HasIndex("DadosCondutorId");
 
                     b.HasIndex("EmpresaId");
 
                     b.ToTable("TBMotorista");
                 });
 
+            modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePF", b =>
+                {
+                    b.HasBaseType("Dominio.PessoaModule.ClienteModule.Cliente");
+
+                    b.Property<int?>("DadosCondutorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataNascimento")
+                        .HasColumnType("datetime2");
+
+                    b.HasIndex("DadosCondutorId");
+
+                    b.ToTable("TBClientePF");
+                });
+
+            modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePJ", b =>
+                {
+                    b.HasBaseType("Dominio.PessoaModule.ClienteModule.Cliente");
+
+                    b.ToTable("TBClientePJ");
+                });
+
             modelBuilder.Entity("Dominio.AluguelModule.Aluguel", b =>
                 {
-                    b.HasOne("Dominio.Entities.PessoaModule.ClienteModule.Cliente", "Cliente")
+                    b.HasOne("Dominio.PessoaModule.ClienteModule.Cliente", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId");
-
-                    b.HasOne("Dominio.PessoaModule.Condutor", "Condutor")
-                        .WithMany()
-                        .HasForeignKey("CondutorId");
 
                     b.HasOne("Dominio.CupomModule.Cupom", "Cupom")
                         .WithMany()
                         .HasForeignKey("CupomId");
+
+                    b.HasOne("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", "DadosCondutor")
+                        .WithMany()
+                        .HasForeignKey("DadosCondutorId");
 
                     b.HasOne("Dominio.PessoaModule.Funcionario", "Funcionario")
                         .WithMany()
@@ -479,9 +430,9 @@ namespace Infra.DAO.ORM.Migrations
 
                     b.Navigation("Cliente");
 
-                    b.Navigation("Condutor");
-
                     b.Navigation("Cupom");
+
+                    b.Navigation("DadosCondutor");
 
                     b.Navigation("Funcionario");
 
@@ -506,13 +457,40 @@ namespace Infra.DAO.ORM.Migrations
                     b.Navigation("Parceiro");
                 });
 
-            modelBuilder.Entity("Dominio.PessoaModule.Condutor", b =>
+            modelBuilder.Entity("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", b =>
                 {
-                    b.HasOne("Dominio.PessoaModule.CNH", "Cnh")
-                        .WithMany()
-                        .HasForeignKey("CnhId");
+                    b.OwnsOne("Dominio.PessoaModule.Condutor.CNH", "Cnh", b1 =>
+                        {
+                            b1.Property<int>("DadosCondutorId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                            b1.Property<int>("Id")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("NumeroCnh")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<int>("TipoCnh")
+                                .HasColumnType("int");
+
+                            b1.HasKey("DadosCondutorId");
+
+                            b1.ToTable("TBDadosCondutor");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DadosCondutorId");
+                        });
 
                     b.Navigation("Cnh");
+                });
+
+            modelBuilder.Entity("Dominio.Entities.PessoaModule.Condutor.Multa", b =>
+                {
+                    b.HasOne("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", null)
+                        .WithMany("Multas")
+                        .HasForeignKey("DadosCondutorId");
                 });
 
             modelBuilder.Entity("Dominio.ServicoModule.Servico", b =>
@@ -533,33 +511,77 @@ namespace Infra.DAO.ORM.Migrations
                     b.Navigation("Categoria");
                 });
 
-            modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePF", b =>
+            modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.Cliente", b =>
                 {
-                    b.HasOne("Dominio.PessoaModule.Condutor", null)
+                    b.HasOne("Dominio.PessoaModule.Pessoa", null)
                         .WithOne()
-                        .HasForeignKey("Dominio.PessoaModule.ClienteModule.ClientePF", "Id")
+                        .HasForeignKey("Dominio.PessoaModule.ClienteModule.Cliente", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Dominio.PessoaModule.Funcionario", b =>
+                {
+                    b.HasOne("Dominio.PessoaModule.Pessoa", null)
+                        .WithOne()
+                        .HasForeignKey("Dominio.PessoaModule.Funcionario", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Dominio.PessoaModule.Motorista", b =>
                 {
+                    b.HasOne("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", "DadosCondutor")
+                        .WithMany()
+                        .HasForeignKey("DadosCondutorId");
+
                     b.HasOne("Dominio.PessoaModule.ClienteModule.ClientePJ", "Empresa")
                         .WithMany("Motoristas")
                         .HasForeignKey("EmpresaId");
 
-                    b.HasOne("Dominio.PessoaModule.Condutor", null)
+                    b.HasOne("Dominio.PessoaModule.Pessoa", null)
                         .WithOne()
                         .HasForeignKey("Dominio.PessoaModule.Motorista", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
+                    b.Navigation("DadosCondutor");
+
                     b.Navigation("Empresa");
+                });
+
+            modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePF", b =>
+                {
+                    b.HasOne("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", "DadosCondutor")
+                        .WithMany()
+                        .HasForeignKey("DadosCondutorId");
+
+                    b.HasOne("Dominio.PessoaModule.ClienteModule.Cliente", null)
+                        .WithOne()
+                        .HasForeignKey("Dominio.PessoaModule.ClienteModule.ClientePF", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
+                    b.Navigation("DadosCondutor");
+                });
+
+            modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePJ", b =>
+                {
+                    b.HasOne("Dominio.PessoaModule.ClienteModule.Cliente", null)
+                        .WithOne()
+                        .HasForeignKey("Dominio.PessoaModule.ClienteModule.ClientePJ", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Dominio.AluguelModule.Aluguel", b =>
                 {
                     b.Navigation("Servicos");
+                });
+
+            modelBuilder.Entity("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", b =>
+                {
+                    b.Navigation("Multas");
                 });
 
             modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePJ", b =>

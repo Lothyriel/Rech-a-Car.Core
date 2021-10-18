@@ -83,7 +83,7 @@ namespace AluguelPDF
 
             pdf.Close();
 
-            return new RelatorioAluguel(aluguel,ms);
+            return new RelatorioAluguel(aluguel, ms);
         }
     }
 }

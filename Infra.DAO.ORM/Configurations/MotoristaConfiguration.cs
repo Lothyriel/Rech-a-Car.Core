@@ -10,11 +10,7 @@ namespace Infra.DAO.ORM.Configurations
         {
             builder.ToTable("TBMotorista");
 
-            builder.Property(p => p.Nome).HasColumnType("VARCHAR(80)").IsRequired();
-
-            builder.Property(p => p.Telefone).HasColumnType("CHAR(11)").IsRequired();
-
-            builder.Property(p => p.Documento).HasColumnType("CHAR(11)").IsRequired();
+            builder.HasOne(p => p.DadosCondutor);
 
             builder.HasOne(p => p.Empresa);
         }

@@ -39,11 +39,11 @@ namespace Dominio.Entities.PessoaModule
                                         iterationCount: 100000,
                                         numBytesRequested: 256 / 8));
         }
-        public static bool SenhaCorreta(string senha, SenhaHashed hashed) 
+        public static bool SenhaCorreta(string senha, SenhaHashed hashed)
         {
             return GerarHash(senha, hashed.Salt) == hashed.Hash;
         }
-        public static SenhaHashed GerarNovaSenhaHashed(string senha) 
+        public static SenhaHashed GerarNovaSenhaHashed(string senha)
         {
             var salt = GerarSalt();
             var hashed = GerarHash(senha, salt);

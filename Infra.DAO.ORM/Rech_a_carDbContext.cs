@@ -1,5 +1,4 @@
-﻿using ConfigurationManager;
-using Dominio.VeiculoModule;
+﻿using Dominio.PessoaModule;
 using Infra.Extensions.Methods;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -10,17 +9,17 @@ using System.IO;
 
 namespace Infra.DAO.ORM
 {
-    public class rech_a_carDbContext : DbContext
+    public class Rech_a_carDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
                 .UseLazyLoadingProxies()
                 .UseLoggerFactory(ConfigureLog())
-                .UseSqlServer(AppConfigManager.AppConfig["BancoDeDados"]["ConnectionString"].ToString());
+                .UseSqlServer(@"Data Source=(LocalDB)\MSSqlLocalDB;Initial Catalog=DBRech-a-CarORM;Integrated Security=True;Pooling=False");
         }
 
-        private ILoggerFactory ConfigureLog()
+        private static ILoggerFactory ConfigureLog()
         {
             return LoggerFactory.Create(builder =>
             {
@@ -31,7 +30,7 @@ namespace Infra.DAO.ORM
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(rech_a_carDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Rech_a_carDbContext).Assembly);
             var imageConverter = new ValueConverter<Image, byte[]>(
                 p => p.ToByteArray(null),
                 p => p.ToImage());
@@ -39,6 +38,10 @@ namespace Infra.DAO.ORM
             var memoryStreamConverter = new ValueConverter<MemoryStream, byte[]>(
                 p => p.ToArray(),
                 p => p.ToMemoryStream());
+
+            var tipoPessoaConverter = new ValueConverter<TipoPessoa, string>(
+                p => p.Documento,
+                p => p.Length == 11 ? new CPF(p) : new CNPJ(p));
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
@@ -49,6 +52,9 @@ namespace Infra.DAO.ORM
 
                     if (property.ClrType == typeof(MemoryStream))
                         property.SetValueConverter(memoryStreamConverter);
+
+                    if (property.ClrType == typeof(TipoPessoa))
+                        property.SetValueConverter(tipoPessoaConverter);
                 }
             }
         }

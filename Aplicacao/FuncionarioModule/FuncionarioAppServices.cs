@@ -10,7 +10,7 @@ namespace Aplicacao.FuncionarioModule
     public class FuncionarioAppServices : EntidadeAppServices<Funcionario>
     {
         protected override IFuncionarioRepository Repositorio { get; }
-        public ISenhaRepository RepositorioSenha { get; set; }
+        private ISenhaRepository RepositorioSenha { get; set; }
 
         public FuncionarioAppServices()
         {
@@ -30,10 +30,10 @@ namespace Aplicacao.FuncionarioModule
             return base.Inserir(funcionario);
         }
 
-        public override void Excluir(int id, Type tipo = null)
+        public override bool Excluir(int id, Type tipo = null)
         {
-            base.Excluir(id, tipo);
-            //RepositorioSenha.Excluir(id); ATUALMENTE ISSO TA SENDO GARANTIDO PELAS CHAVES ESTRANGEIRAS NO BANCO, MAS PROVAVELMENTE TEM QUE MUDAR PQ NEM TODAS AS FORMAS DE PERMANCENCIA TEM CASCADE E FKs
+            RepositorioSenha.Excluir(id);
+            return base.Excluir(id, tipo);
         }
         public bool ExisteUsuario(string usuario)
         {

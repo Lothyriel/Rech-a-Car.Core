@@ -1,6 +1,8 @@
 ﻿using Aplicacao.ClienteModule;
+using Dominio.Entities.PessoaModule.Condutor;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.Condutor;
 using System;
 using System.Windows.Forms;
 using WindowsApp.Shared;
@@ -26,13 +28,13 @@ namespace WindowsApp.ClienteModule
             tbTelefone.Text = entidade.Telefone;
             tbEndereco.Text = entidade.Endereco;
             tbCPF.Text = entidade.Documento;
-            tbCNH.Text = entidade.Cnh.NumeroCnh;
-            cbTipoCNH.SelectedIndex = (int)entidade.Cnh.TipoCnh;
+            tbCNH.Text = entidade.DadosCondutor.Cnh.NumeroCnh;
+            cbTipoCNH.SelectedIndex = (int)entidade.DadosCondutor.Cnh.TipoCnh;
             return this;
         }
         protected override void AdicionarDependencias(Motorista motorista)
         {
-            motorista.Cnh.Id = entidade.Cnh.Id;
+            motorista.DadosCondutor.Id = entidade.DadosCondutor.Id;
         }
         public override Motorista GetNovaEntidade()
         {
@@ -40,7 +42,7 @@ namespace WindowsApp.ClienteModule
             var telefone = tbTelefone.Text;
             var endereco = tbEndereco.Text;
             var documento = tbCPF.Text;
-            return new Motorista(nome, telefone, endereco, documento, GetCNH(), Empresa);
+            return new Motorista(nome, telefone, endereco, documento, new DadosCondutor(GetCNH()), Empresa);
         }
         public CNH GetCNH()
         {
@@ -54,8 +56,7 @@ namespace WindowsApp.ClienteModule
             if (!Salva())
                 return;
 
-            var pjRepo = Services.ClientePJRepository;
-            TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroClientePJ().ConfigurarEditar(pjRepo.GetById(Empresa.Id));
+            TelaPrincipal.Instancia.FormAtivo = (Form)new CadastroClientePJ().ConfigurarEditar(Empresa);
         }
     }
 }

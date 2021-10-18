@@ -18,7 +18,7 @@ namespace WindowsApp.WindowsApp.CupomModule.ParceiroModule
 
         protected override IEditavel Editar()
         {
-            tbNome.Text = entidade.nome;
+            tbNome.Text = entidade.Nome;
 
             return this;
         }

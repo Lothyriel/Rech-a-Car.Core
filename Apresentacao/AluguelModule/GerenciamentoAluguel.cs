@@ -31,7 +31,7 @@ namespace WindowsApp.AluguelModule
             {
                 aluguel.Veiculo,
                 aluguel.Cliente,
-                aluguel.Condutor is ClientePF ? "-----" : aluguel.Condutor.Nome,
+                aluguel.Cliente is ClientePF ? "-----" : aluguel.DadosCondutor,
                 aluguel.TipoPlano,
                 aluguel.DataDevolucao.ToString("d"),
                 aluguel.Funcionario

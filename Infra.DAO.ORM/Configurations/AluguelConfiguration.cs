@@ -16,7 +16,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasOne(p => p.Veiculo);
 
-            builder.HasOne(p => p.Condutor);
+            builder.HasOne(p => p.DadosCondutor);
 
             builder.HasOne(p => p.Cupom);
 
@@ -24,9 +24,9 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasOne(p => p.Cliente);
 
-            builder.Property(p => p.DataAluguel).HasColumnType("DATE").IsRequired();
+            builder.Property(p => p.DataAluguel).IsRequired();
 
-            builder.Property(p => p.DataDevolucao).HasColumnType("DATE").IsRequired();
+            builder.Property(p => p.DataDevolucao).IsRequired();
 
             builder.Property(p => p.TipoPlano).IsRequired();
         }

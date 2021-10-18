@@ -1,6 +1,7 @@
 ﻿using Aplicacao.ClienteModule;
-using Dominio.PessoaModule;
+using Dominio.Entities.PessoaModule.Condutor;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.Condutor;
 using System;
 using WindowsApp.Shared;
 
@@ -25,8 +26,8 @@ namespace WindowsApp.ClienteModule
             tbEndereco.Text = entidade.Endereco;
             mtbNascimento.Text = entidade.DataNascimento.ToString();
 
-            tbCNH.Text = entidade.Cnh.NumeroCnh;
-            cbTipoCNH.SelectedIndex = (int)entidade.Cnh.TipoCnh;
+            tbCNH.Text = entidade.DadosCondutor.Cnh.NumeroCnh;
+            cbTipoCNH.SelectedIndex = (int)entidade.DadosCondutor.Cnh.TipoCnh;
             tbEmail.Text = entidade.Email;
 
             return this;
@@ -41,7 +42,7 @@ namespace WindowsApp.ClienteModule
             var email = tbEmail.Text;
             var cnh = GetCNH();
             DateTime.TryParse(mtbNascimento.Text, out DateTime dataNascimento);
-            return new ClientePF(nome, telefone, endereco, documento, cnh, dataNascimento, email);
+            return new ClientePF(nome, telefone, endereco, documento, new DadosCondutor(cnh), dataNascimento, email);
         }
         public CNH GetCNH()
         {
@@ -52,7 +53,7 @@ namespace WindowsApp.ClienteModule
         }
         protected override void AdicionarDependencias(ClientePF cliente)
         {
-            cliente.Cnh.Id = entidade.Cnh.Id;
+            cliente.DadosCondutor.Id = entidade.DadosCondutor.Id;
         }
         private void btAdicionar_Click(object sender, EventArgs e)
         {

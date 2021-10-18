@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Join.ClienteModule
 {
-    public class ClienteJoinRepository : IRepository<ICliente>
+    public class ClienteJoinRepository : IRepository<Cliente>
     {
         public IClientePFRepository RepositorioClientePF { get; }
         public IClientePJRepository RepositorioClientePJ { get; }
@@ -17,7 +17,7 @@ namespace Join.ClienteModule
             RepositorioClientePF = repositorioClientePF;
             RepositorioClientePJ = repositorioClientePJ;
         }
-        public void Inserir(ICliente cliente)
+        public void Inserir(Cliente cliente)
         {
             if (cliente is ClientePF pF)
                 RepositorioClientePF.Inserir(pF);
@@ -26,7 +26,7 @@ namespace Join.ClienteModule
             else
                 throw new ArgumentException();
         }
-        public void Editar(int id, ICliente cliente)
+        public void Editar(int id, Cliente cliente)
         {
             if (cliente is ClientePF pF)
                 RepositorioClientePF.Editar(cliente.Id, pF);
@@ -35,24 +35,24 @@ namespace Join.ClienteModule
             else
                 throw new ArgumentException();
         }
-        public List<ICliente> Registros => TodosRegistros();
-        private List<ICliente> TodosRegistros()
+        public List<Cliente> Registros => TodosRegistros();
+        private List<Cliente> TodosRegistros()
         {
-            List<ICliente> Clientes = new();
+            List<Cliente> Clientes = new();
             Clientes.AddRange(RepositorioClientePF.Registros);
             Clientes.AddRange(RepositorioClientePJ.Registros);
             return Clientes;
         }
-        public void Excluir(int id, Type tipo = null)
+        public bool Excluir(int id, Type tipo = null)
         {
             if (tipo.IsAssignableFrom(typeof(ClientePF)))
-                RepositorioClientePF.Excluir(id);
+                return RepositorioClientePF.Excluir(id);
             else if (tipo.IsAssignableFrom(typeof(ClientePJ)))
-                RepositorioClientePJ.Excluir(id);
+                return RepositorioClientePJ.Excluir(id);
             else
                 throw new ArgumentException();
         }
-        public ICliente GetById(int id, Type tipo)
+        public Cliente GetById(int id, Type tipo)
         {
             if (tipo.IsAssignableFrom(typeof(ClientePF)))
                 return RepositorioClientePF.GetById(id);
@@ -73,13 +73,13 @@ namespace Join.ClienteModule
         public bool ExisteDocumento(string documento, Type tipo)
         {
             if (tipo.IsAssignableFrom(typeof(ClientePF)))
-                return RepositorioClientePF.ExisteDocumento(documento, tipo);
+                return RepositorioClientePF.ExisteDocumento(documento);
             else if (tipo.IsAssignableFrom(typeof(ClientePJ)))
-                return RepositorioClientePJ.ExisteDocumento(documento, tipo);
+                return RepositorioClientePJ.ExisteDocumento(documento);
             else
                 throw new ArgumentException();
         }
-        public List<ICliente> FiltroGenerico(string filtro)
+        public List<Cliente> FiltroGenerico(string filtro)
         {
             var palavras = filtro.Split(' ');
 

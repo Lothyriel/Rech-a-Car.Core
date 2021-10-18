@@ -5,7 +5,7 @@ using WindowsApp.Shared;
 
 namespace WindowsApp.ClienteModule
 {
-    public partial class CadastroCliente : CadastroEntidade<ICliente>
+    public partial class CadastroCliente : CadastroEntidade<Cliente>
     {
         public override ClienteAppServices Services { get; }
         public CadastroCliente()
@@ -24,7 +24,7 @@ namespace WindowsApp.ClienteModule
                 throw new ArgumentException();
         }
 
-        public override ICliente GetNovaEntidade()
+        public override Cliente GetNovaEntidade()
         {
             throw new NotSupportedException();
         }

@@ -1,8 +1,7 @@
 ﻿using Dominio.Shared;
-using System;
 using System.Text.RegularExpressions;
 
-namespace Dominio.PessoaModule
+namespace Dominio.PessoaModule.Condutor
 {
     public class CNH : Entidade
     {
@@ -10,11 +9,8 @@ namespace Dominio.PessoaModule
         {
 
         }
-        public string NumeroCnh { get; set; }
-
-        public TipoCNH TipoCnh { get; set; }
-
-        Regex ValidarCNH = new(@"\b[0-9]{11}\b");
+        public string NumeroCnh { get; init; }
+        public TipoCNH TipoCnh { get; init; }
 
         public CNH(string numeroCnh, TipoCNH tipoCnh)
         {
@@ -24,7 +20,8 @@ namespace Dominio.PessoaModule
 
         public override string Validar()
         {
-            string validacao = String.Empty;
+            string validacao = string.Empty;
+            Regex ValidarCNH = new(@"\b[0-9]{11}\b");
 
             if (!ValidarCNH.IsMatch(NumeroCnh))
                 validacao = "CNH Inválida.\n";

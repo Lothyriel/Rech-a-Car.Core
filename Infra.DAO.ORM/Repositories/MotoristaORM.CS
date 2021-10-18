@@ -5,7 +5,7 @@ namespace Infra.DAO.ORM.Repositories
 {
     public class MotoristaORM : BaseORM<Motorista>, IMotoristaRepository
     {
-        public MotoristaORM(rech_a_carDbContext context) : base(context)
+        public MotoristaORM(Rech_a_carDbContext context) : base(context)
         {
         }
     }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.DAO.ORM.Configurations
 {
-    class ParceiroConfiguration : IEntityTypeConfiguration<Parceiro>
+    public class ParceiroConfiguration : IEntityTypeConfiguration<Parceiro>
     {
         public void Configure(EntityTypeBuilder<Parceiro> builder)
         {
@@ -12,7 +12,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasKey(p => p.Id);
 
-            builder.Property(p => p.nome).HasColumnType("VARCHAR(80)").IsRequired();
+            builder.Property(p => p.Nome).HasColumnType("VARCHAR(80)").IsRequired();
         }
     }
 }

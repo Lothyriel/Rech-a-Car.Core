@@ -116,7 +116,7 @@ namespace Infra.DAO.PessoaModule
                 { "ENDERECO", funcionario.Endereco },
                 { "TELEFONE", funcionario.Telefone },
                 { "CARGO", funcionario.Cargo },
-                { "DOCUMENTO", funcionario.Documento },
+                { "DOCUMENTO", funcionario.TipoPessoa.Documento },
                 { "USER", funcionario.Usuario },
                 { "FOTO", funcionario.Foto.ToByteArray() }
             };

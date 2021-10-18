@@ -117,7 +117,6 @@ namespace Infra.DAO.PessoaModule
                 var documentoMotorista = Convert.ToString(reader["DOCUMENTO_MOTORISTA"]);
 
                 var id_cnh = Convert.ToInt32(reader["ID_CNH"]);
-                var cnh = new CnhDAO().GetById(id_cnh);
 
                 motoristas.Add(new Motorista(nomeMotorista, telefoneMotorista, enderecoMotorista, documentoMotorista, cnh, empresa)
                 {
@@ -199,24 +198,6 @@ namespace Infra.DAO.PessoaModule
 
         #endregion
 
-        public override void Inserir(Motorista motorista)
-        {
-            new CnhDAO().Inserir(motorista.Cnh);
-            motorista.Id = Db.Insert(sqlInserirMotorista, ObterParametrosMotorista(motorista));
-        }
-
-        public override void Editar(int id, Motorista motorista)
-        {
-            new CnhDAO().Editar(motorista.Cnh.Id, motorista.Cnh);
-            motorista.Id = id;
-            Db.Update(sqlEditarMotorista, ObterParametrosMotorista(motorista));
-        }
-
-        public override void Excluir(int id_motorista, Type tipo = null)
-        {
-            Db.Delete(sqlExcluirMotorista, Db.AdicionarParametro("ID", id_motorista));
-        }
-
         public override Motorista GetById(int id, Type tipo = null)
         {
             throw new NotSupportedException();
@@ -230,8 +211,8 @@ namespace Infra.DAO.PessoaModule
                 { "NOME", motorista.Nome },
                 { "TELEFONE", motorista.Telefone },
                 { "ENDERECO", motorista.Endereco },
-                { "DOCUMENTO", motorista.Documento },
-                { "ID_CNH", motorista.Cnh.Id },
+                { "DOCUMENTO", motorista.TipoPessoa.Documento },
+                { "ID_CNH", motorista.DadosCondutor.Cnh.Id },
                 { "ID_EMPRESA", motorista.Empresa.Id }
                 };
 

@@ -5,7 +5,7 @@ namespace Infra.DAO.ORM.Repositories
 {
     public class AluguelFechadoORM : BaseORM<AluguelFechado>, IAluguelFechadoRepository
     {
-        public AluguelFechadoORM(rech_a_carDbContext context) : base(context)
+        public AluguelFechadoORM(Rech_a_carDbContext context) : base(context)
         {
         }
     }

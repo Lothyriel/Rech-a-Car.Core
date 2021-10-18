@@ -1,5 +1,5 @@
 ﻿using Dominio.Shared;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +8,9 @@ namespace Infra.DAO.ORM
 {
     public class BaseORM<T> : IRepository<T> where T : Entidade
     {
-        protected rech_a_carDbContext Context { get; init; }
+        protected Rech_a_carDbContext Context { get; init; }
 
-        public BaseORM(rech_a_carDbContext context)
+        public BaseORM(Rech_a_carDbContext context)
         {
             Context = context;
         }
@@ -30,11 +30,19 @@ namespace Infra.DAO.ORM
             Context.Update(entidade);
             Context.SaveChanges();
         }
-        public void Excluir(int id, Type tipo = null)
+        public bool Excluir(int id, Type tipo = null)
         {
             var entidade = GetById(id);
-            Context.Remove(entidade);
-            Context.SaveChanges();
+            try
+            {
+                Context.Remove(entidade);
+                Context.SaveChanges();
+                return true;
+            }
+            catch (SqlException)
+            {
+                return false;
+            }
         }
         public bool Existe(int id, Type tipo = null)
         {

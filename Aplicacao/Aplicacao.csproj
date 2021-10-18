@@ -16,7 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DependencyInjector\DependencyInjector.csproj" />
     <ProjectReference Include="..\Dominio\Dominio.csproj" />
-    <ProjectReference Include="..\Infra.DAO.SQL\Infra.DAO.SQL.csproj" />
     <ProjectReference Include="..\Infra.ES.EnvioEmail\Infra.ES.EnvioEmail.csproj" />
     <ProjectReference Include="..\Infra.Logger\Infra.Logger.csproj" />
   </ItemGroup>

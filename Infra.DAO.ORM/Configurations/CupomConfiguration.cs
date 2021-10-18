@@ -12,19 +12,19 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasKey(p => p.Id);
 
-            builder.Property(p => p.Nome).HasColumnType("VARCHAR(30)").IsRequired();
-
-            builder.Property(p => p.ValorFixo).HasColumnType("FLOAT").IsRequired();
-
-            builder.Property(p => p.ValorPercentual).HasColumnType("INT").IsRequired();
-
-            builder.Property(p => p.DataValidade).HasColumnType("DATE");
-
             builder.HasOne(p => p.Parceiro);
 
-            builder.Property(p => p.ValorMinimo).HasColumnType("FLOAT").IsRequired();
+            builder.Property(p => p.Nome).HasColumnType("VARCHAR(30)").IsRequired();
 
-            builder.Property(p => p.Usos).HasColumnType("INT").IsRequired();
+            builder.Property(p => p.ValorFixo).IsRequired();
+
+            builder.Property(p => p.ValorPercentual).IsRequired();
+
+            builder.Property(p => p.DataValidade).IsRequired();
+
+            builder.Property(p => p.ValorMinimo).IsRequired();
+
+            builder.Property(p => p.Usos).IsRequired();
         }
     }
 }

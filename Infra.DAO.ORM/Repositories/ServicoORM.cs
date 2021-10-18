@@ -1,17 +1,15 @@
 ﻿using Dominio.AluguelModule;
 using Dominio.ServicoModule;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Infra.DAO.ORM.Repositories
 {
     public class ServicoORM : BaseORM<Servico>, IServicoRepository
     {
-        public ServicoORM(rech_a_carDbContext context) : base(context)
+        public ServicoORM(Rech_a_carDbContext context) : base(context)
         {
         }
 
@@ -25,13 +23,13 @@ namespace Infra.DAO.ORM.Repositories
             Context.UpdateRange(nServicos);
 
             Context.SaveChanges();
-          
+
         }
         public void DesalugarServicosAlugados(int id)
         {
             var alugueis = Context.Set<Servico>().Where(x => x.Aluguel != null);
 
-            Task.Run(async() => await alugueis.ForEachAsync(x => x.Aluguel = null));
+            Task.Run(async () => await alugueis.ForEachAsync(x => x.Aluguel = null));
 
             Context.UpdateRange(alugueis);
 

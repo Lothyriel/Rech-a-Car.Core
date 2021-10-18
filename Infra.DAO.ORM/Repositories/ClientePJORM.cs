@@ -1,8 +1,5 @@
-﻿using Dominio.PessoaModule;
-using Dominio.PessoaModule.ClienteModule;
+﻿using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
-using Dominio.Shared;
-using System;
 using System.Linq;
 
 namespace Infra.DAO.ORM.Repositories
@@ -11,11 +8,11 @@ namespace Infra.DAO.ORM.Repositories
     {
         public IMotoristaRepository MotoristaRepository => new MotoristaORM(Context);
 
-        public ClientePJORM(rech_a_carDbContext context) : base(context)
+        public ClientePJORM(Rech_a_carDbContext context) : base(context)
         {
         }
 
-        public bool ExisteDocumento(string documento, Type type)
+        public bool ExisteDocumento(string documento)
         {
             return Context.Set<ClientePJ>().Where(c => c.Documento == documento).Any();
         }
