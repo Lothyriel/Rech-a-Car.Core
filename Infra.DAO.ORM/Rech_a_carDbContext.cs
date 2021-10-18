@@ -18,7 +18,7 @@ namespace Infra.DAO.ORM
             optionsBuilder
                 .UseLazyLoadingProxies()
                 .UseLoggerFactory(ConfigureLog())
-                .UseSqlServer(AppConfigManager.AppConfig["BancoDeDados"]["ConnectionString"].ToString());
+                .UseSqlServer("Data Source=(LocalDB)\\MSSqlLocalDB;Initial Catalog=DBRech-a-CarORM;Integrated Security=True;Pooling=False");
         }
 
         private static ILoggerFactory ConfigureLog()

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infra.DAO.ORM.Migrations
 {
-    public partial class agora_ta_pica : Migration
+    public partial class opa_nem_chama : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

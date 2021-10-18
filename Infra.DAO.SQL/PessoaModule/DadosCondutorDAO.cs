@@ -1,5 +1,6 @@
 ﻿using Dominio.Entities.PessoaModule.Condutor;
 using Dominio.PessoaModule.Condutor;
+using Dominio.Repositories;
 using Infra.DAO.Shared;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Data;
 
 namespace Infra.DAO.PessoaModule
 {
-    public class DadosCondutorDAO
+    public class DadosCondutorDAO : EntidadeDAO<DadosCondutor>, IDadosCondutorRepository
     {
         #region Queries
         private const string sqlSelecionarDadosCondutorPorIdCondutor =
@@ -40,33 +41,19 @@ namespace Infra.DAO.PessoaModule
                 @"DELETE FROM [TBCNH]
                     WHERE [ID] = @ID";
 
+
         #endregion
-        public void Inserir(DadosCondutor dadosCondutor)
-        {
-            dadosCondutor.Id = Db.Insert(sqlInserirDadosCondutor, ObterParametrosRegistro(dadosCondutor));
-        }
-        public void Editar(int id, DadosCondutor dadosCondutor)
-        {
-            dadosCondutor.Id = id;
-            Db.Update(sqlEditarDadosCondutor, ObterParametrosRegistro(dadosCondutor));
-        }
-        public bool Excluir(int id) 
-        {
-            try
-            {
-                Db.Delete(sqlExcluirDadosCondutor, Db.AdicionarParametro("ID", id));
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        public override string sqlSelecionarPorId => sqlSelecionarDadosCondutorPorIdCondutor;
+        public override string sqlSelecionarTodos => throw new NotImplementedException();
+        public override string sqlInserir => sqlInserirDadosCondutor;
+        public override string sqlEditar => sqlEditarDadosCondutor;
+        public override string sqlExcluir => sqlExcluirDadosCondutor;
+        public override string sqlExists => throw new NotImplementedException();
         public DadosCondutor GetById(int id_condutor)
         {
             return Db.Get(sqlSelecionarDadosCondutorPorIdCondutor, ConverterEmEntidade, new Dictionary<string, object> { { "ID", id_condutor } });
         }
-        public Dictionary<string, object> ObterParametrosRegistro(DadosCondutor dadosCondutor)
+        public override Dictionary<string, object> ObterParametrosRegistro(DadosCondutor dadosCondutor)
         {
             var parametros = new Dictionary<string, object>
                     {
@@ -76,7 +63,7 @@ namespace Infra.DAO.PessoaModule
                     };
             return parametros;
         }
-        public DadosCondutor ConverterEmEntidade(IDataReader reader)
+        public override DadosCondutor ConverterEmEntidade(IDataReader reader)
         {
             var id = Convert.ToInt32(reader["ID"]);
             var tipo = Convert.ToInt32(reader["TIPO"]);

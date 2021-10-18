@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using DependencyInjector;
+using Dominio.Entities.PessoaModule.Condutor;
 using Dominio.PessoaModule.Condutor;
 using FluentAssertions;
 using Infra.DAO.ORM;
@@ -13,7 +14,7 @@ namespace IntegrationTests.ClientePFModule
     [TestClass]
     public class CnhORM_Test
     {
-        CNH cnh;
+        DadosCondutor dados;
         ILifetimeScope lsp;
         Rech_a_carDbContext ctx;
 
@@ -23,25 +24,25 @@ namespace IntegrationTests.ClientePFModule
             lsp = DependencyInjection.Container.BeginLifetimeScope();
             ctx = lsp.Resolve<Rech_a_carDbContext>();
 
-            cnh = new CNH("1212120", TipoCNH.A);
-            new DadosCondutorORM(ctx).Inserir(cnh);
+            dados = new DadosCondutor(new CNH("1212120", TipoCNH.A));
+            new DadosCondutorORM(ctx).Inserir(dados);
         }
 
         [TestMethod]
         public void Deve_editar_cnh_cliente()
         {
-            var cnhAnterior = new CNH("1212120", TipoCNH.A);
-            var cnhnova = new CNH("1212120", TipoCNH.C);
-            new DadosCondutorORM(ctx).Inserir(cnhAnterior);
-            new DadosCondutorORM(ctx).Editar(cnhAnterior.Id, cnhnova);
+            var dadosAntigo = new DadosCondutor(new CNH("1212120", TipoCNH.A));
+            var dadosNovo = new DadosCondutor(new CNH("1212120", TipoCNH.C));
+            new DadosCondutorORM(ctx).Inserir(dadosAntigo);
+            new DadosCondutorORM(ctx).Editar(dadosAntigo.Id, dadosNovo);
 
-            new DadosCondutorORM(ctx).GetById(cnhAnterior.Id).TipoCnh.Should().Be(cnhnova.TipoCnh);
+            new DadosCondutorORM(ctx).GetById(dadosAntigo.Id).Cnh.TipoCnh.Should().Be(dadosNovo.Cnh.TipoCnh);
         }
 
         [TestMethod]
         public void Deve_Inserir_cnh_cliente()
         {
-            var cnhAnterior = new CNH("1212120", TipoCNH.A);
+            var cnhAnterior = new DadosCondutor(new CNH("1212120", TipoCNH.A));
             new DadosCondutorORM(ctx).Inserir(cnhAnterior);
         }
 

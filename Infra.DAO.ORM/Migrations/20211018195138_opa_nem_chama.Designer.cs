@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.DAO.ORM.Migrations
 {
     [DbContext(typeof(Rech_a_carDbContext))]
-    [Migration("20211017053435_agora_ta_pica")]
-    partial class agora_ta_pica
+    [Migration("20211018195138_opa_nem_chama")]
+    partial class opa_nem_chama
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

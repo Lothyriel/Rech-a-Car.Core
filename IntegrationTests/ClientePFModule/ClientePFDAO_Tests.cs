@@ -79,8 +79,6 @@ namespace IntegrationTests.ClientePF_Module
             ClientePFDAO.GetById(cliente.Id).Documento.Should().NotBe(documentoAnterior);
         }
 
-
-
         [TestMethod]
         public void Deve_retornar_todos_os_clientesPF()
         {
