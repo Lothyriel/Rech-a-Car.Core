@@ -1,5 +1,5 @@
-﻿using Aplicacao.ClienteModule;
-using Dominio.Entities.PessoaModule.Condutor;
+﻿using Applicacao.ClienteModule;
+using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.PessoaModule.Condutor;
 using System;
