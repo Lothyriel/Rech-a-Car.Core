@@ -1,12 +1,10 @@
 ﻿using Autofac;
 using DependencyInjector;
-using Dominio.PessoaModule;
 using Dominio.PessoaModule.Condutor;
 using Dominio.VeiculoModule;
 using FluentAssertions;
 using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
-using Infra.DAO.Shared;
 using IntegrationTests.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -72,7 +70,8 @@ namespace IntegrationTests.VeiculoModule
         [TestCleanup]
         public void LimparTestes()
         {
-            Db.Delete(TestExtensions.ResetId("TBVeiculo"));
+            ctx.DeleteAll<Veiculo>();
+            ctx.SaveChanges();
             lsp.Dispose();
         }
     }

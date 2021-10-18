@@ -12,7 +12,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasKey(p => p.Id);
 
-            builder.HasOne(p => p.Aluguel);
+            builder.HasOne(p => p.Aluguel).WithOne().OnDelete(DeleteBehavior.Cascade).HasForeignKey<RelatorioAluguel>(p => p.Id);
 
             builder.Property(p => p.DataEnvio);
 

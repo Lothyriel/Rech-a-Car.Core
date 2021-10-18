@@ -68,11 +68,6 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.AluguelModule.RelatorioAluguel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AluguelId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DataEnvio")
@@ -82,8 +77,6 @@ namespace Infra.DAO.ORM.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AluguelId");
 
                     b.ToTable("TBEnvioRelatorio");
                 });
@@ -127,9 +120,7 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -369,11 +360,16 @@ namespace Infra.DAO.ORM.Migrations
                 {
                     b.HasBaseType("Dominio.PessoaModule.Pessoa");
 
+                    b.Property<int?>("ClientePJId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("DadosCondutorId")
                         .HasColumnType("int");
 
                     b.Property<int?>("EmpresaId")
                         .HasColumnType("int");
+
+                    b.HasIndex("ClientePJId");
 
                     b.HasIndex("DadosCondutorId");
 
@@ -386,13 +382,8 @@ namespace Infra.DAO.ORM.Migrations
                 {
                     b.HasBaseType("Dominio.PessoaModule.ClienteModule.Cliente");
 
-                    b.Property<int?>("DadosCondutorId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("datetime2");
-
-                    b.HasIndex("DadosCondutorId");
 
                     b.ToTable("TBClientePF");
                 });
@@ -408,23 +399,28 @@ namespace Infra.DAO.ORM.Migrations
                 {
                     b.HasOne("Dominio.PessoaModule.ClienteModule.Cliente", "Cliente")
                         .WithMany()
-                        .HasForeignKey("ClienteId");
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Dominio.CupomModule.Cupom", "Cupom")
                         .WithMany()
-                        .HasForeignKey("CupomId");
+                        .HasForeignKey("CupomId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", "DadosCondutor")
                         .WithMany()
-                        .HasForeignKey("DadosCondutorId");
+                        .HasForeignKey("DadosCondutorId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Dominio.PessoaModule.Funcionario", "Funcionario")
                         .WithMany()
-                        .HasForeignKey("FuncionarioId");
+                        .HasForeignKey("FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Dominio.VeiculoModule.Veiculo", "Veiculo")
                         .WithMany()
-                        .HasForeignKey("VeiculoId");
+                        .HasForeignKey("VeiculoId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Cliente");
 
@@ -440,8 +436,10 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.AluguelModule.RelatorioAluguel", b =>
                 {
                     b.HasOne("Dominio.AluguelModule.Aluguel", "Aluguel")
-                        .WithMany()
-                        .HasForeignKey("AluguelId");
+                        .WithOne()
+                        .HasForeignKey("Dominio.AluguelModule.RelatorioAluguel", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Aluguel");
                 });
@@ -450,19 +448,24 @@ namespace Infra.DAO.ORM.Migrations
                 {
                     b.HasOne("Dominio.ParceiroModule.Parceiro", "Parceiro")
                         .WithMany()
-                        .HasForeignKey("ParceiroId");
+                        .HasForeignKey("ParceiroId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Parceiro");
                 });
 
             modelBuilder.Entity("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", b =>
                 {
+                    b.HasOne("Dominio.PessoaModule.ClienteModule.ClientePF", null)
+                        .WithOne("DadosCondutor")
+                        .HasForeignKey("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsOne("Dominio.PessoaModule.Condutor.CNH", "Cnh", b1 =>
                         {
                             b1.Property<int>("DadosCondutorId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasColumnType("int");
 
                             b1.Property<int>("Id")
                                 .HasColumnType("int");
@@ -504,7 +507,8 @@ namespace Infra.DAO.ORM.Migrations
                 {
                     b.HasOne("Dominio.VeiculoModule.Categoria", "Categoria")
                         .WithMany()
-                        .HasForeignKey("CategoriaId");
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Categoria");
                 });
@@ -529,12 +533,17 @@ namespace Infra.DAO.ORM.Migrations
 
             modelBuilder.Entity("Dominio.PessoaModule.Motorista", b =>
                 {
+                    b.HasOne("Dominio.PessoaModule.ClienteModule.ClientePJ", null)
+                        .WithMany("Motoristas")
+                        .HasForeignKey("ClientePJId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", "DadosCondutor")
                         .WithMany()
                         .HasForeignKey("DadosCondutorId");
 
                     b.HasOne("Dominio.PessoaModule.ClienteModule.ClientePJ", "Empresa")
-                        .WithMany("Motoristas")
+                        .WithMany()
                         .HasForeignKey("EmpresaId");
 
                     b.HasOne("Dominio.PessoaModule.Pessoa", null)
@@ -550,17 +559,11 @@ namespace Infra.DAO.ORM.Migrations
 
             modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePF", b =>
                 {
-                    b.HasOne("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", "DadosCondutor")
-                        .WithMany()
-                        .HasForeignKey("DadosCondutorId");
-
                     b.HasOne("Dominio.PessoaModule.ClienteModule.Cliente", null)
                         .WithOne()
                         .HasForeignKey("Dominio.PessoaModule.ClienteModule.ClientePF", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
-
-                    b.Navigation("DadosCondutor");
                 });
 
             modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePJ", b =>
@@ -580,6 +583,11 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", b =>
                 {
                     b.Navigation("Multas");
+                });
+
+            modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePF", b =>
+                {
+                    b.Navigation("DadosCondutor");
                 });
 
             modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePJ", b =>

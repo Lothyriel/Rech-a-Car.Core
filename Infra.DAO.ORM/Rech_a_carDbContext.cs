@@ -1,6 +1,4 @@
-﻿using ConfigurationManager;
-using Dominio.PessoaModule;
-using Dominio.VeiculoModule;
+﻿using Dominio.PessoaModule;
 using Infra.Extensions.Methods;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;

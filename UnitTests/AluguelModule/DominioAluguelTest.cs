@@ -33,7 +33,6 @@ namespace Tests.Tests.AlguelModule
         [TestInitialize]
         public void InicializaAluguel()
         {
-     
             categoria = new Categoria("nome", 2, 2, 2, 2, TipoCNH.A);
             veiculo = new Veiculo("modelo", "marca", 1, "ASD1234", 1, 1, 1, "123456789123", 2, 50, imagemVeiculo, true, categoria, TipoCombustivel.Diesel);
             aluguel = new Aluguel(veiculo, null, Plano.Diário, DateTime.Today.AddDays(10), clientepj, funcionario, DateTime.Today.AddDays(15), motoristaEmpresa.DadosCondutor);

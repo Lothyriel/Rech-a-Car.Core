@@ -12,7 +12,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasOne(p => p.DadosCondutor);
 
-            builder.HasOne(p => p.Empresa);
+            //builder.HasOne(p => p.Empresa).WithMany().OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
