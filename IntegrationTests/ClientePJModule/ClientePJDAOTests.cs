@@ -1,5 +1,6 @@
 ﻿using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.Condutor;
 using FluentAssertions;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;

@@ -35,13 +35,13 @@ namespace IntegrationTests.ParceiroModule
         [TestMethod]
         public void Deve_editar_Parceiro()
         {
-            var parceiroAnterior = parceiro.nome;
+            var parceiroAnterior = parceiro.Nome;
 
-            parceiro.nome = "Nome editado";
+            parceiro.Nome = "Nome editado";
 
             ParceiroDAO.Editar(parceiro.Id, parceiro);
 
-            ParceiroDAO.GetById(parceiro.Id).nome.Should().NotBe(parceiroAnterior);
+            ParceiroDAO.GetById(parceiro.Id).Nome.Should().NotBe(parceiroAnterior);
         }
 
         [TestMethod]

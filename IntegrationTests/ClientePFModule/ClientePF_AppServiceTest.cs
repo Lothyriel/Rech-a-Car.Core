@@ -2,6 +2,7 @@
 using Aplicacao.Shared;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.Condutor;
 using Dominio.Repositories;
 using Dominio.Shared;
 using FluentAssertions;
@@ -18,7 +19,6 @@ namespace IntegrationTests.ClientePF_Module
         ClientePF clientePF;
         CNH cnh;
         Mock<IClientePFRepository> mockClientePF_Repo;
-        Mock<ICnhRepository> mockCnh_Repo;
         ClientePFAppServices sut;
 
         [TestInitialize]
@@ -34,7 +34,6 @@ namespace IntegrationTests.ClientePF_Module
             cnh = cnh_Mock.Object;
 
             mockClientePF_Repo = new();
-            mockCnh_Repo = new();
 
             sut = new ClientePFAppServices();
         }
