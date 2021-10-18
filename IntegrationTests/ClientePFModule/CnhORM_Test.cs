@@ -1,17 +1,12 @@
 ﻿using Autofac;
 using DependencyInjector;
-using Dominio.PessoaModule;
+using Dominio.PessoaModule.Condutor;
 using FluentAssertions;
 using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
 using Infra.DAO.Shared;
 using IntegrationTests.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationTests.ClientePFModule
 {
@@ -20,13 +15,13 @@ namespace IntegrationTests.ClientePFModule
     {
         CNH cnh;
         ILifetimeScope lsp;
-        rech_a_carDbContext ctx;
+        Rech_a_carDbContext ctx;
 
         [TestInitialize]
         public void Inserir_Cnh()
         {
             lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            ctx = lsp.Resolve<Rech_a_carDbContext>();
 
             cnh = new CNH("1212120", TipoCNH.A);
             new CnhORM(ctx).Inserir(cnh);

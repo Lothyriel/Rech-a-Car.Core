@@ -1,5 +1,7 @@
-﻿using Dominio.PessoaModule;
+﻿using Dominio.Entities.PessoaModule.Condutor;
+using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.Condutor;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -9,7 +11,7 @@ namespace UnitTests.PessoaModule
     public class Motorista_Test
     {
         Motorista motorista;
-        CNH cnh = new CNH("36510896881", TipoCNH.AB);
+        DadosCondutor cnh = new DadosCondutor(new CNH("36510896881", TipoCNH.AB));
         ClientePJ cliente = new ClientePJ("nome", "99999999999", "endereco", "99999999999999", "email@teste.com");
 
         [TestMethod]

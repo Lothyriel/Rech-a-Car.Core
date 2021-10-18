@@ -37,7 +37,7 @@ namespace Infra.DAO.AluguelModule
             Db.Update(sqlFecharAluguel, Db.AdicionarParametro("ID", id, ObterParametrosRegistro(entidade)));
         }
 
-        public override void Excluir(int id, Type tipo = null)
+        public override bool Excluir(int id, Type tipo = null)
         {
             throw new NotSupportedException();
         }

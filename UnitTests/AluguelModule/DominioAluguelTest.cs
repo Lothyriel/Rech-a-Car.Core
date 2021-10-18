@@ -1,7 +1,8 @@
 ﻿using Dominio.AluguelModule;
-using Dominio.Entities.PessoaModule.ClienteModule;
+using Dominio.Entities.PessoaModule.Condutor;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.Condutor;
 using Dominio.ServicoModule;
 using Dominio.VeiculoModule;
 using FluentAssertions;
@@ -19,7 +20,7 @@ namespace Tests.Tests.AlguelModule
         Aluguel aluguel;
         AluguelFechado aluguelFechado;
         Veiculo veiculo;
-        CNH cnh;
+        DadosCondutor dadosCondutor;
         Motorista motoristaEmpresa;
         ClientePF clientepf;
         ClientePJ clientepj;
@@ -35,21 +36,20 @@ namespace Tests.Tests.AlguelModule
      
             categoria = new Categoria("nome", 2, 2, 2, 2, TipoCNH.A);
             veiculo = new Veiculo("modelo", "marca", 1, "ASD1234", 1, 1, 1, "123456789123", 2, 50, imagemVeiculo, true, categoria, TipoCombustivel.Diesel);
-            aluguel = new Aluguel(veiculo, null, Plano.Diário, DateTime.Today.AddDays(10), clientepj, funcionario, DateTime.Today.AddDays(15), motoristaEmpresa);
+            aluguel = new Aluguel(veiculo, null, Plano.Diário, DateTime.Today.AddDays(10), clientepj, funcionario, DateTime.Today.AddDays(15), motoristaEmpresa.DadosCondutor);
             servicos = new List<Servico>() { new Servico("1", 1, aluguel), new Servico("2", 2, aluguel) };
-            cnh = new CNH("numero", TipoCNH.A);
+            dadosCondutor = new DadosCondutor(new CNH("numero", TipoCNH.A));
             clientepj = new ClientePJ("nome", "4999915522", "endereço", "0131038190371", "email@teste.com");
-            motoristaEmpresa = new Motorista("nome", "123123123", "endereço", "d12398127", cnh, clientepj);
+            motoristaEmpresa = new Motorista("nome", "123123123", "endereço", "d12398127", dadosCondutor, clientepj);
             funcionario = new Funcionario("nome", "49999155922", "endereco", "01308174983", Cargo.SysAdmin, imagemFuncionario, "usuario");
             aluguel.Servicos = servicos;
-            
         }
 
         [TestMethod]
         public void Deve_retornar_aluguel_clientePF_valido()
         {
-            clientepf = new ClientePF("nome", "49999155922", "endereço", "013108478983", cnh, new DateTime(2001, 09, 10), "email@teste.com");
-            aluguel.Condutor = clientepf;
+            clientepf = new ClientePF("nome", "49999155922", "endereço", "013108478983", dadosCondutor, new DateTime(2001, 09, 10), "email@teste.com");
+            aluguel.DadosCondutor = clientepf.DadosCondutor;
                 
             aluguel.Validar().Should().Be(string.Empty);
 

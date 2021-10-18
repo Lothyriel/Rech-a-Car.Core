@@ -1,7 +1,6 @@
 ﻿using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
-using Dominio.Shared;
 using Infra.DAO.Shared;
 using System;
 using System.Collections.Generic;
@@ -116,9 +115,11 @@ namespace Infra.DAO.PessoaModule
                 var enderecoMotorista = Convert.ToString(reader["ENDERECO_MOTORISTA"]);
                 var documentoMotorista = Convert.ToString(reader["DOCUMENTO_MOTORISTA"]);
 
-                var id_cnh = Convert.ToInt32(reader["ID_CNH"]);
+                var idDadosCondutor = Convert.ToInt32(reader["ID_CNH"]);
 
-                motoristas.Add(new Motorista(nomeMotorista, telefoneMotorista, enderecoMotorista, documentoMotorista, cnh, empresa)
+                var dadosCondutor = new DadosCondutorDAO().GetById(idDadosCondutor);
+
+                motoristas.Add(new Motorista(nomeMotorista, telefoneMotorista, enderecoMotorista, documentoMotorista, dadosCondutor, empresa)
                 {
                     Id = idMotorista
                 });
@@ -129,7 +130,7 @@ namespace Infra.DAO.PessoaModule
             return empresa;
         }
 
-        public bool ExisteDocumento(string documento, Type type)
+        public bool ExisteDocumento(string documento)
         {
             return Db.Exists(sqlExisteDocumento, Db.AdicionarParametro("DOCUMENTO", documento));
         }
@@ -149,19 +150,19 @@ namespace Infra.DAO.PessoaModule
             return parametros;
         }
     }
-    public class MotoristaDAO : DAO<Motorista>, IMotoristaRepository
-    {
-
-        #region Queries
-        private const string sqlSelecionarMotoristaPorId =
-            @"SELECT *
+}
+public class MotoristaDAO : EntidadeDAO<Motorista>, IMotoristaRepository
+{
+    #region Queries
+    private const string sqlSelecionarMotoristaPorId =
+        @"SELECT *
              FROM
                 [TBMOTORISTA]
              WHERE 
                 [ID] = @ID";
 
-        private const string sqlInserirMotorista =
-            @"INSERT INTO [TBMOTORISTA]
+    private const string sqlInserirMotorista =
+        @"INSERT INTO [TBMOTORISTA]
                 (
                     [NOME],
                     [TELEFONE],
@@ -180,8 +181,8 @@ namespace Infra.DAO.PessoaModule
                     @ID_CNH
                 )";
 
-        private const string sqlEditarMotorista =
-                @"UPDATE [TBMOTORISTA]
+    private const string sqlEditarMotorista =
+            @"UPDATE [TBMOTORISTA]
                     SET     
                     [NOME] = @NOME,             
                     [TELEFONE] = @TELEFONE,
@@ -190,22 +191,29 @@ namespace Infra.DAO.PessoaModule
                     [ID_CNH] = @ID_CNH
                     WHERE [ID] = @ID";
 
-        private const string sqlExcluirMotorista =
-            @"DELETE FROM [TBMOTORISTA] 
+    private const string sqlExcluirMotorista =
+        @"DELETE FROM [TBMOTORISTA] 
                             WHERE [ID] = @ID";
 
-        public override List<Motorista> Registros => throw new NotImplementedException();
+    public override List<Motorista> Registros => throw new NotImplementedException();
 
-        #endregion
+    public override string sqlSelecionarPorId => throw new NotImplementedException();
 
-        public override Motorista GetById(int id, Type tipo = null)
-        {
-            throw new NotSupportedException();
-        }
+    public override string sqlSelecionarTodos => throw new NotImplementedException();
 
-        protected static Dictionary<string, object> ObterParametrosMotorista(Motorista motorista)
-        {
-            var parametros = new Dictionary<string, object>
+    public override string sqlInserir => throw new NotImplementedException();
+
+    public override string sqlEditar => throw new NotImplementedException();
+
+    public override string sqlExcluir => throw new NotImplementedException();
+
+    public override string sqlExists => throw new NotImplementedException();
+
+    #endregion
+
+    public override Dictionary<string, object> ObterParametrosRegistro(Motorista motorista)
+    {
+        var parametros = new Dictionary<string, object>
                 {
                 { "ID", motorista.Id },
                 { "NOME", motorista.Nome },
@@ -216,12 +224,11 @@ namespace Infra.DAO.PessoaModule
                 { "ID_EMPRESA", motorista.Empresa.Id }
                 };
 
-            return parametros;
-        }
+        return parametros;
+    }
 
-        public override bool Existe(int id, Type tipo = null)
-        {
-            throw new NotImplementedException();
-        }
+    public override Motorista ConverterEmEntidade(IDataReader reader)
+    {
+        throw new NotImplementedException();
     }
 }

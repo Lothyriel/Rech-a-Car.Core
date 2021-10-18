@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using DependencyInjector;
 using Dominio.PessoaModule;
+using Dominio.PessoaModule.Condutor;
 using Dominio.VeiculoModule;
 using FluentAssertions;
 using Infra.DAO.ORM;
@@ -16,13 +17,13 @@ namespace IntegrationTests.CategoriaModule
     {
         Categoria categoria;
         ILifetimeScope lsp;
-        rech_a_carDbContext ctx;
+        Rech_a_carDbContext ctx;
 
         [TestInitialize]
         public void Inserir_categoria()
         {
             lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            ctx = lsp.Resolve<Rech_a_carDbContext>();
             categoria = new Categoria("nome", 1, 1, 1, 1, TipoCNH.A);
             new CategoriaORM(ctx).Inserir(categoria);
 

@@ -2,8 +2,10 @@
 using Aplicacao.AluguelModule;
 using Dominio.AluguelModule;
 using Dominio.Entities.PessoaModule.ClienteModule;
+using Dominio.Entities.PessoaModule.Condutor;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.Condutor;
 using Dominio.ServicoModule;
 using Dominio.VeiculoModule;
 using FluentAssertions;
@@ -29,7 +31,7 @@ namespace Infra.DAO.AluguelModule
         static RelatorioDAO rd = new();
         static ServicoDAO sd = new();
         static CupomDAO cd = new();
-        static CnhDAO cn = new();
+        static DadosCondutorDAO cn = new();
         static ClientePFDAO cf = new();
 
         AluguelAppServices AluguelAppServices = new();
@@ -40,13 +42,13 @@ namespace Infra.DAO.AluguelModule
             var categoria = new Categoria("Joaninha", 100, 5, 300, 500, TipoCNH.B);
             var imagem = Resources.ford_ka_gay;
             var veiculo = new Veiculo("Ka", "Ford", 1997, "ABC1234", 50000, 4, 2, "LDSAPLDPLADAS", 0, 50, imagem, false, categoria, TipoCombustivel.Gasolina);
-            var cnh = new CNH("01648986", TipoCNH.B);
-            var cliente = new ClientePF("João Xavier", "49998300761", "Rua Jose Linhares", "01384972900", cnh, new DateTime(2001, 04, 27), "fastjonh@gmail.com");
+            var dadosCondutor = new DadosCondutor(new CNH("01648986", TipoCNH.B));
+            var cliente = new ClientePF("João Xavier", "49998300761", "Rua Jose Linhares", "01384972900", dadosCondutor, new DateTime(2001, 04, 27), "fastjonh@gmail.com");
             var funcionario = new Funcionario("Alexandre Rech", "99999999", "Rua da Ndd", "99999999", Cargo.SysAdmin, imagem, "admin", "admin123");
 
             var servicos = new List<Servico>() { new Servico("Servico 1", 100, aluguel), new Servico("Servico 2", 200, aluguel), new Servico("Servico 3", 300, aluguel) };
 
-            cn.Inserir(cliente.Cnh);
+            cn.Inserir(cliente.DadosCondutor);
             cf.Inserir(cliente);
 
             new CategoriaDAO().Inserir(categoria);
@@ -54,7 +56,7 @@ namespace Infra.DAO.AluguelModule
 
             new FuncionarioDAO().Inserir(funcionario);
 
-            aluguel = new Aluguel() { Veiculo = veiculo, Funcionario = funcionario, Condutor = cliente, Cliente = new Cliente(cliente), Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
+            aluguel = new Aluguel() { Veiculo = veiculo, Funcionario = funcionario, DadosCondutor = cliente.DadosCondutor, Cliente = cliente, Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
             ad.Inserir(aluguel);
         }
         [TestMethod]

@@ -40,6 +40,12 @@ namespace Infra.DAO.PessoaModule
             WHERE 
                 [ID_FUNCIONARIO] = @ID_FUNCIONARIO";
 
+        private const string sqlExcluirSenha =
+            @"DELETE FROM
+                [TBSENHA]
+            WHERE 
+                [ID] = @ID";
+
         #endregion
         public SenhaHashed GetSenhaHashed(int id_funcionario)
         {
@@ -68,6 +74,19 @@ namespace Infra.DAO.PessoaModule
             var hash = Convert.ToString(reader["HASH_SENHA"]);
 
             return new SenhaHashed(salt, hash);
+        }
+
+        public bool Excluir(int idFuncionario)
+        {
+            try
+            {
+                Db.Delete(sqlExcluirSenha, Db.AdicionarParametro("ID", idFuncionario));
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

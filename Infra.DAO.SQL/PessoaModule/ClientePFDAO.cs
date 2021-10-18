@@ -1,4 +1,5 @@
-﻿using Dominio.PessoaModule.ClienteModule;
+﻿using Dominio.Entities.PessoaModule.Condutor;
+using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
 using Dominio.Shared;
 using Infra.DAO.Shared;
@@ -95,15 +96,15 @@ namespace Infra.DAO.PessoaModule
             var data_nascimento = Convert.ToDateTime(reader["DATA_NASCIMENTO"]);
 
             var id_cnh = Convert.ToInt32(reader["ID_CNH"]);
-            var cnh = new CnhDAO().GetById(id_cnh);
+            var dadosCondutor = new DadosCondutorDAO().GetById(id_cnh);
 
-            return new ClientePF(nome, telefone, endereco, documento, cnh, data_nascimento, email)
+            return new ClientePF(nome, telefone, endereco, documento, dadosCondutor, data_nascimento, email)
             {
                 Id = id
             };
         }
   
-        public bool ExisteDocumento(string documento, Type type)
+        public bool ExisteDocumento(string documento)
         {
             return Db.Exists(sqlExisteDocumento, Db.AdicionarParametro("DOCUMENTO", documento));
         }
@@ -118,7 +119,7 @@ namespace Infra.DAO.PessoaModule
                 { "TELEFONE", cliente.Telefone },
                 { "DOCUMENTO", cliente.Documento },
                 { "DATA_NASCIMENTO", cliente.DataNascimento },
-                { "ID_CNH", cliente.Cnh.Id },
+                { "ID_CNH", cliente.DadosCondutor.Cnh.Id },
                 { "EMAIL", cliente.Email },
             };
 

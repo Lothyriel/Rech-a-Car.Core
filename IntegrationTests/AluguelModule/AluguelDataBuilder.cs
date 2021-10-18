@@ -1,9 +1,10 @@
 ﻿using Dominio.AluguelModule;
 using Dominio.CupomModule;
-using Dominio.Entities.PessoaModule.ClienteModule;
+using Dominio.Entities.PessoaModule.Condutor;
 using Dominio.ParceiroModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.Condutor;
 using Dominio.ServicoModule;
 using Dominio.VeiculoModule;
 using IntegrationTests.Properties;
@@ -26,10 +27,10 @@ namespace IntegrationTests.Shared
             return this;
         }
 
-        public AluguelDataBuilder ParaCliente(ICliente cliente = null)
+        public AluguelDataBuilder ParaCliente(Cliente cliente = null)
         {
-            cliente ??= new ClientePF("Cliente 1", "999999", "endereco", "9999990", new CNH("99999", TipoCNH.AB), new DateTime(2001, 10, 10), "aaaaaa@aaa.com");
-            aluguel.Cliente = new Cliente(cliente);
+            cliente ??= new ClientePF("Cliente 1", "999999", "endereco", "9999990", new DadosCondutor(new CNH("99999", TipoCNH.AB)), new DateTime(2001, 10, 10), "aaaaaa@aaa.com");
+            aluguel.Cliente = cliente;
 
             return this;
         }
@@ -66,10 +67,10 @@ namespace IntegrationTests.Shared
             return this;
         }
 
-        public AluguelDataBuilder ParaCondutor(Condutor condutor = null)
+        public AluguelDataBuilder ParaCondutor(DadosCondutor condutor = null)
         {
-            condutor ??= (aluguel.Cliente._Cliente is ClientePF pF ? pF : new Motorista("Motorista 1", "99999999", "endereço", "999999", new CNH("7546456", TipoCNH.AB), (ClientePJ)aluguel.Cliente._Cliente));
-            aluguel.Condutor = condutor;
+            condutor ??= (aluguel.Cliente is ClientePF pF ? pF.DadosCondutor : new Motorista("Motorista 1", "99999999", "endereço", "999999", new DadosCondutor(new CNH("7546456", TipoCNH.AB)), (ClientePJ)aluguel.Cliente).DadosCondutor);
+            aluguel.DadosCondutor = condutor;
 
             return this;
         }

@@ -2,7 +2,6 @@
 using DependencyInjector;
 using Dominio.CupomModule;
 using Dominio.ParceiroModule;
-using Dominio.PessoaModule;
 using FluentAssertions;
 using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
@@ -18,14 +17,14 @@ namespace IntegrationTests.CupomModule
     {
         Cupom cupom1;
         ILifetimeScope lsp;
-        rech_a_carDbContext ctx;
+        Rech_a_carDbContext ctx;
 
 
         [TestInitialize]
         public void Inserir_Cupom()
         {
             lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            ctx = lsp.Resolve<Rech_a_carDbContext>();
 
             var parceiro = new Parceiro("Nome Cupom");
             cupom1 = new Cupom("Deko", 50, 0, new DateTime(2021, 08, 26), parceiro, 230, 0);
@@ -56,7 +55,7 @@ namespace IntegrationTests.CupomModule
         [TestCleanup]
         public void Limpar()
         {
-            Db.Delete(TestExtensions.ResetId("TBCupons"));
+            Db.Delete(TestExtensions.ResetId("TBCupom"));
         }
     }
 }

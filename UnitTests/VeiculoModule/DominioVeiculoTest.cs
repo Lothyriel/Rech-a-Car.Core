@@ -1,4 +1,5 @@
 ﻿using Dominio.PessoaModule;
+using Dominio.PessoaModule.Condutor;
 using Dominio.VeiculoModule;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
