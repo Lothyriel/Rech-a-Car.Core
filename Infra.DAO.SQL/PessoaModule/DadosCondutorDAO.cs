@@ -36,6 +36,10 @@ namespace Infra.DAO.PessoaModule
                     [NUMERO] = @NUMERO
                     WHERE [ID] = @ID";
 
+        private const string sqlExcluirDadosCondutor =
+                @"DELETE FROM [TBCNH]
+                    WHERE [ID] = @ID";
+
         #endregion
         public void Inserir(DadosCondutor dadosCondutor)
         {
@@ -45,6 +49,18 @@ namespace Infra.DAO.PessoaModule
         {
             dadosCondutor.Id = id;
             Db.Update(sqlEditarDadosCondutor, ObterParametrosRegistro(dadosCondutor));
+        }
+        public bool Excluir(int id) 
+        {
+            try
+            {
+                Db.Delete(sqlExcluirDadosCondutor, Db.AdicionarParametro("ID", id));
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
         public DadosCondutor GetById(int id_condutor)
         {

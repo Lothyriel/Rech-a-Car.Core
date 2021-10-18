@@ -7,7 +7,7 @@ namespace Dominio.PessoaModule
         public string Nome { get; set; }
         public string Telefone { get; set; }
         public string Endereco { get; set; }
-        public string Documento { get; init; }
+        public string Documento { get; set; }
         public abstract TipoPessoa TipoPessoa { get; init; }
 
         public override string Validar()

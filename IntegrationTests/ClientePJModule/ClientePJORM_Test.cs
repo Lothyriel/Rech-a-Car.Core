@@ -1,7 +1,9 @@
 ﻿using Autofac;
 using DependencyInjector;
+using Dominio.Entities.PessoaModule.Condutor;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.Condutor;
 using FluentAssertions;
 using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
@@ -32,7 +34,7 @@ namespace IntegrationTests.ClientePJModule
             ctx = lsp.Resolve<Rech_a_carDbContext>();
 
             cliente1 = new ClientePJ("nome", "99999999999", "endereco", "99999999999999", "email@teste.com");
-            motorista1 = new Motorista("nomeMotorista", "99999999999", "endereco", "99999999999999", new CNH("59778304921", TipoCNH.A), cliente1);
+            motorista1 = new Motorista("nomeMotorista", "99999999999", "endereco", "99999999999999", new DadosCondutor(new CNH("59778304921", TipoCNH.A)), cliente1);
             new ClientePJORM(ctx).Inserir(cliente1);
             new MotoristaORM(ctx).Inserir(motorista1);
             cliente1 = new ClientePJORM(ctx).GetById(cliente1.Id);

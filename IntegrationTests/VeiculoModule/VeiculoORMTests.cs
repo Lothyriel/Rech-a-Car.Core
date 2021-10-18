@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using DependencyInjector;
 using Dominio.PessoaModule;
+using Dominio.PessoaModule.Condutor;
 using Dominio.VeiculoModule;
 using FluentAssertions;
 using Infra.DAO.ORM;

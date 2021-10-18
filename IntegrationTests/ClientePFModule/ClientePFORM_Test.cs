@@ -1,7 +1,8 @@
 ﻿using Autofac;
 using DependencyInjector;
-using Dominio.PessoaModule;
+using Dominio.Entities.PessoaModule.Condutor;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.Condutor;
 using FluentAssertions;
 using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
@@ -9,10 +10,6 @@ using Infra.DAO.Shared;
 using IntegrationTests.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationTests.ClientePFModule
 {
@@ -20,7 +17,7 @@ namespace IntegrationTests.ClientePFModule
     public class ClientePFORM_Test
     {
         ClientePF cliente1;
-        CNH cnh1;
+        DadosCondutor dadosCondutor;
         ILifetimeScope lsp;
         Rech_a_carDbContext ctx;
         
@@ -30,9 +27,9 @@ namespace IntegrationTests.ClientePFModule
             lsp = DependencyInjection.Container.BeginLifetimeScope();
             ctx = lsp.Resolve<Rech_a_carDbContext>();
 
-            cnh1 = new CNH("1212120", TipoCNH.A);
-            cliente1 = new ClientePF("nome", "999999999", "endereco", "99999999999", cnh1, new DateTime(2001, 04, 27), "email@teste.com");
-            new CnhORM(ctx).Inserir(cnh1);
+            dadosCondutor = new DadosCondutor(new CNH("1212120", TipoCNH.A));
+            cliente1 = new ClientePF("nome", "999999999", "endereco", "99999999999", dadosCondutor, new DateTime(2001, 04, 27), "email@teste.com");
+            new DadosCondutorORM(ctx).Inserir(dadosCondutor);
             new ClientePFORM(ctx).Inserir(cliente1);
 
         }

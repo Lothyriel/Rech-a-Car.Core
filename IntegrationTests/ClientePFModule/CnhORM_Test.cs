@@ -24,7 +24,7 @@ namespace IntegrationTests.ClientePFModule
             ctx = lsp.Resolve<Rech_a_carDbContext>();
 
             cnh = new CNH("1212120", TipoCNH.A);
-            new CnhORM(ctx).Inserir(cnh);
+            new DadosCondutorORM(ctx).Inserir(cnh);
         }
 
         [TestMethod]
@@ -32,24 +32,24 @@ namespace IntegrationTests.ClientePFModule
         {
             var cnhAnterior = new CNH("1212120", TipoCNH.A);
             var cnhnova = new CNH("1212120", TipoCNH.C);
-            new CnhORM(ctx).Inserir(cnhAnterior);
-            new CnhORM(ctx).Editar(cnhAnterior.Id, cnhnova);
+            new DadosCondutorORM(ctx).Inserir(cnhAnterior);
+            new DadosCondutorORM(ctx).Editar(cnhAnterior.Id, cnhnova);
 
-            new CnhORM(ctx).GetById(cnhAnterior.Id).TipoCnh.Should().Be(cnhnova.TipoCnh);
+            new DadosCondutorORM(ctx).GetById(cnhAnterior.Id).TipoCnh.Should().Be(cnhnova.TipoCnh);
         }
 
         [TestMethod]
         public void Deve_Inserir_cnh_cliente()
         {
             var cnhAnterior = new CNH("1212120", TipoCNH.A);
-            new CnhORM(ctx).Inserir(cnhAnterior);
+            new DadosCondutorORM(ctx).Inserir(cnhAnterior);
         }
 
         [TestMethod]
         public void Deve_Excluir_cnh_cliente()
         {
             var cnhAnterior = new CNH("1212120", TipoCNH.A);
-            new CnhORM(ctx).Excluir(cnhAnterior.Id);
+            new DadosCondutorORM(ctx).Excluir(cnhAnterior.Id);
         }
 
         [TestCleanup]
