@@ -63,6 +63,16 @@ namespace UnitTests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap among {
+            get {
+                object obj = ResourceManager.GetObject("among", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap focus_gay {
             get {
                 object obj = ResourceManager.GetObject("focus_gay", resourceCulture);
@@ -76,6 +86,16 @@ namespace UnitTests.Properties {
         internal static System.Drawing.Bitmap ford_ka_gay {
             get {
                 object obj = ResourceManager.GetObject("ford_ka_gay", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap homer {
+            get {
+                object obj = ResourceManager.GetObject("homer", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

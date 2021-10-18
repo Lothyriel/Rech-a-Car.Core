@@ -5,10 +5,22 @@ namespace Dominio.AluguelModule
 {
     public class RelatorioAluguel : EnvioEmail
     {
-        public RelatorioAluguel(Aluguel aluguel, MemoryStream relatorioStream) : base(relatorioStream)
+        public RelatorioAluguel()
+        {
+        }
+
+        public RelatorioAluguel(Aluguel aluguel, MemoryStream relatorioStream)
         {
             Aluguel = aluguel;
+            StreamAttachment = relatorioStream;
         }
-        public Aluguel Aluguel { get; }
+        public virtual Aluguel Aluguel { get; }
+
+        public override MemoryStream StreamAttachment { get; }
+
+        public override string Validar()
+        {
+            return "";
+        }
     }
 }

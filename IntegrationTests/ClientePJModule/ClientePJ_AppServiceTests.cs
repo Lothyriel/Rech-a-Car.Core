@@ -1,9 +1,9 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using Aplicacao.ClienteModule;
 using Aplicacao.Shared;
 using Dominio.PessoaModule.ClienteModule;
-using Aplicacao.ClienteModule;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace IntegrationTests.ClientePJ_Module
 {

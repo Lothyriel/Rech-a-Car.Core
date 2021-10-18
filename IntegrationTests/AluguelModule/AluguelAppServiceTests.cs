@@ -1,26 +1,15 @@
 ﻿using Aplicacao.AluguelModule;
-using Aplicacao.ClienteModule;
-using Aplicacao.FuncionarioModule;
 using Aplicacao.Shared;
+using Applicacao.Shared;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
-using Dominio.ParceiroModule;
-using Dominio.PessoaModule;
-using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
-using Dominio.Shared;
-using Dominio.VeiculoModule;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationTests.AluguelModule
-{   
+{
     [TestClass]
     public class AluguelAppServiceTests
     {
@@ -28,7 +17,7 @@ namespace IntegrationTests.AluguelModule
         Aluguel aluguel;
 
         Mock<IAluguelRepository> mockRepoAluguel;
-        Mock<IRelatorioAluguel> mock_Relatorio;
+        Mock<IRelatorio> mock_Relatorio;
         Mock<IRelatorioRepository> mock_Relatorio_Repo;
         Mock<IServicoRepository> mock_Servico_Repo;
         Mock<ICupomRepository> mock_Cupom_Repo;
@@ -83,8 +72,5 @@ namespace IntegrationTests.AluguelModule
             sut.Editar(aluguel.Id, aluguel);
             mockRepoAluguel.Verify(x => x.Editar(aluguel.Id, aluguel));
         }
-
-
-
     }
 }

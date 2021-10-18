@@ -1,5 +1,6 @@
 ﻿using ConfigurationManager;
 using Dominio.AluguelModule;
+using Dominio.Repositories;
 using Dominio.ServicoModule;
 using Infra.DAO.Shared;
 using System;
@@ -8,7 +9,7 @@ using System.Data;
 
 namespace Infra.DAO.AluguelModule
 {
-    public class AluguelFechadoDAO : DAO<AluguelFechado>
+    public class AluguelFechadoDAO : DAO<AluguelFechado>, IAluguelFechadoRepository
     {
         private AluguelDAO AluguelDAO = new();
 
@@ -76,7 +77,7 @@ namespace Infra.DAO.AluguelModule
                 { "DATA_DEVOLVIDA", aluguel.DataDevolvida },
                 { "TANQUE_UTILIZADO", aluguel.TanqueUtilizado },
                 { "KM_RODADOS", aluguel.KmRodados },
-                { "TOTAL", aluguel.CalcularTotal(ConfigAluguel.Configs) },
+                { "TOTAL", aluguel.CalcularTotal(ConfigsAluguel.Configs) },
             };
         }
     }

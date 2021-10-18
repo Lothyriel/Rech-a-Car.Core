@@ -1,19 +1,27 @@
 ﻿using Aplicacao.Shared;
-using Dominio.PessoaModule;
+using Autofac;
+using DependencyInjector;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
-using Dominio.ServicoModule;
+using Join.ClienteModule;
 
 namespace Aplicacao.ClienteModule
 {
-    public class ClienteAppServices : EntidadeAppServices<ICliente>
+    public class ClienteAppServices : EntidadeAppServices<Cliente>
     {
-        public override IClienteRepository Repositorio { get; }
+        protected override ClienteJoinRepository Repositorio { get; }
 
-        public ClienteAppServices(IClienteRepository repositorio, ICnhRepository cnhRepository)
+        public IClientePFRepository RepositorioClientePF { get; }
+        public IClientePJRepository RepositorioClientePJ { get; }
+
+        public ClienteAppServices()
         {
-            Repositorio = repositorio;
+            var dependencyResolver = DependencyInjection.Container;
 
+            var pfRepo = dependencyResolver.Resolve<IClientePFRepository>();
+            var pjRepo = dependencyResolver.Resolve<IClientePJRepository>();
+
+            Repositorio = new ClienteJoinRepository(pfRepo, pjRepo);
         }
     }
 }

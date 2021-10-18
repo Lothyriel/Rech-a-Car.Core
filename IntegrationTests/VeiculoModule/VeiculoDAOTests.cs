@@ -5,9 +5,6 @@ using Infra.DAO.Shared;
 using Infra.DAO.VeiculoModule;
 using IntegrationTests.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Drawing;
-using IntegrationTests.Shared;
-using Moq;
 
 namespace IntegrationTests.VeiculoModule
 {
@@ -20,7 +17,7 @@ namespace IntegrationTests.VeiculoModule
         [TestInitialize]
         public void Inserir_Veiculo()
         {
-            var imagem = Image.FromFile(@"..\..\..\Resources\ford_ka_gay.jpg");
+            var imagem = Properties.Resources.focus_gay;
             var categoria = new Categoria("Economico", 100, 10, 400, 800, TipoCNH.B);
             veiculo1 = new Veiculo("Ka", "Ford", 2001, "ABC1024", 50000, 4, 4, "ASDFGHJKLQWERTYUI", 0, 50, imagem, false, categoria, TipoCombustivel.Gasolina);
             new CategoriaDAO().Inserir(categoria);

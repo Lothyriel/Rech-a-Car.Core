@@ -1,41 +1,34 @@
 ﻿using Aplicacao.Shared;
+using Autofac;
+using DependencyInjector;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
-using Dominio.Shared;
 
 namespace Aplicacao.ClienteModule
 {
     public class ClientePFAppServices : EntidadeAppServices<ClientePF>
     {
-        public ICnhRepository CnhRepository { get; }
-
-        public ClientePFAppServices(IRepository<ClientePF> repositorio, ICnhRepository cnhRepositorio)
+        public ClientePFAppServices()
         {
-            Repositorio = repositorio;
-            CnhRepository = cnhRepositorio;
+            var dependencyResolver = DependencyInjection.Container;
+            Repositorio = dependencyResolver.Resolve<IClientePFRepository>();
         }
-        public override IRepository<ClientePF> Repositorio { get; }
+        protected override IClientePFRepository Repositorio { get; }
 
+        public override ResultadoOperacao Inserir(ClientePF clientePF)
+        {
+            if (Repositorio.ExisteDocumento(clientePF.Documento))
+                return new ResultadoOperacao("Já existe um cliente com este Documento", EnumResultado.Falha);
+
+            return base.Inserir(clientePF);
+        }
         public override ResultadoOperacao Editar(int id, ClientePF entidade)
         {
             var edicao = base.Editar(id, entidade);
             if (edicao.Resultado == EnumResultado.Falha)
                 return edicao;
 
-            CnhRepository.Editar(id, entidade.Cnh);
-
             return edicao;
-        }
-
-        public override ResultadoOperacao Inserir(ClientePF entidade)
-        {
-            var inserir = base.Inserir(entidade);
-            if (inserir.Resultado == EnumResultado.Falha)
-                return inserir;
-
-            CnhRepository.Inserir(entidade.Cnh);
-
-            return inserir;
         }
     }
 }

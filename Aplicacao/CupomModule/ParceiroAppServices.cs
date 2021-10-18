@@ -1,16 +1,19 @@
 ﻿using Aplicacao.Shared;
+using Autofac;
+using DependencyInjector;
 using Dominio.ParceiroModule;
-using Dominio.Shared;
+using Dominio.Repositories;
 
 namespace Aplicacao.CupomModule
 {
     public class ParceiroAppServices : EntidadeAppServices<Parceiro>
     {
-        public override IRepository<Parceiro> Repositorio { get; }
+        protected override IParceiroRepository Repositorio { get; }
 
-        public ParceiroAppServices(IRepository<Parceiro> repositorio)
+        public ParceiroAppServices()
         {
-            Repositorio = repositorio;
+            var dependencyResolver = DependencyInjection.Container;
+            Repositorio = dependencyResolver.Resolve<IParceiroRepository>();
         }
     }
 }

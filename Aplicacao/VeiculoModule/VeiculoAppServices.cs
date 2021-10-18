@@ -1,18 +1,27 @@
 ﻿using Aplicacao.Shared;
-using Dominio.Shared;
+using Autofac;
+using DependencyInjector;
+using Dominio.Repositories;
 using Dominio.VeiculoModule;
+using System.Collections.Generic;
 
 namespace Aplicacao.VeiculoModule
 {
     public class VeiculoAppServices : EntidadeAppServices<Veiculo>
     {
-        public VeiculoAppServices(IVeiculoRepository repositorio, IRepository<Categoria> repositorioCategoria)
+        public VeiculoAppServices()
         {
-            Repositorio = repositorio;
-            RepositorioCategoria = repositorioCategoria;
+            var dependencyResolver = DependencyInjection.Container;
+
+            Repositorio = dependencyResolver.Resolve<IVeiculoRepository>();
+            RepositorioCategoria = dependencyResolver.Resolve<ICategoriaRepository>();
         }
 
-        public override IVeiculoRepository Repositorio { get; }
-        public IRepository<Categoria> RepositorioCategoria { get; }
+        protected override IVeiculoRepository Repositorio { get; }
+        public ICategoriaRepository RepositorioCategoria { get; }
+        public List<Veiculo> GetDisponiveis()
+        {
+            return Repositorio.GetDisponiveis();
+        }
     }
 }

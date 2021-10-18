@@ -6,6 +6,7 @@ namespace Dominio.CupomModule
 {
     public class Cupom : Entidade
     {
+        public static Cupom Invalido = new Cupom("", 0, 0, DateTime.MinValue, null, 0, 0);
         public Cupom(string nome, int valorPercentual, double valorFixo, DateTime dataValidade, Parceiro parceiro, double valorMInimo, int usos)
         {
             Nome = nome;
@@ -16,12 +17,12 @@ namespace Dominio.CupomModule
             ValorMinimo = valorMInimo;
             Usos = usos;
         }
-
+        public Cupom() { }
         public string Nome { get; }
         public int ValorPercentual { get; }
         public double ValorFixo { get; }
         public DateTime DataValidade { get; }
-        public Parceiro Parceiro { get; }
+        public virtual Parceiro Parceiro { get; }
         public double ValorMinimo { get; }
         public int Usos { get; set; }
 
@@ -72,7 +73,7 @@ namespace Dominio.CupomModule
                 resultadoValidacao += "O campo Valor Minimo não pode ser menor que Zero.\n";
 
             if (ValorFixo > ValorMinimo)
-                resultadoValidacao += "O valor Minimo não pode ser menor que o valor de Desconto.";
+                resultadoValidacao += "O valor Minimo não pode ser menor que o valor de Desconto.\n";
 
             return resultadoValidacao;
 

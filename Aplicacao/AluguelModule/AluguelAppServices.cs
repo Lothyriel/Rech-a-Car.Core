@@ -1,5 +1,6 @@
 ﻿using Aplicacao.Shared;
-using ConfigurationManager;
+using Autofac;
+using DependencyInjector;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.ServicoModule;
@@ -15,33 +16,34 @@ namespace Aplicacao.AluguelModule
 {
     public class AluguelAppServices : EntidadeAppServices<Aluguel>
     {
-        public override IAluguelRepository Repositorio { get; }
+        protected override IAluguelRepository Repositorio { get; }
         public IRelatorioRepository RelatorioRepositorio { get; }
-        public IRelatorioAluguel Relatorio { get; }
+        public IRelatorio Relatorio { get; }
         public IServicoRepository ServicoRepositorio { get; }
         public ICupomRepository CupomRepositorio { get; }
 
-        public AluguelAppServices(IAluguelRepository repositorio, IRelatorioAluguel relatorio, IRelatorioRepository relatorioRepositorio, IServicoRepository servicoRepositorio, ICupomRepository cupomRepositorio)
+        public AluguelAppServices()
         {
-            Repositorio = repositorio;
-            Relatorio = relatorio;
-            RelatorioRepositorio = relatorioRepositorio;
-            ServicoRepositorio = servicoRepositorio;
-            CupomRepositorio = cupomRepositorio;
-        }
+            var dependencyResolver = DependencyInjection.Container;
 
+            Repositorio = dependencyResolver.Resolve<IAluguelRepository>();
+            Relatorio = dependencyResolver.Resolve<IRelatorio>();
+            RelatorioRepositorio = dependencyResolver.Resolve<IRelatorioRepository>();
+            ServicoRepositorio = dependencyResolver.Resolve<IServicoRepository>();
+            CupomRepositorio = dependencyResolver.Resolve<ICupomRepository>();
+        }
         public async void IniciaLoopEnvioEmails()
         {
             while (true)
             {
                 try
                 {
-                    NLogger.Logger.Info("Serviço de Envio de Emails Iniciado");
+                    NLogger.Logger.Aqui().Debug("Serviço de Envio de Emails Iniciado");
                     TentaEnviarRelatorioEmail();
                 }
                 catch (FilaEmailVazia)
                 {
-                    NLogger.Logger.Info("Sem emails para envio, esperando 5 minutos para tentar novamente");
+                    NLogger.Logger.Aqui().Warn("Sem emails para envio, esperando 5 minutos para tentar novamente");
                     await Task.Delay(new TimeSpan(0, 5, 0));
                 }
             }
@@ -63,34 +65,41 @@ namespace Aplicacao.AluguelModule
             Email.Envia(emailUsuario, titulo, corpoEmail, new List<Attachment>() { attachment });
             RelatorioRepositorio.MarcarEnviado(proxEnvio.Id);
 
-            NLogger.Logger.Info("Email {email.id} Enviado", proxEnvio.Id);
+            NLogger.Logger.Aqui().Info("Email {email.id} Enviado", proxEnvio.Id);
         }
         public override ResultadoOperacao Inserir(Aluguel aluguel)
         {
-            var insercao = base.Inserir(aluguel);
-            if (insercao.Resultado == EnumResultado.Falha)
-                return insercao;
-
-            if (aluguel.Cupom != null)
+            using (var ctx = DependencyInjection.Container.BeginLifetimeScope())
             {
-                aluguel.Cupom.Usos++;
-                CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
+                var validacaoCupom = ValidarCupom(aluguel);
+                if (validacaoCupom.Resultado == EnumResultado.Falha)
+                    return validacaoCupom;
 
-                if (aluguel.Cupom.ValorMinimo < aluguel.CalcularTotal(ConfigAluguel.Configs))
-                {
-                    insercao.AppendMensagem($"Cupom válido para aluguel acima de R${aluguel.Cupom.ValorMinimo}");
+                var insercao = base.Inserir(aluguel);
+                if (insercao.Resultado == EnumResultado.Falha)
                     return insercao;
+
+                if (aluguel.Cupom != null)
+                {
+                    aluguel.Cupom.Usos++;
+                    CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
                 }
-                    
+                ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
+
+                GerarRelatorio(aluguel);
+
+                return insercao;
             }
-
-            ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
-
-            var relatorio = Relatorio.GerarRelatorio(aluguel);
-            NLogger.Logger.Info("Gerando relatório de {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
-            RelatorioRepositorio.SalvarRelatorio(new RelatorioAluguel(aluguel, relatorio));
-            return insercao;
         }
+
+        private void GerarRelatorio(Aluguel aluguel)
+        {
+            NLogger.Logger.Aqui().Debug("Gerando relatório de {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
+            var relatorio = Task.Run(() => Relatorio.GerarRelatorio(aluguel));
+            RelatorioRepositorio.SalvarRelatorio(relatorio.Result);
+            NLogger.Logger.Aqui().Info("Relatório gerado {aluguel} | ID: {idAluguel}", aluguel, aluguel.Id);
+        }
+
         public override ResultadoOperacao Editar(int id, Aluguel entidade)
         {
             var edicao = base.Editar(id, entidade);
@@ -104,17 +113,19 @@ namespace Aplicacao.AluguelModule
         public ResultadoOperacao ValidarCupom(Aluguel aluguel)
         {
             if (aluguel.Cupom == null)
+                return new ResultadoOperacao("", EnumResultado.Sucesso);
+
+            if (aluguel.Cupom == Cupom.Invalido)
                 return new ResultadoOperacao("Cupom não existe", EnumResultado.Falha);
 
             var validacao = aluguel.ValidarCupom();
 
-            if (validacao == string.Empty)
-                return new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso);
+            if (validacao != string.Empty)
+                return new ResultadoOperacao(validacao, EnumResultado.Falha);
 
-            return new ResultadoOperacao(validacao, EnumResultado.Falha);
+            return new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso);
         }
     }
-    [Serializable]
     public class FilaEmailVazia : Exception
     {
         public FilaEmailVazia()

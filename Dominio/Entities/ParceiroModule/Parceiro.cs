@@ -6,24 +6,24 @@ namespace Dominio.ParceiroModule
     {
         public Parceiro(string parceiro)
         {
-            this.nome = parceiro;
+            this.Nome = parceiro;
         }
         public Parceiro()
         {
         }
 
-        public string nome { get; set; }
+        public string Nome { get; set; }
         public override string Validar()
         {
             string resultadoValidacao = "";
-            if (string.IsNullOrEmpty(nome))
+            if (string.IsNullOrEmpty(Nome))
                 resultadoValidacao = "O Nome do Parceiro é obrigatório.";
 
             return resultadoValidacao;
         }
         public override string ToString()
         {
-            return nome;
+            return Nome;
         }
     }
 }

@@ -1,20 +1,28 @@
 ﻿using Aplicacao.Shared;
+using Autofac;
+using DependencyInjector;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
-using Dominio.Shared;
 
 namespace Aplicacao.ClienteModule
 {
     public class ClientePJAppServices : EntidadeAppServices<ClientePJ>
     {
-        public ICnhRepository CnhRepository { get; }
+        public IMotoristaRepository MotoristaRepository { get; }
 
-        public ClientePJAppServices(IRepository<ClientePJ> repositorio)
+        public ClientePJAppServices()
         {
-            Repositorio = repositorio;
-
+            var dependencyResolver = DependencyInjection.Container;
+            Repositorio = dependencyResolver.Resolve<IClientePJRepository>();
+            MotoristaRepository = dependencyResolver.Resolve<IMotoristaRepository>();
         }
-        public override IRepository<ClientePJ> Repositorio { get; }
+        protected override IClientePJRepository Repositorio { get; }
+        public override ResultadoOperacao Inserir(ClientePJ clientePJ)
+        {
+            if (Repositorio.ExisteDocumento(clientePJ.Documento))
+                return new ResultadoOperacao("Já existe um cliente com este Documento", EnumResultado.Falha);
 
+            return base.Inserir(clientePJ);
+        }
     }
 }

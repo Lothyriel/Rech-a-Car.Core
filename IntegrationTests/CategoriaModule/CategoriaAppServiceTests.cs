@@ -1,12 +1,10 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Aplicacao.Shared;
-using Dominio.PessoaModule.ClienteModule;
-using Aplicacao.ClienteModule;
+﻿using Aplicacao.Shared;
+using Aplicacao.VeiculoModule;
 using Dominio.Shared;
 using Dominio.VeiculoModule;
-using Aplicacao.VeiculoModule;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace IntegrationTests.CategoriaModule
 {

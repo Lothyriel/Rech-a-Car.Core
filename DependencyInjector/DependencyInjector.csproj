@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>DependencyInjector</RootNamespace>
+    <AssemblyName>DependencyInjection</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.DAO.ORM\Infra.DAO.ORM.csproj" />
+    <ProjectReference Include="..\Infra.ES.GeraPDF\Infra.GeraPDF.csproj" />
+  </ItemGroup>
+
+</Project>

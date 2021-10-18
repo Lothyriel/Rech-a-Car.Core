@@ -17,11 +17,12 @@ namespace Infra.DAO.Shared
 
         static Db()
         {
-            var ConfigurationManager = Config.AppConfig;
-            bancoSelecionado = ConfigurationManager.GetSection("bancoDeDados").Value;
-            connectionString = ConfigurationManager.GetSection("ConnectionStrings").GetSection("SQLServer").Value;
+            var ConfigurationManager = AppConfigManager.AppConfig;
+            var dadosBanco = ConfigurationManager["BancoDeDados"];
+            bancoSelecionado = dadosBanco["Nome"].ToString();
+            connectionString = dadosBanco["ConnectionString"].ToString();
 
-            string nomeProvedor = ConfigurationManager.GetSection("SQLProvider").Value;
+            string nomeProvedor = dadosBanco["Provider"].ToString();
             DbProviderFactories.RegisterFactory(nomeProvedor, SqlClientFactory.Instance);
             factory = DbProviderFactories.GetFactory(nomeProvedor);
         }

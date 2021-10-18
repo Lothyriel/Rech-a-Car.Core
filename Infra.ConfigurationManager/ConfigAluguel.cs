@@ -1,5 +1,4 @@
 ﻿using Dominio.AluguelModule;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
@@ -7,20 +6,18 @@ using System.Linq;
 
 namespace ConfigurationManager
 {
-    public class ConfigAluguel
+    public class ConfigsAluguel : AppConfigManager
     {
-        private const string pathAppConfig = @"..\..\..\appsettings.json";
-
         public static Configuracoes Configs
         {
             get
             {
                 JObject o1 = JObject.Parse(File.ReadAllText(pathAppConfig));
-
-                var gasolina = o1["Gasolina"].ToObject<double>();
-                var diesel = o1["Diesel"].ToObject<double>();
-                var etanol = o1["Etanol"].ToObject<double>();
-                var caucao = o1["Caucao"].ToObject<double>();
+                var configsAluguel = o1["AluguelConfigs"];
+                var gasolina = configsAluguel["Gasolina"].ToObject<double>();
+                var diesel = configsAluguel["Diesel"].ToObject<double>();
+                var etanol = configsAluguel["Etanol"].ToObject<double>();
+                var caucao = configsAluguel["Caucao"].ToObject<double>();
 
                 return new Configuracoes(etanol, diesel, gasolina, caucao);
             }
@@ -41,14 +38,15 @@ namespace ConfigurationManager
         }
         private static void SalvaConfiguracoes(Configuracoes config)
         {
-            JObject o1 = JObject.Parse(File.ReadAllText(pathAppConfig));
-            o1["Gasolina"] = new JValue(config.ValorGasolina);
-            o1["Diesel"] = new JValue(config.ValorDiesel);
-            o1["Etanol"] = new JValue(config.ValorEtanol);
+            var appConfig = AppConfig;
+            var aluguelConfigAppConfig = appConfig["AluguelConfigs"];
+            aluguelConfigAppConfig["Gasolina"] = new JValue(config.ValorGasolina);
+            aluguelConfigAppConfig["Diesel"] = new JValue(config.ValorDiesel);
+            aluguelConfigAppConfig["Etanol"] = new JValue(config.ValorEtanol);
 
-            o1["Caucao"] = new JValue(config.ValorCaucao);
+            aluguelConfigAppConfig["Caucao"] = new JValue(config.ValorCaucao);
 
-            File.WriteAllText(pathAppConfig, JsonConvert.SerializeObject(o1));
+            Save(appConfig);
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Dominio.PessoaModule;
+using Dominio.PessoaModule.Condutor;
+using Dominio.Repositories;
 using Dominio.VeiculoModule;
 using Infra.DAO.Shared;
 using System;
@@ -7,7 +9,7 @@ using System.Data;
 
 namespace Infra.DAO.VeiculoModule
 {
-    public class CategoriaDAO : EntidadeDAO<Categoria>
+    public class CategoriaDAO : EntidadeDAO<Categoria>, ICategoriaRepository
     {
         #region Queries
         private const string sqlSelecionarGrupoPorId =

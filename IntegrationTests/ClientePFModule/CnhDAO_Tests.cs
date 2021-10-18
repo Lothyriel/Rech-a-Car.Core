@@ -18,7 +18,21 @@ namespace IntegrationTests.ClientePFModule
             var cnhnova = new CNH("1212120", TipoCNH.C);
             CnhDAO.Editar(cnhAnterior.Id, cnhnova);
 
-            CnhDAO.GetByIdCondutor(cnhAnterior.Id).TipoCnh.Should().Be(cnhnova.TipoCnh);
+            CnhDAO.GetById(cnhAnterior.Id).TipoCnh.Should().Be(cnhnova.TipoCnh);
+        }
+
+        [TestMethod]
+        public void Deve_Inserir_cnh_cliente()
+        {
+            var cnhAnterior = new CNH("1212120", TipoCNH.A);
+            CnhDAO.Inserir(cnhAnterior);
+        }
+
+        [TestMethod]
+        public void Deve_Excluir_cnh_cliente()
+        {
+            var cnhAnterior = new CNH("1212120", TipoCNH.A);
+            CnhDAO.Excluir(cnhAnterior.Id);
         }
     }
 }

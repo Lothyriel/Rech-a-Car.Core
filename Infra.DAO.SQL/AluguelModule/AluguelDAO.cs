@@ -6,6 +6,7 @@ using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;
 using Infra.DAO.SQL.AluguelModule;
 using Infra.DAO.VeiculoModule;
+using Join.ClienteModule;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -101,9 +102,9 @@ namespace Infra.DAO.AluguelModule
 
             var ehClientePF = id_condutor == id_cliente;
 
-            var cliente = new ClienteDAO().GetById(id_cliente, ehClientePF ? typeof(ClientePF) : typeof(ClientePJ));
+            var cliente = new ClienteJoinRepository(new ClientePFDAO(), new ClientePJDAO()).GetById(id_cliente, ehClientePF ? typeof(ClientePF) : typeof(ClientePJ));
 
-            var condutor = ehClientePF ? null : ((ClientePJ)cliente).Motoristas.Find(x => x.Id == id_condutor);
+            var condutor = ehClientePF ? ((ClientePF)cliente).DadosCondutor : ((ClientePJ)cliente).Motoristas.Find(x => x.Id == id_condutor).DadosCondutor;
 
             var servicos = new ServicoDAO().GetServicosAlugados(id);
 
@@ -124,7 +125,7 @@ namespace Infra.DAO.AluguelModule
             {
                 { "ID", aluguel.Id },
                 { "ID_CLIENTE", aluguel.Cliente.Id },
-                { "ID_CONDUTOR", aluguel.Condutor.Id },
+                { "ID_CONDUTOR", aluguel.DadosCondutor.Id },
                 { "ID_FUNCIONARIO", aluguel.Funcionario.Id },
                 { "ID_VEICULO", aluguel.Veiculo.Id },
                 { "ID_CUPOM", aluguel.Cupom?.Id},

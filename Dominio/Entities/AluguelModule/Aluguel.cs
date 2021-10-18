@@ -1,4 +1,5 @@
 ﻿using Dominio.CupomModule;
+using Dominio.Entities.PessoaModule.Condutor;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
@@ -11,7 +12,7 @@ namespace Dominio.AluguelModule
 {
     public class Aluguel : Entidade
     {
-        public Aluguel(Veiculo veiculo, List<Servico> servicos, Plano tipoPlano, DateTime dataAluguel, ICliente cliente, Funcionario funcionario, DateTime dataDevolucao, Condutor condutor = null, Cupom cupom = null)
+        public Aluguel(Veiculo veiculo, List<Servico> servicos, Plano tipoPlano, DateTime dataAluguel, Cliente cliente, Funcionario funcionario, DateTime dataDevolucao, DadosCondutor dadosCondutor = null, Cupom cupom = null)
         {
             Funcionario = funcionario;
             Veiculo = veiculo;
@@ -19,11 +20,11 @@ namespace Dominio.AluguelModule
             TipoPlano = tipoPlano;
             DataAluguel = dataAluguel;
             Cliente = cliente;
-            Condutor = condutor;
+            DadosCondutor = dadosCondutor;
             DataDevolucao = dataDevolucao;
             Cupom = cupom;
-            if (condutor == null)
-                Condutor = (Condutor)cliente;
+
+            DadosCondutor ??= ((ClientePF)Cliente).DadosCondutor;
         }
         public Aluguel(Aluguel aluguel)
         {
@@ -33,20 +34,20 @@ namespace Dominio.AluguelModule
             TipoPlano = aluguel.TipoPlano;
             DataAluguel = aluguel.DataAluguel;
             Cliente = aluguel.Cliente;
-            Condutor = aluguel.Condutor;
-            if (aluguel.Condutor == null)
-                Condutor = (Condutor)aluguel.Cliente;
+            DadosCondutor = aluguel.DadosCondutor;
+
+            DadosCondutor ??= ((ClientePF)Cliente).DadosCondutor;
         }
         public Aluguel() { }
-        public Funcionario Funcionario { get; set; }
-        public Veiculo Veiculo { get; set; }
-        public ICliente Cliente { get; set; }
-        public List<Servico> Servicos { get; set; } = new List<Servico>();
-        public Condutor Condutor { get; set; }
+        public virtual Funcionario Funcionario { get; set; }
+        public virtual Veiculo Veiculo { get; set; }
+        public virtual Cliente Cliente { get; set; }
+        public virtual List<Servico> Servicos { get; set; } = new List<Servico>();
+        public virtual DadosCondutor DadosCondutor { get; set; }
         public Plano TipoPlano { get; set; }
         public DateTime DataAluguel { get; set; }
         public DateTime DataDevolucao { get; set; }
-        public Cupom Cupom { get; set; }
+        public virtual Cupom Cupom { get; set; }
 
         public virtual double CalcularTotal(Configuracoes configs = null)
         {
@@ -100,13 +101,13 @@ namespace Dominio.AluguelModule
 
             if (Veiculo == null)
                 validacao += "O aluguel necessita de um veículo\n";
-            if (Condutor == null)
+            if (DadosCondutor == null)
                 validacao += "O aluguel necessita de um condutor\n";
 
             if (validacao != string.Empty)
                 return validacao;
 
-            if (Condutor.Cnh.TipoCnh < Veiculo.Categoria.TipoDeCnh)
+            if (DadosCondutor.Cnh.TipoCnh < Veiculo.Categoria.TipoDeCnh)
                 validacao += "Condutor não tem a carteira necessária para dirigir o veículo selecionado\n";
 
             if (DataAluguel < DateTime.Today)
@@ -114,8 +115,6 @@ namespace Dominio.AluguelModule
 
             if (!DatasValidas())
                 validacao += "Data de devolução deve ser após data de aluguel";
-
-
 
             return validacao;
         }
@@ -134,7 +133,7 @@ namespace Dominio.AluguelModule
         }
         public override string ToString()
         {
-            return $"{Veiculo} {Funcionario} {Cliente} {Condutor} {TipoPlano}";
+            return $"{Veiculo} {Funcionario} {Cliente} {DadosCondutor} {TipoPlano}";
         }
     }
     public enum Plano

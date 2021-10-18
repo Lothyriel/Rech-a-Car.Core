@@ -1,6 +1,7 @@
 ﻿using AluguelPDF;
 using Aplicacao.AluguelModule;
 using Dominio.AluguelModule;
+using Dominio.Entities.PessoaModule.ClienteModule;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
@@ -43,7 +44,7 @@ namespace Infra.DAO.AluguelModule
             var cliente = new ClientePF("João Xavier", "49998300761", "Rua Jose Linhares", "01384972900", cnh, new DateTime(2001, 04, 27), "fastjonh@gmail.com");
             var funcionario = new Funcionario("Alexandre Rech", "99999999", "Rua da Ndd", "99999999", Cargo.SysAdmin, imagem, "admin", "admin123");
 
-            var servicos = new List<Servico>() { new Servico("Servico 1", 100), new Servico("Servico 2", 200), new Servico("Servico 3", 300) };
+            var servicos = new List<Servico>() { new Servico("Servico 1", 100, aluguel), new Servico("Servico 2", 200, aluguel), new Servico("Servico 3", 300, aluguel) };
 
             cn.Inserir(cliente.Cnh);
             cf.Inserir(cliente);
@@ -53,21 +54,19 @@ namespace Infra.DAO.AluguelModule
 
             new FuncionarioDAO().Inserir(funcionario);
 
-            aluguel = new Aluguel() { Veiculo = veiculo, Funcionario = funcionario, Condutor = cliente, Cliente = cliente, Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
+            aluguel = new Aluguel() { Veiculo = veiculo, Funcionario = funcionario, Condutor = cliente, Cliente = new Cliente(cliente), Servicos = servicos, DataAluguel = DateTime.Today.AddDays(3), DataDevolucao = DateTime.Today.AddDays(7) };
             ad.Inserir(aluguel);
         }
         [TestMethod]
         public void DeveCriarPdf()
         {
-            var ms = pa.GerarRelatorio(aluguel);
-            rd.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
+            rd.SalvarRelatorio(pa.GerarRelatorio(aluguel));
             rd.GetProxEnvio().Should().NotBeNull();
         }
         [TestMethod]
         public void DeveEnviarPdf()
         {
-            var ms = pa.GerarRelatorio(aluguel);
-            rd.SalvarRelatorio(new RelatorioAluguel(aluguel, ms));
+            rd.SalvarRelatorio(pa.GerarRelatorio(aluguel));
             AluguelAppServices.TentaEnviarRelatorioEmail();
 
             rd.GetProxEnvio().Should().BeNull();

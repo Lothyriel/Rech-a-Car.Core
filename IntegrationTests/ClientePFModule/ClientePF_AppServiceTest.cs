@@ -1,12 +1,12 @@
-﻿using FluentAssertions;
+﻿using Aplicacao.ClienteModule;
+using Aplicacao.Shared;
+using Dominio.PessoaModule;
+using Dominio.PessoaModule.ClienteModule;
+using Dominio.Repositories;
+using Dominio.Shared;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Aplicacao.Shared;
-using Dominio.PessoaModule.ClienteModule;
-using Aplicacao.ClienteModule;
-using Dominio.Shared;
-using Dominio.PessoaModule;
-using Dominio.Repositories;
 
 namespace IntegrationTests.ClientePF_Module
 {
@@ -17,8 +17,8 @@ namespace IntegrationTests.ClientePF_Module
         Mock<CNH> cnh_Mock;
         ClientePF clientePF;
         CNH cnh;
-        Mock<IRepository<ClientePF>> mockClientePF_Repo;
-        Mock<ICnhRepository>mockCnh_Repo;
+        Mock<IClientePFRepository> mockClientePF_Repo;
+        Mock<ICnhRepository> mockCnh_Repo;
         ClientePFAppServices sut;
 
         [TestInitialize]

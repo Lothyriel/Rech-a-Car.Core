@@ -1,11 +1,10 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Aplicacao.ServicosModule;
+﻿using Aplicacao.FuncionarioModule;
 using Aplicacao.Shared;
 using Dominio.PessoaModule;
-using Aplicacao.FuncionarioModule;
 using Dominio.Repositories;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace IntegrationTests.FuncionarioModule
 {
@@ -43,7 +42,7 @@ namespace IntegrationTests.FuncionarioModule
             funcionario = funcionarioMock.Object;
 
             sut.Inserir(funcionario).Resultado.Should().Be(EnumResultado.Falha);
-            mockRepoFuncionario.VerifyNoOtherCalls();
+            mockRepoFuncionario.Verify(x => x.ExisteUsuario(funcionario.Nome));
         }
         [TestMethod]
         public void Deve_remover_funcionario()

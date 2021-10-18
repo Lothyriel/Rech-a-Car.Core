@@ -25,7 +25,7 @@ namespace IntegrationTests.ClientePF_Module
             CnhDAO.Inserir(cnh);
             cliente = new ClientePF("nome", "999999999", "endereco", "99999999999", cnh, new DateTime(2001, 04, 27), "email@teste.com");
             ClientePFDAO.Inserir(cliente);
-            
+
         }
         [TestMethod]
         public void Deve_inserir_cliente()

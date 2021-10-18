@@ -1,5 +1,6 @@
 ﻿using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.Repositories;
 using Dominio.Shared;
 using Infra.DAO.Shared;
 using System;
@@ -69,6 +70,14 @@ namespace Infra.DAO.PessoaModule
             WHERE 
                 [ID] = @ID";
 
+        private const string sqlExisteDocumento =
+            @"SELECT 
+                COUNT(*) 
+            FROM 
+                [TBCLIENTEPJ]
+            WHERE 
+                [DOCUMENTO] = @DOCUMENTO";
+
         #endregion
         public override string sqlSelecionarPorId => sqlSelecionarClientePJPorId;
         public override string sqlSelecionarTodos => sqlSelecionarTodosClientePJ;
@@ -77,7 +86,7 @@ namespace Infra.DAO.PessoaModule
         public override string sqlExcluir => sqlExcluirClientePJ;
         public override string sqlExists => sqlExisteClientePJ;
 
-        public IRepository<Motorista> MotoristaRepository => new MotoristaDAO();
+        public IMotoristaRepository MotoristaRepository => new MotoristaDAO();
 
         public override ClientePJ ConverterEmEntidade(IDataReader reader)
         {
@@ -101,18 +110,17 @@ namespace Infra.DAO.PessoaModule
                 if (reader.IsDBNull(reader.GetOrdinal("ID_MOTORISTA")))
                     break;
 
-                var id_motorista = Convert.ToInt32(reader["ID_MOTORISTA"]);
-                var nome_motorista = Convert.ToString(reader["NOME_MOTORISTA"]);
-                var telefone_motorista = Convert.ToString(reader["TELEFONE_MOTORISTA"]);
-                var endereco_motorista = Convert.ToString(reader["ENDERECO_MOTORISTA"]);
-                var documento_motorista = Convert.ToString(reader["DOCUMENTO_MOTORISTA"]);
+                var idMotorista = Convert.ToInt32(reader["ID_MOTORISTA"]);
+                var nomeMotorista = Convert.ToString(reader["NOME_MOTORISTA"]);
+                var telefoneMotorista = Convert.ToString(reader["TELEFONE_MOTORISTA"]);
+                var enderecoMotorista = Convert.ToString(reader["ENDERECO_MOTORISTA"]);
+                var documentoMotorista = Convert.ToString(reader["DOCUMENTO_MOTORISTA"]);
 
                 var id_cnh = Convert.ToInt32(reader["ID_CNH"]);
-                var cnh = new CnhDAO().GetByIdCondutor(id_cnh);
 
-                motoristas.Add(new Motorista(nome_motorista, telefone_motorista, endereco_motorista, documento_motorista, cnh, empresa)
+                motoristas.Add(new Motorista(nomeMotorista, telefoneMotorista, enderecoMotorista, documentoMotorista, cnh, empresa)
                 {
-                    Id = id_motorista
+                    Id = idMotorista
                 });
 
             } while (reader.Read());
@@ -120,6 +128,12 @@ namespace Infra.DAO.PessoaModule
 
             return empresa;
         }
+
+        public bool ExisteDocumento(string documento, Type type)
+        {
+            return Db.Exists(sqlExisteDocumento, Db.AdicionarParametro("DOCUMENTO", documento));
+        }
+
         public override Dictionary<string, object> ObterParametrosRegistro(ClientePJ cliente)
         {
             var parametros = new Dictionary<string, object>
@@ -135,7 +149,7 @@ namespace Infra.DAO.PessoaModule
             return parametros;
         }
     }
-    public class MotoristaDAO : DAO<Motorista>, IRepository<Motorista>
+    public class MotoristaDAO : DAO<Motorista>, IMotoristaRepository
     {
 
         #region Queries
@@ -184,24 +198,6 @@ namespace Infra.DAO.PessoaModule
 
         #endregion
 
-        public override void Inserir(Motorista motorista)
-        {
-            new CnhDAO().Inserir(motorista.Cnh);
-            motorista.Id = Db.Insert(sqlInserirMotorista, ObterParametrosMotorista(motorista));
-        }
-
-        public override void Editar(int id, Motorista motorista)
-        {
-            new CnhDAO().Editar(motorista.Cnh.Id, motorista.Cnh);
-            motorista.Id = id;
-            Db.Update(sqlEditarMotorista, ObterParametrosMotorista(motorista));
-        }
-
-        public override void Excluir(int id_motorista, Type tipo = null)
-        {
-            Db.Delete(sqlExcluirMotorista, Db.AdicionarParametro("ID", id_motorista));
-        }
-
         public override Motorista GetById(int id, Type tipo = null)
         {
             throw new NotSupportedException();
@@ -215,8 +211,8 @@ namespace Infra.DAO.PessoaModule
                 { "NOME", motorista.Nome },
                 { "TELEFONE", motorista.Telefone },
                 { "ENDERECO", motorista.Endereco },
-                { "DOCUMENTO", motorista.Documento },
-                { "ID_CNH", motorista.Cnh.Id },
+                { "DOCUMENTO", motorista.TipoPessoa.Documento },
+                { "ID_CNH", motorista.DadosCondutor.Cnh.Id },
                 { "ID_EMPRESA", motorista.Empresa.Id }
                 };
 

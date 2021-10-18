@@ -1,4 +1,6 @@
 ﻿using Dominio.PessoaModule.ClienteModule;
+using Dominio.Repositories;
+using Dominio.Shared;
 using Infra.DAO.Shared;
 using System;
 using System.Collections.Generic;
@@ -6,11 +8,11 @@ using System.Data;
 
 namespace Infra.DAO.PessoaModule
 {
-    public class ClientePFDAO : EntidadeDAO<ClientePF>
+    public class ClientePFDAO : EntidadeDAO<ClientePF> , IClientePFRepository
     {
         #region Queries
         private const string sqlInserirClientePF =
-    @"INSERT INTO [TBCLIENTEPF]
+            @"INSERT INTO [TBCLIENTEPF]
                 (
                     [NOME],       
                     [TELEFONE],             
@@ -66,6 +68,14 @@ namespace Infra.DAO.PessoaModule
             WHERE 
                 [ID] = @ID";
 
+        private const string sqlExisteDocumento =
+            @"SELECT 
+                COUNT(*) 
+            FROM 
+                [TBCLIENTEPF]
+            WHERE 
+                [DOCUMENTO] = @DOCUMENTO";
+
         #endregion
         public override string sqlSelecionarPorId => sqlSelecionarClientePFPorId;
         public override string sqlSelecionarTodos => sqlSelecionarTodosClientePF;
@@ -85,13 +95,19 @@ namespace Infra.DAO.PessoaModule
             var data_nascimento = Convert.ToDateTime(reader["DATA_NASCIMENTO"]);
 
             var id_cnh = Convert.ToInt32(reader["ID_CNH"]);
-            var cnh = new CnhDAO().GetByIdCondutor(id_cnh);
+            var cnh = new CnhDAO().GetById(id_cnh);
 
             return new ClientePF(nome, telefone, endereco, documento, cnh, data_nascimento, email)
             {
                 Id = id
             };
         }
+  
+        public bool ExisteDocumento(string documento, Type type)
+        {
+            return Db.Exists(sqlExisteDocumento, Db.AdicionarParametro("DOCUMENTO", documento));
+        }
+
         public override Dictionary<string, object> ObterParametrosRegistro(ClientePF cliente)
         {
             var parametros = new Dictionary<string, object>

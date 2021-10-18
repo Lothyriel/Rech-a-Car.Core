@@ -1,4 +1,7 @@
 ﻿using Aplicacao.Shared;
+using Autofac;
+using DependencyInjector;
+using Dominio.Repositories;
 using Dominio.Shared;
 using Dominio.VeiculoModule;
 
@@ -6,10 +9,12 @@ namespace Aplicacao.VeiculoModule
 {
     public class CategoriaAppServices : EntidadeAppServices<Categoria>
     {
-        public CategoriaAppServices(IRepository<Categoria> repositorio)
+        public CategoriaAppServices()
         {
-            Repositorio = repositorio;
+            var dependencyResolver = DependencyInjection.Container;
+
+            Repositorio = dependencyResolver.Resolve<ICategoriaRepository>();
         }
-        public override IRepository<Categoria> Repositorio { get; }
+        protected override IRepository<Categoria> Repositorio { get; }
     }
 }

@@ -1,9 +1,9 @@
-﻿using Dominio.ServicoModule;
+﻿using Aplicacao.ServicosModule;
+using Aplicacao.Shared;
+using Dominio.ServicoModule;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Aplicacao.ServicosModule;
-using Aplicacao.Shared;
 
 namespace IntegrationTests.ServicoModule
 {
@@ -57,7 +57,7 @@ namespace IntegrationTests.ServicoModule
         [TestMethod]
         public void Deve_editar_servico()
         {
-            sut.Editar(servico.Id,servico);
+            sut.Editar(servico.Id, servico);
             mockRepoServico.Verify(x => x.Editar(servico.Id, servico));
         }
     }

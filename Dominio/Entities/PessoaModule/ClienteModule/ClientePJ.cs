@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace Dominio.PessoaModule.ClienteModule
 {
-    public class ClientePJ : PessoaJuridica, ICliente
+    public class ClientePJ : Cliente
     {
-        public List<Motorista> Motoristas { get; set; } = new List<Motorista>();
-        public string Email { get; set; }
+        public virtual List<Motorista> Motoristas { get; set; } = new List<Motorista>();
+        public override TipoPessoa TipoPessoa { get; init; }
 
         public ClientePJ(string nome, string telefone, string endereco, string documento, string email)
         {
@@ -15,21 +14,11 @@ namespace Dominio.PessoaModule.ClienteModule
             Endereco = endereco;
             Documento = documento;
             Email = email;
+            TipoPessoa = new CNPJ(documento);
         }
         public ClientePJ()
         {
 
-        }
-        public override string Validar()
-        {
-            string validacao = base.Validar();
-
-            Regex ValidarEmail = new Regex(@"[a-z0-9._]+@[a-z0-9._]+\.[a-z0-9.]+[a-z]+", RegexOptions.IgnoreCase);
-
-            if (!ValidarEmail.IsMatch(Email))
-                validacao += "Email inválido\n";
-
-            return validacao;
         }
     }
 }

@@ -1,12 +1,10 @@
-﻿using FluentAssertions;
+﻿using Aplicacao.Shared;
+using Aplicacao.VeiculoModule;
+using Dominio.Shared;
+using Dominio.VeiculoModule;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Dominio.Shared;
-using Aplicacao.VeiculoModule;
-using Infra.DAO.Shared;
-using Infra.DAO.VeiculoModule;
-using Dominio.VeiculoModule;
-using Aplicacao.Shared;
 
 namespace IntegrationTests.VeiculoModule
 {
@@ -19,14 +17,14 @@ namespace IntegrationTests.VeiculoModule
         Mock<IRepository<Categoria>> mockrepoCategoria;
         VeiculoAppServices sut;
 
-       [TestInitialize]
+        [TestInitialize]
         public void InicializarClasse()
         {
             veiculoMock = new();
             veiculoMock.Setup(x => x.Validar()).Returns("");
 
             veiculo = veiculoMock.Object;
-                    
+
 
             mockrepoVeiculo = new();
             mockrepoCategoria = new();
@@ -63,7 +61,7 @@ namespace IntegrationTests.VeiculoModule
         [TestMethod]
         public void Deve_editar_veiculo()
         {
-            sut.Editar(veiculo.Id,veiculo);
+            sut.Editar(veiculo.Id, veiculo);
             mockrepoVeiculo.Verify(x => x.Editar(veiculo.Id, veiculo));
         }
     }

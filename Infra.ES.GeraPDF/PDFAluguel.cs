@@ -12,9 +12,9 @@ using System.IO;
 
 namespace AluguelPDF
 {
-    public class PDFAluguel : IRelatorioAluguel
+    public class PDFAluguel : IRelatorio
     {
-        public MemoryStream GerarRelatorio(Aluguel aluguel)
+        public RelatorioAluguel GerarRelatorio(Aluguel aluguel)
         {
             var ms = new MemoryStream();
             var writer = new PdfWriter(ms);
@@ -83,7 +83,7 @@ namespace AluguelPDF
 
             pdf.Close();
 
-            return ms;
+            return new RelatorioAluguel(aluguel, ms);
         }
     }
 }
