@@ -1,5 +1,4 @@
 ﻿using Dominio.Entities.PessoaModule.Condutor;
-using Dominio.PessoaModule;
 using Dominio.PessoaModule.Condutor;
 using FluentAssertions;
 using Infra.DAO.PessoaModule;
@@ -28,15 +27,15 @@ namespace IntegrationTests.ClientePFModule
         [TestMethod]
         public void Deve_Inserir_cnh_cliente()
         {
-            var cnhAnterior = new CNH("1212120", TipoCNH.A);
-            dd.Inserir(cnhAnterior);
+            var dadosCondutor = new DadosCondutor(new CNH("1212120", TipoCNH.A));
+            dd.Inserir(dadosCondutor);
         }
 
         [TestMethod]
         public void Deve_Excluir_cnh_cliente()
         {
-            var cnhAnterior = new CNH("1212120", TipoCNH.A);
-            dd.Excluir(cnhAnterior.Id);
+            var dadosCondutor = new DadosCondutor(new CNH("1212120", TipoCNH.A));
+            dd.Excluir(dadosCondutor.Id);
         }
     }
 }

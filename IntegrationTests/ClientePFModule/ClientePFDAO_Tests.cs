@@ -1,5 +1,7 @@
-﻿using Dominio.PessoaModule;
+﻿using Dominio.Entities.PessoaModule.Condutor;
+using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.Condutor;
 using FluentAssertions;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;
@@ -13,17 +15,17 @@ namespace IntegrationTests.ClientePF_Module
     public class ClientePFDAO_Tests
     {
         ClientePFDAO ClientePFDAO = new();
-        CnhDAO CnhDAO = new();
+        DadosCondutorDAO dadosDAO = new();
         ClientePF cliente;
-        CNH cnh;
+        DadosCondutor dados;
 
 
         [TestInitialize]
         public void Inserir_clientePF()
         {
-            cnh = new CNH("1212120", TipoCNH.A);
-            CnhDAO.Inserir(cnh);
-            cliente = new ClientePF("nome", "999999999", "endereco", "99999999999", cnh, new DateTime(2001, 04, 27), "email@teste.com");
+            dados = new DadosCondutor(new CNH("1212120", TipoCNH.A));
+            dadosDAO.Inserir(dados);
+            cliente = new ClientePF("nome", "999999999", "endereco", "99999999999", dados, new DateTime(2001, 04, 27), "email@teste.com");
             ClientePFDAO.Inserir(cliente);
 
         }
