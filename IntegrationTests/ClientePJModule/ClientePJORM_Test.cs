@@ -23,13 +23,13 @@ namespace IntegrationTests.ClientePJModule
         ClientePJ cliente1;
         Motorista motorista1;
         ILifetimeScope lsp;
-        rech_a_carDbContext ctx;
+        Rech_a_carDbContext ctx;
 
         [TestInitialize]
         public void Inserir_clientePJ()
         {
             lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            ctx = lsp.Resolve<Rech_a_carDbContext>();
 
             cliente1 = new ClientePJ("nome", "99999999999", "endereco", "99999999999999", "email@teste.com");
             motorista1 = new Motorista("nomeMotorista", "99999999999", "endereco", "99999999999999", new CNH("59778304921", TipoCNH.A), cliente1);

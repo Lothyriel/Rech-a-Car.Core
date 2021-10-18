@@ -16,13 +16,13 @@ namespace IntegrationTests.VeiculoModule
     {
         Veiculo veiculo1;
         ILifetimeScope lsp;
-        rech_a_carDbContext ctx;
+        Rech_a_carDbContext ctx;
 
         [TestInitialize]
         public void Inserir_Veiculo()
         {
             lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            ctx = lsp.Resolve<Rech_a_carDbContext>();
 
             var imagem = Properties.Resources.focus_gay;
             var categoria = new Categoria("Economico", 100, 10, 400, 800, TipoCNH.B);

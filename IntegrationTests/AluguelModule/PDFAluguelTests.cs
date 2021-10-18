@@ -1,7 +1,6 @@
 ﻿using AluguelPDF;
 using Aplicacao.AluguelModule;
 using Dominio.AluguelModule;
-using Dominio.Entities.PessoaModule.ClienteModule;
 using Dominio.Entities.PessoaModule.Condutor;
 using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;

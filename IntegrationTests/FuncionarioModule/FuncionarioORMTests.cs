@@ -16,13 +16,13 @@ namespace IntegrationTests.FuncionarioModule
     {
         Funcionario funcionario1;
         ILifetimeScope lsp;
-        rech_a_carDbContext ctx;
+        Rech_a_carDbContext ctx;
 
         [TestInitialize]
         public void Inserindo()
         {
             lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            ctx = lsp.Resolve<Rech_a_carDbContext>();
 
             var imagem = Image.FromFile(@"..\..\..\Resources\user.png");
             funcionario1 = new Funcionario("Nome", "49999155922", "Endereço", "13130847983", Cargo.Vendedor, imagem, "user_teste", "senha12345678");

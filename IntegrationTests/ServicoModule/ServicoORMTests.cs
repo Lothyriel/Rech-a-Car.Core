@@ -15,13 +15,13 @@ namespace IntegrationTests.ServicoModule
     {
         Servico servico1;
         ILifetimeScope lsp;
-        rech_a_carDbContext ctx;
+        Rech_a_carDbContext ctx;
 
         [TestInitialize]
         public void Inserindo_no_banco()
         {
             lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            ctx = lsp.Resolve<Rech_a_carDbContext>();
 
             servico1 = new("nomeServico", 10, new AluguelDataBuilder().Padrao);
             new ServicoORM(ctx).Inserir(servico1);

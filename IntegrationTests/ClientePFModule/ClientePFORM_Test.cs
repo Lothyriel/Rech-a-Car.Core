@@ -22,13 +22,13 @@ namespace IntegrationTests.ClientePFModule
         ClientePF cliente1;
         CNH cnh1;
         ILifetimeScope lsp;
-        rech_a_carDbContext ctx;
+        Rech_a_carDbContext ctx;
         
         [TestInitialize]
         public void Inserir_clientePF()
         {
             lsp = DependencyInjection.Container.BeginLifetimeScope();
-            ctx = lsp.Resolve<rech_a_carDbContext>();
+            ctx = lsp.Resolve<Rech_a_carDbContext>();
 
             cnh1 = new CNH("1212120", TipoCNH.A);
             cliente1 = new ClientePF("nome", "999999999", "endereco", "99999999999", cnh1, new DateTime(2001, 04, 27), "email@teste.com");
