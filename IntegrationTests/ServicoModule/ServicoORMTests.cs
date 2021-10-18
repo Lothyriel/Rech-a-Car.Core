@@ -43,13 +43,11 @@ namespace IntegrationTests.ServicoModule
             servico1.Nome = "novoNome";
             new ServicoORM(ctx).Editar(servico1.Id, servico1);
             new ServicoORM(ctx).GetById(servico1.Id).Nome.Should().NotBe(nomeAnterior);
-
         }
 
         [TestMethod]
         public void Deve_remover_servico()
         {
-
             new ServicoORM(ctx).Excluir(servico1.Id);
             new ServicoORM(ctx).Registros.Count.Should().Be(0);
         }
@@ -57,7 +55,8 @@ namespace IntegrationTests.ServicoModule
         [TestCleanup]
         public void LimparTestes()
         {
-            Db.Delete(TestExtensions.ResetId("TBServico"));
+            ctx.DeleteAll<Servico>();
+            ctx.SaveChanges();
             lsp.Dispose();
         }
     }

@@ -55,7 +55,9 @@ namespace IntegrationTests.CupomModule
         [TestCleanup]
         public void Limpar()
         {
-            Db.Delete(TestExtensions.ResetId("TBCupom"));
+            ctx.DeleteAll<Cupom>();
+            ctx.SaveChanges();
+            lsp.Dispose();
         }
     }
 }

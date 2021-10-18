@@ -54,11 +54,11 @@ namespace IntegrationTests.CupomModule
             new ParceiroORM(ctx).Registros.Count.Should().Be(0);
         }
 
-
         [TestCleanup]
         public void LimparTestes()
         {
-            Db.Delete(TestExtensions.ResetId("TBParceiro"));
+            ctx.DeleteAll<Parceiro>();
+            ctx.SaveChanges();
             lsp.Dispose();
         }
     }

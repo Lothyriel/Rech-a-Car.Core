@@ -91,7 +91,8 @@ namespace IntegrationTests.ClientePFModule
         [TestCleanup]
         public void LimparTestes()
         {
-            Db.Delete(TestExtensions.ResetId("TBClientePF"));
+            ctx.DeleteAll<ClientePF>();
+            ctx.SaveChanges();
             lsp.Dispose();
         }
     }

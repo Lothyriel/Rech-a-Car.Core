@@ -121,7 +121,8 @@ namespace IntegrationTests.ClientePJModule
         [TestCleanup]
         public void LimparTestes()
         {
-            Db.Delete(TestExtensions.ResetId("TBClientePJ"));
+            ctx.DeleteAll<ClientePJ>();
+            ctx.SaveChanges();
             lsp.Dispose();
         }
     }

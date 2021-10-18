@@ -22,7 +22,7 @@ using System.Collections.Generic;
 namespace Infra.DAO.AluguelModule
 {
     [TestClass]
-    public class PDFAluguelTests
+    public class PDFAluguelDAOTests
     {
         Aluguel aluguel;
         static AluguelDAO ad = new();

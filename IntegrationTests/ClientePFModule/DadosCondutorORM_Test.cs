@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IntegrationTests.ClientePFModule
 {
     [TestClass]
-    public class CnhORM_Test
+    public class DadosCondutorORM_Test
     {
         DadosCondutor dados;
         ILifetimeScope lsp;
@@ -49,14 +49,15 @@ namespace IntegrationTests.ClientePFModule
         [TestMethod]
         public void Deve_Excluir_cnh_cliente()
         {
-            var cnhAnterior = new CNH("1212120", TipoCNH.A);
-            new DadosCondutorORM(ctx).Excluir(cnhAnterior.Id);
+            var dados = new DadosCondutor(new CNH("1212120", TipoCNH.A));
+            new DadosCondutorORM(ctx).Excluir(dados.Id);
         }
 
         [TestCleanup]
         public void LimparTestes()
         {
-            Db.Delete(TestExtensions.ResetId("TBCNH"));
+            ctx.DeleteAll<DadosCondutor>();
+            ctx.SaveChanges();
             lsp.Dispose();
         }
     }

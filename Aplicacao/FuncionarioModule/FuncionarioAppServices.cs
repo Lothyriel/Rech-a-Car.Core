@@ -30,11 +30,11 @@ namespace Aplicacao.FuncionarioModule
             return base.Inserir(funcionario);
         }
 
-        public override bool Excluir(int id, Type tipo = null)
-        {
-            RepositorioSenha.Excluir(id);
-            return base.Excluir(id, tipo);
-        }
+        //public override bool Excluir(int id, Type tipo = null)  NÃO PRECISA POR CAUSA DAS FKs CONFIGURADAS
+        //{
+        //    RepositorioSenha.Excluir(id);
+        //    return base.Excluir(id, tipo);
+        //}
         public bool ExisteUsuario(string usuario)
         {
             return Repositorio.ExisteUsuario(usuario);

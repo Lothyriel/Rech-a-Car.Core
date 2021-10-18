@@ -4,14 +4,16 @@ using Infra.DAO.ORM;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infra.DAO.ORM.Migrations
 {
     [DbContext(typeof(Rech_a_carDbContext))]
-    partial class Rech_a_carDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211018202745_chave")]
+    partial class chave
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -12,6 +12,8 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasKey(p => p.Id);
 
+            builder.HasOne(p => p.Aluguel).WithMany().OnDelete(DeleteBehavior.Cascade);
+
             builder.Property(p => p.Nome).HasColumnType("VARCHAR(80)").IsRequired();
 
             builder.Property(p => p.Taxa).IsRequired();
