@@ -10,9 +10,7 @@ namespace Infra.DAO.ORM.Configurations
         {
             builder.ToTable("TBPessoa");
 
-            builder.HasKey(p => p.Id).HasAnnotation("SqlServer:Identity", "1, 1");
-
-            builder.Property(p => p.Id).ValueGeneratedOnAdd();
+            builder.Property(p => p.Id).ValueGeneratedOnAdd().HasAnnotation("SqlServer:Identity", "1, 1");
 
             builder.Property(p => p.Nome).HasColumnType("VARCHAR(80)").IsRequired();
 

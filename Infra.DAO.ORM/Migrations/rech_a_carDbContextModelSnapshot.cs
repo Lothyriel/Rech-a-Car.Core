@@ -187,7 +187,9 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.PessoaModule.Pessoa", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:Identity", "1, 1");
 
                     b.Property<string>("Documento")
                         .IsRequired()
@@ -208,8 +210,7 @@ namespace Infra.DAO.ORM.Migrations
                         .IsRequired()
                         .HasColumnType("CHAR(11)");
 
-                    b.HasKey("Id")
-                        .HasAnnotation("SqlServer:Identity", "1, 1");
+                    b.HasKey("Id");
 
                     b.ToTable("TBPessoa");
                 });

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.DAO.ORM.Migrations
 {
     [DbContext(typeof(Rech_a_carDbContext))]
-    [Migration("20211019185934_initial")]
-    partial class initial
+    [Migration("20211019191455_meudeus")]
+    partial class meudeus
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -189,7 +189,9 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.PessoaModule.Pessoa", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:Identity", "1, 1");
 
                     b.Property<string>("Documento")
                         .IsRequired()
@@ -210,8 +212,7 @@ namespace Infra.DAO.ORM.Migrations
                         .IsRequired()
                         .HasColumnType("CHAR(11)");
 
-                    b.HasKey("Id")
-                        .HasAnnotation("SqlServer:Identity", "1, 1");
+                    b.HasKey("Id");
 
                     b.ToTable("TBPessoa");
                 });
