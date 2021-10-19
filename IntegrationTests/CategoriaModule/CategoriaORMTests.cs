@@ -86,7 +86,8 @@ namespace IntegrationTests.CategoriaModule
         [TestCleanup]
         public void LimparTestes()
         {
-            Db.Delete(TestExtensions.ResetId("TBCategoria"));
+            ctx.DeleteAll<Categoria>();
+            ctx.SaveChanges();
             lsp.Dispose();
         }
     }

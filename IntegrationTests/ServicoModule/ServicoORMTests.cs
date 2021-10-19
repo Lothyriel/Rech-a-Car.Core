@@ -23,7 +23,7 @@ namespace IntegrationTests.ServicoModule
             lsp = DependencyInjection.Container.BeginLifetimeScope();
             ctx = lsp.Resolve<Rech_a_carDbContext>();
 
-            servico1 = new("nomeServico", 10, new AluguelDataBuilder().Padrao);
+            servico1 = new("nomeServico", 10, null);
             new ServicoORM(ctx).Inserir(servico1);
 
         }

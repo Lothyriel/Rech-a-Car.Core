@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.DAO.ORM.Migrations
 {
     [DbContext(typeof(Rech_a_carDbContext))]
-    [Migration("20211018202745_chave")]
-    partial class chave
+    [Migration("20211019012011_initia")]
+    partial class initia
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -122,7 +122,9 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.HasKey("Id");
 
@@ -188,9 +190,7 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.PessoaModule.Pessoa", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Documento")
                         .HasColumnType("nvarchar(max)");
@@ -463,16 +463,12 @@ namespace Infra.DAO.ORM.Migrations
 
             modelBuilder.Entity("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", b =>
                 {
-                    b.HasOne("Dominio.PessoaModule.ClienteModule.ClientePF", null)
-                        .WithOne("DadosCondutor")
-                        .HasForeignKey("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.OwnsOne("Dominio.PessoaModule.Condutor.CNH", "Cnh", b1 =>
                         {
                             b1.Property<int>("DadosCondutorId")
-                                .HasColumnType("int");
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                             b1.Property<int>("Id")
                                 .HasColumnType("int");
@@ -571,11 +567,19 @@ namespace Infra.DAO.ORM.Migrations
 
             modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePF", b =>
                 {
+                    b.HasOne("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", "DadosCondutor")
+                        .WithOne()
+                        .HasForeignKey("Dominio.PessoaModule.ClienteModule.ClientePF", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Dominio.PessoaModule.ClienteModule.Cliente", null)
                         .WithOne()
                         .HasForeignKey("Dominio.PessoaModule.ClienteModule.ClientePF", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
+
+                    b.Navigation("DadosCondutor");
                 });
 
             modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePJ", b =>
@@ -595,11 +599,6 @@ namespace Infra.DAO.ORM.Migrations
             modelBuilder.Entity("Dominio.Entities.PessoaModule.Condutor.DadosCondutor", b =>
                 {
                     b.Navigation("Multas");
-                });
-
-            modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePF", b =>
-                {
-                    b.Navigation("DadosCondutor");
                 });
 
             modelBuilder.Entity("Dominio.PessoaModule.ClienteModule.ClientePJ", b =>

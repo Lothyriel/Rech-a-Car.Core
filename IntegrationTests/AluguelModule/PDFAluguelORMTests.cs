@@ -22,7 +22,7 @@ using Dominio.Entities.PessoaModule.Condutor;
 namespace Infra.ORM.AluguelModule
 {
     [TestClass]
-    public class PDFAluguelTests
+    public class PDFAluguelORMTests
     {
         Aluguel aluguel;
         ILifetimeScope lsp;
