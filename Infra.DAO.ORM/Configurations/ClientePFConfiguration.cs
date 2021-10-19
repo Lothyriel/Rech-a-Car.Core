@@ -11,9 +11,11 @@ namespace Infra.DAO.ORM.Configurations
         {
             builder.ToTable("TBClientePF");
 
+            builder.HasBaseType<Cliente>();
+
             builder.Property(p => p.DataNascimento).IsRequired();
 
-            builder.HasOne(p => p.DadosCondutor).WithOne().OnDelete(DeleteBehavior.Cascade).HasForeignKey<ClientePF>(p=>p.Id);
+            builder.HasOne(p => p.DadosCondutor).WithOne().OnDelete(DeleteBehavior.Cascade).HasForeignKey<DadosCondutor>(p=>p.Id);
         }
     }
 }

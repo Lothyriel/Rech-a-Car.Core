@@ -5,16 +5,15 @@ namespace Dominio.PessoaModule.ClienteModule
     public class ClientePJ : Cliente
     {
         public virtual List<Motorista> Motoristas { get; set; } = new List<Motorista>();
-        public override TipoPessoa TipoPessoa { get; init; }
+        public override ETipoPessoa ETipoPessoa { get; init; } = ETipoPessoa.CNPJ;
 
-        public ClientePJ(string nome, string telefone, string endereco, string documento, string email)
+        public ClientePJ(string nome, string telefone, string endereco, string documento, string email) : base(nome, telefone, endereco, documento, email)
         {
             Nome = nome;
             Telefone = telefone;
             Endereco = endereco;
             Documento = documento;
             Email = email;
-            TipoPessoa = new CNPJ(documento);
         }
         public ClientePJ()
         {

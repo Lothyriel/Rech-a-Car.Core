@@ -221,7 +221,7 @@ public class MotoristaDAO : EntidadeDAO<Motorista>, IMotoristaRepository
                 { "ENDERECO", motorista.Endereco },
                 { "DOCUMENTO", motorista.TipoPessoa.Documento },
                 { "ID_CNH", motorista.DadosCondutor.Cnh.Id },
-                { "ID_EMPRESA", motorista.Empresa.Id }
+                { "ID_EMPRESA", motorista.ClientePJ.Id }
                 };
 
         return parametros;

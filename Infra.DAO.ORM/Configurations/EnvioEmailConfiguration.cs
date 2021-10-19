@@ -16,7 +16,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.DataEnvio);
 
-            builder.Property(p => p.StreamAttachment);
+            builder.Property(p => p.StreamAttachment).IsRequired();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasKey(p => p.Id);
 
-            builder.HasOne(p => p.Aluguel).WithMany().OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(p => p.Aluguel).WithMany(p=>p.Servicos).OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(p => p.Nome).HasColumnType("VARCHAR(80)").IsRequired();
 

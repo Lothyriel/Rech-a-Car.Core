@@ -26,6 +26,7 @@ namespace IntegrationTests.ClientePJModule
         Motorista motorista1;
         ILifetimeScope lsp;
         Rech_a_carDbContext ctx;
+        ClientePJORM clientePJORM;
 
         [TestInitialize]
         public void Inserir_clientePJ()
@@ -35,9 +36,10 @@ namespace IntegrationTests.ClientePJModule
 
             cliente1 = new ClientePJ("nome", "99999999999", "endereco", "99999999999999", "email@teste.com");
             motorista1 = new Motorista("nomeMotorista", "99999999999", "endereco", "99999999999999", new DadosCondutor(new CNH("59778304921", TipoCNH.A)), cliente1);
-            new ClientePJORM(ctx).Inserir(cliente1);
+            clientePJORM = new ClientePJORM(ctx);
+            clientePJORM.Inserir(cliente1);
             new MotoristaORM(ctx).Inserir(motorista1);
-            cliente1 = new ClientePJORM(ctx).GetById(cliente1.Id);
+            cliente1 = clientePJORM.GetById(cliente1.Id);
         }
         [TestMethod]
         public void Deve_inserir_cliente()
@@ -53,7 +55,7 @@ namespace IntegrationTests.ClientePJModule
         public void Deve_remover_motorista()
         {
             new MotoristaORM(ctx).Excluir(cliente1.Motoristas[0].Id);
-            cliente1 = new ClientePJORM(ctx).GetById(cliente1.Id);
+            cliente1 = clientePJORM.GetById(cliente1.Id);
             cliente1.Motoristas.Count.Should().Be(0);
         }
         [TestMethod]
@@ -65,7 +67,7 @@ namespace IntegrationTests.ClientePJModule
             motoristaEmpresa.Nome = "NOME EDITADO";
 
             new MotoristaORM(ctx).Editar(motoristaEmpresa.Id, motoristaEmpresa);
-            cliente1 = new ClientePJORM(ctx).GetById(cliente1.Id);
+            cliente1 = clientePJORM.GetById(cliente1.Id);
             nomeAntigo.Should().NotBe(motoristaEmpresa.Nome);
         }
         [TestMethod]
@@ -75,9 +77,9 @@ namespace IntegrationTests.ClientePJModule
 
             cliente1.Nome = "Nome editado";
 
-            new ClientePJORM(ctx).Editar(cliente1.Id, cliente1);
+            clientePJORM.Editar(cliente1.Id, cliente1);
 
-            new ClientePJORM(ctx).GetById(cliente1.Id).Nome.Should().NotBe(nomeAnterior);
+            clientePJORM.GetById(cliente1.Id).Nome.Should().NotBe(nomeAnterior);
         }
         [TestMethod]
         public void Deve_editar_telefone_cliente()
@@ -86,9 +88,9 @@ namespace IntegrationTests.ClientePJModule
 
             cliente1.Telefone = "000000000";
 
-            new ClientePJORM(ctx).Editar(cliente1.Id, cliente1);
+            clientePJORM.Editar(cliente1.Id, cliente1);
 
-            new ClientePJORM(ctx).GetById(cliente1.Id).Telefone.Should().NotBe(telefoneAnterior);
+            clientePJORM.GetById(cliente1.Id).Telefone.Should().NotBe(telefoneAnterior);
         }
         [TestMethod]
         public void Deve_editar_endereco_cliente()
@@ -97,9 +99,9 @@ namespace IntegrationTests.ClientePJModule
 
             cliente1.Endereco = "Endereco editado";
 
-            new ClientePJORM(ctx).Editar(cliente1.Id, cliente1);
+            clientePJORM.Editar(cliente1.Id, cliente1);
 
-            new ClientePJORM(ctx).GetById(cliente1.Id).Endereco.Should().NotBe(enderecoAnterior);
+            clientePJORM.GetById(cliente1.Id).Endereco.Should().NotBe(enderecoAnterior);
         }
         [TestMethod]
         public void Deve_editar_documento_cliente()
@@ -108,14 +110,14 @@ namespace IntegrationTests.ClientePJModule
 
             cliente1.Documento = "00000000000000";
 
-            new ClientePJORM(ctx).Editar(cliente1.Id, cliente1);
+            clientePJORM.Editar(cliente1.Id, cliente1);
 
-            new ClientePJORM(ctx).GetById(cliente1.Id).Documento.Should().NotBe(documentoAnterior);
+            clientePJORM.GetById(cliente1.Id).Documento.Should().NotBe(documentoAnterior);
         }
         [TestMethod]
         public void Deve_retornar_todos_os_clientesPJ()
         {
-            new ClientePJORM(ctx).Registros.Count.Should().Be(1);
+            clientePJORM.Registros.Count.Should().Be(1);
         }
 
         [TestCleanup]

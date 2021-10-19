@@ -8,7 +8,24 @@ namespace Dominio.PessoaModule
         public string Telefone { get; set; }
         public string Endereco { get; set; }
         public string Documento { get; set; }
-        public abstract TipoPessoa TipoPessoa { get; init; }
+        public abstract ETipoPessoa ETipoPessoa { get; init; }
+
+        public Pessoa()
+        {
+        }
+        public Pessoa(string nome, string telefone, string endereco, string documento)
+        {
+            Nome = nome;
+            Telefone = telefone;
+            Endereco = endereco;
+            Documento = documento;
+
+            if (ETipoPessoa == ETipoPessoa.CNPJ)
+                TipoPessoa = new CNPJ(Documento);
+            if (ETipoPessoa == ETipoPessoa.CPF)
+                TipoPessoa = new CPF(Documento);
+        }
+        public TipoPessoa TipoPessoa { get; init; }
 
         public override string Validar()
         {
@@ -31,4 +48,5 @@ namespace Dominio.PessoaModule
             return Nome;
         }
     }
+    public enum ETipoPessoa { CPF, CNPJ }
 }

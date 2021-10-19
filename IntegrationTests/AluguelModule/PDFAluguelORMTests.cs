@@ -27,6 +27,7 @@ namespace Infra.ORM.AluguelModule
         Aluguel aluguel;
         ILifetimeScope lsp;
         Rech_a_carDbContext ctx;
+        RelatorioORM relatorioORM;
         readonly AluguelAppServices AluguelAppServices = new();
 
         [TestInitialize]
@@ -34,7 +35,7 @@ namespace Infra.ORM.AluguelModule
         {
             lsp = DependencyInjection.Container.BeginLifetimeScope();
             ctx = lsp.Resolve<Rech_a_carDbContext>();
-
+            relatorioORM = new RelatorioORM(ctx);
             var categoria = new Categoria("Joaninha", 100, 5, 300, 500, TipoCNH.B);
             var imagem = Resources.ford_ka_gay;
             var veiculo = new Veiculo("Ka", "Ford", 1997, "ABC1234", 50000, 4, 2, "LDSAPLDPLADAS", 0, 50, imagem, false, categoria, TipoCombustivel.Gasolina);
@@ -58,21 +59,28 @@ namespace Infra.ORM.AluguelModule
         [TestMethod]
         public void DeveCriarPdf()
         {
-            new RelatorioORM(ctx).SalvarRelatorio(new PDFAluguel().GerarRelatorio(aluguel));
-            new RelatorioORM(ctx).GetProxEnvio().Should().NotBeNull();
+            relatorioORM.SalvarRelatorio(new PDFAluguel().GerarRelatorio(aluguel));
+            relatorioORM.GetProxEnvio().Should().NotBeNull();
         }
         [TestMethod]
         public void DeveEnviarPdf()
         {
-            new RelatorioORM(ctx).SalvarRelatorio(new PDFAluguel().GerarRelatorio(aluguel));
+            relatorioORM.SalvarRelatorio(new PDFAluguel().GerarRelatorio(aluguel));
             AluguelAppServices.TentaEnviarRelatorioEmail();
 
-            new RelatorioORM(ctx).GetProxEnvio().Should().BeNull();
+            relatorioORM.GetProxEnvio().Should().BeNull();
         }
         [TestCleanup]
         public void LimparArquivo()
         {
-            Db.Delete(TestExtensions.ResetId("TBEmail"));
+            lsp.Dispose();
+            using (var lsp = DependencyInjection.Container.BeginLifetimeScope())
+            {
+                ctx = lsp.Resolve<Rech_a_carDbContext>();
+                ctx.DeleteAll<RelatorioAluguel>();
+                ctx.DeleteAll<Funcionario>();
+                ctx.DeleteAll<Aluguel>();
+            }
         }
     }
 }

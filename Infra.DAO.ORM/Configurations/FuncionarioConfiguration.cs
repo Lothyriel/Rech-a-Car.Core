@@ -10,11 +10,13 @@ namespace Infra.DAO.ORM.Configurations
         {
             builder.ToTable("TBFuncionario");
 
+            builder.HasBaseType<Pessoa>();
+
             builder.Property(p => p.Cargo);
 
             builder.Property(p => p.Usuario).HasColumnType("VARCHAR(30)").IsRequired();
 
-            builder.Property(p => p.Foto);
+            builder.Property(p => p.Foto).IsRequired();
 
             builder.Ignore(p => p.Senha);
         }

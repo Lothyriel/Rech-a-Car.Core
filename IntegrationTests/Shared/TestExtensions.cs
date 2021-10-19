@@ -14,6 +14,7 @@ namespace IntegrationTests.Shared
         {
             var todos = ctx.Set<T>().ToList();
             ctx.Set<T>().RemoveRange(todos);
+            ctx.SaveChanges();
         }
     }
 }

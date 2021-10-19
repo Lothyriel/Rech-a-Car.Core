@@ -12,16 +12,14 @@ namespace Dominio.PessoaModule
             Endereco = endereco;
             Documento = documento;
             DadosCondutor = dadosCondutor;
-            Empresa = empresa;
-            TipoPessoa = new CPF(documento);
+            ClientePJ = empresa;
         }
         public Motorista()
         {
 
         }
-        public virtual ClientePJ Empresa { get; set; }
-
-        public override TipoPessoa TipoPessoa { get; init; }
+        public override ETipoPessoa ETipoPessoa { get; init; } = ETipoPessoa.CPF;
+        public virtual ClientePJ ClientePJ { get; set; }
         public virtual DadosCondutor DadosCondutor { get; init; }
 
         public override string Validar()

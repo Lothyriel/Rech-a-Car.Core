@@ -20,7 +20,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.HasOne(p => p.Cupom).WithMany().OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(p => p.Servicos);
+            builder.HasMany(p => p.Servicos).WithOne(p=>p.Aluguel).OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(p => p.Cliente).WithMany().OnDelete(DeleteBehavior.Cascade);
 
