@@ -16,7 +16,7 @@ namespace Dominio.Entities.PessoaModule.Condutor
 
         }
 
-        public virtual CNH Cnh { get; init; }
+        public virtual CNH Cnh { get; set; }
         public virtual List<Multa> Multas { get; init; }
 
         public override string Validar()

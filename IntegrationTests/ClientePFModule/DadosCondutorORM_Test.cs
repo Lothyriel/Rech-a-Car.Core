@@ -5,7 +5,6 @@ using Dominio.PessoaModule.Condutor;
 using FluentAssertions;
 using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
-using Infra.DAO.Shared;
 using IntegrationTests.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -17,6 +16,7 @@ namespace IntegrationTests.ClientePFModule
         DadosCondutor dados;
         ILifetimeScope lsp;
         Rech_a_carDbContext ctx;
+        DadosCondutorORM orm;
 
         [TestInitialize]
         public void Inserir_Cnh()
@@ -25,32 +25,33 @@ namespace IntegrationTests.ClientePFModule
             ctx = lsp.Resolve<Rech_a_carDbContext>();
 
             dados = new DadosCondutor(new CNH("1212120", TipoCNH.A));
-            new DadosCondutorORM(ctx).Inserir(dados);
+            orm = new DadosCondutorORM(ctx);
+            orm.Inserir(dados);
         }
 
         [TestMethod]
         public void Deve_editar_cnh_cliente()
         {
-            var dadosAntigo = new DadosCondutor(new CNH("1212120", TipoCNH.A));
-            var dadosNovo = new DadosCondutor(new CNH("1212120", TipoCNH.C));
-            new DadosCondutorORM(ctx).Inserir(dadosAntigo);
-            new DadosCondutorORM(ctx).Editar(dadosAntigo.Id, dadosNovo);
+            var cnhNova = new CNH("1212120", TipoCNH.C);
+            dados.Cnh = cnhNova;
 
-            new DadosCondutorORM(ctx).GetById(dadosAntigo.Id).Cnh.TipoCnh.Should().Be(dadosNovo.Cnh.TipoCnh);
+            orm.Editar(dados.Id, dados);
+
+            orm.GetById(dados.Id).Cnh.TipoCnh.Should().Be(cnhNova.TipoCnh);
         }
 
         [TestMethod]
         public void Deve_Inserir_cnh_cliente()
         {
-            var cnhAnterior = new DadosCondutor(new CNH("1212120", TipoCNH.A));
-            new DadosCondutorORM(ctx).Inserir(cnhAnterior);
+            orm.Inserir(dados);
+            orm.Registros.Count.Should().Be(1);
         }
 
         [TestMethod]
         public void Deve_Excluir_cnh_cliente()
         {
-            var dados = new DadosCondutor(new CNH("1212120", TipoCNH.A));
-            new DadosCondutorORM(ctx).Excluir(dados.Id);
+            orm.Excluir(dados.Id);
+            orm.Registros.Count.Should().Be(0);
         }
 
         [TestCleanup]

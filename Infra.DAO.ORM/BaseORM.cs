@@ -27,6 +27,7 @@ namespace Infra.DAO.ORM
         }
         public void Editar(int id, T entidade)
         {
+            entidade.Id = id;
             Context.Update(entidade);
             Context.SaveChanges();
         }
