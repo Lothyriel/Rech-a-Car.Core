@@ -34,12 +34,17 @@ namespace Tests.Tests.AlguelModule
         public void InicializaAluguel()
         {
             categoria = new Categoria("nome", 2, 2, 2, 2, TipoCNH.A);
+            dadosCondutor = new DadosCondutor(new CNH("numero", TipoCNH.A));
+            motoristaEmpresa = new Motorista("nome", "123123123", "endereço", "d12398127", dadosCondutor, clientepj);
             veiculo = new Veiculo("modelo", "marca", 1, "ASD1234", 1, 1, 1, "123456789123", 2, 50, imagemVeiculo, true, categoria, TipoCombustivel.Diesel);
             clientepj = new ClientePJ("nome", "4999915522", "endereço", "0131038190371", "email@teste.com");
             dadosCondutor = new DadosCondutor(new CNH("numero", TipoCNH.A));
             motoristaEmpresa = new Motorista("nome", "123123123", "endereço", "d12398127", dadosCondutor, clientepj);
             aluguel = new Aluguel(veiculo, null, Plano.Diário, DateTime.Today.AddDays(10), clientepj, funcionario, DateTime.Today.AddDays(15), motoristaEmpresa.DadosCondutor);
             servicos = new List<Servico>() { new Servico("1", 1, aluguel), new Servico("2", 2, aluguel) };
+            dadosCondutor = new DadosCondutor(new CNH("numero", TipoCNH.A));
+            clientepj = new ClientePJ("nome", "4999915522", "endereço", "0131038190371", "email@teste.com");
+            motoristaEmpresa = new Motorista("nome", "123123123", "endereço", "d12398127", dadosCondutor, clientepj);
             funcionario = new Funcionario("nome", "49999155922", "endereco", "01308174983", Cargo.SysAdmin, imagemFuncionario, "usuario");
             aluguel.Servicos = servicos;
         }
@@ -61,7 +66,7 @@ namespace Tests.Tests.AlguelModule
         [TestMethod]
         public void Deve_retornar_aluguel_invalido()
         {
-            aluguel = new Aluguel(null, null, Plano.Controlado, new DateTime(), null, null, new DateTime());
+            aluguel.DadosCondutor = null;
 
             aluguel.Validar().Should().NotBe(string.Empty);
         }
