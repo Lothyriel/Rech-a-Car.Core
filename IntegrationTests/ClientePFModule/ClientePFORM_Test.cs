@@ -1,95 +1,99 @@
-﻿using Dominio.PessoaModule;
+﻿using Autofac;
+using DependencyInjector;
+using Dominio.Entities.PessoaModule.Condutor;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.Condutor;
 using FluentAssertions;
+using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
 using Infra.DAO.Shared;
 using IntegrationTests.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationTests.ClientePFModule
 {
     [TestClass]
     public class ClientePFORM_Test
     {
-        ClientePFORM ClientePFORM = new();
-        CnhORM CnhORM = new();
-        ClientePF cliente;
-        CNH cnh;
-
-
+        ClientePF cliente1;
+        DadosCondutor dadosCondutor;
+        ILifetimeScope lsp;
+        Rech_a_carDbContext ctx;
+        
         [TestInitialize]
         public void Inserir_clientePF()
         {
-            cnh = new CNH("1212120", TipoCNH.A);
-            CnhORM.Inserir(cnh);
-            cliente = new ClientePF("nome", "999999999", "endereco", "99999999999", cnh, new DateTime(2001, 04, 27), "email@teste.com");
-            ClientePFORM.Inserir(cliente);
+            lsp = DependencyInjection.Container.BeginLifetimeScope();
+            ctx = lsp.Resolve<Rech_a_carDbContext>();
+
+            dadosCondutor = new DadosCondutor(new CNH("1212120", TipoCNH.A));
+            cliente1 = new ClientePF("nome", "999999999", "endereco", "99999999999", dadosCondutor, new DateTime(2001, 04, 27), "email@teste.com");
+            new DadosCondutorORM(ctx).Inserir(dadosCondutor);
+            new ClientePFORM(ctx).Inserir(cliente1);
 
         }
         [TestMethod]
         public void Deve_inserir_cliente()
         {
-            cliente.Id.Should().NotBe(0);
+            cliente1.Id.Should().NotBe(0);
         }
         [TestMethod]
         public void Deve_editar_nome_cliente()
         {
-            string nomeAnterior = cliente.Nome;
+            string nomeAnterior = cliente1.Nome;
 
-            cliente.Nome = "Nome editado";
+            cliente1.Nome = "Nome editado";
 
-            ClientePFORM.Editar(cliente.Id, cliente);
+            new ClientePFORM(ctx).Editar(cliente1.Id, cliente1);
 
-            ClientePFORM.GetById(cliente.Id).Nome.Should().NotBe(nomeAnterior);
+            new ClientePFORM(ctx).GetById(cliente1.Id).Nome.Should().NotBe(nomeAnterior);
         }
         [TestMethod]
         public void Deve_editar_telefone_cliente()
         {
-            string telefoneAnterior = cliente.Telefone;
+            string telefoneAnterior = cliente1.Telefone;
 
-            cliente.Telefone = "000000000";
+            cliente1.Telefone = "000000000";
 
-            ClientePFORM.Editar(cliente.Id, cliente);
+            new ClientePFORM(ctx).Editar(cliente1.Id, cliente1);
 
-            ClientePFORM.GetById(cliente.Id).Telefone.Should().NotBe(telefoneAnterior);
+            new ClientePFORM(ctx).GetById(cliente1.Id).Telefone.Should().NotBe(telefoneAnterior);
         }
         [TestMethod]
         public void Deve_editar_endereco_cliente()
         {
-            string enderecoAnterior = cliente.Endereco;
+            string enderecoAnterior = cliente1.Endereco;
 
-            cliente.Endereco = "Endereco editado";
+            cliente1.Endereco = "Endereco editado";
 
-            ClientePFORM.Editar(cliente.Id, cliente);
+            new ClientePFORM(ctx).Editar(cliente1.Id, cliente1);
 
-            ClientePFORM.GetById(cliente.Id).Endereco.Should().NotBe(enderecoAnterior);
+            new ClientePFORM(ctx).GetById(cliente1.Id).Endereco.Should().NotBe(enderecoAnterior);
         }
         [TestMethod]
         public void Deve_editar_documento_cliente()
         {
-            string documentoAnterior = cliente.Documento;
+            string documentoAnterior = cliente1.Documento;
 
-            cliente.Documento = "00000000000";
+            cliente1.Documento = "00000000000";
 
-            ClientePFORM.Editar(cliente.Id, cliente);
+            new ClientePFORM(ctx).Editar(cliente1.Id, cliente1);
 
-            ClientePFORM.GetById(cliente.Id).Documento.Should().NotBe(documentoAnterior);
+            new ClientePFORM(ctx).GetById(cliente1.Id).Documento.Should().NotBe(documentoAnterior);
         }
         [TestMethod]
         public void Deve_retornar_todos_os_clientesPF()
         {
-            ClientePFORM.Registros.Count.Should().Be(1);
+            new ClientePFORM(ctx).Registros.Count.Should().Be(1);
         }
 
         [TestCleanup]
         public void LimparTestes()
         {
-            Db.Delete(TestExtensions.ResetId("TBClientePF"));
+            ctx.DeleteAll<ClientePF>();
+            ctx.SaveChanges();
+            lsp.Dispose();
         }
     }
 }

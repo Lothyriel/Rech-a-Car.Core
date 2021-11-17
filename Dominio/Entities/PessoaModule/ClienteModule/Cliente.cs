@@ -4,6 +4,14 @@ namespace Dominio.PessoaModule.ClienteModule
 {
     public abstract class Cliente : Pessoa
     {
+        public Cliente()
+        {
+
+        }
+        public Cliente(string nome, string telefone, string endereco, string documento, string email) : base(nome, telefone, endereco, documento)
+        {
+            Email = email;
+        }
         public string Email { get; set; }
         public override string Validar()
         {

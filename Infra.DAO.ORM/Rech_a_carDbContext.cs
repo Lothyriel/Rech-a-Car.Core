@@ -16,7 +16,7 @@ namespace Infra.DAO.ORM
             optionsBuilder
                 .UseLazyLoadingProxies()
                 .UseLoggerFactory(ConfigureLog())
-                .UseSqlServer(@"Data Source=(LocalDB)\MSSqlLocalDB;Initial Catalog=DBRech-a-CarORM;Integrated Security=True;Pooling=False");
+                .UseSqlServer("Data Source=(LocalDB)\\MSSqlLocalDB;Initial Catalog=DBRech-a-CarORM;Integrated Security=True;Pooling=False");
         }
 
         private static ILoggerFactory ConfigureLog()
@@ -39,10 +39,6 @@ namespace Infra.DAO.ORM
                 p => p.ToArray(),
                 p => p.ToMemoryStream());
 
-            var tipoPessoaConverter = new ValueConverter<TipoPessoa, string>(
-                p => p.Documento,
-                p => p.Length == 11 ? new CPF(p) : new CNPJ(p));
-
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
                 foreach (var property in entityType.GetProperties())
@@ -52,9 +48,6 @@ namespace Infra.DAO.ORM
 
                     if (property.ClrType == typeof(MemoryStream))
                         property.SetValueConverter(memoryStreamConverter);
-
-                    if (property.ClrType == typeof(TipoPessoa))
-                        property.SetValueConverter(tipoPessoaConverter);
                 }
             }
         }

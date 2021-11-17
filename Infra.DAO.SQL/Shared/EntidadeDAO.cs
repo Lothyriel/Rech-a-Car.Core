@@ -26,9 +26,17 @@ namespace Infra.DAO.Shared
             entidade.Id = id;
             Db.Update(sqlEditar, ObterParametrosRegistro(entidade));
         }
-        public override void Excluir(int id, Type tipo = null)
+        public override bool Excluir(int id, Type tipo = null)
         {
-            Db.Delete(sqlExcluir, Db.AdicionarParametro("ID", id));
+            try
+            {
+                Db.Delete(sqlExcluir, Db.AdicionarParametro("ID", id));
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
         public override bool Existe(int id, Type tipo = null)
         {

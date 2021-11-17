@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Infra.DAO.ORM\Infra.DAO.ORM.csproj" />
+    <ProjectReference Include="..\Infra.DAO.SQL\Infra.DAO.SQL.csproj" />
     <ProjectReference Include="..\Infra.ES.GeraPDF\Infra.GeraPDF.csproj" />
   </ItemGroup>
 

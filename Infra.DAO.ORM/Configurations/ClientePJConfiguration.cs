@@ -10,7 +10,9 @@ namespace Infra.DAO.ORM.Configurations
         {
             builder.ToTable("TBClientePJ");
 
-            builder.HasMany(p => p.Motoristas);
+            builder.HasBaseType<Cliente>();
+
+            builder.HasMany(p => p.Motoristas).WithOne().OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

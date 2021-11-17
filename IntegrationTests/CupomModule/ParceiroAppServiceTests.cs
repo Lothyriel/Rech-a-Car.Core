@@ -25,7 +25,7 @@ namespace IntegrationTests.CupomModule
             parceiro = parceiroMock.Object;
 
             mockParceiroRepo = new();
-            sut = new ParceiroAppServices(mockParceiroRepo.Object);
+            sut = new ParceiroAppServices();
         }
         [TestMethod]
         public void Deve_inserir_parceiro()

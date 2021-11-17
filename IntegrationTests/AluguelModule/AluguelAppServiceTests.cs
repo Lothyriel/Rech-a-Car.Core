@@ -1,6 +1,5 @@
 ﻿using Aplicacao.AluguelModule;
 using Aplicacao.Shared;
-using Applicacao.Shared;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.ServicoModule;
@@ -38,7 +37,7 @@ namespace IntegrationTests.AluguelModule
             mock_Servico_Repo = new();
             mock_Relatorio_Repo = new();
 
-            sut = new AluguelAppServices(mockRepoAluguel.Object, mock_Relatorio.Object, mock_Relatorio_Repo.Object, mock_Servico_Repo.Object, mock_Cupom_Repo.Object);
+            sut = new AluguelAppServices();
         }
 
 

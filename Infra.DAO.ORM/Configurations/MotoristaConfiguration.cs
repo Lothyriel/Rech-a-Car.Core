@@ -1,4 +1,5 @@
-﻿using Dominio.PessoaModule;
+﻿using Dominio.Entities.PessoaModule.Condutor;
+using Dominio.PessoaModule;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,9 +11,11 @@ namespace Infra.DAO.ORM.Configurations
         {
             builder.ToTable("TBMotorista");
 
-            builder.HasOne(p => p.DadosCondutor);
+            builder.HasBaseType<Pessoa>();
 
-            builder.HasOne(p => p.Empresa);
+            builder.HasOne(p => p.DadosCondutor).WithOne().OnDelete(DeleteBehavior.Cascade).HasForeignKey<Motorista>(p=>p.Id);
+
+            builder.HasOne(p => p.ClientePJ).WithMany(p=>p.Motoristas).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

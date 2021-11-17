@@ -10,14 +10,13 @@ namespace IntegrationTests.ServicoModule
     [TestClass]
     public class ServicoDAOTests
     {
-        Servico servico = new("nomeServico", 10, new AluguelDataBuilder().Padrao);
+        Servico servico = new("nomeServico", 10, null);
         ServicoDAO ServicoDAO = new();
 
         [TestInitialize]
         public void Inserindo_no_banco()
         {
             ServicoDAO.Inserir(servico);
-
         }
         [TestMethod]
         public void Deve_inserir_um_servico()

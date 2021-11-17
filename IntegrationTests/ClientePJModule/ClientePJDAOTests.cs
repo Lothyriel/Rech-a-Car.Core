@@ -1,5 +1,7 @@
-﻿using Dominio.PessoaModule;
+﻿using Dominio.Entities.PessoaModule.Condutor;
+using Dominio.PessoaModule;
 using Dominio.PessoaModule.ClienteModule;
+using Dominio.PessoaModule.Condutor;
 using FluentAssertions;
 using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;
@@ -22,7 +24,7 @@ namespace IntegrationTests.ClientePJ_Module
         {
             cliente = new ClientePJ("nome", "99999999999", "endereco", "99999999999999", "email@teste.com");
             ClientePJDAO.Inserir(cliente);
-            motorista = new Motorista("nomeMotorista", "99999999999", "endereco", "99999999999999", new CNH("59778304921", TipoCNH.A), cliente);
+            motorista = new Motorista("nomeMotorista", "99999999999", "endereco", "99999999999999", new DadosCondutor(new CNH("59778304921", TipoCNH.A)), cliente);
             MotoristaDAO.Inserir(motorista);
             cliente = ClientePJDAO.GetById(cliente.Id);
         }

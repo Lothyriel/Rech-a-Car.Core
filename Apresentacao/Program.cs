@@ -1,7 +1,5 @@
-﻿using Aplicacao.AluguelModule;
-using Infra.NLogger;
+﻿using Infra.NLogger;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsApp
@@ -26,7 +24,7 @@ namespace WindowsApp
 
             new Login().Show();
 
-            Task.Run(() => new AluguelAppServices().IniciaLoopEnvioEmails());
+            Infra.ES.WorkerEnvioEmail.Program.Main(Array.Empty<string>());
 
             Application.Run();
         }

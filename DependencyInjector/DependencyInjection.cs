@@ -8,8 +8,14 @@ using Dominio.PessoaModule.ClienteModule;
 using Dominio.Repositories;
 using Dominio.ServicoModule;
 using Dominio.VeiculoModule;
+using Infra.DAO.AluguelModule;
+using Infra.DAO.CupomModule;
 using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
+using Infra.DAO.ParceiroModule;
+using Infra.DAO.PessoaModule;
+using Infra.DAO.SQL.AluguelModule;
+using Infra.DAO.VeiculoModule;
 using Infra.NLogger;
 using System;
 
@@ -60,20 +66,19 @@ namespace DependencyInjector
         }
         private static void GerarRepositoriosSQL()
         {
-            throw new NotSupportedException("não faça uma coisa dessas..");
-            //Builder.RegisterType<CategoriaDAO>().As<ICategoriaRepository>().SingleInstance();
-            //Builder.RegisterType<VeiculoDAO>().As<IVeiculoRepository>().SingleInstance();
-            //Builder.RegisterType<FuncionarioDAO>().As<IFuncionarioRepository>().SingleInstance();
-            //Builder.RegisterType<ParceiroDAO>().As<IParceiroRepository>().SingleInstance();
-            //Builder.RegisterType<MotoristaDAO>().As<IMotoristaRepository>().SingleInstance();
-            //Builder.RegisterType<ClientePJDAO>().As<IClientePJRepository>().SingleInstance();
-            //Builder.RegisterType<ClientePFDAO>().As<IClientePFRepository>().SingleInstance();
-            //Builder.RegisterType<AluguelFechadoDAO>().As<IAluguelFechadoRepository>().SingleInstance();
-            //Builder.RegisterType<AluguelDAO>().As<IAluguelRepository>().SingleInstance();
-            //Builder.RegisterType<ServicoDAO>().As<IServicoRepository>().SingleInstance();
-            //Builder.RegisterType<CupomDAO>().As<ICupomRepository>().SingleInstance();
-            //Builder.RegisterType<RelatorioDAO>().As<IRelatorioRepository>().SingleInstance();
-            //Builder.RegisterType<SenhaDAO>().As<ISenhaRepository>().SingleInstance();
+            Builder.RegisterType<CategoriaDAO>().As<ICategoriaRepository>().SingleInstance();
+            Builder.RegisterType<VeiculoDAO>().As<IVeiculoRepository>().SingleInstance();
+            Builder.RegisterType<FuncionarioDAO>().As<IFuncionarioRepository>().SingleInstance();
+            Builder.RegisterType<ParceiroDAO>().As<IParceiroRepository>().SingleInstance();
+            Builder.RegisterType<MotoristaDAO>().As<IMotoristaRepository>().SingleInstance();
+            Builder.RegisterType<ClientePJDAO>().As<IClientePJRepository>().SingleInstance();
+            Builder.RegisterType<ClientePFDAO>().As<IClientePFRepository>().SingleInstance();
+            Builder.RegisterType<AluguelFechadoDAO>().As<IAluguelFechadoRepository>().SingleInstance();
+            Builder.RegisterType<AluguelDAO>().As<IAluguelRepository>().SingleInstance();
+            Builder.RegisterType<ServicoDAO>().As<IServicoRepository>().SingleInstance();
+            Builder.RegisterType<CupomDAO>().As<ICupomRepository>().SingleInstance();
+            Builder.RegisterType<RelatorioDAO>().As<IRelatorioRepository>().SingleInstance();
+            Builder.RegisterType<SenhaDAO>().As<ISenhaRepository>().SingleInstance();
         }
         private static void GerarRepositoriosORM()
         {

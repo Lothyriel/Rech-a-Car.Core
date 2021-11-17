@@ -120,7 +120,7 @@ namespace WindowsApp.Shared
             if (opcao == DialogResult.Cancel)
                 return;
 
-            if(Cadastro.Services.Excluir(dgvEntidade.GetIdSelecionado(), GetTipoEntidade()))
+            if(!Cadastro.Services.Excluir(dgvEntidade.GetIdSelecionado(), GetTipoEntidade()))
                 MessageBox.Show("Erro ao excluir registro", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
             AlternarBotoes(false);

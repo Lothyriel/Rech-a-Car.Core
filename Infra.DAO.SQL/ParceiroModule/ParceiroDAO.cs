@@ -87,7 +87,7 @@ namespace Infra.DAO.ParceiroModule
             return new Dictionary<string, object>
             {
                 { "ID", parceiro.Id },
-                { "PARCEIRO", parceiro.nome }
+                { "PARCEIRO", parceiro.Nome }
             };
         }
     }

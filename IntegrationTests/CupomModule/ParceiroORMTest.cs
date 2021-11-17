@@ -1,5 +1,8 @@
-﻿using Dominio.ParceiroModule;
+﻿using Autofac;
+using DependencyInjector;
+using Dominio.ParceiroModule;
 using FluentAssertions;
+using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
 using Infra.DAO.Shared;
 using IntegrationTests.Shared;
@@ -15,46 +18,48 @@ namespace IntegrationTests.CupomModule
     [TestClass]
     public class ParceiroORMTest
     {
-        ParceiroORM ParceiroORM = new();
         Parceiro parceiro;
-
-
-        [TestCleanup]
-        public void LimparTestes()
-        {
-            Db.Delete(TestExtensions.ResetId("TBParceiro"));
-        }
+        ILifetimeScope lsp;
+        Rech_a_carDbContext ctx;
 
         [TestInitialize]
         public void Inserindo()
         {
+            lsp = DependencyInjection.Container.BeginLifetimeScope();
+            ctx = lsp.Resolve<Rech_a_carDbContext>();
+
             parceiro = new Parceiro("Desconto do Deko");
-            ParceiroORM.Inserir(parceiro);
+            new ParceiroORM(ctx).Inserir(parceiro);
         }
 
         [TestMethod]
         public void Deve_inserir_Parceiro()
         {
-            ParceiroORM.Registros.Count.Should().Be(1);
+            new ParceiroORM(ctx).Registros.Count.Should().Be(1);
         }
 
         [TestMethod]
         public void Deve_editar_Parceiro()
         {
-            var parceiroAnterior = parceiro.nome;
-
-            parceiro.nome = "Nome editado";
-
-            ParceiroORM.Editar(parceiro.Id, parceiro);
-
-            ParceiroORM.GetById(parceiro.Id).nome.Should().NotBe(parceiroAnterior);
+            var parceiroAnterior = parceiro.Nome;
+            parceiro.Nome = "Nome editado";
+            new ParceiroORM(ctx).Editar(parceiro.Id, parceiro);
+            new ParceiroORM(ctx).GetById(parceiro.Id).Nome.Should().NotBe(parceiroAnterior);
         }
 
         [TestMethod]
         public void Deve_excluir_Parceiro()
         {
-            ParceiroORM.Excluir(parceiro.Id);
-            ParceiroORM.Registros.Count.Should().Be(0);
+            new ParceiroORM(ctx).Excluir(parceiro.Id);
+            new ParceiroORM(ctx).Registros.Count.Should().Be(0);
+        }
+
+        [TestCleanup]
+        public void LimparTestes()
+        {
+            ctx.DeleteAll<Parceiro>();
+            ctx.SaveChanges();
+            lsp.Dispose();
         }
     }
 }

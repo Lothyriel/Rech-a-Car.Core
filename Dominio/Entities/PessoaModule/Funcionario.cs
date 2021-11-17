@@ -4,17 +4,12 @@ namespace Dominio.PessoaModule
 {
     public class Funcionario : Pessoa, IUser
     {
-        public Funcionario(string nome, string telefone, string endereco, string documento, Cargo cargo, Image foto, string usuario, string senha = null)
+        public Funcionario(string nome, string telefone, string endereco, string documento, Cargo cargo, Image foto, string usuario, string senha = null) : base(nome, telefone, endereco, documento)
         {
-            Nome = nome;
-            Telefone = telefone;
-            Endereco = endereco;
-            Documento = documento;
             Cargo = cargo;
             Foto = foto;
             Usuario = usuario;
             Senha = senha;
-            TipoPessoa = new CPF(documento);
         }
         public Funcionario()
         {
@@ -24,7 +19,7 @@ namespace Dominio.PessoaModule
         public string Usuario { get; set; }
         public string Senha { get; set; }
         public Cargo Cargo { get; set; }
-        public override TipoPessoa TipoPessoa { get; init; }
+        public override ETipoPessoa ETipoPessoa { get; init; } = ETipoPessoa.CPF;
 
         public override string Validar()
         {

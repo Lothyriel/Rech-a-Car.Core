@@ -25,7 +25,7 @@ namespace IntegrationTests.CategoriaModule
             categoria = categoriaMock.Object;
 
             mockCategoria_Repo = new();
-            sut = new CategoriaAppServices(mockCategoria_Repo.Object);
+            sut = new CategoriaAppServices();
         }
         [TestMethod]
         public void Deve_inserir_cupom()

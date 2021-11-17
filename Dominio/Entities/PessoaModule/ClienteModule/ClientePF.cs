@@ -6,16 +6,11 @@ namespace Dominio.PessoaModule.ClienteModule
     public class ClientePF : Cliente, ICondutor
     {
         public DateTime DataNascimento { get; set; }
-        public override TipoPessoa TipoPessoa { get; init; }
         public virtual DadosCondutor DadosCondutor { get; init; }
+        public override ETipoPessoa ETipoPessoa { get; init; } = ETipoPessoa.CPF;
 
-        public ClientePF(string nome, string telefone, string endereco, string documento, DadosCondutor dadosCondutor, DateTime dataNascimento, string email)
+        public ClientePF(string nome, string telefone, string endereco, string documento, DadosCondutor dadosCondutor, DateTime dataNascimento, string email) : base(nome, telefone, endereco, documento, email)
         {
-            Nome = nome;
-            Telefone = telefone;
-            Endereco = endereco;
-            TipoPessoa = new CPF(documento);
-            Documento = documento;
             DadosCondutor = dadosCondutor;
             DataNascimento = dataNascimento;
             Email = email;

@@ -9,7 +9,7 @@ namespace Infra.DAO.Shared
     {
         public abstract void Inserir(T entidade);
         public abstract void Editar(int id, T entidade);
-        public abstract void Excluir(int id, Type tipo = null);
+        public abstract bool Excluir(int id, Type tipo = null);
         public abstract bool Existe(int id, Type tipo = null);
         public abstract T GetById(int id, Type tipo = null);
         public abstract List<T> Registros { get; }

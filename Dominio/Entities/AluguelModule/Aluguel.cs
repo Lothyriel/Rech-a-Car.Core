@@ -24,7 +24,7 @@ namespace Dominio.AluguelModule
             DataDevolucao = dataDevolucao;
             Cupom = cupom;
 
-            DadosCondutor ??= ((ClientePF)Cliente).DadosCondutor;
+            DadosCondutor ??= ((ClientePF)Cliente)?.DadosCondutor;
         }
         public Aluguel(Aluguel aluguel)
         {

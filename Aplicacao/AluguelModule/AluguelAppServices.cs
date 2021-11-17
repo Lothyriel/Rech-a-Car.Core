@@ -4,12 +4,9 @@ using DependencyInjector;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.ServicoModule;
-using EnviaEmail;
+using Infra.ES.WorkerEnvioEmail;
 using Infra.NLogger;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Aplicacao.AluguelModule
@@ -31,41 +28,6 @@ namespace Aplicacao.AluguelModule
             RelatorioRepositorio = dependencyResolver.Resolve<IRelatorioRepository>();
             ServicoRepositorio = dependencyResolver.Resolve<IServicoRepository>();
             CupomRepositorio = dependencyResolver.Resolve<ICupomRepository>();
-        }
-        public async void IniciaLoopEnvioEmails()
-        {
-            while (true)
-            {
-                try
-                {
-                    NLogger.Logger.Aqui().Debug("Serviço de Envio de Emails Iniciado");
-                    TentaEnviarRelatorioEmail();
-                }
-                catch (FilaEmailVazia)
-                {
-                    NLogger.Logger.Aqui().Warn("Sem emails para envio, esperando 5 minutos para tentar novamente");
-                    await Task.Delay(new TimeSpan(0, 5, 0));
-                }
-            }
-        }
-        public void TentaEnviarRelatorioEmail()
-        {
-            var proxEnvio = RelatorioRepositorio.GetProxEnvio();
-
-            if (proxEnvio == null)
-                throw new FilaEmailVazia();
-
-            Stream ms = proxEnvio.StreamAttachment;
-            var attachment = new Attachment(ms, "Pdf Resumo Aluguel.pdf");
-
-            var corpoEmail = "Confira o resumo do seu mais novo aluguel: ";
-            var titulo = "Resumo Aluguel Rech-a-car";
-            var emailUsuario = proxEnvio.Aluguel.Cliente.Email;
-
-            Email.Envia(emailUsuario, titulo, corpoEmail, new List<Attachment>() { attachment });
-            RelatorioRepositorio.MarcarEnviado(proxEnvio.Id);
-
-            NLogger.Logger.Aqui().Info("Email {email.id} Enviado", proxEnvio.Id);
         }
         public override ResultadoOperacao Inserir(Aluguel aluguel)
         {
@@ -124,16 +86,6 @@ namespace Aplicacao.AluguelModule
                 return new ResultadoOperacao(validacao, EnumResultado.Falha);
 
             return new ResultadoOperacao("Cupom aplicado com sucesso", EnumResultado.Sucesso);
-        }
-    }
-    public class FilaEmailVazia : Exception
-    {
-        public FilaEmailVazia()
-        {
-        }
-
-        public FilaEmailVazia(string message) : base(message)
-        {
         }
     }
 }

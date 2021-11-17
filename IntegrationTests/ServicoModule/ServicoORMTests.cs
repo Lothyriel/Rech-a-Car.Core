@@ -1,59 +1,63 @@
-﻿using Dominio.ServicoModule;
+﻿using Autofac;
+using DependencyInjector;
+using Dominio.ServicoModule;
 using FluentAssertions;
+using Infra.DAO.ORM;
 using Infra.DAO.ORM.Repositories;
 using Infra.DAO.Shared;
 using IntegrationTests.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationTests.ServicoModule
 {
     [TestClass]
     public class ServicoORMTests
     {
-        Servico servico = new("nomeServico", 10, new AluguelDataBuilder().Padrao);
-        ServicosORM ORM = new();
+        Servico servico1;
+        ILifetimeScope lsp;
+        Rech_a_carDbContext ctx;
 
         [TestInitialize]
         public void Inserindo_no_banco()
         {
-            ORM.Inserir(servico);
+            lsp = DependencyInjection.Container.BeginLifetimeScope();
+            ctx = lsp.Resolve<Rech_a_carDbContext>();
+
+            servico1 = new("nomeServico", 10, null);
+            new ServicoORM(ctx).Inserir(servico1);
 
         }
         [TestMethod]
         public void Deve_inserir_um_servico()
         {
-            ORM.Registros.Count.Should().NotBe(0);
+
+            servico1.Id.Should().NotBe(0);
         }
 
         [TestMethod]
         public void Deve_editar_nome_servico()
         {
-            string nomeAnterior = servico.Nome;
 
-            servico.Nome = "novoNome";
+            string nomeAnterior = servico1.Nome;
 
-            ORM.Editar(servico.Id, servico);
-
-            ORM.GetById(servico.Id).Nome.Should().NotBe(nomeAnterior);
-
+            servico1.Nome = "novoNome";
+            new ServicoORM(ctx).Editar(servico1.Id, servico1);
+            new ServicoORM(ctx).GetById(servico1.Id).Nome.Should().NotBe(nomeAnterior);
         }
 
         [TestMethod]
         public void Deve_remover_servico()
         {
-            ORM.Excluir(servico.Id);
-            ORM.Registros.Count.Should().Be(0);
+            new ServicoORM(ctx).Excluir(servico1.Id);
+            new ServicoORM(ctx).Registros.Count.Should().Be(0);
         }
 
         [TestCleanup]
         public void LimparTestes()
         {
-            Db.Delete(TestExtensions.ResetId("TBServico"));
+            ctx.DeleteAll<Servico>();
+            ctx.SaveChanges();
+            lsp.Dispose();
         }
     }
 }
