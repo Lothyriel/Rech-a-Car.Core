@@ -1,5 +1,6 @@
 ﻿using Dominio.Shared;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace Infra.DAO.ORM
         public void Editar(int id, T entidade)
         {
             var oldEntidade = Context.Set<T>().Find(id);
+            entidade.Id = id;
             Context.Entry(oldEntidade).CurrentValues.SetValues(entidade);
             Context.SaveChanges();
         }
