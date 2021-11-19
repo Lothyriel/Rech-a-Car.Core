@@ -27,7 +27,8 @@ namespace Infra.DAO.ORM
         }
         public void Editar(int id, T entidade)
         {
-            Context.Update(entidade);
+            var oldEntidade = Context.Set<T>().Find(id);
+            Context.Entry(oldEntidade).CurrentValues.SetValues(entidade);
             Context.SaveChanges();
         }
         public bool Excluir(int id, Type tipo = null)
