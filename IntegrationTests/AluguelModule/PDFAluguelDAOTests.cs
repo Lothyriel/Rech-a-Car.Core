@@ -13,6 +13,7 @@ using Infra.DAO.PessoaModule;
 using Infra.DAO.Shared;
 using Infra.DAO.SQL.AluguelModule;
 using Infra.DAO.VeiculoModule;
+using Infra.ES.WorkerEnvioEmail;
 using IntegrationTests.Properties;
 using IntegrationTests.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -68,8 +69,7 @@ namespace Infra.DAO.AluguelModule
         public void DeveEnviarPdf()
         {
             rd.SalvarRelatorio(pa.GerarRelatorio(aluguel));
-            AluguelAppServices.TentaEnviarRelatorioEmail();
-
+            EnvioEmail.TentaEnviarRelatorioEmail();
             rd.GetProxEnvio().Should().BeNull();
         }
         [TestCleanup]

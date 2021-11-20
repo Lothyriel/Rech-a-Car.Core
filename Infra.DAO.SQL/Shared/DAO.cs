@@ -7,8 +7,8 @@ namespace Infra.DAO.Shared
 {
     public abstract class DAO<T> : IRepository<T> where T : IEntidade
     {
-        public abstract void Inserir(T entidade);
-        public abstract void Editar(int id, T entidade);
+        public abstract bool Inserir(T entidade);
+        public abstract bool Editar(int id, T entidade);
         public abstract bool Excluir(int id, Type tipo = null);
         public abstract bool Existe(int id, Type tipo = null);
         public abstract T GetById(int id, Type tipo = null);

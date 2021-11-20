@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31321.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31815.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio", "Dominio\Dominio.csproj", "{90588AD9-B45D-4A9B-BB1C-098BC165FD88}"
 EndProject
@@ -57,7 +57,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInjector", "Depen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.DAO.SQL", "Infra.DAO.SQL\Infra.DAO.SQL.csproj", "{5BBBA6EC-E835-4849-9A76-B961975FD88D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.ES.WorkerEnvioEmail", "Infra.ES.WorkerEnvioEmail\Infra.ES.WorkerEnvioEmail.csproj", "{A30E7C16-0784-4052-A076-F93559BDB31D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.ES.WorkerEnvioEmail", "Infra.ES.WorkerEnvioEmail\Infra.ES.WorkerEnvioEmail.csproj", "{A30E7C16-0784-4052-A076-F93559BDB31D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web API", "Web API\Web API.csproj", "{25D18918-13BC-4F9B-8971-65ADB68AA821}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +129,10 @@ Global
 		{A30E7C16-0784-4052-A076-F93559BDB31D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A30E7C16-0784-4052-A076-F93559BDB31D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A30E7C16-0784-4052-A076-F93559BDB31D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25D18918-13BC-4F9B-8971-65ADB68AA821}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25D18918-13BC-4F9B-8971-65ADB68AA821}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25D18918-13BC-4F9B-8971-65ADB68AA821}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25D18918-13BC-4F9B-8971-65ADB68AA821}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +163,7 @@ Global
 		{153E10F5-2784-49BD-9E2A-475A37DAB0A7} = {6E901C22-3579-4EFE-AD3E-9EE396EB4C86}
 		{5BBBA6EC-E835-4849-9A76-B961975FD88D} = {B89053E0-9331-4884-B638-750E0A1F1565}
 		{A30E7C16-0784-4052-A076-F93559BDB31D} = {AA481B7F-2D41-4FE9-96B6-58E92A8546BD}
+		{25D18918-13BC-4F9B-8971-65ADB68AA821} = {0574B971-26E1-4880-9FC5-48B9131E09E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {588C9984-282F-4230-84B2-CF78AFC64778}

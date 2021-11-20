@@ -17,21 +17,21 @@ namespace Join.ClienteModule
             RepositorioClientePF = repositorioClientePF;
             RepositorioClientePJ = repositorioClientePJ;
         }
-        public void Inserir(Cliente cliente)
+        public bool Inserir(Cliente cliente)
         {
             if (cliente is ClientePF pF)
-                RepositorioClientePF.Inserir(pF);
+                return RepositorioClientePF.Inserir(pF);
             else if (cliente is ClientePJ pJ)
-                RepositorioClientePJ.Inserir(pJ);
+                return RepositorioClientePJ.Inserir(pJ);
             else
                 throw new ArgumentException();
         }
-        public void Editar(int id, Cliente cliente)
+        public bool Editar(int id, Cliente cliente)
         {
             if (cliente is ClientePF pF)
-                RepositorioClientePF.Editar(cliente.Id, pF);
+                return RepositorioClientePF.Editar(cliente.Id, pF);
             else if (cliente is ClientePJ pJ)
-                RepositorioClientePJ.Editar(cliente.Id, pJ);
+                return RepositorioClientePJ.Editar(cliente.Id, pJ);
             else
                 throw new ArgumentException();
         }

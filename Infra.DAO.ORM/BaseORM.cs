@@ -21,17 +21,34 @@ namespace Infra.DAO.ORM
         {
             return Context.Set<T>().Find(id);
         }
-        public void Inserir(T entidade)
+        public bool Inserir(T entidade)
         {
-            Context.Set<T>().Add(entidade);
-            Context.SaveChanges();
+            try
+            {
+                Context.Set<T>().Add(entidade);
+                Context.SaveChanges();
+                return true;
+            }
+            catch (SqlException)
+            {
+                return false;
+            }
         }
-        public void Editar(int id, T entidade)
+        public bool Editar(int id, T entidade)
         {
-            var oldEntidade = Context.Set<T>().Find(id);
-            entidade.Id = id;
-            Context.Entry(oldEntidade).CurrentValues.SetValues(entidade);
-            Context.SaveChanges();
+            try
+            {
+                var oldEntidade = Context.Set<T>().Find(id);
+                entidade.Id = id;
+                Context.Entry(oldEntidade).CurrentValues.SetValues(entidade);
+                Context.SaveChanges();
+                return true;
+            }
+            catch (SqlException)
+            {
+                return false;
+            }
+
         }
         public bool Excluir(int id, Type tipo = null)
         {

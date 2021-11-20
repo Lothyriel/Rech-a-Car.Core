@@ -34,9 +34,18 @@ namespace DependencyInjector
 
             ConfigurarRelatorio(configRelatorio);
             ConfigurarRepositorios(configRepositorios);
+            ConfigurarServices();
 
             Container = Builder.Build();
         }
+
+        private static void ConfigurarServices()
+        {
+            Builder.RegisterType<FuncionarioAppService>().As<ICategoriaRepository>().SingleInstance();
+            Builder.RegisterType<VeiculoDAO>().As<IVeiculoRepository>().SingleInstance();
+            Builder.RegisterType<FuncionarioDAO>().As<IFuncionarioRepository>().SingleInstance();
+        }
+
         private static void ConfigurarRepositorios(ConfigRepositories configRepos)
         {
             NLogger.Logger.Aqui().Debug($"Configurando Repositórios como {configRepos}");

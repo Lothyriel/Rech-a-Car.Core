@@ -31,10 +31,19 @@ namespace Infra.DAO.AluguelModule
                     [TOTAL] = @TOTAL      
                 WHERE [ID] = @ID";
 
-        public override void Editar(int id, AluguelFechado entidade)
+        public override bool Editar(int id, AluguelFechado entidade)
         {
-            entidade.Id = id;
-            Db.Update(sqlFecharAluguel, Db.AdicionarParametro("ID", id, ObterParametrosRegistro(entidade)));
+            try
+            {
+                entidade.Id = id;
+                Db.Update(sqlFecharAluguel, Db.AdicionarParametro("ID", id, ObterParametrosRegistro(entidade)));
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
 
         public override bool Excluir(int id, Type tipo = null)
@@ -51,7 +60,7 @@ namespace Infra.DAO.AluguelModule
             throw new NotSupportedException();
         }
 
-        public override void Inserir(AluguelFechado entidade)
+        public override bool Inserir(AluguelFechado entidade)
         {
             throw new NotSupportedException();
         }

@@ -17,14 +17,30 @@ namespace Infra.DAO.Shared
         {
             return Db.Get(sqlSelecionarPorId, ConverterEmEntidade, Db.AdicionarParametro("ID", id));
         }
-        public override void Inserir(T entidade)
+        public override bool Inserir(T entidade)
         {
-            entidade.Id = Db.Insert(sqlInserir, ObterParametrosRegistro(entidade));
+            try
+            {
+                entidade.Id = Db.Insert(sqlInserir, ObterParametrosRegistro(entidade));
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
-        public override void Editar(int id, T entidade)
+        public override bool Editar(int id, T entidade)
         {
-            entidade.Id = id;
-            Db.Update(sqlEditar, ObterParametrosRegistro(entidade));
+            try
+            {
+                entidade.Id = id;
+                Db.Update(sqlEditar, ObterParametrosRegistro(entidade));
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
         public override bool Excluir(int id, Type tipo = null)
         {

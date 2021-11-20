@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using Dominio.PessoaModule.Condutor;
 using Dominio.Entities.PessoaModule.Condutor;
+using Infra.ES.WorkerEnvioEmail;
 
 namespace Infra.ORM.AluguelModule
 {
@@ -66,8 +67,7 @@ namespace Infra.ORM.AluguelModule
         public void DeveEnviarPdf()
         {
             relatorioORM.SalvarRelatorio(new PDFAluguel().GerarRelatorio(aluguel));
-            AluguelAppServices.TentaEnviarRelatorioEmail();
-
+            EnvioEmail.TentaEnviarRelatorioEmail();
             relatorioORM.GetProxEnvio().Should().BeNull();
         }
         [TestCleanup]
