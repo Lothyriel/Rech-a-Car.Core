@@ -1,7 +1,5 @@
 ﻿using Aplicacao.Shared;
-using Autofac;
 using AutoMapper;
-using DependencyInjector;
 using Dominio.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -11,19 +9,20 @@ namespace Web_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public abstract class EntidadeController<TEntidade, TListViewModel, TDetailsViewModel, TCreateViewModel, TEditViewModel> :
-        ControllerBase where TEntidade : IEntidade where TCreateViewModel : EntidadeCreateViewModel where TEditViewModel : EntidadeEditViewModel
+    public abstract class EntidadeController<TEntidade, TListViewModel, TDetailsViewModel, TCreateViewModel, TEditViewModel> : ControllerBase where TEntidade : IEntidade where TEditViewModel : EntidadeEditViewModel
     {
         private readonly EntidadeAppServices<TEntidade> AppService;
         private readonly IMapper Mapper;
 
         public EntidadeController()
         {
-            AppService = DependencyInjection.Container.Resolve<EntidadeAppServices<TEntidade>>();
+            AppService = GetServices();
             Mapper = ConfigureMapper().CreateMapper();
         }
 
         protected abstract MapperConfiguration ConfigureMapper();
+        protected abstract EntidadeAppServices<TEntidade> GetServices();
+
 
         [HttpGet]
         public List<TListViewModel> GetAll()

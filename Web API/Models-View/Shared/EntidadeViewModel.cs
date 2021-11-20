@@ -12,6 +12,8 @@
 
     public class EntidadeCreateViewModel
     {
+        public int Id { get; set; }
+
     }
 
     public class EntidadeEditViewModel

@@ -6,7 +6,7 @@ namespace Dominio.CupomModule
 {
     public class Cupom : Entidade
     {
-        public static Cupom Invalido = new Cupom("", 0, 0, DateTime.MinValue, null, 0, 0);
+        public static Cupom Invalido = new("", 0, 0, DateTime.MinValue, null, 0, 0);
         public Cupom(string nome, int valorPercentual, double valorFixo, DateTime dataValidade, Parceiro parceiro, double valorMInimo, int usos)
         {
             Nome = nome;

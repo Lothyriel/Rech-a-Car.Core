@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Aplicacao.FuncionarioModule;
+using Aplicacao.Shared;
+using AutoMapper;
 using Dominio.PessoaModule;
 using Web_API.Models;
 
@@ -22,6 +24,11 @@ namespace Web_API.Controllers
                 cfg.CreateMap<FuncionarioEditViewModel, Funcionario>()
                     .ForMember(dest => dest.Cargo, opt => opt.MapFrom(src => (Cargo)src.Cargo));
             });
+        }
+
+        protected override EntidadeAppServices<Funcionario> GetServices()
+        {
+            return new FuncionarioAppServices();
         }
     }
 }
