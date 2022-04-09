@@ -1,0 +1,56 @@
+<div class="container main-container">
+    <h4>Lista Parceiros</h4>
+    <hr />
+    <div style="float: right;">
+        <button class="btn btn-dark" [routerLink]="['/parceiro/criar']">Cadastrar</button>
+        <button class="btn btn-dark" [routerLink]="['/parceiro/editar', parceiroSelecionado]"
+            [disabled]="!parceiroSelecionado">Editar</button>
+        <button class="btn btn-dark" (click)="abrirConfirmacao(modalExclusao)"
+            [disabled]="!parceiroSelecionado">Excluir</button>
+    </div>
+    <br>
+    <br>
+    <table class="table table-striped" data-click-to-select="true">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let parceiro of listaParceiros">
+                <td>
+                    <div class="custom-control">
+                        <input type="radio" name="flexRadioDefault" class="custom-control-input" id="customRadio"
+                            value="{{ parceiro.id }}" [(ngModel)]="parceiroSelecionado">
+                    </div>
+                </td>
+                <td>{{ parceiro.id }}</td>
+                <td>{{ parceiro.nome }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+            (pageChange)="atualizarParceiros()">
+        </ngb-pagination>
+    </div>
+
+</div>
+
+<ng-template #modalExclusao let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Excluir Parceiro</h4>
+    </div>
+    <div class="modal-body">
+        Deseja realmente excluir esse Parceiro?
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.close('Excluir')">Excluir</button>
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Cancelar')">Cancelar</button>
+    </div>
+</ng-template>
+
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

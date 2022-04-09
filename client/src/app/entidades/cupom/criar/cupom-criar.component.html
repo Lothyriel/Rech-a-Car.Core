@@ -1,0 +1,56 @@
+<div class="container main-container">
+    <h4>Cadastrar Cupom</h4>
+    <hr />
+    <form novalidate [formGroup]="cadastroForm" (ngSubmit)='adicionarCupom()'>
+        <div clas="form-group">
+            <label class="col-md-2 control-label" for="nome">Nome</label>
+            <div class="col-md-10">
+                <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)"
+                    formControlName="nome" />
+            </div>
+            <label class="col-md-2 control-label" for="codigo">Código</label>
+            <div class="col-md-10">
+                <input class="form-control" id="codigo" type="text" placeholder="Código (requerido)"
+                    formControlName="codigo" />
+            </div>
+            <label class="col-md-2 control-label" for="meio">Meio</label>
+            <div class="col-md-10">
+                <input class="form-control" id="meio" type="text" placeholder="Meio (requerido)"
+                    formControlName="meio" />
+            </div>
+            <label class="col-md-2 control-label" for="valor">Valor</label>
+            <div class="col-md-10">
+                <input class="form-control" id="valor" type="text" placeholder="Valor (requerido)"
+                    formControlName="valor" />
+            </div>
+            <label class="col-md-2 control-label" for="valorMinimo">Valor Mínimo</label>
+            <div class="col-md-10">
+                <input class="form-control" id="valorMinimo" type="text" placeholder="Valor Mínimo (requerido)"
+                    formControlName="valorMinimo" />
+            </div>
+            <label class="col-md-2 control-label" for="validade">Data Validade</label>
+            <div class="col-md-10">
+                <div>
+                    <input class="form-control" id="validade" type="date" placeholder="Data Validade (requerido)"
+                        formControlName="validade" />
+                </div>
+            </div>
+            <label class="col-md-2 control-label" for="parceiro">Parceiro</label>
+            <div class="col-md-10">
+                <select class="form-control" id="idParceiro" formControlName="idParceiro">
+                    <option value="">Selecione um Parceiro</option>
+                    <option *ngFor="let parceiro of listaParceiros" value={{parceiro.id}}>
+                        {{parceiro.nome}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <div class="col-md-4 col-md-offset-2">
+                <span><button class="btn btn-success" id="registrar" type="submit">Registrar</button></span>
+                <span><button class="btn btn-danger" id="cancelar" (click)="cancelar()">Cancelar</button></span>
+            </div>
+        </div>
+    </form>
+</div>

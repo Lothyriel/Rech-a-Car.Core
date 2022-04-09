@@ -1,0 +1,63 @@
+<div class="container main-container">
+    <h4>Lista Cupons</h4>
+    <hr />
+    <div style="float: right;">
+        <button class="btn btn-dark" [routerLink]="['/cupom/criar']">Cadastrar</button>
+        <button class="btn btn-dark" [routerLink]="['/cupom/editar', cupomSelecionado]"
+            [disabled]="!cupomSelecionado">Editar</button>
+        <button class="btn btn-dark" (click)="abrirConfirmacao(modalExclusao)"
+            [disabled]="!cupomSelecionado">Excluir</button>
+    </div>
+    <br>
+    <br>
+    <table class="table table-striped" data-click-to-select="true">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Valor Mínimo</th>
+                <th scope="col">Data Validade</th>
+                <th scope="col">Parceiro</th>
+                <th scope="col">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cupom of listaCupons">
+                <td>
+                    <div class="custom-control">
+                        <input type="radio" name="flexRadioDefault" class="custom-control-input" id="customRadio"
+                            value="{{ cupom.id }}" [(ngModel)]="cupomSelecionado">
+                    </div>
+                </td>
+                <td>{{ cupom.id }}</td>
+                <td>{{ cupom.nome }}</td>
+                <td>{{ cupom.valor }}</td>
+                <td>{{ cupom.valorMinimo }}</td>
+                <td>{{ formatarData(cupom.dataValidade) }}</td>
+                <td>{{ cupom.parceiroNome }}</td>
+                <td>{{ cupom.tipo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+            (pageChange)="atualizarCupons()">
+        </ngb-pagination>
+    </div>
+</div>
+
+<ng-template #modalExclusao let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Excluir Cupom</h4>
+    </div>
+    <div class="modal-body">
+        Deseja realmente excluir esse Cupom?
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.close('Excluir')">Excluir</button>
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Cancelar')">Cancelar</button>
+    </div>
+</ng-template>

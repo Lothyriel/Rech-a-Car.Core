@@ -1,0 +1,35 @@
+<div class="sidebar-container">
+    <ul class="sidebar-navigation">
+        <li>
+            <a [routerLink]="['/home']">
+                <i class="fa fa-home" aria-hidden="true"></i> Home
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/parceiro/listar']">
+                <i class="fas fa-handshake" aria-hidden="true"></i> Parceiros
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/cupom/listar']">
+                <i class="fas fa-ticket-alt" aria-hidden="true"></i> Cupons
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/servico/listar']">
+                <i class="fas fa-services" aria-hidden="true"></i> Serviços
+            </a>
+            <a [routerLink]="['/teste/listar']">
+                <i class="fas fa-services" aria-hidden="true"></i> Serviços
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="content-container">
+    <div class="container-fluid">
+
+        <router-outlet></router-outlet>
+
+    </div>
+</div>

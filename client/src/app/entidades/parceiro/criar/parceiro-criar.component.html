@@ -1,0 +1,27 @@
+<div class="container main-container">
+    <h4>Cadastrar Parceiro</h4>
+    <hr />
+    <form novalidate [formGroup]="cadastroForm" (ngSubmit)='adicionarParceiro()'>
+        <div clas="form-group">
+            <label class="col-md-2 control-label" for="nome">Nome</label>
+            <div class="col-md-10">
+                <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)"
+                    formControlName="nome" />
+                <span
+                    *ngIf="cadastroForm.controls.nome.errors && (cadastroForm.controls.nome.dirty || cadastroForm.controls.nome.touched)"
+                    class="alert">
+                    Campo Nome é obrigatório
+                </span>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <div class="col-md-4 col-md-offset-2">
+                <span><button class="btn btn-success" id="registrar" type="submit">Registrar</button></span>
+                <span><button class="btn btn-danger" id="cancelar" (click)="cancelar()">Cancelar</button></span>
+            </div>
+        </div>
+    </form>
+</div>
+
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

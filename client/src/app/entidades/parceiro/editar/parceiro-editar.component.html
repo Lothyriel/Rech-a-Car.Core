@@ -1,0 +1,41 @@
+<div class="container main-container">
+    <h4>Editar Parceiro</h4>
+    <hr />
+    <form novalidate [formGroup]="cadastroForm" (ngSubmit)='atualizarParceiro()'>
+        <div clas="form-group">
+            <label class="col-md-2 control-label" for="nome">Id</label>
+            <div class="col-md-10">
+                <input class="form-control" id="nome" type="text" readonly formControlName="id" />
+            </div>
+
+            <label class="col-md-2 control-label" for="nome">Nome</label>
+            <div class="col-md-10">
+                <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)"
+                    formControlName="nome" />
+                <span
+                    *ngIf="cadastroForm.controls.nome.errors && (cadastroForm.controls.nome.dirty || cadastroForm.controls.nome.touched)"
+                    class="alert">
+                    Campo Nome é obrigatório
+                </span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <h6>Cupons do Parceiro</h6>
+            <ul class="list-group list-group-flush">
+                <li *ngFor="let cupom of cupons" class="list-group-item">
+                    {{cupom.nome}}
+                </li>
+            </ul>
+        </div>
+        <br>
+        <div class="form-group">
+            <div class="container">
+                <button class="btn btn-success" id="registrar" type="submit">Salvar</button>
+                <button class="btn btn-danger" id="cancelar" (click)="cancelar()">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
