@@ -1,4 +1,6 @@
 ﻿using Dominio.Shared;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;
 using System.Security.Cryptography;
@@ -15,10 +17,7 @@ namespace Dominio.Entities.PessoaModule
         public byte[] Salt { get; }
         public string Hash { get; }
 
-        public override string Validar()
-        {
-            return "";
-        }
+        public override ValidationResult Validar => new SenhaHashedValidator().Validate(this);
 
         private static byte[] GerarSalt()
         {
@@ -48,6 +47,13 @@ namespace Dominio.Entities.PessoaModule
             var salt = GerarSalt();
             var hashed = GerarHash(senha, salt);
             return new SenhaHashed(salt, hashed);
+        }
+    }
+
+    public class SenhaHashedValidator : AbstractValidator<SenhaHashed>
+    {
+        public SenhaHashedValidator()
+        {
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Dominio.Shared;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace Dominio.ParceiroModule
 {
@@ -6,24 +8,27 @@ namespace Dominio.ParceiroModule
     {
         public Parceiro(string parceiro)
         {
-            this.Nome = parceiro;
+            Nome = parceiro;
         }
         public Parceiro()
         {
         }
 
         public string Nome { get; set; }
-        public override string Validar()
-        {
-            string resultadoValidacao = "";
-            if (string.IsNullOrEmpty(Nome))
-                resultadoValidacao = "O Nome do Parceiro é obrigatório.";
-
-            return resultadoValidacao;
-        }
+        public override ValidationResult Validar => new ParceiroValidator().Validate(this); 
         public override string ToString()
         {
             return Nome;
+        }
+    }
+
+    public class ParceiroValidator : AbstractValidator<Parceiro> 
+    {
+        public ParceiroValidator()
+        {
+            RuleFor(x => x.Nome)
+                .NotEmpty().NotNull().WithMessage("O {PropertyName} do Parceiro é obrigatório")
+                .Length(2, 200).WithMessage("O {PropertyName} do Parceiro precisa ter entre {MinLength} e {MaxLength} caracteres");
         }
     }
 }

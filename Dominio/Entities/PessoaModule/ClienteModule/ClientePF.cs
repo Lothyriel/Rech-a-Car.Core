@@ -1,4 +1,5 @@
 ﻿using Dominio.Entities.PessoaModule.Condutor;
+using FluentValidation.Results;
 using System;
 
 namespace Dominio.PessoaModule.ClienteModule

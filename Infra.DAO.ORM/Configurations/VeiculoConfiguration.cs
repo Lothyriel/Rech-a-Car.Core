@@ -28,7 +28,7 @@ namespace Infra.DAO.ORM.Configurations
 
             builder.Property(p => p.Portas).IsRequired();
 
-            builder.Property(p => p.Porta_malas).IsRequired();
+            builder.Property(p => p.PortaMalas).IsRequired();
 
             builder.Property(p => p.Ano).IsRequired();
 

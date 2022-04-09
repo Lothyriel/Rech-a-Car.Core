@@ -1,7 +1,8 @@
 ﻿using Dominio.Shared;
+using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Drawing;
-using System.Text.RegularExpressions;
 
 namespace Dominio.VeiculoModule
 {
@@ -16,7 +17,7 @@ namespace Dominio.VeiculoModule
             Capacidade = capacidade;
             Portas = portas;
             Chassi = chassi;
-            Porta_malas = porta_malas;
+            PortaMalas = porta_malas;
             Foto = foto;
             Automatico = automatico;
             Categoria = categoria;
@@ -37,7 +38,7 @@ namespace Dominio.VeiculoModule
         public int Capacidade { get; set; }
         public int CapacidadeTanque { get; set; }
         public int Portas { get; set; }
-        public int Porta_malas { get; set; }
+        public int PortaMalas { get; set; }
         public int Ano { get; set; }
         public Image Foto { get; set; }
         public TipoCombustivel TipoDeCombustivel { get; set; }
@@ -46,9 +47,9 @@ namespace Dominio.VeiculoModule
 
         public string PortaMalaToString()
         {
-            if (Porta_malas == 0)
+            if (PortaMalas == 0)
                 return "Pequeno";
-            if (Porta_malas == 1)
+            if (PortaMalas == 1)
                 return "Médio";
             else
                 return "Grande";
@@ -57,45 +58,50 @@ namespace Dominio.VeiculoModule
         {
             return Automatico ? "Automático" : "Manual";
         }
-        public override string Validar()
-        {
-            Regex templatePlacaMercoSul = new Regex(@"\b[A-Z]{3}[0-9][A-Z][0-9]{2}\b", RegexOptions.IgnoreCase);
-            Regex templatePlacaAntiga = new Regex(@"\b[A-Z]{3}[0-9]{4}\b", RegexOptions.IgnoreCase);
-
-            string validacao = "";
-
-            if (String.IsNullOrEmpty(Modelo))
-                validacao += "Modelo do veículo é obrigatório\n";
-
-            if (String.IsNullOrEmpty(Marca))
-                validacao += "Marca do veículo é obrigatória\n";
-
-            if (!templatePlacaAntiga.IsMatch(Placa) && !templatePlacaMercoSul.IsMatch(Placa))
-                validacao += "Placa do veículo inválida\n";
-
-            if (Chassi.Length != 17)
-                validacao += "Chassi do veículo inválido\n";
-
-            if (Capacidade < 0)
-                validacao += "Selecione a capacidade\n";
-
-            if (Portas < 1)
-                validacao += "Deve ter pelo menos duas Portas\n";
-
-            if (Porta_malas < 0)
-                validacao += "Volume do Porta-malas inválido\n";
-
-            if (Ano > DateTime.Now.Year + 1)
-                validacao += "Ano do carro inválido\n";
-
-            if (CapacidadeTanque < 0)
-                validacao += "Capacidade do tanque tem que ser maior que 0\n";
-
-            return validacao;
-        }
+        public override ValidationResult Validar => new VeiculoValidator().Validate(this);
         public override string ToString()
         {
             return $"{Marca} {Modelo} {Ano} {Categoria}";
+        }
+    }
+
+    public class VeiculoValidator : AbstractValidator<Veiculo>
+    {
+        public VeiculoValidator()
+        {
+            throw new NotImplementedException();
+
+            //Regex templatePlacaMercoSul = new Regex(@"\b[A-Z]{3}[0-9][A-Z][0-9]{2}\b", RegexOptions.IgnoreCase);
+            //Regex templatePlacaAntiga = new Regex(@"\b[A-Z]{3}[0-9]{4}\b", RegexOptions.IgnoreCase);
+
+            //string validacao = "";
+
+            //if (String.IsNullOrEmpty(Modelo))
+            //    validacao += "Modelo do veículo é obrigatório\n";
+
+            //if (String.IsNullOrEmpty(Marca))
+            //    validacao += "Marca do veículo é obrigatória\n";
+
+            //if (!templatePlacaAntiga.IsMatch(Placa) && !templatePlacaMercoSul.IsMatch(Placa))
+            //    validacao += "Placa do veículo inválida\n";
+
+            //if (Chassi.Length != 17)
+            //    validacao += "Chassi do veículo inválido\n";
+
+            //if (Capacidade < 0)
+            //    validacao += "Selecione a capacidade\n";
+
+            //if (Portas < 1)
+            //    validacao += "Deve ter pelo menos duas Portas\n";
+
+            //if (Porta_malas < 0)
+            //    validacao += "Volume do Porta-malas inválido\n";
+
+            //if (Ano > DateTime.Now.Year + 1)
+            //    validacao += "Ano do carro inválido\n";
+
+            //if (CapacidadeTanque < 0)
+            //    validacao += "Capacidade do tanque tem que ser maior que 0\n";
         }
     }
     public enum TipoCombustivel { Diesel, Etanol, Gasolina }

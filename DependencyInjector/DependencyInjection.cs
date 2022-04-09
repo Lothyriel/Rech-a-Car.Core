@@ -83,6 +83,8 @@ namespace DependencyInjector
         }
         private static void GerarRepositoriosORM()
         {
+            Builder.RegisterType<Rech_a_carDbContext>().InstancePerLifetimeScope();
+
             Builder.RegisterType<CategoriaORM>().As<ICategoriaRepository>().SingleInstance();
             Builder.RegisterType<VeiculoORM>().As<IVeiculoRepository>().SingleInstance();
             Builder.RegisterType<FuncionarioORM>().As<IFuncionarioRepository>().SingleInstance();

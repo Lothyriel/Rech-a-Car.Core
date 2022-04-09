@@ -4,9 +4,7 @@ using DependencyInjector;
 using Dominio.AluguelModule;
 using Dominio.CupomModule;
 using Dominio.ServicoModule;
-using Infra.ES.WorkerEnvioEmail;
 using Infra.NLogger;
-using System;
 using System.Threading.Tasks;
 
 namespace Aplicacao.AluguelModule
@@ -31,27 +29,25 @@ namespace Aplicacao.AluguelModule
         }
         public override ResultadoOperacao Inserir(Aluguel aluguel)
         {
-            using (var ctx = DependencyInjection.Container.BeginLifetimeScope())
-            {
-                var validacaoCupom = ValidarCupom(aluguel);
-                if (validacaoCupom.Resultado == EnumResultado.Falha)
-                    return validacaoCupom;
+            using var ctx = DependencyInjection.Container.BeginLifetimeScope();
+            var validacaoCupom = ValidarCupom(aluguel);
+            if (validacaoCupom.Resultado == EnumResultado.Falha)
+                return validacaoCupom;
 
-                var insercao = base.Inserir(aluguel);
-                if (insercao.Resultado == EnumResultado.Falha)
-                    return insercao;
-
-                if (aluguel.Cupom != null)
-                {
-                    aluguel.Cupom.Usos++;
-                    CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
-                }
-                ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
-
-                GerarRelatorio(aluguel);
-
+            var insercao = base.Inserir(aluguel);
+            if (insercao.Resultado == EnumResultado.Falha)
                 return insercao;
+
+            if (aluguel.Cupom != null)
+            {
+                aluguel.Cupom.Usos++;
+                CupomRepositorio.Editar(aluguel.Cupom.Id, aluguel.Cupom);
             }
+            ServicoRepositorio.AlugarServicos(aluguel.Id, aluguel.Servicos);
+
+            GerarRelatorio(aluguel);
+
+            return insercao;
         }
 
         private void GerarRelatorio(Aluguel aluguel)

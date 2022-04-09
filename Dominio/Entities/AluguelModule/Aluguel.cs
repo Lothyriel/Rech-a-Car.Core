@@ -5,6 +5,8 @@ using Dominio.PessoaModule.ClienteModule;
 using Dominio.ServicoModule;
 using Dominio.Shared;
 using Dominio.VeiculoModule;
+using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 
@@ -95,29 +97,7 @@ namespace Dominio.AluguelModule
         {
             return new AluguelFechado(this, kmRodados, tanqueUtilizado, servicos, DateTime.Today);
         }
-        public override string Validar()
-        {
-            string validacao = string.Empty;
-
-            if (Veiculo == null)
-                validacao += "O aluguel necessita de um veículo\n";
-            if (DadosCondutor == null)
-                validacao += "O aluguel necessita de um condutor\n";
-
-            if (validacao != string.Empty)
-                return validacao;
-
-            if (DadosCondutor.Cnh.TipoCnh < Veiculo.Categoria.TipoDeCnh)
-                validacao += "Condutor não tem a carteira necessária para dirigir o veículo selecionado\n";
-
-            if (DataAluguel < DateTime.Today)
-                validacao += "Data de aluguel não pode ser no passado\n";
-
-            if (!DatasValidas())
-                validacao += "Data de devolução deve ser após data de aluguel";
-
-            return validacao;
-        }
+        public override ValidationResult Validar => new AluguelValidator().Validate(this);
 
         public string ValidarCupom()
         {
@@ -141,5 +121,30 @@ namespace Dominio.AluguelModule
         Diário,
         Controlado,
         Livre
+    }
+
+    public class AluguelValidator : AbstractValidator<Aluguel>
+    {
+        public AluguelValidator()
+        {
+            throw new NotImplementedException();    
+
+            //if (Veiculo == null)
+            //    validacao += "O aluguel necessita de um veículo\n";
+            //if (DadosCondutor == null)
+            //    validacao += "O aluguel necessita de um condutor\n";
+
+            //if (validacao != string.Empty)
+            //    return validacao;
+
+            //if (DadosCondutor.Cnh.TipoCnh < Veiculo.Categoria.TipoDeCnh)
+            //    validacao += "Condutor não tem a carteira necessária para dirigir o veículo selecionado\n";
+
+            //if (DataAluguel < DateTime.Today)
+            //    validacao += "Data de aluguel não pode ser no passado\n";
+
+            //if (!DatasValidas())
+            //    validacao += "Data de devolução deve ser após data de aluguel";
+        }
     }
 }

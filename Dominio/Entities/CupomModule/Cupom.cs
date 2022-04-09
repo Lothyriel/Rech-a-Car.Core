@@ -1,5 +1,6 @@
 ﻿using Dominio.ParceiroModule;
 using Dominio.Shared;
+using FluentValidation;
 using System;
 
 namespace Dominio.CupomModule
@@ -46,37 +47,34 @@ namespace Dominio.CupomModule
         {
             return Nome;
         }
-
-        public override string Validar()
+    }
+    public class CupomParceiro : AbstractValidator<Cupom>
+    {
+        public CupomParceiro()
         {
-            string resultadoValidacao = "";
+            RuleFor(x => x.Nome)
+                .NotEmpty().WithMessage("O {PropertyName} do cupom é obrigatório e não pode ser vazio")
+                .Length(2, 200).WithMessage("O {PropertyName} do cupom precisa ter entre {MinLength} e {MaxLength} caracteres");
 
-            if (string.IsNullOrEmpty(Nome))
-                resultadoValidacao += "O campo nome é obrigatório e não pode ser vazio.\n";
+            RuleFor(x => x.DataValidade)
+                .LessThan(DateTime.Today).WithMessage("A Data de Validade do cupom deve ser maior que a data de hoje")
+                .NotEqual(DateTime.MinValue).WithMessage("A Data de Validade do cupom está inválida")
+                .NotEqual(DateTime.MaxValue).WithMessage("A Data de Validade do cupom está inválida");
 
-            if (ValorPercentual < 0)
-                resultadoValidacao += "Valor Percentual não pode ser menor que Zero.\n";
+            RuleFor(x => x.Parceiro)
+                .NotNull().WithMessage("O Parceiro do Cupom é obrigatório e não pode ser vazio");
 
-            if (ValorFixo < 0)
-                resultadoValidacao += "Valor Fixo não pode ser Menor que Zero.\n";
+            RuleFor(x => x.ValorFixo)
+                .LessThan(0).WithMessage("Valor Fixo não pode ser menor que {ComparisonValue}")
+                .GreaterThan(x => x.ValorMinimo).WithMessage("O Valor Fixo do Cupom não pode ser maior que {ComparisonValue}");
 
-            if (ValorPercentual > 100)
-                resultadoValidacao += "Valor Percentual não pode ser Maior que Cem.\n";
+            RuleFor(x => x.ValorPercentual)
+                .LessThan(0).WithMessage("Valor Percentual não pode ser menor que {ComparisonValue}")
+                .GreaterThan(x => (int?)x.ValorMinimo).WithMessage("Valor Percentual não pode ser maior que {ComparisonValue}");
 
-            if (DataValidade < DateTime.Today)
-                resultadoValidacao += "A data Invalida, Insira uma data valida.\n";
-
-            if (Parceiro == null)
-                resultadoValidacao += "O campo Parceiro é obrigatório e não pode ser vazio.\n";
-
-            if (ValorMinimo < 0)
-                resultadoValidacao += "O campo Valor Minimo não pode ser menor que Zero.\n";
-
-            if (ValorFixo > ValorMinimo)
-                resultadoValidacao += "O valor Minimo não pode ser menor que o valor de Desconto.\n";
-
-            return resultadoValidacao;
-
+            RuleFor(x => x.ValorMinimo)
+                .LessThan(0).WithMessage("Valor Percentual não pode ser menor que {ComparisonValue}")
+                .GreaterThan(100).WithMessage("Valor Percentual não pode ser maior que {ComparisonValue}");
         }
     }
 }

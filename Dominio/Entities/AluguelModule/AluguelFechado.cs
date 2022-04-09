@@ -1,4 +1,6 @@
 ﻿using Dominio.ServicoModule;
+using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 
@@ -71,17 +73,21 @@ namespace Dominio.AluguelModule
                 _ => 0,
             };
         }
-        public override string Validar()
+
+        public override ValidationResult Validar => new AluguelFechadoValidator().Validate(this);
+    }
+
+    public class AluguelFechadoValidator : AbstractValidator<AluguelFechado>
+    {
+        public AluguelFechadoValidator()
         {
-            string validacao = base.Validar();
+            throw new NotImplementedException();
 
-            if (KmRodados < 0)
-                validacao += "Quilometros rodados necessita ser pelo menos 0\n";
+            //if (KmRodados < 0)
+            //    validacao += "Quilometros rodados necessita ser pelo menos 0\n";
 
-            if (TanqueUtilizado < 0)
-                validacao += "Tanque utilizado tem que ser pelo menos 0\n";
-
-            return validacao;
+            //if (TanqueUtilizado < 0)
+            //    validacao += "Tanque utilizado tem que ser pelo menos 0\n";
         }
     }
 }

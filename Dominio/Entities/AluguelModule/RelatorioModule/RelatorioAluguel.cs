@@ -1,4 +1,6 @@
 ﻿using Dominio.Shared;
+using FluentValidation;
+using FluentValidation.Results;
 using System.IO;
 
 namespace Dominio.AluguelModule
@@ -18,9 +20,13 @@ namespace Dominio.AluguelModule
 
         public override MemoryStream StreamAttachment { get; }
 
-        public override string Validar()
+        public override ValidationResult Validar => new RelatorioAluguelValidator().Validate(this);
+    }
+
+    public class RelatorioAluguelValidator : AbstractValidator<RelatorioAluguel>
+    {
+        public RelatorioAluguelValidator()
         {
-            return "";
         }
     }
 }

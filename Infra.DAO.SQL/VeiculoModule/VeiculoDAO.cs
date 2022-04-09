@@ -160,7 +160,7 @@ namespace Infra.DAO.VeiculoModule
                 { "CAPACIDADE", veiculo.Capacidade },
                 { "PORTAS", veiculo.Portas },
                 { "CHASSI", veiculo.Chassi },
-                { "PORTA_MALAS", veiculo.Porta_malas },
+                { "PORTA_MALAS", veiculo.PortaMalas },
                 { "FOTO", veiculo.Foto.ToByteArray()  },
                 { "AUTOMATICO", veiculo.Automatico },
                 { "ID_CATEGORIA", veiculo.Categoria.Id },

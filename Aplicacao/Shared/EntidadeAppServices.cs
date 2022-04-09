@@ -15,7 +15,7 @@ namespace Aplicacao.Shared
             NLogger.Logger.Aqui().Debug("Validando {tipo} {entidade}", entidade.GetType().Name, entidade);
             var validacao = entidade.Validar();
             NLogger.Logger.Aqui().Info("Validação completa{resultado}", validacao != string.Empty ? $" , erros: {validacao}" : "");
-
+            
             if (validacao != string.Empty)
             {
                 return new ResultadoOperacao(validacao, EnumResultado.Falha);
